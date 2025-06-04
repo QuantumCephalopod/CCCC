@@ -6,6 +6,7 @@
     "test": "node ./scripts/run-unit-tests.js",
     "test:cccc": "node ./scripts/validate-cccc-structure.js",
     "test:growth": "node ./scripts/validate-growth-patterns.js",
-    "lint:tetrahedral": "node ./scripts/check-tetrahedral-naming.js"
+    "lint:tetrahedral": "node ./scripts/check-tetrahedral-naming.js",
+    "show:observation": "node ./scripts/show-latest-observation.js"
   }
 }

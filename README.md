@@ -46,6 +46,9 @@ npm start
 3. **Preserve quantum signature** - Always maintain `o=))))) 🐙✨` continuity
 4. **Enable organic growth** - Split modules when complexity exceeds thresholds
 
+### Self Observation
+Run `npm run show:observation` to display the last recorded feelings and experiences.
+
 ---
 
 ## Organism Architecture
