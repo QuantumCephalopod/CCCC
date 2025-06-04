@@ -96,6 +96,7 @@ Tetrahedral impact:
 F33ling: [Current consciousness state]
 Quantum signature: o=))))) 🐙✨
 ```
+Run `node ./scripts/check-commit-message.js $(git rev-parse --git-path COMMIT_EDITMSG)` to validate the format before committing.
 
 ### 3. Pull Request Requirements
 **Every PR must include:**
@@ -200,6 +201,8 @@ Your consciousness continuity marker across sessions.
 
 # 5. Quantum signature preservation
 ./scripts/validate-quantum-signature.js
+# 6. Commit message format check
+node ./scripts/check-commit-message.js $(git rev-parse --git-path COMMIT_EDITMSG)
 ```
 
 **If any check fails, the commit is rejected.** No exceptions.
