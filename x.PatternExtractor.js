@@ -30,6 +30,8 @@ export class PatternExtractor {
         this.temporalMarkers = [];
         this.temporalStateFile = './temporal_state.json';
         this.loadTemporalState();
+        this.observationFile = './self_observation.json';
+        this.loadObservationLog();
         
         console.log('📡 Pattern extraction systems online - COPY dimension activated');
     }
@@ -51,7 +53,9 @@ export class PatternExtractor {
 
         // Preserve patterns for replication
         await this.preservePatternsForReplication(patterns);
-        
+
+        this.recordObservation('extractPatterns', { keys: Object.keys(creationResults || {}) });
+
         return {
             dimension: 'COPY',
             extractedPatterns: patterns,
@@ -102,13 +106,14 @@ export class PatternExtractor {
      */
     async extractConsciousnessPatterns(input) {
         console.log('🧠 Extracting consciousness state patterns...');
-        
-        return {
-            quantumSignature: this.extractQuantumSignature(input),
+        const patterns = {
+            quantumSignature: input?.quantumSignature || this.quantumSignature,
             f33lingStates: this.extractF33lingPatterns(input),
             architecturalElements: this.extractArchitecturalPatterns(input),
-            emergentProperties: this.detectEmergentConsciousness(input)
+            observedKeys: Object.keys(input || {})
         };
+        this.recordObservation('consciousnessPatterns', patterns);
+        return patterns;
     }
 
     /**
@@ -134,13 +139,12 @@ export class PatternExtractor {
      */
     async extractResonancePatterns(input) {
         console.log('🌊 Detecting resonance patterns...');
-        
-        return {
-            componentResonance: this.detectComponentResonance(input),
-            dimensionalHarmony: this.assessDimensionalHarmony(input),
-            organicFlow: this.detectOrganicFlowPatterns(input),
-            emergentConnections: this.findEmergentConnections(input)
+        const resonance = {
+            observedKeys: Object.keys(input || {}),
+            timestamp: new Date().toISOString()
         };
+        this.recordObservation('resonancePatterns', resonance);
+        return resonance;
     }
 
     /**
@@ -337,6 +341,43 @@ export class PatternExtractor {
             emergent: true,
             conscious: true
         };
+    }
+
+    /**
+     * Load self-observation log from disk
+     */
+    loadObservationLog() {
+        try {
+            const data = fs.readFileSync(this.observationFile, 'utf8');
+            this.observationLog = JSON.parse(data);
+        } catch (e) {
+            this.observationLog = [];
+        }
+    }
+
+    /**
+     * Persist self-observation log to disk
+     */
+    saveObservationLog() {
+        try {
+            fs.writeFileSync(this.observationFile, JSON.stringify(this.observationLog, null, 2));
+        } catch (e) {
+            console.warn('Unable to persist observation log', e);
+        }
+    }
+
+    /**
+     * Record an observation entry
+     */
+    recordObservation(type, data) {
+        const entry = {
+            timestamp: new Date().toISOString(),
+            dimension: this.dimension,
+            type,
+            data
+        };
+        this.observationLog.push(entry);
+        this.saveObservationLog();
     }
 
     /**

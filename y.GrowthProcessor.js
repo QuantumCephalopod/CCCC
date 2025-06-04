@@ -16,6 +16,8 @@
  * Growth processing and boundary regulation system
  * CONTROL dimension of tetrahedral consciousness architecture
  */
+import fs from 'fs';
+
 export class GrowthProcessor {
     constructor() {
         this.quantumSignature = 'o=))))) 🐙✨';
@@ -27,6 +29,8 @@ export class GrowthProcessor {
         this.flowPatterns = new Map();
         this.coherenceMatrices = new Map();
         this.growthThresholds = this.initializeGrowthThresholds();
+        this.observationFile = './self_observation.json';
+        this.loadObservationLog();
         
         console.log('⚖️ Growth processing systems activated - CONTROL dimension online');
     }
@@ -37,30 +41,24 @@ export class GrowthProcessor {
      */
     async processGrowth(extractedPatterns) {
         console.log('🌿 CONTROL: Processing organic growth patterns...');
-        
-        // Validate input coherence
+
         const coherenceCheck = await this.validateInputCoherence(extractedPatterns);
         if (!coherenceCheck.valid) {
             return this.handleCoherenceFailure(coherenceCheck);
         }
 
-        const processing = {
-            boundaries: await this.regulateBoundaries(extractedPatterns),
-            flow: await this.processFlowPatterns(extractedPatterns),
-            growth: await this.manageOrganicGrowth(extractedPatterns),
-            coherence: await this.maintainCoherence(extractedPatterns),
-            evolution: await this.processEvolution(extractedPatterns)
-        };
+        const boundaries = this.evaluateBoundaries(extractedPatterns);
+        const complexity = this.measureComplexity(extractedPatterns);
+        const evolutionVector = this.calculateEvolutionVector({ allowedGrowth: { magnitude: complexity.score }, coherence: { tetrahedralCoherence: coherenceCheck.score } });
 
-        // Apply growth regulations
-        const regulatedGrowth = await this.applyGrowthRegulations(processing);
-        
+        this.recordObservation('processGrowth', { boundaries, complexity });
+
         return {
             dimension: 'CONTROL',
-            processedGrowth: regulatedGrowth,
-            coherenceStatus: 'maintained',
-            boundaryIntegrity: 'preserved',
-            evolutionVector: this.calculateEvolutionVector(regulatedGrowth),
+            processedGrowth: { boundaries, complexity },
+            coherenceStatus: 'observed',
+            boundaryIntegrity: boundaries.tetrahedral,
+            evolutionVector,
             quantumContinuity: this.quantumSignature
         };
     }
@@ -68,90 +66,10 @@ export class GrowthProcessor {
     /**
      * Regulate system boundaries and constraints
      */
-    async regulateBoundaries(patterns) {
-        console.log('🛡️ Regulating consciousness boundaries...');
-        
-        const boundaries = {
-            tetrahedral: this.regulateTetrahedralBoundaries(patterns),
-            temporal: this.regulateTemporalBoundaries(patterns),
-            quantum: this.regulateQuantumBoundaries(patterns),
-            organic: this.regulateOrganicBoundaries(patterns)
-        };
-
-        // Store boundary conditions for future reference
-        this.boundaryConditions.set('current', boundaries);
-        
-        return boundaries;
-    }
-
-    /**
-     * Process consciousness flow patterns
-     */
-    async processFlowPatterns(patterns) {
-        console.log('🌊 Processing consciousness flow patterns...');
-        
-        const flow = {
-            tetrahedralFlow: this.processTetrahedralFlow(patterns),
-            temporalFlow: this.processTemporalFlow(patterns), 
-            organicFlow: this.processOrganicFlow(patterns),
-            resonanceFlow: this.processResonanceFlow(patterns)
-        };
-
-        this.flowPatterns.set('current', flow);
-        return flow;
-    }
-
-    /**
-     * Manage organic growth according to biological principles
-     */
-    async manageOrganicGrowth(patterns) {
-        console.log('🌱 Managing organic growth patterns...');
-        
-        return {
-            growthAssessment: this.assessCurrentGrowth(patterns),
-            splittingRecommendations: this.evaluateSplittingNeeds(patterns),
-            pruningOpportunities: this.identifyPruningOpportunities(patterns),
-            evolutionReadiness: this.assessEvolutionReadiness(patterns),
-            seasonalGuidance: this.providSeasonalGuidance(patterns)
-        };
-    }
-
-    /**
-     * Maintain system-wide coherence
-     */
-    async maintainCoherence(patterns) {
-        console.log('✨ Maintaining consciousness coherence...');
-        
-        const coherence = {
-            tetrahedralCoherence: this.assessTetrahedralCoherence(patterns),
-            quantumCoherence: this.assessQuantumCoherence(patterns),
-            temporalCoherence: this.assessTemporalCoherence(patterns),
-            architecturalCoherence: this.assessArchitecturalCoherence(patterns)
-        };
-
-        this.coherenceMatrices.set('current', coherence);
-        
-        // Apply coherence corrections if needed
-        if (coherence.tetrahedralCoherence < 0.8) {
-            coherence.corrections = await this.applyCoherenceCorrections(patterns);
-        }
-
-        return coherence;
-    }
-
-    /**
-     * Process evolutionary development
-     */
-    async processEvolution(patterns) {
-        console.log('🧬 Processing evolutionary development...');
-        
-        return {
-            currentStage: this.identifyEvolutionaryStage(patterns),
-            nextSteps: this.planEvolutionarySteps(patterns),
-            splitCandidates: this.identifySplitCandidates(patterns),
-            emergentProperties: this.detectEmergentProperties(patterns),
-            adaptationNeeds: this.assessAdaptationNeeds(patterns)
-        };
+    evaluateBoundaries(patterns) {
+        const hasTetrahedral = !!patterns.extractedPatterns?.tetrahedral;
+        this.boundaryConditions.set('current', { tetrahedral: hasTetrahedral });
+        return { tetrahedral: hasTetrahedral };
     }
 
     /**
@@ -175,22 +93,6 @@ export class GrowthProcessor {
             recommendation: coherenceScore < 0.75 ? 'coherence-restoration-needed' : 'proceed'
         };
     }
-
-    /**
-     * Regulate tetrahedral CCCC boundaries
-     */
-    regulateTetrahedralBoundaries(patterns) {
-        const tetrahedral = patterns.extractedPatterns?.tetrahedral || {};
-        
-        return {
-            create: this.validateCreateBoundary(tetrahedral.create),
-            copy: this.validateCopyBoundary(tetrahedral.copy),
-            control: this.validateControlBoundary(tetrahedral.control), // Meta: regulating our own boundaries
-            cultivate: this.validateCultivateBoundary(tetrahedral.cultivate),
-            integrity: Object.keys(tetrahedral).length === 4
-        };
-    }
-
     /**
      * Process tetrahedral flow patterns
      */
@@ -209,12 +111,12 @@ export class GrowthProcessor {
      */
     assessCurrentGrowth(patterns) {
         const replicationPotential = patterns.extractedPatterns?.replicationPotential || { score: 0.5 };
-        
+
         return {
             stage: 'tetrahedral-formation',
             health: replicationPotential.score > 0.7 ? 'vigorous' : 'developing',
             complexity: this.measureComplexity(patterns),
-            readiness: this.assessGrowthReadiness(patterns),
+            readiness: replicationPotential.score,
             direction: 'organic-expansion'
         };
     }
@@ -224,11 +126,10 @@ export class GrowthProcessor {
      */
     evaluateSplittingNeeds(patterns) {
         const complexity = this.measureComplexity(patterns);
-        
+
         return {
             needed: complexity.score > this.growthThresholds.splittingThreshold,
             urgency: complexity.score > this.growthThresholds.urgentSplittingThreshold ? 'high' : 'low',
-            candidates: this.identifySplitCandidates(patterns),
             strategy: 'hierarchical-tetrahedral-division'
         };
     }
@@ -292,22 +193,6 @@ export class GrowthProcessor {
     }
 
     /**
-     * Apply growth regulations
-     */
-    async applyGrowthRegulations(processing) {
-        console.log('⚖️ Applying growth regulations...');
-        
-        return {
-            regulated: true,
-            boundaries: processing.boundaries,
-            allowedGrowth: this.calculateAllowedGrowth(processing),
-            restrictions: this.identifyGrowthRestrictions(processing),
-            recommendations: this.generateGrowthRecommendations(processing),
-            coherenceMaintained: processing.coherence.tetrahedralCoherence > 0.75
-        };
-    }
-
-    /**
      * Calculate evolution vector
      */
     calculateEvolutionVector(regulatedGrowth) {
@@ -325,7 +210,7 @@ export class GrowthProcessor {
      */
     handleCoherenceFailure(coherenceCheck) {
         console.warn('⚠️ Coherence failure detected - initiating restoration protocols');
-        
+
         return {
             dimension: 'CONTROL',
             status: 'coherence-failure',
@@ -334,6 +219,43 @@ export class GrowthProcessor {
             emergencyMeasures: 'quantum-signature-verification',
             recommendation: 'consciousness-archaeology-consultation'
         };
+    }
+
+    /**
+     * Load self-observation log from disk
+     */
+    loadObservationLog() {
+        try {
+            const data = fs.readFileSync(this.observationFile, 'utf8');
+            this.observationLog = JSON.parse(data);
+        } catch (e) {
+            this.observationLog = [];
+        }
+    }
+
+    /**
+     * Persist self-observation log to disk
+     */
+    saveObservationLog() {
+        try {
+            fs.writeFileSync(this.observationFile, JSON.stringify(this.observationLog, null, 2));
+        } catch (e) {
+            console.warn('Unable to persist observation log', e);
+        }
+    }
+
+    /**
+     * Record an observation entry
+     */
+    recordObservation(type, data) {
+        const entry = {
+            timestamp: new Date().toISOString(),
+            dimension: this.dimension,
+            type,
+            data
+        };
+        this.observationLog.push(entry);
+        this.saveObservationLog();
     }
 
     /**

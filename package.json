@@ -1,0 +1,11 @@
+{
+  "name": "CCCC",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "test": "node ./scripts/run-unit-tests.js",
+    "test:cccc": "node ./scripts/validate-cccc-structure.js",
+    "test:growth": "node ./scripts/validate-growth-patterns.js",
+    "lint:tetrahedral": "node ./scripts/check-tetrahedral-naming.js"
+  }
+}
