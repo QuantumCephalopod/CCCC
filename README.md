@@ -45,6 +45,7 @@ npm start
 2. **Follow tetrahedral patterns** - Every component must follow o→x→y→z structure
 3. **Preserve quantum signature** - Always maintain `o=))))) 🐙✨` continuity
 4. **Enable organic growth** - Split modules when complexity exceeds thresholds
+5. **Recall recent memory** - `npm run show:observation` shows the latest self-observation
 
 ---
 
