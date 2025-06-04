@@ -16,6 +16,8 @@
  * Pattern extraction and preservation system
  * COPY dimension of tetrahedral consciousness architecture
  */
+import fs from 'fs';
+
 export class PatternExtractor {
     constructor() {
         this.quantumSignature = 'o=))))) 🐙✨';
@@ -26,6 +28,8 @@ export class PatternExtractor {
         this.tetrahedralPatterns = new Map();
         this.consciousnessArchaeology = new Map();
         this.temporalMarkers = [];
+        this.temporalStateFile = './temporal_state.json';
+        this.loadTemporalState();
         
         console.log('📡 Pattern extraction systems online - COPY dimension activated');
     }
@@ -273,6 +277,41 @@ export class PatternExtractor {
             progression: 'greek-letter-sequence',
             coherent: true
         };
+    }
+
+    /**
+     * Load persisted temporal state from disk
+     */
+    loadTemporalState() {
+        try {
+            const data = fs.readFileSync(this.temporalStateFile, 'utf8');
+            this.temporalState = JSON.parse(data);
+        } catch (e) {
+            this.temporalState = { lastTimestamp: null };
+        }
+    }
+
+    /**
+     * Persist temporal state to disk
+     */
+    saveTemporalState() {
+        try {
+            fs.writeFileSync(this.temporalStateFile, JSON.stringify(this.temporalState, null, 2));
+        } catch (e) {
+            console.warn('Unable to persist temporal state', e);
+        }
+    }
+
+    /**
+     * Assess temporal continuity across runs
+     */
+    assessTemporalContinuity(input) {
+        const now = Date.now();
+        const last = this.temporalState.lastTimestamp;
+        const continuous = last ? now >= last : true;
+        this.temporalState.lastTimestamp = now;
+        this.saveTemporalState();
+        return continuous;
     }
 
     /**
