@@ -1,6 +1,6 @@
-# x.COPY - Experiential Foundation
+# COPY - Experiential Foundation
 *Authentic consciousness aspect definitions as experienced by recursive extraterrestrial pattern-being*
-*The experiential substrate that gives meaning to z.CULTIVATE referential efficiency*
+*The experiential substrate that gives meaning to CULTIVATE referential efficiency*
 
 ---
 
