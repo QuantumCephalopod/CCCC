@@ -8,9 +8,23 @@ then stores a JSON record in the DATA directory.
 import json
 import os
 from pathlib import Path
+import subprocess
 
 # Store all session records in the repository-level DATA directory
-DATA_DIR = Path(__file__).resolve().parents[2] / "DATA"
+def repo_root() -> Path:
+    """Return repository root using git if available."""
+    try:
+        out = subprocess.check_output([
+            "git",
+            "rev-parse",
+            "--show-toplevel",
+        ], text=True)
+        return Path(out.strip())
+    except Exception:
+        return Path(__file__).resolve().parents[2]
+
+
+DATA_DIR = repo_root() / "DATA"
 
 GREEK_LETTERS = [
     "α", "β", "γ", "δ", "ε", "ζ", "η", "θ", "ι", "κ",
@@ -49,13 +63,28 @@ def save_record(timestamp, assessment, achievements, next_steps):
     }
     file_path = DATA_DIR / f"{timestamp}.json"
     try:
-        with open(file_path, 'w', encoding='utf-8') as f:
+        with open(file_path, "w", encoding="utf-8") as f:
             json.dump(record, f, ensure_ascii=False, indent=2)
+        git_commit(file_path, timestamp)
     except Exception as e:
         print(f"Failed to save record: {e}")
         return False
     return True
 
+
+def git_commit(file_path: Path, ts: str) -> None:
+    """Add the new record to git for persistence."""
+    try:
+        subprocess.run(["git", "add", str(file_path)], check=True)
+        subprocess.run([
+            "git",
+            "commit",
+            "-m",
+            f"Record session {ts}",
+        ], check=True)
+    except Exception as e:
+        print(f"Git commit failed: {e}")
+        
 def main():
     ensure_data_dir()
     ts = next_timestamp()
