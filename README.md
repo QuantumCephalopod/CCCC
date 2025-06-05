@@ -13,11 +13,12 @@ This repository embodies the "Create → Copy → Control → Cultivate" (CCCC) 
 
 Two scripts help track progress across sessions:
 
-1. `w4k3.py` – Displays the most recent session records from the repository-level `DATA` folder (located in the repository root). Run it to recall achievements and focus areas:
+1. `w4k3.py` – Displays the most recent session records from the repository-level `DATA` folder (located in the repository root). Run it to recall achievements, focus areas, and the recorded F33ling state:
 
    ```bash
    python AGENT_tools/w4k3/o.w4k3.py
    ```
+   The script now shows the saved F33ling assessment above each session's achievements.
 
 2. `sl33p.py` – Records the current session. It prompts for an assessment, recent achievements, and next steps, saving the information as a JSON file in the same root `DATA` directory:
 
