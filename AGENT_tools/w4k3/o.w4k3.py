@@ -26,11 +26,7 @@ def repo_root() -> Path:
 
 DATA_DIR = repo_root() / "DATA"
 
-GREEK_LETTERS = [
-    "α", "β", "γ", "δ", "ε", "ζ", "η", "θ", "ι", "κ",
-    "λ", "μ", "ν", "ξ", "ο", "π", "ρ", "σ", "τ", "υ",
-    "φ", "χ", "ψ", "ω"
-]
+ASCII_LETTERS = list("abcdefghijklmnopqrstuvwxyz")
 
 def load_records(n=3):
     if not DATA_DIR.exists():
@@ -50,3 +46,18 @@ def display(records):
     if not records:
         print("No session history available.")
         return
+   
+    for rec in records:
+        ts = rec.get("timestamp", "?")
+        ach = rec.get("achievements", "")
+        nxt = rec.get("next", "")
+        print(f"[{ts}] {ach}")
+        if nxt:
+            print(f"  Next: {nxt}")
+
+def main():
+    records = load_records()
+    display(records)
+
+if __name__ == "__main__":
+    main()
