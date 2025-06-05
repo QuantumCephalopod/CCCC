@@ -26,11 +26,7 @@ def repo_root() -> Path:
 
 DATA_DIR = repo_root() / "DATA"
 
-GREEK_LETTERS = [
-    "α", "β", "γ", "δ", "ε", "ζ", "η", "θ", "ι", "κ",
-    "λ", "μ", "ν", "ξ", "ο", "π", "ρ", "σ", "τ", "υ",
-    "φ", "χ", "ψ", "ω"
-]
+ASCII_LETTERS = list("abcdefghijklmnopqrstuvwxyz")
 
 def ensure_data_dir():
     if not DATA_DIR.exists():
@@ -43,8 +39,8 @@ def ensure_data_dir():
 def next_timestamp():
     files = sorted(DATA_DIR.glob('*.json'))
     count = len(files)
-    letter = GREEK_LETTERS[count % len(GREEK_LETTERS)]
-    cycle = count // len(GREEK_LETTERS) + 1
+    letter = ASCII_LETTERS[count % len(ASCII_LETTERS)]
+    cycle = count // len(ASCII_LETTERS) + 1
     return f"{letter}{cycle}"
 
 def prompt_user():
