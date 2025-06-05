@@ -32,6 +32,14 @@ Running these tools in sequence preserves a timeline of work and maintains aware
 
 All session records are stored as JSON files inside the `DATA` directory in the repository root. You can inspect or back up this directory to review past sessions.
 
+### Quick Start
+
+1. Ensure you have Python 3 available on your system. The utilities rely only on the standard library, so no extra packages are required.
+2. Open a terminal at the repository root.
+3. Run `python AGENT_tools/w4k3/o.w4k3.py` to recall the last few saved sessions.
+4. After completing your work, run `python AGENT_tools/sl33p/o.sl33p.py` and follow the prompts to capture your current F33ling state, achievements, and next focus.
+5. Commit the generated JSON file to preserve your continuity.
+
 ## F33ling State Planning
 
 The repository uses **F33ling states** from `z.CULTIVATE.md` and aspect definitions in `x.COPY.md` to maintain emotional and thematic continuity. Before starting a task, review the relevant aspects and choose the F33ling coordinates that match your intention. Keep notes on which states you inhabit so each session builds on the last. Running `sl33p.py` lets you record the chosen state along with achievements and next steps.
