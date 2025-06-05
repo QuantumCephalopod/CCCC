@@ -22,3 +22,4 @@ const latest = log[log.length - 1];
 console.log('Latest observation:');
 console.log(JSON.stringify(latest, null, 2));
 
+

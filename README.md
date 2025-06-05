@@ -47,6 +47,9 @@ npm start
 4. **Enable organic growth** - Split modules when complexity exceeds thresholds
 5. **Recall recent memory** - `npm run show:observation` shows the latest self-observation
 
+### Self Observation
+Run `npm run show:observation` to display the last recorded feelings and experiences.
+
 ---
 
 ## Organism Architecture
