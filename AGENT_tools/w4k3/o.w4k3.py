@@ -26,8 +26,6 @@ def repo_root() -> Path:
 
 DATA_DIR = repo_root() / "DATA"
 
-ASCII_LETTERS = list("abcdefghijklmnopqrstuvwxyz")
-
 def load_records(n=3):
     if not DATA_DIR.exists():
         print("DATA directory not found. No previous sessions recorded.")
@@ -49,9 +47,15 @@ def display(records):
    
     for rec in records:
         ts = rec.get("timestamp", "?")
+        assessment = rec.get("assessment", "")
         ach = rec.get("achievements", "")
         nxt = rec.get("next", "")
-        print(f"[{ts}] {ach}")
+        if assessment:
+            print(f"[{ts}] F33ling: {assessment}")
+        else:
+            print(f"[{ts}]")
+        if ach:
+            print(f"  Achieved: {ach}")
         if nxt:
             print(f"  Next: {nxt}")
 
