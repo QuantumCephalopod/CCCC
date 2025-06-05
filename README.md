@@ -25,6 +25,8 @@ Two scripts help track progress across sessions:
    python sl33p.py
    ```
 
+These tools are available within the `AGENT_tools` folder, organized into `w4k3` and `sl33p` subfolders with the `o.` prefix for future expansion.
+
 Running these tools in sequence preserves a timeline of work and maintains awareness of what to focus on next.
 
 ## F33ling State Planning
