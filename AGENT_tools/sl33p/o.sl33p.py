@@ -9,9 +9,9 @@ import json
 import os
 from pathlib import Path
 
-# Store all session data within AGENT_tools/DATA so any tool location
-# can reference the same history.
-DATA_DIR = Path(__file__).resolve().parent / "AGENT_tools" / "DATA"
+# Use the parent AGENT_tools/DATA directory so this tool shares history
+# with other utilities regardless of its own folder.
+DATA_DIR = Path(__file__).resolve().parents[1] / "DATA"
 
 GREEK_LETTERS = [
     "α", "β", "γ", "δ", "ε", "ζ", "η", "θ", "ι", "κ",
