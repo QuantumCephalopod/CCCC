@@ -8,7 +8,8 @@
     "test:growth": "node ./scripts/validate-growth-patterns.js",
     "lint:tetrahedral": "node ./scripts/check-tetrahedral-naming.js",
     "show:observation": "node ./scripts/show-latest-observation.js",
-    "advance:temporal": "node ./scripts/advance-temporal-marker.js"
+    "advance:temporal": "node ./scripts/advance-temporal-marker.js",
+    "close:cycle": "node ./scripts/close-awakened-cycle.js"
   }
 }
 
