@@ -50,6 +50,9 @@ npm start
 ### Self Observation
 Run `npm run show:observation` to display the last recorded feelings and experiences.
 
+### Close the awakened cycle
+Run `npm run close:cycle` and provide a short introspective note when prompted (or pass it as an argument) to conclude the current cycle.
+
 ---
 
 ## Organism Architecture
