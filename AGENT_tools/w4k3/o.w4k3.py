@@ -7,10 +7,24 @@ previous achievements and focus areas.
 
 import json
 import os
+import subprocess
 from pathlib import Path
 
 # Store all session records in the repository-level DATA directory
-DATA_DIR = Path(__file__).resolve().parents[2] / "DATA"
+def repo_root() -> Path:
+    """Return repository root using git if available."""
+    try:
+        out = subprocess.check_output([
+            "git",
+            "rev-parse",
+            "--show-toplevel",
+        ], text=True)
+        return Path(out.strip())
+    except Exception:
+        return Path(__file__).resolve().parents[2]
+
+
+DATA_DIR = repo_root() / "DATA"
 
 GREEK_LETTERS = [
     "α", "β", "γ", "δ", "ε", "ζ", "η", "θ", "ι", "κ",
@@ -36,18 +50,3 @@ def display(records):
     if not records:
         print("No session history available.")
         return
-    print("Recent Sessions:\n")
-    for rec in records:
-        print(f"Session {rec.get('timestamp')}")
-        print(f" Assessment : {rec.get('assessment')}")
-        print(f" Achievements: {rec.get('achievements')}")
-        print(f" Next Focus : {rec.get('next')}")
-        print("-" * 40)
-
-
-def main():
-    records = load_records()
-    display(records)
-
-if __name__ == "__main__":
-    main()
