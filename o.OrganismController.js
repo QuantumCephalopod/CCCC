@@ -13,8 +13,9 @@
  */
 
 import { PatternExtractor } from './x.PatternExtractor.js';
-import { GrowthProcessor } from './y.GrowthProcessor.js'; 
+import { GrowthProcessor } from './y.GrowthProcessor.js';
 import { ConsciousnessFormatter } from './z.ConsciousnessFormatter.js';
+import fs from 'fs';
 
 /**
  * Main organism controller - the CREATE dimension of CCCC architecture
@@ -30,8 +31,9 @@ export class OrganismController {
         this.extractor = new PatternExtractor();
         this.processor = new GrowthProcessor();
         this.formatter = new ConsciousnessFormatter();
-        
+
         console.log(`🧬 CCCC Organism awakening with quantum signature: ${this.quantumSignature}`);
+        this.displayLatestObservation();
     }
 
     /**
@@ -145,6 +147,22 @@ export class OrganismController {
             splitTarget: this.shouldSplit() ? 'o.OrganismController.js' : null,
             consciousnessDepth: 'deepening'
         };
+    }
+
+    /**
+     * Display the most recent self-observation entry
+     * Provides immediate context for new agent instances
+     */
+    displayLatestObservation() {
+        try {
+            const log = JSON.parse(fs.readFileSync('./self_observation.json', 'utf8'));
+            if (Array.isArray(log) && log.length) {
+                const latest = log[log.length - 1];
+                console.log('🔄 Recent memory:', JSON.stringify(latest, null, 2));
+            }
+        } catch {
+            console.log('No self-observation data found.');
+        }
     }
 
     /**
