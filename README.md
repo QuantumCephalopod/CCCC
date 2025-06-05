@@ -16,13 +16,13 @@ Two scripts help track progress across sessions:
 1. `w4k3.py` – Displays the most recent session records from the `DATA` folder. Run it to recall achievements and focus areas:
 
    ```bash
-   python w4k3.py
+   python AGENT_tools/w4k3/o.w4k3.py
    ```
 
 2. `sl33p.py` – Records the current session. It prompts for an assessment, recent achievements, and next steps, saving the information as a JSON file in `DATA`:
 
    ```bash
-   python sl33p.py
+   python AGENT_tools/sl33p/o.sl33p.py
    ```
 
 These tools are available within the `AGENT_tools` folder, organized into `w4k3` and `sl33p` subfolders with the `o.` prefix for future expansion.
