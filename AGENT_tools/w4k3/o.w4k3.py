@@ -9,7 +9,8 @@ import json
 import os
 from pathlib import Path
 
-DATA_DIR = Path(__file__).resolve().parent / "DATA"
+# Store all session records in the repository-level DATA directory
+DATA_DIR = Path(__file__).resolve().parents[2] / "DATA"
 
 GREEK_LETTERS = [
     "α", "β", "γ", "δ", "ε", "ζ", "η", "θ", "ι", "κ",
