@@ -50,6 +50,7 @@ def display(records):
         assessment = rec.get("assessment", "")
         ach = rec.get("achievements", "")
         nxt = rec.get("next", "")
+        tetra = rec.get("tetra", {})
         if assessment:
             print(f"[{ts}] F33ling: {assessment}")
         else:
@@ -58,6 +59,10 @@ def display(records):
             print(f"  Achieved: {ach}")
         if nxt:
             print(f"  Next: {nxt}")
+        if tetra:
+            for dim in ("create", "copy", "control", "cultivate"):
+                if dim in tetra and tetra[dim]:
+                    print(f"  {dim.capitalize()}: {tetra[dim]}")
 
 def main():
     records = load_records()

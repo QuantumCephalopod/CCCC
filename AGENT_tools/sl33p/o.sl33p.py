@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 """Session documentation tool.
 
-Prompts for session state assessment, achievements, next priorities and
-other context details, then stores a JSON record in the DATA directory.
-The JSON structure can now include additional optional fields capturing
-aspect mappings, methodology notes, learning insights, framework depth and
-performance optimization ideas. Older fields remain unchanged so previous
-tools continue to operate.
+Prompts for session state assessment, achievements and next priorities,
+then stores a JSON record in the DATA directory. The data model now
+explicitly supports the tetrahedral workflow dimensions (CREATE, COPY,
+CONTROL, CULTIVATE). Older fields remain supported so previous tools can
+operate without modification.
 """
 
 import argparse
@@ -71,20 +70,27 @@ def prompt_user():
     assessment = input("State assessment: ")
     achievements = input("Main achievements: ")
     next_steps = input("Next session priorities: ")
-    aspects = input("Detailed aspect mappings (JSON or text, optional): ")
-    methodology = input("Methodology patterns (optional): ")
-    learning = input("Learning discoveries (optional): ")
-    depth = input("Framework utilization depth (optional): ")
-    optimization = input("Performance optimization insights (optional): ")
+    create = input(
+        "CREATE dimension notes (innovation, problem identification, optional): "
+    )
+    copy = input(
+        "COPY dimension notes (learning, pattern recognition, optional): "
+    )
+    control = input(
+        "CONTROL dimension notes (methodology, optimization, optional): "
+    )
+    cultivate = input(
+        "CULTIVATE dimension notes (growth insights, optional): "
+    )
     return (
         assessment,
         achievements,
         next_steps,
-        aspects,
-        methodology,
-        learning,
-        depth,
-        optimization,
+
+        create,
+        copy,
+        control,
+        cultivate,
     )
 
 def save_record(
@@ -92,10 +98,10 @@ def save_record(
     assessment,
     achievements,
     next_steps,
-    aspects=None,
-    methodology=None,
-    learning=None,
-    depth=None,
+    create=None,
+    copy=None,
+    control=None,
+    cultivate=None,
     optimization=None,
     dry_run=False,
 ):
@@ -105,14 +111,21 @@ def save_record(
         "achievements": achievements,
         "next": next_steps,
     }
-    if aspects is not None:
-        record["aspects"] = aspects
-    if methodology:
-        record["methodology"] = methodology
-    if learning:
-        record["learning"] = learning
-    if depth:
-        record["framework_depth"] = depth
+    tetra = {}
+    if create is not None:
+        record["aspects"] = create
+        tetra["create"] = create
+    if copy is not None:
+        record["learning"] = copy
+        tetra["copy"] = copy
+    if control is not None:
+        record["methodology"] = control
+        tetra["control"] = control
+    if cultivate is not None:
+        record["framework_depth"] = cultivate
+        tetra["cultivate"] = cultivate
+    if tetra:
+        record["tetra"] = tetra
     if optimization:
         record["optimization"] = optimization
     file_path = DATA_DIR / f"{timestamp}.json"
@@ -154,10 +167,11 @@ def main():
     assessment = os.getenv("ASSESS")
     achievements = os.getenv("ACHIEVE")
     next_steps = os.getenv("NEXT")
-    aspects = os.getenv("ASPECTS")
-    methodology = os.getenv("METHOD")
-    learning = os.getenv("LEARN")
-    depth = os.getenv("DEPTH")
+
+    create = os.getenv("CREATE") or os.getenv("ASPECTS")
+    copy = os.getenv("COPY") or os.getenv("LEARN")
+    control = os.getenv("CONTROL") or os.getenv("METHOD") or os.getenv("OPTIM")
+    cultivate = os.getenv("CULTIVATE") or os.getenv("DEPTH")
     optimization = os.getenv("OPTIM")
 
     if not (assessment and achievements and next_steps):
@@ -165,28 +179,26 @@ def main():
             assessment_i,
             achievements_i,
             next_steps_i,
-            aspects_i,
-            methodology_i,
-            learning_i,
-            depth_i,
-            optimization_i,
+            create_i,
+            copy_i,
+            control_i,
+            cultivate_i,
         ) = prompt_user()
         assessment = assessment or assessment_i
         achievements = achievements or achievements_i
         next_steps = next_steps or next_steps_i
-        aspects = aspects or aspects_i
-        methodology = methodology or methodology_i
-        learning = learning or learning_i
-        depth = depth or depth_i
-        optimization = optimization or optimization_i
+        create = create or create_i
+        copy = copy or copy_i
+        control = control or control_i
+        cultivate = cultivate or cultivate_i
 
     assessment = sanitize(assessment)
     achievements = sanitize(achievements)
     next_steps = sanitize(next_steps)
-    aspects_val = parse_json_field(aspects)
-    methodology_val = sanitize(methodology) if methodology else None
-    learning_val = sanitize(learning) if learning else None
-    depth_val = sanitize(depth) if depth else None
+    create_val = parse_json_field(create)
+    copy_val = sanitize(copy) if copy else None
+    control_val = sanitize(control) if control else None
+    cultivate_val = sanitize(cultivate) if cultivate else None
     optimization_val = sanitize(optimization) if optimization else None
 
     dry = args.dry_run or os.getenv("SL33P_DRY_RUN")
@@ -196,10 +208,10 @@ def main():
         assessment,
         achievements,
         next_steps,
-        aspects=aspects_val,
-        methodology=methodology_val,
-        learning=learning_val,
-        depth=depth_val,
+        create=create_val,
+        copy=copy_val,
+        control=control_val,
+        cultivate=cultivate_val,
         optimization=optimization_val,
         dry_run=dry,
     ):
