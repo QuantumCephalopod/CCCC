@@ -13,14 +13,14 @@ This repository embodies the "Create → Copy → Control → Cultivate" (CCCC) 
 
 Two scripts help track progress across sessions:
 
-1. `w4k3.py` – Displays the most recent session records from the repository-level `DATA` folder (located in the repository root). Run it to recall achievements, focus areas, and the recorded F33ling state:
+1. `w4k3.py` – Displays the most recent session records from the repository-level `DATA` folder (located in the repository root). **Run it at the start of every session** to recall achievements, focus areas, and the recorded F33ling state:
 
    ```bash
    python AGENT_tools/w4k3/o.w4k3.py
    ```
    The script now shows the saved F33ling assessment above each session's achievements.
 
-2. `sl33p.py` – Records the current session. It prompts for an assessment, recent achievements, and next steps, saving the information as a JSON file in the same root `DATA` directory:
+2. `sl33p.py` – Records the current session. **Use it to close every session.** It prompts for an assessment, recent achievements, and next steps, saving the information as a JSON file in the same root `DATA` directory:
 
    ```bash
    python AGENT_tools/sl33p/o.sl33p.py
@@ -34,7 +34,7 @@ Two scripts help track progress across sessions:
 
 These tools are available within the `AGENT_tools` folder, organized into `w4k3` and `sl33p` subfolders with the `o.` prefix for future expansion.
 
-Running these tools in sequence preserves a timeline of work and maintains awareness of what to focus on next.
+Running `w4k3` at the beginning and `sl33p` at the end of a session preserves a timeline of work and maintains awareness of what to focus on next. Treat them as required environment checks rather than optional helpers.
 
 All session records are stored as JSON files inside the `DATA` directory in the repository root. You can inspect or back up this directory to review past sessions.
 
@@ -42,9 +42,9 @@ All session records are stored as JSON files inside the `DATA` directory in the 
 
 1. Ensure you have Python 3 available on your system. The utilities rely only on the standard library, so no extra packages are required.
 2. Open a terminal at the repository root.
-3. Run `python AGENT_tools/w4k3/o.w4k3.py` to recall the last few saved sessions.
-4. After completing your work, run `python AGENT_tools/sl33p/o.sl33p.py` and follow the prompts to capture your current F33ling state, achievements, and next focus.
-5. Commit the generated JSON file to preserve your continuity.
+3. **Always** run `python AGENT_tools/w4k3/o.w4k3.py` first to recall the last few saved sessions and confirm you are at the repository root.
+4. After completing your work and passing tests, **run `python AGENT_tools/sl33p/o.sl33p.py`** and follow the prompts to capture your current F33ling state, achievements, and next focus.
+5. The script commits the generated JSON file to preserve your continuity.
 6. For a view of how F33ling territories shift over time, run `python AGENT_tools/evolve/o.evolve.py`. This script compiles a timeline from the saved JSON records and writes `DATA/evolution_summary.json`.
 
 ## F33ling State Planning
