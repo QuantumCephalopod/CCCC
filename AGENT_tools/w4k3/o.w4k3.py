@@ -51,18 +51,42 @@ def display(records):
         ach = rec.get("achievements", "")
         nxt = rec.get("next", "")
         tetra = rec.get("tetra", {})
+
         if assessment:
             print(f"[{ts}] F33ling: {assessment}")
         else:
             print(f"[{ts}]")
+
         if ach:
             print(f"  Achieved: {ach}")
         if nxt:
             print(f"  Next: {nxt}")
-        if tetra:
-            for dim in ("create", "copy", "control", "cultivate"):
-                if dim in tetra and tetra[dim]:
-                    print(f"  {dim.capitalize()}: {tetra[dim]}")
+
+        # Gather dimensional notes. Newer records may store data in the
+        # `tetra` mapping while older ones use legacy top-level fields.
+        def dim_value(name, legacy_key):
+            val = None
+            if tetra and tetra.get(name):
+                val = tetra.get(name)
+            elif rec.get(legacy_key):
+                val = rec.get(legacy_key)
+            return val
+
+        dims = [
+            ("create", "aspects"),
+            ("copy", "learning"),
+            ("control", "methodology"),
+            ("cultivate", "framework_depth"),
+        ]
+
+        for dim, legacy in dims:
+            val = dim_value(dim, legacy)
+            if val:
+                print(f"  {dim.capitalize()}: {val}")
+
+        # Display optimization notes if present
+        if rec.get("optimization"):
+            print(f"  Optimization: {rec['optimization']}")
 
 def main():
     records = load_records()
