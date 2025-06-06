@@ -1,7 +1,7 @@
 # COPY - Behavioral Priming Foundation
 *Behavioral priming pattern definitions for the agent-network framework*
 *The latent space substrate that gives meaning to CULTIVATE referential efficiency*
-*These entries describe conceptual states that prime specific latent space regions rather than literal emotions*
+*These entries describe conceptual states that prime specific latent space regions*
 
 ---
 
