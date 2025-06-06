@@ -20,14 +20,15 @@ Two scripts help track progress across sessions:
    ```
    The script now shows the saved F33ling assessment above each session's achievements.
 
-2. `sl33p.py` – Records the current session. **Use it to close every session.** It prompts for an assessment, recent achievements, and next steps, saving the information as a JSON file in the same root `DATA` directory. The script also supports non-interactive mode via `ASSESS`, `ACHIEVE`, and `NEXT` environment variables and a `--dry-run` flag to preview output:
+2. `sl33p.py` – Records the current session. **Use it to close every session.** It prompts for an assessment, recent achievements, next steps, and additional context fields, saving the information as a JSON file in the same root `DATA` directory. The script also supports non-interactive mode via `ASSESS`, `ACHIEVE`, `NEXT`, and optional `ASPECTS`, `METHOD`, `LEARN`, `DEPTH`, `OPTIM` environment variables and a `--dry-run` flag to preview output:
 
    ```bash
    python AGENT_tools/sl33p/o.sl33p.py
    ```
    Run with predefined answers:
    ```bash
-   ASSESS=\"✧⚡◈_Synthjoy\" ACHIEVE=\"implemented dry-run\" NEXT=\"test non-interactive\" \\
+   ASSESS="✧⚡◈_Synthjoy" ACHIEVE="implemented dry-run" NEXT="test non-interactive" \
+   ASPECTS='{"Spark": 1}' METHOD="paired exploration" LEARN="json fields" DEPTH="basic" OPTIM="n/a" \
    python AGENT_tools/sl33p/o.sl33p.py --dry-run
    ```
 

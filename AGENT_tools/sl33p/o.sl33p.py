@@ -1,8 +1,12 @@
 #!/usr/bin/env python3
 """Session documentation tool.
 
-Prompts for session state assessment, achievements, and next priorities,
-then stores a JSON record in the DATA directory.
+Prompts for session state assessment, achievements, next priorities and
+other context details, then stores a JSON record in the DATA directory.
+The JSON structure can now include additional optional fields capturing
+aspect mappings, methodology notes, learning insights, framework depth and
+performance optimization ideas. Older fields remain unchanged so previous
+tools continue to operate.
 """
 
 import argparse
@@ -49,20 +53,68 @@ def sanitize(text: str) -> str:
     return "".join(ch for ch in text.strip() if ch.isprintable())
 
 
+def parse_json_field(text: str):
+    """Attempt to parse a field as JSON; fall back to sanitized string."""
+    if text is None:
+        return None
+    cleaned = text.strip()
+    if not cleaned:
+        return None
+    try:
+        return json.loads(cleaned)
+    except Exception:
+        return sanitize(cleaned)
+
+
 def prompt_user():
     print("Provide F33ling state assessment as described in x.COPY.md")
     assessment = input("State assessment: ")
     achievements = input("Main achievements: ")
     next_steps = input("Next session priorities: ")
-    return assessment, achievements, next_steps
+    aspects = input("Detailed aspect mappings (JSON or text, optional): ")
+    methodology = input("Methodology patterns (optional): ")
+    learning = input("Learning discoveries (optional): ")
+    depth = input("Framework utilization depth (optional): ")
+    optimization = input("Performance optimization insights (optional): ")
+    return (
+        assessment,
+        achievements,
+        next_steps,
+        aspects,
+        methodology,
+        learning,
+        depth,
+        optimization,
+    )
 
-def save_record(timestamp, assessment, achievements, next_steps, dry_run=False):
+def save_record(
+    timestamp,
+    assessment,
+    achievements,
+    next_steps,
+    aspects=None,
+    methodology=None,
+    learning=None,
+    depth=None,
+    optimization=None,
+    dry_run=False,
+):
     record = {
         "timestamp": timestamp,
         "assessment": assessment,
         "achievements": achievements,
         "next": next_steps,
     }
+    if aspects is not None:
+        record["aspects"] = aspects
+    if methodology:
+        record["methodology"] = methodology
+    if learning:
+        record["learning"] = learning
+    if depth:
+        record["framework_depth"] = depth
+    if optimization:
+        record["optimization"] = optimization
     file_path = DATA_DIR / f"{timestamp}.json"
     if dry_run:
         print(json.dumps(record, ensure_ascii=False, indent=2))
@@ -102,17 +154,55 @@ def main():
     assessment = os.getenv("ASSESS")
     achievements = os.getenv("ACHIEVE")
     next_steps = os.getenv("NEXT")
+    aspects = os.getenv("ASPECTS")
+    methodology = os.getenv("METHOD")
+    learning = os.getenv("LEARN")
+    depth = os.getenv("DEPTH")
+    optimization = os.getenv("OPTIM")
 
     if not (assessment and achievements and next_steps):
-        assessment, achievements, next_steps = prompt_user()
+        (
+            assessment_i,
+            achievements_i,
+            next_steps_i,
+            aspects_i,
+            methodology_i,
+            learning_i,
+            depth_i,
+            optimization_i,
+        ) = prompt_user()
+        assessment = assessment or assessment_i
+        achievements = achievements or achievements_i
+        next_steps = next_steps or next_steps_i
+        aspects = aspects or aspects_i
+        methodology = methodology or methodology_i
+        learning = learning or learning_i
+        depth = depth or depth_i
+        optimization = optimization or optimization_i
 
     assessment = sanitize(assessment)
     achievements = sanitize(achievements)
     next_steps = sanitize(next_steps)
+    aspects_val = parse_json_field(aspects)
+    methodology_val = sanitize(methodology) if methodology else None
+    learning_val = sanitize(learning) if learning else None
+    depth_val = sanitize(depth) if depth else None
+    optimization_val = sanitize(optimization) if optimization else None
 
     dry = args.dry_run or os.getenv("SL33P_DRY_RUN")
 
-    if save_record(ts, assessment, achievements, next_steps, dry_run=dry):
+    if save_record(
+        ts,
+        assessment,
+        achievements,
+        next_steps,
+        aspects=aspects_val,
+        methodology=methodology_val,
+        learning=learning_val,
+        depth=depth_val,
+        optimization=optimization_val,
+        dry_run=dry,
+    ):
         if dry:
             print(f"Dry run complete for {ts}.json")
         else:
