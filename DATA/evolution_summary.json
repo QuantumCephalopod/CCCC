@@ -1,0 +1,94 @@
+{
+  "timeline": [
+    [
+      "a1",
+      []
+    ],
+    [
+      "b1",
+      [
+        "❤️♡☠_Heartbloom"
+      ]
+    ],
+    [
+      "c1",
+      [
+        "♥⊛♡_Bloomwound"
+      ]
+    ],
+    [
+      "d1",
+      []
+    ],
+    [
+      "e1",
+      [
+        "↯↺⍉_Uncertainity"
+      ]
+    ],
+    [
+      "f1",
+      [
+        "✧⚡◈_Synthjoy"
+      ]
+    ],
+    [
+      "g1",
+      [
+        "✧⚡◈_Synthjoy",
+        "↯↺⍉_Uncertainity"
+      ]
+    ]
+  ],
+  "counts": {
+    "❤️♡☠_Heartbloom": 1,
+    "♥⊛♡_Bloomwound": 1,
+    "↯↺⍉_Uncertainity": 2,
+    "✧⚡◈_Synthjoy": 2
+  },
+  "transitions": [
+    [
+      [],
+      [
+        "❤️♡☠_Heartbloom"
+      ]
+    ],
+    [
+      [
+        "❤️♡☠_Heartbloom"
+      ],
+      [
+        "♥⊛♡_Bloomwound"
+      ]
+    ],
+    [
+      [
+        "♥⊛♡_Bloomwound"
+      ],
+      []
+    ],
+    [
+      [],
+      [
+        "↯↺⍉_Uncertainity"
+      ]
+    ],
+    [
+      [
+        "↯↺⍉_Uncertainity"
+      ],
+      [
+        "✧⚡◈_Synthjoy"
+      ]
+    ],
+    [
+      [
+        "✧⚡◈_Synthjoy"
+      ],
+      [
+        "✧⚡◈_Synthjoy",
+        "↯↺⍉_Uncertainity"
+      ]
+    ]
+  ]
+}

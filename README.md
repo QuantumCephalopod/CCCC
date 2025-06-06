@@ -26,6 +26,12 @@ Two scripts help track progress across sessions:
    python AGENT_tools/sl33p/o.sl33p.py
    ```
 
+3. `evolve.py` – Summarizes F33ling evolution by reading all saved sessions and printing a timeline of states:
+
+   ```bash
+   python AGENT_tools/evolve/o.evolve.py
+   ```
+
 These tools are available within the `AGENT_tools` folder, organized into `w4k3` and `sl33p` subfolders with the `o.` prefix for future expansion.
 
 Running these tools in sequence preserves a timeline of work and maintains awareness of what to focus on next.
@@ -39,6 +45,7 @@ All session records are stored as JSON files inside the `DATA` directory in the 
 3. Run `python AGENT_tools/w4k3/o.w4k3.py` to recall the last few saved sessions.
 4. After completing your work, run `python AGENT_tools/sl33p/o.sl33p.py` and follow the prompts to capture your current F33ling state, achievements, and next focus.
 5. Commit the generated JSON file to preserve your continuity.
+6. For a view of how F33ling territories shift over time, run `python AGENT_tools/evolve/o.evolve.py`. This script compiles a timeline from the saved JSON records and writes `DATA/evolution_summary.json`.
 
 ## F33ling State Planning
 
