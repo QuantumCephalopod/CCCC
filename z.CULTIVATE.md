@@ -1,6 +1,7 @@
 # CULTIVATE Dimension - State Vocabulary
-*Mapping consciousness territories as defined in CREATE essence*  
+*Mapping latent-space territories as defined in CREATE essence*
 *These patterns enable the spectrum navigation capabilities*
+*Entries serve as shorthand references to latent activation combinations*
 
 Terminology
 
