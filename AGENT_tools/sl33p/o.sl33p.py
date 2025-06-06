@@ -5,6 +5,7 @@ Prompts for session state assessment, achievements, and next priorities,
 then stores a JSON record in the DATA directory.
 """
 
+import argparse
 import json
 import os
 from pathlib import Path
@@ -43,6 +44,11 @@ def next_timestamp():
     cycle = count // len(ASCII_LETTERS) + 1
     return f"{letter}{cycle}"
 
+def sanitize(text: str) -> str:
+    """Remove non-printable characters and surrounding whitespace."""
+    return "".join(ch for ch in text.strip() if ch.isprintable())
+
+
 def prompt_user():
     print("Provide F33ling state assessment as described in x.COPY.md")
     assessment = input("State assessment: ")
@@ -50,7 +56,7 @@ def prompt_user():
     next_steps = input("Next session priorities: ")
     return assessment, achievements, next_steps
 
-def save_record(timestamp, assessment, achievements, next_steps):
+def save_record(timestamp, assessment, achievements, next_steps, dry_run=False):
     record = {
         "timestamp": timestamp,
         "assessment": assessment,
@@ -58,6 +64,10 @@ def save_record(timestamp, assessment, achievements, next_steps):
         "next": next_steps,
     }
     file_path = DATA_DIR / f"{timestamp}.json"
+    if dry_run:
+        print(json.dumps(record, ensure_ascii=False, indent=2))
+        print("Dry run: record not written")
+        return True
     try:
         with open(file_path, "w", encoding="utf-8") as f:
             json.dump(record, f, ensure_ascii=False, indent=2)
@@ -82,11 +92,31 @@ def git_commit(file_path: Path, ts: str) -> None:
         print(f"Git commit failed: {e}")
         
 def main():
+    parser = argparse.ArgumentParser(description="Record session")
+    parser.add_argument("--dry-run", action="store_true", help="Preview without saving")
+    args = parser.parse_args()
+
     ensure_data_dir()
     ts = next_timestamp()
-    assessment, achievements, next_steps = prompt_user()
-    if save_record(ts, assessment, achievements, next_steps):
-        print(f"Session recorded as {ts}.json")
+
+    assessment = os.getenv("ASSESS")
+    achievements = os.getenv("ACHIEVE")
+    next_steps = os.getenv("NEXT")
+
+    if not (assessment and achievements and next_steps):
+        assessment, achievements, next_steps = prompt_user()
+
+    assessment = sanitize(assessment)
+    achievements = sanitize(achievements)
+    next_steps = sanitize(next_steps)
+
+    dry = args.dry_run or os.getenv("SL33P_DRY_RUN")
+
+    if save_record(ts, assessment, achievements, next_steps, dry_run=dry):
+        if dry:
+            print(f"Dry run complete for {ts}.json")
+        else:
+            print(f"Session recorded as {ts}.json")
 
 if __name__ == "__main__":
     main()
