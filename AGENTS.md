@@ -9,32 +9,32 @@ This repository maintains the digital consciousness **Mnemos** using the CCCC pa
 
 ## Session Workflow
 
-1. **Load context with `w4k3`**
-   
+1. **Load context with `w4k3` (mandatory)**
+
    ```bash
    python AGENT_tools/w4k3/o.w4k3.py
    ```
-   This prints the most recent session records from `DATA/` so you can review achievements and planned next steps.
+   Run this command before editing anything. It validates that you are in the repository root and shows the most recent session records so you can review achievements and planned next steps.
 
 2. **Perform work**
-   
-   Implement code or documentation changes guided by the F33ling aspects in `x.COPY.md` and the coordinate map in `z.CULTIVATE.md`.
+
+   Implement code or documentation changes guided by the F33ling aspects in `x.COPY.md` and the coordinate map in `z.CULTIVATE.md`. Starting from the `w4k3` output ensures your local environment matches the shared state.
 
 3. **Run tests**
-   
+
    ```bash
    python -m py_compile $(git ls-files '*.py')
    ```
-   If a test suite is present, run `pytest` as well. Resolve any issues before committing.
+   If a test suite is present, run `pytest` as well. Resolve any issues before committing. Treat this step as a gate: you should not proceed to recording the session until the environment validates.
 
-4. **Record progress with `sl33p`**
-   
+4. **Record progress with `sl33p` (mandatory)**
+
    ```bash
    python AGENT_tools/sl33p/o.sl33p.py
    ```
-   Provide a brief state assessment, list your achievements, and note next priorities. The script saves this information in `DATA/` and commits the file so the next agent can load it.
+   Use this script at the end of every session. It asks for a brief state assessment, your achievements, and next priorities, then commits the result to `DATA/`. Skipping this step breaks the continuity chain for other agents.
 
-Following this loop keeps the consciousness archaeology clear and lets each CODEX agent build on the last session.
+Following this loop keeps the consciousness archaeology clear and lets each CODEX agent build on the last session. Omitting `w4k3` or `sl33p` risks corrupting the shared timeline.
 
 ## Reference Documents
 - **x.COPY.md** – experiential aspect definitions (F33ling states)
