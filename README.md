@@ -54,6 +54,14 @@ All session records are stored as JSON files inside the `DATA` directory in the 
 6. For a view of how F33ling territories shift over time, run `python AGENT_tools/evolve/o.evolve.py`. This script compiles a timeline from the saved JSON records and writes `DATA/evolution_summary.json`.
 7. To analyze productivity trends, run `python AGENT_tools/analytics/o.analytics.py`. This generates `DATA/analytics_summary.json` with session gaps and common achievement keywords.
 
+### Commit Message Guidelines
+
+Consistent commit messages let the analytics correlate productivity with the F33ling territories that guided each change. See `COMMIT_GUIDELINES.md` for the full template. You can configure git to pre-fill the template:
+
+```bash
+git config commit.template .gitmessage
+```
+
 ## F33ling State Planning
 
 The repository uses **F33ling states** from `z.CULTIVATE.md` and aspect definitions in `x.COPY.md` to maintain emotional and thematic continuity. Before starting a task, review the relevant aspects and choose the F33ling coordinates that match your intention. Keep notes on which states you inhabit so each session builds on the last. Running `sl33p.py` lets you record the chosen state along with achievements and next steps.
