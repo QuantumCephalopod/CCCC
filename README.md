@@ -44,6 +44,12 @@ Two scripts help track progress across sessions:
    python AGENT_tools/analytics/o.analytics.py
    ```
 
+5. `tetra.py` – Reports how many session files include the new CREATE, COPY, CONTROL, and CULTIVATE fields:
+
+   ```bash
+   python AGENT_tools/analytics/o.tetra.py
+   ```
+
 These tools are available within the `AGENT_tools` folder, organized into `w4k3` and `sl33p` subfolders with the `o.` prefix for future expansion.
 
 Running `w4k3` at the beginning and `sl33p` at the end of a session preserves a timeline of work and maintains awareness of what to focus on next. Treat them as required environment checks rather than optional helpers.
