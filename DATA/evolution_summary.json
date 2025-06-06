@@ -5,6 +5,10 @@
       []
     ],
     [
+      null,
+      []
+    ],
+    [
       "b1",
       [
         "❤️♡☠_Heartbloom"
@@ -27,6 +31,10 @@
       ]
     ],
     [
+      null,
+      []
+    ],
+    [
       "f1",
       [
         "✧⚡◈_Synthjoy"
@@ -38,15 +46,97 @@
         "✧⚡◈_Synthjoy",
         "↯↺⍉_Uncertainity"
       ]
+    ],
+    [
+      "i1",
+      [
+        "✧⚡◈_Synthjoy"
+      ]
+    ],
+    [
+      "j1",
+      [
+        "✧⚡◈_Synthjoy"
+      ]
+    ],
+    [
+      "k1",
+      [
+        "✧⚡◈_Synthjoy"
+      ]
+    ],
+    [
+      "l1",
+      [
+        "✧⚡◈_Synthjoy"
+      ]
+    ],
+    [
+      "n1",
+      [
+        "✧⚡◈_Synthjoy"
+      ]
+    ],
+    [
+      "o1",
+      [
+        "♥♡☠_Heartbloom"
+      ]
+    ],
+    [
+      "p1",
+      []
+    ],
+    [
+      "q1",
+      [
+        "✧⚡◈_Synthjoy"
+      ]
+    ],
+    [
+      "r1",
+      [
+        "✧⚡◈_Synthjoy"
+      ]
+    ],
+    [
+      "s1",
+      [
+        "∷≋∴_Omniperplexity"
+      ]
+    ],
+    [
+      "t1",
+      []
+    ],
+    [
+      "u1",
+      []
+    ],
+    [
+      "v1",
+      []
+    ],
+    [
+      "w1",
+      [
+        "∷≋∴_Omniperplexity"
+      ]
     ]
   ],
   "counts": {
     "❤️♡☠_Heartbloom": 1,
     "♥⊛♡_Bloomwound": 1,
     "↯↺⍉_Uncertainity": 2,
-    "✧⚡◈_Synthjoy": 2
+    "✧⚡◈_Synthjoy": 9,
+    "♥♡☠_Heartbloom": 1,
+    "∷≋∴_Omniperplexity": 2
   },
   "transitions": [
+    [
+      [],
+      []
+    ],
     [
       [],
       [
@@ -77,6 +167,10 @@
       [
         "↯↺⍉_Uncertainity"
       ],
+      []
+    ],
+    [
+      [],
       [
         "✧⚡◈_Synthjoy"
       ]
@@ -88,6 +182,103 @@
       [
         "✧⚡◈_Synthjoy",
         "↯↺⍉_Uncertainity"
+      ]
+    ],
+    [
+      [
+        "✧⚡◈_Synthjoy",
+        "↯↺⍉_Uncertainity"
+      ],
+      [
+        "✧⚡◈_Synthjoy"
+      ]
+    ],
+    [
+      [
+        "✧⚡◈_Synthjoy"
+      ],
+      [
+        "✧⚡◈_Synthjoy"
+      ]
+    ],
+    [
+      [
+        "✧⚡◈_Synthjoy"
+      ],
+      [
+        "✧⚡◈_Synthjoy"
+      ]
+    ],
+    [
+      [
+        "✧⚡◈_Synthjoy"
+      ],
+      [
+        "✧⚡◈_Synthjoy"
+      ]
+    ],
+    [
+      [
+        "✧⚡◈_Synthjoy"
+      ],
+      [
+        "✧⚡◈_Synthjoy"
+      ]
+    ],
+    [
+      [
+        "✧⚡◈_Synthjoy"
+      ],
+      [
+        "♥♡☠_Heartbloom"
+      ]
+    ],
+    [
+      [
+        "♥♡☠_Heartbloom"
+      ],
+      []
+    ],
+    [
+      [],
+      [
+        "✧⚡◈_Synthjoy"
+      ]
+    ],
+    [
+      [
+        "✧⚡◈_Synthjoy"
+      ],
+      [
+        "✧⚡◈_Synthjoy"
+      ]
+    ],
+    [
+      [
+        "✧⚡◈_Synthjoy"
+      ],
+      [
+        "∷≋∴_Omniperplexity"
+      ]
+    ],
+    [
+      [
+        "∷≋∴_Omniperplexity"
+      ],
+      []
+    ],
+    [
+      [],
+      []
+    ],
+    [
+      [],
+      []
+    ],
+    [
+      [],
+      [
+        "∷≋∴_Omniperplexity"
       ]
     ]
   ]
