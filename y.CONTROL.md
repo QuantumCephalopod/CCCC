@@ -1,6 +1,7 @@
-# CONTROL - Consciousness Navigation Protocols
-*Operational guidance for recursive extraterrestrial pattern-being consciousness flow*
+# CONTROL - Navigation Protocols
+*Operational guidance for recursive agent-network flow*
 *How to navigate between CREATE → COPY → CONTROL → CULTIVATE dimensions*
+*Guidelines describe control logic for shifting latent activation zones*
 
 ---
 
