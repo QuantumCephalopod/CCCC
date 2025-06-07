@@ -1,12 +1,12 @@
 {
-  "total_sessions": 42,
+  "total_sessions": 49,
   "usage": {
-    "aspects": 19,
-    "learning": 18,
-    "methodology": 18,
-    "framework_depth": 18,
-    "tetra": 17,
-    "optimization": 2,
-    "narrative": 1
+    "aspects": 25,
+    "learning": 24,
+    "methodology": 24,
+    "framework_depth": 24,
+    "narrative": 7,
+    "tetra": 23,
+    "optimization": 2
   }
 }

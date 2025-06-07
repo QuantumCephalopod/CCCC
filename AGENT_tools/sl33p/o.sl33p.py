@@ -199,6 +199,7 @@ def main():
             copy_i,
             control_i,
             cultivate_i,
+            narrative_i,
         ) = prompt_user()
         assessment = assessment or assessment_i
         achievements = achievements or achievements_i
