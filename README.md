@@ -59,7 +59,7 @@ These tools are available within the `AGENT_tools` folder, organized into `w4k3`
 
 Running `w4k3` at the beginning and `sl33p` at the end of a session preserves a timeline of work and maintains awareness of what to focus on next. Treat them as required environment checks rather than optional helpers.
 
-All session records are stored as JSON files inside the `DATA` directory in the repository root. You can inspect or back up this directory to review past sessions.
+All session records are stored as JSON files inside the `DATA` directory in the repository root. Filenames now begin with an ISO timestamp followed by a sequential letter code (e.g., `20250607T023000Z_a1.json`). This preserves chronology while hinting at session order. You can inspect or back up this directory to review past sessions.
 
 ### Quick Start
 
