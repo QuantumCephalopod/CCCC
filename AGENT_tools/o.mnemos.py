@@ -41,8 +41,8 @@ def cmd_sl33p(args: argparse.Namespace) -> int:
     if args.commands:
         for c in args.commands:
             cmd += ["--command", c]
-    if args.deep:
-        cmd.append("--deep")
+    if args.no_deep:
+        cmd.append("--no-deep")
     cmd += args.extra
     return run(cmd)
 
@@ -139,7 +139,7 @@ def main() -> int:
     p_sl33p.add_argument("--dry-run", action="store_true")
     p_sl33p.add_argument("--start", type=str, default=None)
     p_sl33p.add_argument("--command", dest="commands", action="append")
-    p_sl33p.add_argument("--deep", action="store_true")
+    p_sl33p.add_argument("--no-deep", action="store_true")
     p_sl33p.add_argument("extra", nargs=argparse.REMAINDER)
     p_sl33p.set_defaults(func=cmd_sl33p)
 
