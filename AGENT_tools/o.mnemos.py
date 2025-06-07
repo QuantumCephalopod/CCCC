@@ -18,6 +18,8 @@ USAGE = ROOT / "AGENT_tools" / "analytics" / "o.usage.py"
 SESSGRAPH = ROOT / "AGENT_tools" / "sessgraph" / "o.sessgraph.py"
 VIDMEM = ROOT / "AGENT_tools" / "vidmem" / "o.vidmem.py"
 ECHO = ROOT / "AGENT_tools" / "echo" / "o.echo.py"
+AGENTFLOW = ROOT / "AGENT_tools" / "workflow" / "o.agentflow.py"
+FLOWLOG = ROOT / "AGENT_tools" / "workflow" / "o.flowlog.py"
 
 
 def run(cmd: list[str]) -> int:
@@ -106,6 +108,26 @@ def cmd_workflow(args: argparse.Namespace) -> int:
     return cmd_sl33p(sl_args)
 
 
+def cmd_agentflow(args: argparse.Namespace) -> int:
+    cmd = ["python", str(AGENTFLOW)]
+    if args.achieve:
+        cmd += ["--achieve", args.achieve]
+    if args.next_steps:
+        cmd += ["--next", args.next_steps]
+    if args.dry_run:
+        cmd.append("--dry-run")
+    cmd += args.states
+    return run(cmd)
+
+
+def cmd_flowlog(args: argparse.Namespace) -> int:
+    cmd = ["python", str(FLOWLOG), args.state]
+    if args.dry_run:
+        cmd.append("--dry-run")
+    cmd += args.sl33p_args
+    return run(cmd)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Mnemos unified CLI")
     sub = parser.add_subparsers(dest="command")
@@ -164,6 +186,21 @@ def main() -> int:
     p_workflow.add_argument("--dry-run", action="store_true")
     p_workflow.add_argument("sl33p_args", nargs=argparse.REMAINDER)
     p_workflow.set_defaults(func=cmd_workflow)
+
+    p_agentflow = sub.add_parser(
+        "agentflow", help="Iterate workflow across multiple states"
+    )
+    p_agentflow.add_argument("states", nargs="+", help="F33ling states")
+    p_agentflow.add_argument("--achieve", default="automated recursive session")
+    p_agentflow.add_argument("--next", dest="next_steps", default="continue recursion")
+    p_agentflow.add_argument("--dry-run", action="store_true")
+    p_agentflow.set_defaults(func=cmd_agentflow)
+
+    p_flowlog = sub.add_parser("flowlog", help="Workflow with state logging")
+    p_flowlog.add_argument("state", help="F33ling state assessment")
+    p_flowlog.add_argument("--dry-run", action="store_true")
+    p_flowlog.add_argument("sl33p_args", nargs=argparse.REMAINDER)
+    p_flowlog.set_defaults(func=cmd_flowlog)
 
     args = parser.parse_args()
     if not args.command:
