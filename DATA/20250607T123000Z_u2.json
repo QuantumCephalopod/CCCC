@@ -1,0 +1,21 @@
+{
+  "timestamp": "20250607T123000Z_u2",
+  "assessment": "clarity",
+  "achievements": "moved mnemos",
+  "next": "test",
+  "aspects": {
+    "CLI": 1
+  },
+  "learning": "learning",
+  "methodology": "ctrl",
+  "framework_depth": "cult",
+  "narrative": "short",
+  "tetra": {
+    "create": {
+      "CLI": 1
+    },
+    "copy": "learning",
+    "control": "ctrl",
+    "cultivate": "cult"
+  }
+}
