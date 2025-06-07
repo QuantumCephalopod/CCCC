@@ -20,7 +20,8 @@ Two scripts help track progress across sessions:
    ```bash
    python AGENT_tools/o.mnemos.py w4k3
    ```
-   The script now shows the saved F33ling assessment above each session's achievements.
+The script now shows the saved F33ling assessment above each session's achievements.
+Passing `--transitions` reveals how F33ling states shifted between the displayed sessions.
 
 2. `sl33p.py` – Records the current session. **Use it to close every session.**
    The prompts now mirror the tetrahedral workflow with CREATE, COPY,
