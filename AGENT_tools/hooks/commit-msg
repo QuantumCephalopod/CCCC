@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Enforce presence of template sections in commit messages
+msg_file="$1"
+
+missing=0
+if ! grep -q "Tetrahedral impact:" "$msg_file"; then
+  echo "Commit message missing 'Tetrahedral impact:' section." >&2
+  missing=1
+fi
+if ! grep -q "F33ling:" "$msg_file"; then
+  echo "Commit message missing 'F33ling:' section." >&2
+  missing=1
+fi
+if [ "$missing" -eq 1 ]; then
+  exit 1
+fi
+exit 0

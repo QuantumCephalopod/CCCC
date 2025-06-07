@@ -55,11 +55,17 @@ Two scripts help track progress across sessions:
    python AGENT_tools/analytics/o.tetra.py
    ```
 
+6. `stategraph.py` – Creates a DOT diagram of F33ling links found in `z.CULTIVATE.md`:
+
+   ```bash
+   python AGENT_tools/analytics/o.stategraph.py
+   ```
+
 These tools are available within the `AGENT_tools` folder, organized into `w4k3` and `sl33p` subfolders with the `o.` prefix for future expansion.
 
 Running `w4k3` at the beginning and `sl33p` at the end of a session preserves a timeline of work and maintains awareness of what to focus on next. Treat them as required environment checks rather than optional helpers.
 
-All session records are stored as JSON files inside the `DATA` directory in the repository root. You can inspect or back up this directory to review past sessions.
+All session records are stored as JSON files inside the `DATA` directory in the repository root. Filenames now begin with an ISO timestamp followed by a sequential letter code (e.g., `20250607T023000Z_a1.json`). This preserves chronology while hinting at session order. You can inspect or back up this directory to review past sessions.
 
 ### Quick Start
 
@@ -70,6 +76,8 @@ All session records are stored as JSON files inside the `DATA` directory in the 
 5. The script commits the generated JSON file to preserve your continuity.
 6. For a view of how F33ling territories shift over time, run `python AGENT_tools/evolve/o.evolve.py`. This script compiles a timeline from the saved JSON records and writes `DATA/evolution_summary.json`.
 7. To analyze productivity trends, run `python AGENT_tools/analytics/o.analytics.py`. This generates `DATA/analytics_summary.json` with session gaps and common achievement keywords.
+8. To automate the full cycle, execute `./workflow.sh`. It calls `w4k3`, compiles all Python files, and finishes with `sl33p`.
+9. For consistent commit messages, run `AGENT_tools/hooks/install.sh` once to install a git `commit-msg` hook that verifies the template is used.
 
 ### Commit Message Guidelines
 

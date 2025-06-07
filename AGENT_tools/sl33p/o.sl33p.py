@@ -13,6 +13,7 @@ import json
 import os
 from pathlib import Path
 import subprocess
+from datetime import datetime
 
 # Store all session records in the repository-level DATA directory
 def repo_root() -> Path:
@@ -32,6 +33,10 @@ DATA_DIR = repo_root() / "DATA"
 
 ASCII_LETTERS = list("abcdefghijklmnopqrstuvwxyz")
 
+def current_time_stamp() -> str:
+    """Return an ISO style timestamp for filenames."""
+    return datetime.utcnow().strftime("%Y%m%dT%H%M%SZ")
+
 def ensure_data_dir():
     if not DATA_DIR.exists():
         try:
@@ -40,12 +45,13 @@ def ensure_data_dir():
             print(f"Failed to create DATA directory: {e}")
             raise SystemExit(1)
 
-def next_timestamp():
+def next_timestamp() -> str:
     files = sorted(DATA_DIR.glob('*.json'))
     count = len(files)
     letter = ASCII_LETTERS[count % len(ASCII_LETTERS)]
     cycle = count // len(ASCII_LETTERS) + 1
-    return f"{letter}{cycle}"
+    prefix = current_time_stamp()
+    return f"{prefix}_{letter}{cycle}"
 
 def sanitize(text: str) -> str:
     """Remove non-printable characters and surrounding whitespace."""
