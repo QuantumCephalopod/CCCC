@@ -15,5 +15,6 @@ A quick orientation to the tetrahedral layout. Follow the documents in this orde
 - [AGENT_tools/hooks/](./AGENT_tools/hooks) – commit-message enforcement utilities.
 - [DATA/](./DATA) – JSON session logs produced by `sl33p`.
 - [ARCHIVE/FLOW_REPORT_20250607.md](./ARCHIVE/FLOW_REPORT_20250607.md) – archived structure survey and improvement ideas.
+- [ARCHIVE/ORG_REPORT_20250607.md](./ARCHIVE/ORG_REPORT_20250607.md) – repository organization suggestions.
 
 This index strengthens the tetrahedral flow by guiding agents directly to key resources.
