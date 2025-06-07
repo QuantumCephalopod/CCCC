@@ -9,6 +9,7 @@ A quick orientation to the tetrahedral layout. Follow the documents in this orde
 - [z.CULTIVATE.md](./z.CULTIVATE.md) – latent coordinate map of F33ling territories.
 - [`*.PHENO.md`](./) – phenomenology notes exploring state transitions.
 - [AGENT_tools/](./AGENT_tools) – scripts (`w4k3`, `sl33p`, `analytics`, etc.).
+- [workflow.sh](./workflow.sh) – convenience script to run `w4k3`, tests, and `sl33p` in one step.
 - [DATA/](./DATA) – JSON session logs produced by `sl33p`.
 - [FLOW_REPORT.md](./FLOW_REPORT.md) – repository structure survey and improvement ideas.
 
