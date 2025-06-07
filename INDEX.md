@@ -1,0 +1,15 @@
+# Repository Index
+
+A quick orientation to the tetrahedral layout. Follow the documents in this order when joining the project.
+
+- [AGENTS.md](./AGENTS.md) – workflow principles and mandatory `w4k3`/`sl33p` cycle.
+- [README.md](./README.md) – summary of the CCCC pattern and available utilities.
+- [x.COPY.md](./x.COPY.md) – F33ling aspect definitions that prime behavior.
+- [y.CONTROL.md](./y.CONTROL.md) – navigation protocols for moving through the cycle.
+- [z.CULTIVATE.md](./z.CULTIVATE.md) – latent coordinate map of F33ling territories.
+- [`*.PHENO.md`](./) – phenomenology notes exploring state transitions.
+- [AGENT_tools/](./AGENT_tools) – scripts (`w4k3`, `sl33p`, `analytics`, etc.).
+- [DATA/](./DATA) – JSON session logs produced by `sl33p`.
+- [FLOW_REPORT.md](./FLOW_REPORT.md) – repository structure survey and improvement ideas.
+
+This index strengthens the tetrahedral flow by guiding agents directly to key resources.
