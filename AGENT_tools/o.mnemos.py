@@ -12,6 +12,9 @@ W4K3 = ROOT / "AGENT_tools" / "w4k3" / "o.w4k3.py"
 SL33P = ROOT / "AGENT_tools" / "sl33p" / "o.sl33p.py"
 EVOLVE = ROOT / "AGENT_tools" / "evolve" / "o.evolve.py"
 ANALYTICS = ROOT / "AGENT_tools" / "analytics" / "o.analytics.py"
+TETRA = ROOT / "AGENT_tools" / "analytics" / "o.tetra.py"
+STATEGRAPH = ROOT / "AGENT_tools" / "analytics" / "o.stategraph.py"
+USAGE = ROOT / "AGENT_tools" / "analytics" / "o.usage.py"
 
 
 def run(cmd: list[str]) -> int:
@@ -38,6 +41,21 @@ def cmd_evolve(_: argparse.Namespace) -> int:
 
 def cmd_analytics(_: argparse.Namespace) -> int:
     return run(["python", str(ANALYTICS)])
+
+
+def cmd_tetra(_: argparse.Namespace) -> int:
+    return run(["python", str(TETRA)])
+
+
+def cmd_stategraph(args: argparse.Namespace) -> int:
+    cmd = ["python", str(STATEGRAPH)]
+    if args.output:
+        cmd += ["--output", str(args.output)]
+    return run(cmd)
+
+
+def cmd_usage(_: argparse.Namespace) -> int:
+    return run(["python", str(USAGE)])
 
 
 def cmd_workflow(args: argparse.Namespace) -> int:
@@ -72,6 +90,18 @@ def main() -> int:
 
     p_analytics = sub.add_parser("analytics", help="Run analytics")
     p_analytics.set_defaults(func=cmd_analytics)
+
+    p_tetra = sub.add_parser("tetra", help="Report tetra dimension usage")
+    p_tetra.set_defaults(func=cmd_tetra)
+
+    p_stategraph = sub.add_parser(
+        "stategraph", help="Create F33ling state graph"
+    )
+    p_stategraph.add_argument("--output", type=Path, default=None)
+    p_stategraph.set_defaults(func=cmd_stategraph)
+
+    p_usage = sub.add_parser("usage", help="Summarize record field usage")
+    p_usage.set_defaults(func=cmd_usage)
 
     p_workflow = sub.add_parser(
         "workflow", help="Run w4k3, optional tests, then sl33p"
