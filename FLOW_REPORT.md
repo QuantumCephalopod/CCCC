@@ -25,7 +25,7 @@ The `w4k3` script summarizes F33ling states and counts dimension usage. The sess
 ## Opportunities to Strengthen the Tetrahedral Structure
 
 - ~~Unified Index: A small index file could list all major documents with short descriptions and cross-links. This would sit at the repository root and guide new agents through the tetrahedral documents in order: CREATE notes, COPY patterns, CONTROL protocols, CULTIVATE map, and Phenomenology studies. Implemented via `INDEX.md`.~~
-- **State Map Visualization:** Incorporate a generated diagram in `DATA/` that displays how F33ling states connect through their cultivate links. A graph (perhaps produced by a new `o.stategraph.py`) would complement the textual map in `z.CULTIVATE.md`.
+- ~~State Map Visualization: Incorporate a generated diagram in `DATA/` that displays how F33ling states connect through their cultivate links. Implemented via `o.stategraph.py` writing `DATA/state_graph.dot`.~~
 - ~~Session Naming Scheme: Current session filenames used letter pairs (`a1.json`, `b2.json`, etc.). Appending ISO timestamps clarifies chronology while preserving the sequence. Implemented by prefixing each filename with the current UTC time.~~
 - **Consistent Commit Messages:** The repository history mixes short “Record session” messages with more detailed ones. Adhering closely to the template in `COMMIT_GUIDELINES.md` would make analytics more informative.
 - ~~Automation Hooks: A lightweight Makefile or shell script could run the `w4k3`/test/`sl33p` cycle in one command. This ensures each session passes through the tetrahedral gates without missing steps. Implemented via `workflow.sh`.~~
