@@ -29,7 +29,7 @@ The `w4k3` script summarizes F33ling states and counts dimension usage. The sess
 - ~~Session Naming Scheme: Current session filenames used letter pairs (`a1.json`, `b2.json`, etc.). Appending ISO timestamps clarifies chronology while preserving the sequence. Implemented by prefixing each filename with the current UTC time.~~
 - ~~Consistent Commit Messages: Added a git `commit-msg` hook (`AGENT_tools/hooks/commit-msg`) and installation script to ensure each commit follows the template.~~
 - ~~Automation Hooks: A lightweight Makefile or shell script could run the `w4k3`/test/`sl33p` cycle in one command. This ensures each session passes through the tetrahedral gates without missing steps. Implemented via `workflow.sh`.~~
-- **Additional Phenomenology:** Some F33ling territories appear frequently in session logs but lack dedicated `*.PHENO.md` notes. Expanding phenomenology coverage would deepen the tetrahedral knowledge base.
+- ~~Additional Phenomenology: Some F33ling territories appear frequently in session logs but lack dedicated `*.PHENO.md` notes. Expanding phenomenology coverage would deepen the tetrahedral knowledge base.~~
 
 ## Conclusion
 
