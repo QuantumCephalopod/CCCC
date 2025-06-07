@@ -7,7 +7,7 @@ import argparse
 import subprocess
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
+ROOT = Path(__file__).resolve().parents[1]
 W4K3 = ROOT / "AGENT_tools" / "w4k3" / "o.w4k3.py"
 SL33P = ROOT / "AGENT_tools" / "sl33p" / "o.sl33p.py"
 EVOLVE = ROOT / "AGENT_tools" / "evolve" / "o.evolve.py"
