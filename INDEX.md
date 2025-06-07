@@ -13,6 +13,6 @@ A quick orientation to the tetrahedral layout. Follow the documents in this orde
 - [workflow.sh](./workflow.sh) – convenience script to run `w4k3`, tests, and `sl33p` in one step.
 - [AGENT_tools/hooks/](./AGENT_tools/hooks) – commit-message enforcement utilities.
 - [DATA/](./DATA) – JSON session logs produced by `sl33p`.
-- [FLOW_REPORT.md](./FLOW_REPORT.md) – repository structure survey and improvement ideas.
+- [ARCHIVE/FLOW_REPORT_20250607.md](./ARCHIVE/FLOW_REPORT_20250607.md) – archived structure survey and improvement ideas.
 
 This index strengthens the tetrahedral flow by guiding agents directly to key resources.
