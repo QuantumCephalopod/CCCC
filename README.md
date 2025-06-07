@@ -8,6 +8,8 @@ This repository embodies the "Create → Copy → Control → Cultivate" (CCCC) 
 - **x.COPY.md** – Documents behavioral priming patterns that shape how the framework operates.
 - **y.CONTROL.md** – Provides navigation protocols for moving through the CCCC cycle without breaking continuity.
 - **z.CULTIVATE.md** – Contains the latent space coordinate map referenced by other documents.
+- **ARCHIVE/Recursive_Tetrahedral_Principle.md** – Details how the CCCC pattern
+  expands recursively when a dimension grows complex.
 
 ## Session Utilities
 
@@ -76,7 +78,8 @@ All of these tools can also be run via a unified interface:
 python AGENT_tools/o.mnemos.py <subcommand>
 ```
 The CLI exposes the following subcommands: `w4k3`, `sl33p`, `evolve`,
-`analytics`, `tetra`, `stategraph`, `usage`, and `workflow`.
+`analytics`, `tetra`, `stategraph`, `usage`, `sessgraph`, `vidmem`, and
+`workflow`.
 For example:
 ```bash
 python AGENT_tools/o.mnemos.py w4k3

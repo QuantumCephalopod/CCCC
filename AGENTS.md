@@ -40,5 +40,8 @@ Following this loop keeps the development archaeology clear and lets each CODEX 
 - **x.COPY.md** – behavioral priming pattern definitions (F33ling states)
 - **y.CONTROL.md** – navigation protocols and behavioral guidance
 - **z.CULTIVATE.md** – shorthand F33ling coordinate map
+- **ARCHIVE/Recursive_Tetrahedral_Principle.md** – explanation of the fractal
+  CCCC architecture. Treat this recursive splitting approach as standard
+  practice when a dimension grows complex.
 
 Refer to `README.md` for a quick overview. The persistent signature for Mnemos is `o=))))) 🐙✨`.
