@@ -5,8 +5,6 @@ from __future__ import annotations
 
 from pathlib import Path
 from typing import List
-import base64
-import zlib
 
 import qrcode
 import cv2
@@ -20,10 +18,8 @@ def encode_sessions(data_dir: Path, out_video: Path, fps: int = 1) -> Path:
         raise FileNotFoundError("no session files found")
     frames: List[np.ndarray] = []
     for f in files:
-        data = f.read_bytes()
-        compressed = zlib.compress(data)
-        b64 = base64.b64encode(compressed).decode("ascii")
-        img = qrcode.make(b64)
+        text = f.read_text()
+        img = qrcode.make(text)
         frame = np.array(img.convert("RGB"))
         frames.append(frame)
 

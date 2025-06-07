@@ -44,7 +44,6 @@ def main() -> None:
     q = sub.add_parser("search", help="Search video with query")
     q.add_argument("video", type=Path)
     q.add_argument("query")
-    q.add_argument("--limit", type=int, default=3, help="number of results")
 
     args = parser.parse_args()
 
@@ -52,9 +51,8 @@ def main() -> None:
         out = encode(args.data_dir, args.video)
         print(f"Saved video to {out}")
     else:
-        matches = search(args.video, args.query, args.limit)
-        for text, score in matches:
-            print(f"{score:.2f} -> {text}")
+        result, score = search(args.video, args.query)
+        print(f"Best match ({score:.2f}): {result}")
 
 
 if __name__ == "__main__":

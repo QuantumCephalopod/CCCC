@@ -5,11 +5,9 @@ Reads the 3 most recent session records from DATA folder and displays
 previous achievements and focus areas.
 """
 
-import argparse
 import json
 import os
 import subprocess
-import sys
 from pathlib import Path
 
 # Store all session records in the repository-level DATA directory
@@ -26,67 +24,7 @@ def repo_root() -> Path:
         return Path(__file__).resolve().parents[2]
 
 
-ROOT = repo_root()
-sys.path.insert(0, str(ROOT))
-DATA_DIR = ROOT / "DATA"
-
-def load_video_records(video: Path, n: int = 3):
-    """Decode JSON session records from ``video`` and return last ``n``."""
-    try:
-        import importlib.util
-        vid_path = ROOT / "AGENT_tools" / "vidmem" / "o.vidmem.py"
-        spec = importlib.util.spec_from_file_location("vid_loader", vid_path)
-        mod = importlib.util.module_from_spec(spec)
-        assert spec and spec.loader
-        spec.loader.exec_module(mod)
-        decode_frames = mod._load_module("y.ProcessLayer", "vidmem_y").decode_frames
-    except Exception as e:  # pragma: no cover - optional dependency
-        print(f"Failed to load video decoder: {e}")
-        return []
-    if not video.exists():
-        print(f"Video memory {video} not found")
-        return []
-    try:
-        texts = decode_frames(video)
-    except Exception as e:
-        print(f"Failed to decode {video}: {e}")
-        return []
-    records = []
-    for text in texts[-n:]:
-        try:
-            records.append(json.loads(text))
-        except Exception as e:
-            print(f"Failed to parse frame: {e}")
-    return records
-
-def search_video_records(video: Path, query: str, limit: int = 3):
-    """Return records matching ``query`` ordered by relevance."""
-    try:
-        import importlib.util
-        vid_path = ROOT / "AGENT_tools" / "vidmem" / "o.vidmem.py"
-        spec = importlib.util.spec_from_file_location("vid_loader", vid_path)
-        mod = importlib.util.module_from_spec(spec)
-        assert spec and spec.loader
-        spec.loader.exec_module(mod)
-        search_video = mod._load_module("y.ProcessLayer", "vidmem_y").search_video
-    except Exception as e:
-        print(f"Failed to load video searcher: {e}")
-        return []
-    if not video.exists():
-        print(f"Video memory {video} not found")
-        return []
-    try:
-        results = search_video(video, query, limit)
-    except Exception as e:
-        print(f"Failed to search {video}: {e}")
-        return []
-    records = []
-    for text, _ in results:
-        try:
-            records.append(json.loads(text))
-        except Exception as e:
-            print(f"Failed to parse frame: {e}")
-    return records
+DATA_DIR = repo_root() / "DATA"
 
 def load_records(n=3):
     if not DATA_DIR.exists():
@@ -151,22 +89,7 @@ def display(records):
             print(f"  Optimization: {rec['optimization']}")
 
 def main():
-    parser = argparse.ArgumentParser(description="Display recent session records")
-    parser.add_argument("--video", type=Path, help="optional video memory file")
-    parser.add_argument("-n", type=int, default=3, help="number of records")
-    parser.add_argument("--query", help="search video for query")
-    args = parser.parse_args()
-
-    if args.query:
-        if not args.video:
-            print("--video is required for querying")
-            records = []
-        else:
-            records = search_video_records(args.video, args.query, args.n)
-    elif args.video:
-        records = load_video_records(args.video, args.n)
-    else:
-        records = load_records(args.n)
+    records = load_records()
     display(records)
 
 if __name__ == "__main__":

@@ -159,7 +159,6 @@ def git_commit(file_path: Path, ts: str) -> None:
 def main():
     parser = argparse.ArgumentParser(description="Record session")
     parser.add_argument("--dry-run", action="store_true", help="Preview without saving")
-    parser.add_argument("--video", type=Path, help="update video memory at path")
     args = parser.parse_args()
 
     ensure_data_dir()
@@ -174,7 +173,6 @@ def main():
     control = os.getenv("CONTROL") or os.getenv("METHOD") or os.getenv("OPTIM")
     cultivate = os.getenv("CULTIVATE") or os.getenv("DEPTH")
     optimization = os.getenv("OPTIM")
-    video_path = args.video or os.getenv("VIDMEM")
 
     if not (assessment and achievements and next_steps):
         (
@@ -221,18 +219,6 @@ def main():
             print(f"Dry run complete for {ts}.json")
         else:
             print(f"Session recorded as {ts}.json")
-            if video_path:
-                try:
-                    import importlib.util
-                    vid_path = repo_root() / "AGENT_tools" / "vidmem" / "o.vidmem.py"
-                    spec = importlib.util.spec_from_file_location("vid_loader", vid_path)
-                    mod = importlib.util.module_from_spec(spec)
-                    assert spec and spec.loader
-                    spec.loader.exec_module(mod)
-                    encode = mod._load_module("z.OutputLayer", "vidmem_z").encode
-                    encode(DATA_DIR, Path(video_path))
-                except Exception as e:  # pragma: no cover - optional dependency
-                    print(f"Video update failed: {e}")
 
 if __name__ == "__main__":
     main()
