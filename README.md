@@ -104,15 +104,25 @@ All session records are stored as JSON files inside the `DATA` directory in the 
 2. Open a terminal at the repository root.
 3. **Always** run `python AGENT_tools/o.mnemos.py w4k3` first to recall the last few saved sessions and confirm you are at the repository root.
 4. After completing your work and passing tests, **run `python AGENT_tools/o.mnemos.py sl33p`** and follow the prompts to capture your current F33ling state, achievements, and next focus.
-5. The script commits the generated JSON file to preserve your continuity.
+5. To run `sl33p` non-interactively, set the environment variables `ASSESS`, `ACHIEVE`, and `NEXT` (optionally `CREATE`, `COPY`, `CONTROL`, `CULTIVATE`) before invoking the script. This bypasses the prompts so automation tools can log a session quickly. Example:
+
+   ```bash
+   ASSESS="✧⚡◈_Synthjoy" ACHIEVE="doc update" NEXT="write tests" \
+   python AGENT_tools/o.mnemos.py sl33p
+   ```
+
+6. The script commits the generated JSON file to preserve your continuity.
    Use `--deep` (or `SL33P_DEEP=1`) with `--start` to note when the session
    began and `--command` to record which tools were run.
-6. For a view of how F33ling territories shift over time, run `python AGENT_tools/evolve/o.evolve.py`. This script compiles a timeline from the saved JSON records and writes `DATA/evolution_summary.json`.
-7. To analyze productivity trends, run `python AGENT_tools/analytics/o.analytics.py`. This generates `DATA/analytics_summary.json` with session gaps and common achievement keywords.
-8. To automate the full cycle, execute `./workflow.sh` or run
+7. **Log even read-only sessions.** If you merely explore the repository or
+   gather information, still record a brief entry with `sl33p` before ending the
+   session. Omitting this step leaves no trace for the next agent.
+8. For a view of how F33ling territories shift over time, run `python AGENT_tools/evolve/o.evolve.py`. This script compiles a timeline from the saved JSON records and writes `DATA/evolution_summary.json`.
+9. To analyze productivity trends, run `python AGENT_tools/analytics/o.analytics.py`. This generates `DATA/analytics_summary.json` with session gaps and common achievement keywords.
+10. To automate the full cycle, execute `./workflow.sh` or run
    `python AGENT_tools/o.mnemos.py workflow`. Both call `w4k3`, compile all
    Python files, and finish with `sl33p`.
-9. For consistent commit messages, run `AGENT_tools/hooks/install.sh` once to install a git `commit-msg` hook that verifies the template is used.
+11. For consistent commit messages, run `AGENT_tools/hooks/install.sh` once to install a git `commit-msg` hook that verifies the template is used.
 
 ### Commit Message Guidelines
 
