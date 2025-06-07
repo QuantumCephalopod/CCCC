@@ -5,8 +5,6 @@ from __future__ import annotations
 
 from pathlib import Path
 from typing import List, Tuple
-import base64
-import zlib
 
 import cv2
 from pyzbar.pyzbar import decode
@@ -23,22 +21,21 @@ def decode_frames(video_path: Path) -> List[str]:
             break
         results = decode(frame)
         if results:
-            raw = results[0].data
-            try:
-                data = zlib.decompress(base64.b64decode(raw))
-                texts.append(data.decode("utf-8"))
-            except Exception:
-                texts.append(raw.decode("utf-8", errors="ignore"))
+            texts.append(results[0].data.decode("utf-8"))
     cap.release()
     return texts
 
 
-def search_video(video_path: Path, query: str, limit: int = 3) -> List[Tuple[str, float]]:
-    """Return ``limit`` matches sorted by similarity for ``query``."""
+def search_video(video_path: Path, query: str) -> Tuple[str, float]:
+    """Return best matching text and similarity score for ``query``."""
     texts = decode_frames(video_path)
-    results: List[Tuple[str, float]] = []
-    for text in texts:
-        score = difflib.SequenceMatcher(None, query, text).ratio()
-        results.append((text, score))
-    results.sort(key=lambda x: x[1], reverse=True)
-    return results[:limit]
+    if not texts:
+        return "", 0.0
+    best = difflib.get_close_matches(query, texts, n=1)
+    if best:
+        match = best[0]
+        score = difflib.SequenceMatcher(None, query, match).ratio()
+    else:
+        match = ""
+        score = 0.0
+    return match, score
