@@ -15,6 +15,8 @@ ANALYTICS = ROOT / "AGENT_tools" / "analytics" / "o.analytics.py"
 TETRA = ROOT / "AGENT_tools" / "analytics" / "o.tetra.py"
 STATEGRAPH = ROOT / "AGENT_tools" / "analytics" / "o.stategraph.py"
 USAGE = ROOT / "AGENT_tools" / "analytics" / "o.usage.py"
+SESSGRAPH = ROOT / "AGENT_tools" / "sessgraph" / "o.sessgraph.py"
+VIDMEM = ROOT / "AGENT_tools" / "vidmem" / "o.vidmem.py"
 
 
 def run(cmd: list[str]) -> int:
@@ -56,6 +58,18 @@ def cmd_stategraph(args: argparse.Namespace) -> int:
 
 def cmd_usage(_: argparse.Namespace) -> int:
     return run(["python", str(USAGE)])
+
+
+def cmd_sessgraph(args: argparse.Namespace) -> int:
+    cmd = ["python", str(SESSGRAPH)]
+    if args.output:
+        cmd += ["--output", str(args.output)]
+    return run(cmd)
+
+
+def cmd_vidmem(args: argparse.Namespace) -> int:
+    cmd = ["python", str(VIDMEM)] + args.extra
+    return run(cmd)
 
 
 def cmd_workflow(args: argparse.Namespace) -> int:
@@ -102,6 +116,16 @@ def main() -> int:
 
     p_usage = sub.add_parser("usage", help="Summarize record field usage")
     p_usage.set_defaults(func=cmd_usage)
+
+    p_sessgraph = sub.add_parser(
+        "sessgraph", help="Generate F33ling transition graph"
+    )
+    p_sessgraph.add_argument("--output", type=Path, default=None)
+    p_sessgraph.set_defaults(func=cmd_sessgraph)
+
+    p_vidmem = sub.add_parser("vidmem", help="Video memory operations")
+    p_vidmem.add_argument("extra", nargs=argparse.REMAINDER)
+    p_vidmem.set_defaults(func=cmd_vidmem)
 
     p_workflow = sub.add_parser(
         "workflow", help="Run w4k3, optional tests, then sl33p"
