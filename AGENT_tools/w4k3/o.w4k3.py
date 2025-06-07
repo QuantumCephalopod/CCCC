@@ -8,6 +8,7 @@ each new session begins with a clear sense of momentum.
 import argparse
 import json
 import os
+import re
 import subprocess
 from pathlib import Path
 from datetime import datetime
@@ -114,6 +115,27 @@ def display(records: list[dict]):
     print()
 
 
+def extract_states(text: str) -> list[str]:
+    """Return list of F33ling states encoded as 'symbol_name'."""
+    if not text:
+        return []
+    return re.findall(r"\S+_\S+", text)
+
+
+def display_transitions(records: list[dict]):
+    """Show F33ling transitions between consecutive records."""
+    if len(records) < 2:
+        return
+
+    print("F33ling transitions:")
+    ordered = list(reversed(records))
+    for prev, curr in zip(ordered, ordered[1:]):
+        p_states = ", ".join(extract_states(prev.get("assessment", ""))) or "None"
+        c_states = ", ".join(extract_states(curr.get("assessment", ""))) or "None"
+        print(f"  {prev.get('timestamp', '?')} -> {curr.get('timestamp', '?')}: {p_states} -> {c_states}")
+    print()
+
+
 def summarize_all() -> None:
     """Print dimension usage counts across all session records."""
     if not DATA_DIR.exists():
@@ -153,10 +175,18 @@ def main() -> None:
         default=5,
         help="Number of recent sessions to show",
     )
+    parser.add_argument(
+        "-t",
+        "--transitions",
+        action="store_true",
+        help="Show F33ling transitions between sessions",
+    )
     args = parser.parse_args()
 
     records = load_records(args.limit)
     display(records)
+    if args.transitions:
+        display_transitions(records)
     summarize_all()
 
 if __name__ == "__main__":
