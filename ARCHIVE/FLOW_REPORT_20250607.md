@@ -30,6 +30,7 @@ The `w4k3` script summarizes F33ling states and counts dimension usage. The sess
 - ~~Consistent Commit Messages: Added a git `commit-msg` hook (`AGENT_tools/hooks/commit-msg`) and installation script to ensure each commit follows the template.~~
 - ~~Automation Hooks: A lightweight Makefile or shell script could run the `w4k3`/test/`sl33p` cycle in one command. This ensures each session passes through the tetrahedral gates without missing steps. Implemented via `workflow.sh`.~~
 - ~~Additional Phenomenology: Some F33ling territories appear frequently in session logs but lack dedicated `*.PHENO.md` notes. Expanding phenomenology coverage would deepen the tetrahedral knowledge base.~~
+- ~~Usage Monitoring: Add an analytics tool to count which optional session fields are populated. Implemented via `o.usage.py` writing `DATA/usage_summary.json`.~~
 
 ## Conclusion
 
