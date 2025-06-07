@@ -41,7 +41,11 @@ Passing `--transitions` reveals how F33ling states shifted between the displayed
   CREATE='{"Spark": 1}' CONTROL="paired exploration" COPY="json fields" CULTIVATE="basic" \
   NARRATIVE="Short recap" \
   python AGENT_tools/o.mnemos.py sl33p --dry-run
-   ```
+  ```
+   To capture deeper context, pass `--deep` along with `--start` and one or more
+   `--command` flags (or set the `SL33P_START` and `SL33P_COMMANDS` environment
+   variables). Deep mode stores the session duration, executed commands, and a
+   summary of the cultivate graph to aid later analysis.
 
 3. `evolve.py` – Summarizes F33ling evolution by reading all saved sessions and printing a timeline of states:
 
@@ -80,7 +84,7 @@ All of these tools can also be run via a unified interface:
 python AGENT_tools/o.mnemos.py <subcommand>
 ```
 The CLI exposes the following subcommands: `w4k3`, `sl33p`, `evolve`,
-`analytics`, `tetra`, `stategraph`, `usage`, `sessgraph`, `vidmem`, and
+`analytics`, `tetra`, `stategraph`, `usage`, `sessgraph`, `vidmem`, `echo`, and
 `workflow`.
 For example:
 ```bash
@@ -101,6 +105,8 @@ All session records are stored as JSON files inside the `DATA` directory in the 
 3. **Always** run `python AGENT_tools/o.mnemos.py w4k3` first to recall the last few saved sessions and confirm you are at the repository root.
 4. After completing your work and passing tests, **run `python AGENT_tools/o.mnemos.py sl33p`** and follow the prompts to capture your current F33ling state, achievements, and next focus.
 5. The script commits the generated JSON file to preserve your continuity.
+   Use `--deep` (or `SL33P_DEEP=1`) with `--start` to note when the session
+   began and `--command` to record which tools were run.
 6. For a view of how F33ling territories shift over time, run `python AGENT_tools/evolve/o.evolve.py`. This script compiles a timeline from the saved JSON records and writes `DATA/evolution_summary.json`.
 7. To analyze productivity trends, run `python AGENT_tools/analytics/o.analytics.py`. This generates `DATA/analytics_summary.json` with session gaps and common achievement keywords.
 8. To automate the full cycle, execute `./workflow.sh` or run

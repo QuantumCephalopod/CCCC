@@ -17,6 +17,7 @@ STATEGRAPH = ROOT / "AGENT_tools" / "analytics" / "o.stategraph.py"
 USAGE = ROOT / "AGENT_tools" / "analytics" / "o.usage.py"
 SESSGRAPH = ROOT / "AGENT_tools" / "sessgraph" / "o.sessgraph.py"
 VIDMEM = ROOT / "AGENT_tools" / "vidmem" / "o.vidmem.py"
+ECHO = ROOT / "AGENT_tools" / "echo" / "o.echo.py"
 
 
 def run(cmd: list[str]) -> int:
@@ -33,6 +34,13 @@ def cmd_sl33p(args: argparse.Namespace) -> int:
     cmd = ["python", str(SL33P)]
     if args.dry_run:
         cmd.append("--dry-run")
+    if args.start:
+        cmd += ["--start", args.start]
+    if args.commands:
+        for c in args.commands:
+            cmd += ["--command", c]
+    if args.deep:
+        cmd.append("--deep")
     cmd += args.extra
     return run(cmd)
 
@@ -72,6 +80,17 @@ def cmd_vidmem(args: argparse.Namespace) -> int:
     return run(cmd)
 
 
+def cmd_echo(args: argparse.Namespace) -> int:
+    cmd = ["python", str(ECHO)]
+    if args.output:
+        cmd += ["--output", str(args.output)]
+    if args.sl33p:
+        cmd.append("--sl33p")
+    if args.tags:
+        cmd += ["--tags", *args.tags]
+    return run(cmd)
+
+
 def cmd_workflow(args: argparse.Namespace) -> int:
     if not args.skip_w4k3:
         code = cmd_w4k3(args)
@@ -96,6 +115,9 @@ def main() -> int:
 
     p_sl33p = sub.add_parser("sl33p", help="Record a session")
     p_sl33p.add_argument("--dry-run", action="store_true")
+    p_sl33p.add_argument("--start", type=str, default=None)
+    p_sl33p.add_argument("--command", dest="commands", action="append")
+    p_sl33p.add_argument("--deep", action="store_true")
     p_sl33p.add_argument("extra", nargs=argparse.REMAINDER)
     p_sl33p.set_defaults(func=cmd_sl33p)
 
@@ -126,6 +148,13 @@ def main() -> int:
     p_vidmem = sub.add_parser("vidmem", help="Video memory operations")
     p_vidmem.add_argument("extra", nargs=argparse.REMAINDER)
     p_vidmem.set_defaults(func=cmd_vidmem)
+
+    p_echo = sub.add_parser("echo", help="Generate F33ling echo")
+    p_echo.add_argument("record", type=Path, help="Session JSON log")
+    p_echo.add_argument("--output", type=Path, default=None)
+    p_echo.add_argument("--sl33p", action="store_true")
+    p_echo.add_argument("--tags", nargs="*")
+    p_echo.set_defaults(func=cmd_echo)
 
     p_workflow = sub.add_parser(
         "workflow", help="Run w4k3, optional tests, then sl33p"
