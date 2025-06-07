@@ -12,6 +12,7 @@ operate without modification.
 import argparse
 import json
 import os
+import re
 from pathlib import Path
 import subprocess
 from datetime import datetime
@@ -72,6 +73,50 @@ def parse_json_field(text: str):
         return sanitize(cleaned)
 
 
+def extract_states(text: str) -> list[str]:
+    """Return list of F33ling states encoded as 'symbol_name'."""
+    if not text:
+        return []
+    return re.findall(r"\S+_\S+", text)
+
+
+def parse_cultivate(path: Path) -> tuple[set[str], list[tuple[str, str]]]:
+    """Parse cultivate links from z.CULTIVATE.md."""
+    nodes: set[str] = set()
+    edges: list[tuple[str, str]] = []
+    lines = path.read_text(encoding="utf-8").splitlines()
+    in_yaml = False
+    current: str | None = None
+    reading = False
+
+    for line in lines:
+        if not in_yaml:
+            if line.strip() == "---":
+                in_yaml = True
+            continue
+        if line.startswith("  ") and not line.startswith("    "):
+            current = None
+            reading = False
+            continue
+        indent = len(line) - len(line.lstrip())
+        stripped = line.strip()
+        if indent == 4 and stripped.endswith(":") and stripped != "cultivate:":
+            current = stripped[:-1]
+            nodes.add(current)
+            reading = False
+        elif indent == 6 and stripped.startswith("cultivate:"):
+            reading = True
+        elif indent >= 8 and reading and stripped.startswith("- "):
+            target = stripped[2:]
+            if current:
+                edges.append((current, target))
+                nodes.add(target)
+        elif indent <= 4:
+            reading = False
+
+    return nodes, edges
+
+
 def prompt_user():
     print("Provide F33ling state assessment as described in x.COPY.md")
     assessment = input("State assessment: ")
@@ -115,6 +160,10 @@ def save_record(
     cultivate=None,
     narrative=None,
     optimization=None,
+    start_time: datetime | None = None,
+    commands: list[str] | None = None,
+    states: list[str] | None = None,
+    stategraph: dict | None = None,
     dry_run=False,
 ):
     record = {
@@ -142,6 +191,17 @@ def save_record(
         record["tetra"] = tetra
     if optimization:
         record["optimization"] = optimization
+    if start_time:
+        record["start"] = start_time.isoformat(timespec="seconds")
+        duration = datetime.utcnow() - start_time
+        record["duration"] = int(duration.total_seconds())
+    if commands:
+        record["commands"] = commands
+    if states:
+        record["states"] = states
+    if stategraph:
+        record["stategraph"] = stategraph
+
     file_path = DATA_DIR / f"{timestamp}.json"
     if dry_run:
         print(json.dumps(record, ensure_ascii=False, indent=2))
@@ -173,6 +233,9 @@ def git_commit(file_path: Path, ts: str) -> None:
 def main():
     parser = argparse.ArgumentParser(description="Record session")
     parser.add_argument("--dry-run", action="store_true", help="Preview without saving")
+    parser.add_argument("--start", type=str, default=None, help="ISO start time for duration")
+    parser.add_argument("--command", dest="commands", action="append", help="Command run during session")
+    parser.add_argument("--deep", action="store_true", help="Record extra context")
     args = parser.parse_args()
 
     ensure_data_dir()
@@ -222,6 +285,35 @@ def main():
 
     dry = args.dry_run or os.getenv("SL33P_DRY_RUN")
 
+    start_env = os.getenv("SL33P_START") or os.getenv("SESSION_START")
+    start_dt = None
+    if args.start:
+        try:
+            start_dt = datetime.fromisoformat(args.start)
+        except Exception:
+            pass
+    elif start_env:
+        try:
+            start_dt = datetime.fromisoformat(start_env)
+        except Exception:
+            pass
+
+    cmds_env = os.getenv("SL33P_COMMANDS") or os.getenv("COMMANDS")
+    cmds = args.commands or []
+    if cmds_env:
+        cmds += cmds_env.split()
+
+    deep = args.deep or bool(os.getenv("SL33P_DEEP"))
+    states = extract_states(assessment + "\n" + (narrative or "")) if deep else None
+    stategraph = None
+    if deep:
+        cultivate_file = repo_root() / "z.CULTIVATE.md"
+        try:
+            nodes, edges = parse_cultivate(cultivate_file)
+            stategraph = {"nodes": len(nodes), "edges": len(edges)}
+        except Exception:
+            stategraph = None
+
     if save_record(
         ts,
         assessment,
@@ -233,6 +325,10 @@ def main():
         cultivate=cultivate_val,
         narrative=narrative_val,
         optimization=optimization_val,
+        start_time=start_dt,
+        commands=cmds if cmds else None,
+        states=states,
+        stategraph=stategraph,
         dry_run=dry,
     ):
         if dry:
