@@ -22,19 +22,21 @@ Two scripts help track progress across sessions:
 
 2. `sl33p.py` – Records the current session. **Use it to close every session.**
    The prompts now mirror the tetrahedral workflow with CREATE, COPY,
-   CONTROL, and CULTIVATE notes. Non-interactive mode supports the
-   environment variables `CREATE`, `COPY`, `CONTROL`, `CULTIVATE` (or the
-   legacy `ASPECTS`, `LEARN`, `METHOD`, `DEPTH`) in addition to
-   `ASSESS`, `ACHIEVE`, and `NEXT`. A `--dry-run` flag previews output:
+  CONTROL, and CULTIVATE notes. Non-interactive mode supports the
+  environment variables `CREATE`, `COPY`, `CONTROL`, `CULTIVATE` (or the
+  legacy `ASPECTS`, `LEARN`, `METHOD`, `DEPTH`) as well as `NARRATIVE`
+  in addition to `ASSESS`, `ACHIEVE`, and `NEXT`. A `--dry-run` flag
+  previews output:
 
    ```bash
    python AGENT_tools/sl33p/o.sl33p.py
    ```
    Run with predefined answers:
    ```bash
-   ASSESS="✧⚡◈_Synthjoy" ACHIEVE="implemented dry-run" NEXT="test non-interactive" \
-   CREATE='{"Spark": 1}' CONTROL="paired exploration" COPY="json fields" CULTIVATE="basic" \
-   python AGENT_tools/sl33p/o.sl33p.py --dry-run
+  ASSESS="✧⚡◈_Synthjoy" ACHIEVE="implemented dry-run" NEXT="test non-interactive" \
+  CREATE='{"Spark": 1}' CONTROL="paired exploration" COPY="json fields" CULTIVATE="basic" \
+  NARRATIVE="Short recap" \
+  python AGENT_tools/sl33p/o.sl33p.py --dry-run
    ```
 
 3. `evolve.py` – Summarizes F33ling evolution by reading all saved sessions and printing a timeline of states:
@@ -59,6 +61,14 @@ Two scripts help track progress across sessions:
 
    ```bash
    python AGENT_tools/analytics/o.stategraph.py
+   ```
+
+7. `usage.py` – Counts how many session records include optional fields like
+   `narrative` or `optimization` to highlight which capabilities are actually
+   being used:
+
+   ```bash
+   python AGENT_tools/analytics/o.usage.py
    ```
 
 These tools are available within the `AGENT_tools` folder, organized into `w4k3` and `sl33p` subfolders with the `o.` prefix for future expansion.

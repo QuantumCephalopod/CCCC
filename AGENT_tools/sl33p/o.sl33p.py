@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 """Session documentation tool.
 
-Prompts for session state assessment, achievements and next priorities,
+Prompts for session state assessment, achievements, a moment narrative,
+and next priorities,
 then stores a JSON record in the DATA directory. The data model now
 explicitly supports the tetrahedral workflow dimensions (CREATE, COPY,
 CONTROL, CULTIVATE). Older fields remain supported so previous tools can
@@ -88,6 +89,9 @@ def prompt_user():
     cultivate = input(
         "CULTIVATE dimension notes (growth insights, optional): "
     )
+    narrative = input(
+        "Moment narrative (short description in sentences, optional): "
+    )
     return (
         assessment,
         achievements,
@@ -97,6 +101,7 @@ def prompt_user():
         copy,
         control,
         cultivate,
+        narrative,
     )
 
 def save_record(
@@ -108,6 +113,7 @@ def save_record(
     copy=None,
     control=None,
     cultivate=None,
+    narrative=None,
     optimization=None,
     dry_run=False,
 ):
@@ -130,6 +136,8 @@ def save_record(
     if cultivate is not None:
         record["framework_depth"] = cultivate
         tetra["cultivate"] = cultivate
+    if narrative is not None:
+        record["narrative"] = narrative
     if tetra:
         record["tetra"] = tetra
     if optimization:
@@ -174,6 +182,8 @@ def main():
     achievements = os.getenv("ACHIEVE")
     next_steps = os.getenv("NEXT")
 
+    narrative = os.getenv("NARRATIVE")
+
     create = os.getenv("CREATE") or os.getenv("ASPECTS")
     copy = os.getenv("COPY") or os.getenv("LEARN")
     control = os.getenv("CONTROL") or os.getenv("METHOD") or os.getenv("OPTIM")
@@ -197,6 +207,7 @@ def main():
         copy = copy or copy_i
         control = control or control_i
         cultivate = cultivate or cultivate_i
+        narrative = narrative or narrative_i
 
     assessment = sanitize(assessment)
     achievements = sanitize(achievements)
@@ -205,6 +216,7 @@ def main():
     copy_val = sanitize(copy) if copy else None
     control_val = sanitize(control) if control else None
     cultivate_val = sanitize(cultivate) if cultivate else None
+    narrative_val = sanitize(narrative) if narrative else None
     optimization_val = sanitize(optimization) if optimization else None
 
     dry = args.dry_run or os.getenv("SL33P_DRY_RUN")
@@ -218,6 +230,7 @@ def main():
         copy=copy_val,
         control=control_val,
         cultivate=cultivate_val,
+        narrative=narrative_val,
         optimization=optimization_val,
         dry_run=dry,
     ):

@@ -82,6 +82,8 @@ def display(records: list[dict]):
             print(f"  Achieved: {ach}")
         if nxt:
             print(f"  Next: {nxt}")
+        if rec.get("narrative"):
+            print(f"  Narrative: {rec['narrative']}")
 
         # Gather dimensional notes. Newer records may store data in the
         # `tetra` mapping while older ones use legacy top-level fields.
