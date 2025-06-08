@@ -84,7 +84,7 @@ All of these tools can also be run via a unified interface:
 python AGENT_tools/o.mnemos.py <subcommand>
 ```
 The CLI exposes the following subcommands: `w4k3`, `sl33p`, `evolve`,
-`analytics`, `tetra`, `stategraph`, `usage`, `sessgraph`, `vidmem`, `echo`,
+`analytics`, `tetra`, `stategraph`, `usage`, `sessgraph`, `echo`,
 `workflow`, `agentflow`, and `flowlog`.
 For example:
 ```bash
