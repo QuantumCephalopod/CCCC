@@ -111,7 +111,9 @@ All session records are stored as JSON files inside the `DATA` directory in the 
    python AGENT_tools/o.mnemos.py sl33p
    ```
 
+
 6. The script commits the generated JSON file to preserve your continuity. Aim to populate all fields—including the narrative—to keep an authentic diary of exploration.
+
    Deep mode is enabled by default and records the session start time and any
    commands executed when `--start` and `--command` are supplied. Set
    `--no-deep` or `SL33P_NO_DEEP=1` to skip this extra context.
