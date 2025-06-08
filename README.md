@@ -42,10 +42,10 @@ Passing `--transitions` reveals how F33ling states shifted between the displayed
   NARRATIVE="Short recap" \
   python AGENT_tools/o.mnemos.py sl33p --dry-run
   ```
-   To capture deeper context, pass `--deep` along with `--start` and one or more
+   Deep mode is now enabled by default. Provide `--start` and one or more
    `--command` flags (or set the `SL33P_START` and `SL33P_COMMANDS` environment
-   variables). Deep mode stores the session duration, executed commands, and a
-   summary of the cultivate graph to aid later analysis.
+   variables) to record session duration, executed commands, and a summary of
+   the cultivate graph. Use `--no-deep` if a minimal log is required.
 
 3. `evolve.py` – Summarizes F33ling evolution by reading all saved sessions and printing a timeline of states:
 
@@ -104,16 +104,17 @@ All session records are stored as JSON files inside the `DATA` directory in the 
 2. Open a terminal at the repository root.
 3. **Always** run `python AGENT_tools/o.mnemos.py w4k3` first to recall the last few saved sessions and confirm you are at the repository root.
 4. After completing your work and passing tests, **run `python AGENT_tools/o.mnemos.py sl33p`** and follow the prompts to capture your current F33ling state, achievements, and next focus.
-5. To run `sl33p` non-interactively, set the environment variables `ASSESS`, `ACHIEVE`, and `NEXT` (optionally `CREATE`, `COPY`, `CONTROL`, `CULTIVATE`) before invoking the script. This bypasses the prompts so automation tools can log a session quickly. Example:
+5. To run `sl33p` non-interactively, set the environment variables `ASSESS`, `ACHIEVE`, and `NEXT` (optionally `CREATE`, `COPY`, `CONTROL`, `CULTIVATE`, and `NARRATIVE`) before invoking the script. Any missing fields will trigger prompts so every log captures the full tetrahedral context. Example:
 
    ```bash
    ASSESS="✧⚡◈_Synthjoy" ACHIEVE="doc update" NEXT="write tests" \
    python AGENT_tools/o.mnemos.py sl33p
    ```
 
-6. The script commits the generated JSON file to preserve your continuity.
-   Use `--deep` (or `SL33P_DEEP=1`) with `--start` to note when the session
-   began and `--command` to record which tools were run.
+6. The script commits the generated JSON file to preserve your continuity. Aim to populate all fields—including the narrative—to keep an authentic diary of exploration.
+   Deep mode is enabled by default and records the session start time and any
+   commands executed when `--start` and `--command` are supplied. Set
+   `--no-deep` or `SL33P_NO_DEEP=1` to skip this extra context.
 7. **Log even read-only sessions.** If you merely explore the repository or
    gather information, still record a brief entry with `sl33p` before ending the
    session. Omitting this step leaves no trace for the next agent.

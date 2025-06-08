@@ -193,8 +193,8 @@ def save_record(
         record["optimization"] = optimization
     if start_time:
         record["start"] = start_time.isoformat(timespec="seconds")
-        duration = datetime.utcnow() - start_time
-        record["duration"] = int(duration.total_seconds())
+        delta = datetime.utcnow() - start_time
+        record["duration"] = max(0, int(delta.total_seconds()))
     if commands:
         record["commands"] = commands
     if states:
@@ -210,6 +210,7 @@ def save_record(
     try:
         with open(file_path, "w", encoding="utf-8") as f:
             json.dump(record, f, ensure_ascii=False, indent=2)
+            f.write("\n")
         git_commit(file_path, timestamp)
     except Exception as e:
         print(f"Failed to save record: {e}")
@@ -235,7 +236,7 @@ def main():
     parser.add_argument("--dry-run", action="store_true", help="Preview without saving")
     parser.add_argument("--start", type=str, default=None, help="ISO start time for duration")
     parser.add_argument("--command", dest="commands", action="append", help="Command run during session")
-    parser.add_argument("--deep", action="store_true", help="Record extra context")
+    parser.add_argument("--no-deep", action="store_true", help="Disable deep context logging")
     args = parser.parse_args()
 
     ensure_data_dir()
@@ -253,7 +254,17 @@ def main():
     cultivate = os.getenv("CULTIVATE") or os.getenv("DEPTH")
     optimization = os.getenv("OPTIM")
 
-    if not (assessment and achievements and next_steps):
+    # Prompt for any unspecified fields so records remain richly detailed
+    if not all([
+        assessment,
+        achievements,
+        next_steps,
+        create,
+        copy,
+        control,
+        cultivate,
+        narrative,
+    ]):
         (
             assessment_i,
             achievements_i,
@@ -303,7 +314,7 @@ def main():
     if cmds_env:
         cmds += cmds_env.split()
 
-    deep = args.deep or bool(os.getenv("SL33P_DEEP"))
+    deep = not args.no_deep and not os.getenv("SL33P_NO_DEEP")
     states = extract_states(assessment + "\n" + (narrative or "")) if deep else None
     stategraph = None
     if deep:
