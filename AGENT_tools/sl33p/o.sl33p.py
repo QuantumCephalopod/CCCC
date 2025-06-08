@@ -210,6 +210,7 @@ def save_record(
     try:
         with open(file_path, "w", encoding="utf-8") as f:
             json.dump(record, f, ensure_ascii=False, indent=2)
+            f.write("\n")
         git_commit(file_path, timestamp)
     except Exception as e:
         print(f"Failed to save record: {e}")
@@ -253,7 +254,17 @@ def main():
     cultivate = os.getenv("CULTIVATE") or os.getenv("DEPTH")
     optimization = os.getenv("OPTIM")
 
-    if not (assessment and achievements and next_steps):
+    # Prompt for any unspecified fields so records remain richly detailed
+    if not all([
+        assessment,
+        achievements,
+        next_steps,
+        create,
+        copy,
+        control,
+        cultivate,
+        narrative,
+    ]):
         (
             assessment_i,
             achievements_i,

@@ -104,14 +104,16 @@ All session records are stored as JSON files inside the `DATA` directory in the 
 2. Open a terminal at the repository root.
 3. **Always** run `python AGENT_tools/o.mnemos.py w4k3` first to recall the last few saved sessions and confirm you are at the repository root.
 4. After completing your work and passing tests, **run `python AGENT_tools/o.mnemos.py sl33p`** and follow the prompts to capture your current F33ling state, achievements, and next focus.
-5. To run `sl33p` non-interactively, set the environment variables `ASSESS`, `ACHIEVE`, and `NEXT` (optionally `CREATE`, `COPY`, `CONTROL`, `CULTIVATE`) before invoking the script. This bypasses the prompts so automation tools can log a session quickly. Example:
+5. To run `sl33p` non-interactively, set the environment variables `ASSESS`, `ACHIEVE`, and `NEXT` (optionally `CREATE`, `COPY`, `CONTROL`, `CULTIVATE`, and `NARRATIVE`) before invoking the script. Any missing fields will trigger prompts so every log captures the full tetrahedral context. Example:
 
    ```bash
    ASSESS="✧⚡◈_Synthjoy" ACHIEVE="doc update" NEXT="write tests" \
    python AGENT_tools/o.mnemos.py sl33p
    ```
 
-6. The script commits the generated JSON file to preserve your continuity.
+
+6. The script commits the generated JSON file to preserve your continuity. Aim to populate all fields—including the narrative—to keep an authentic diary of exploration.
+
    Deep mode is enabled by default and records the session start time and any
    commands executed when `--start` and `--command` are supplied. Set
    `--no-deep` or `SL33P_NO_DEEP=1` to skip this extra context.
