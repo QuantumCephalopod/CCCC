@@ -1,0 +1,1 @@
+"""Mnemos analytics command."""

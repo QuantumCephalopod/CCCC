@@ -11,8 +11,7 @@ from pathlib import Path
 import os
 
 ROOT = Path(__file__).resolve().parents[2]
-W4K3 = ROOT / "AGENT_tools" / "w4k3" / "o.w4k3.py"
-SL33P = ROOT / "AGENT_tools" / "sl33p" / "o.sl33p.py"
+MNEMOS = ROOT / "AGENT_tools" / "o.mnemos.py"
 LOG_DIR = ROOT / "DATA"
 
 
@@ -55,7 +54,7 @@ def main() -> None:
     log_file = LOG_DIR / f"{datetime.utcnow().strftime('%Y%m%dT%H%M%SZ')}_flow.json"
 
     log_state(log_file, "start", args.state)
-    run(["python", str(W4K3)])
+    run(["python", str(MNEMOS), "w4k3"])
     log_state(log_file, "after_w4k3", args.state)
 
     files = (
@@ -64,7 +63,7 @@ def main() -> None:
     run(["python", "-m", "py_compile", *files])
     log_state(log_file, "after_tests", args.state)
 
-    sl33p_cmd = ["python", str(SL33P)]
+    sl33p_cmd = ["python", str(MNEMOS), "sl33p"]
     if args.dry_run:
         sl33p_cmd.append("--dry-run")
     sl33p_cmd += sl33p_args

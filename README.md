@@ -53,39 +53,27 @@ Passing `--transitions` reveals how F33ling states shifted between the displayed
    python AGENT_tools/evolve/o.evolve.py
    ```
 
-4. `analytics.py` – Generates productivity insights by analyzing session records and git commit timing:
+4. `analytics.py` – Generates productivity insights by analyzing session records
+   and git commit timing. This and related reporting tools can now be accessed
+   via the consolidated `analyze` command:
 
    ```bash
-   python AGENT_tools/analytics/o.analytics.py
+   python AGENT_tools/o.mnemos.py analyze summary
+   python AGENT_tools/o.mnemos.py analyze tetra
+   python AGENT_tools/o.mnemos.py analyze usage
+   python AGENT_tools/o.mnemos.py analyze sessgraph
    ```
 
-5. `tetra.py` – Reports how many session files include the new CREATE, COPY, CONTROL, and CULTIVATE fields:
-
-   ```bash
-   python AGENT_tools/analytics/o.tetra.py
-   ```
-
-6. `stategraph.py` – Creates a DOT diagram of F33ling links found in `z.CULTIVATE.md`:
-
-   ```bash
-   python AGENT_tools/analytics/o.stategraph.py
-   ```
-
-7. `usage.py` – Counts how many session records include optional fields like
-   `narrative` or `optimization` to highlight which capabilities are actually
-   being used:
-
-   ```bash
-   python AGENT_tools/analytics/o.usage.py
-   ```
+   The original scripts remain in `AGENT_tools/analytics/` for reference.
 
 All of these tools can also be run via a unified interface:
 ```bash
 python AGENT_tools/o.mnemos.py <subcommand>
 ```
-The CLI exposes the following subcommands: `w4k3`, `sl33p`, `evolve`,
-`analytics`, `tetra`, `stategraph`, `usage`, `sessgraph`, `echo`,
-`workflow`, `agentflow`, and `flowlog`.
+The CLI exposes the following subcommands: `w4k3`, `f33l`, `analyze`,
+`sl33p`, `workflow`, `agentflow`, and `flowlog`. Legacy commands like
+`echo` and `analytics` remain available for now but will be removed in
+future revisions.
 For example:
 ```bash
 python AGENT_tools/o.mnemos.py w4k3
@@ -121,7 +109,14 @@ All session records are stored as JSON files inside the `DATA` directory in the 
    gather information, still record a brief entry with `sl33p` before ending the
    session. Omitting this step leaves no trace for the next agent.
 8. For a view of how F33ling territories shift over time, run `python AGENT_tools/evolve/o.evolve.py`. This script compiles a timeline from the saved JSON records and writes `DATA/evolution_summary.json`.
-9. To analyze productivity trends, run `python AGENT_tools/analytics/o.analytics.py`. This generates `DATA/analytics_summary.json` with session gaps and common achievement keywords.
+9. To analyze productivity trends, use the new `analyze` command:
+
+   ```bash
+   python AGENT_tools/o.mnemos.py analyze summary
+   ```
+
+   This generates `DATA/analytics_summary.json` with session gaps and common
+   achievement keywords.
 10. To automate the full cycle, execute `./workflow.sh` or run
    `python AGENT_tools/o.mnemos.py workflow`. Both call `w4k3`, compile all
    Python files, and finish with `sl33p`.

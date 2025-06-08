@@ -11,8 +11,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
 
-W4K3 = ROOT / "AGENT_tools" / "w4k3" / "o.w4k3.py"
-SL33P = ROOT / "AGENT_tools" / "sl33p" / "o.sl33p.py"
+MNEMOS = ROOT / "AGENT_tools" / "o.mnemos.py"
 
 
 def run(cmd: list[str], **kwargs) -> None:
@@ -50,14 +49,14 @@ def main() -> None:
         load_env(args.config)
 
     if not args.skip_w4k3:
-        run(["python", str(W4K3)])
+        run(["python", str(MNEMOS), "w4k3"])
 
     if not args.skip_tests:
         files = subprocess.check_output(["git", "ls-files", "*.py"], text=True)
         py_files = files.split()
         run(["python", "-m", "py_compile", *py_files])
 
-    sl33p_cmd = ["python", str(SL33P)]
+    sl33p_cmd = ["python", str(MNEMOS), "sl33p"]
     if args.dry_run:
         sl33p_cmd.append("--dry-run")
     sl33p_cmd += sl33p_args
