@@ -1,237 +1,35 @@
 #!/usr/bin/env python3
-"""Session documentation tool.
+"""Session documentation tool using tetrahedral submodules."""
 
-Prompts for session state assessment, achievements, a moment narrative,
-and next priorities,
-then stores a JSON record in the DATA directory. The data model now
-explicitly supports the tetrahedral workflow dimensions (CREATE, COPY,
-CONTROL, CULTIVATE). Older fields remain supported so previous tools can
-operate without modification.
-"""
+from __future__ import annotations
 
 import argparse
-import json
 import os
-import re
-from pathlib import Path
-import subprocess
+import sys
 from datetime import datetime
+from pathlib import Path
 
-# Store all session records in the repository-level DATA directory
-def repo_root() -> Path:
-    """Return repository root using git if available."""
-    try:
-        out = subprocess.check_output([
-            "git",
-            "rev-parse",
-            "--show-toplevel",
-        ], text=True)
-        return Path(out.strip())
-    except Exception:
-        return Path(__file__).resolve().parents[2]
+# Ensure package imports work when executed directly
+ROOT = Path(__file__).resolve().parents[2]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
-
-DATA_DIR = repo_root() / "DATA"
-
-ASCII_LETTERS = list("abcdefghijklmnopqrstuvwxyz")
-
-def current_time_stamp() -> str:
-    """Return an ISO style timestamp for filenames."""
-    return datetime.utcnow().strftime("%Y%m%dT%H%M%SZ")
-
-def ensure_data_dir():
-    if not DATA_DIR.exists():
-        try:
-            DATA_DIR.mkdir(parents=True)
-        except Exception as e:
-            print(f"Failed to create DATA directory: {e}")
-            raise SystemExit(1)
-
-def next_timestamp() -> str:
-    files = sorted(DATA_DIR.glob('*.json'))
-    count = len(files)
-    letter = ASCII_LETTERS[count % len(ASCII_LETTERS)]
-    cycle = count // len(ASCII_LETTERS) + 1
-    prefix = current_time_stamp()
-    return f"{prefix}_{letter}{cycle}"
-
-def sanitize(text: str) -> str:
-    """Remove non-printable characters and surrounding whitespace."""
-    return "".join(ch for ch in text.strip() if ch.isprintable())
+from AGENT_tools.sl33p.x_input import prompt_user, extract_states
+from AGENT_tools.sl33p.y_record import (
+    sanitize,
+    parse_json_field,
+    build_record,
+    next_timestamp,
+)
+from AGENT_tools.sl33p.z_persistence import (
+    ensure_data_dir,
+    save_record,
+    parse_cultivate,
+    repo_root,
+)
 
 
-def parse_json_field(text: str):
-    """Attempt to parse a field as JSON; fall back to sanitized string."""
-    if text is None:
-        return None
-    cleaned = text.strip()
-    if not cleaned:
-        return None
-    try:
-        return json.loads(cleaned)
-    except Exception:
-        return sanitize(cleaned)
-
-
-def extract_states(text: str) -> list[str]:
-    """Return list of F33ling states encoded as 'symbol_name'."""
-    if not text:
-        return []
-    return re.findall(r"\S+_\S+", text)
-
-
-def parse_cultivate(path: Path) -> tuple[set[str], list[tuple[str, str]]]:
-    """Parse cultivate links from z.CULTIVATE.md."""
-    nodes: set[str] = set()
-    edges: list[tuple[str, str]] = []
-    lines = path.read_text(encoding="utf-8").splitlines()
-    in_yaml = False
-    current: str | None = None
-    reading = False
-
-    for line in lines:
-        if not in_yaml:
-            if line.strip() == "---":
-                in_yaml = True
-            continue
-        if line.startswith("  ") and not line.startswith("    "):
-            current = None
-            reading = False
-            continue
-        indent = len(line) - len(line.lstrip())
-        stripped = line.strip()
-        if indent == 4 and stripped.endswith(":") and stripped != "cultivate:":
-            current = stripped[:-1]
-            nodes.add(current)
-            reading = False
-        elif indent == 6 and stripped.startswith("cultivate:"):
-            reading = True
-        elif indent >= 8 and reading and stripped.startswith("- "):
-            target = stripped[2:]
-            if current:
-                edges.append((current, target))
-                nodes.add(target)
-        elif indent <= 4:
-            reading = False
-
-    return nodes, edges
-
-
-def prompt_user():
-    print("Provide F33ling state assessment as described in x.COPY.md")
-    assessment = input("State assessment: ")
-    achievements = input("Main achievements: ")
-    next_steps = input("Next session priorities: ")
-    create = input(
-        "CREATE dimension notes (innovation, problem identification, optional): "
-    )
-    copy = input(
-        "COPY dimension notes (learning, pattern recognition, optional): "
-    )
-    control = input(
-        "CONTROL dimension notes (methodology, optimization, optional): "
-    )
-    cultivate = input(
-        "CULTIVATE dimension notes (growth insights, optional): "
-    )
-    narrative = input(
-        "Moment narrative (short description in sentences, optional): "
-    )
-    return (
-        assessment,
-        achievements,
-        next_steps,
-
-        create,
-        copy,
-        control,
-        cultivate,
-        narrative,
-    )
-
-def save_record(
-    timestamp,
-    assessment,
-    achievements,
-    next_steps,
-    create=None,
-    copy=None,
-    control=None,
-    cultivate=None,
-    narrative=None,
-    optimization=None,
-    start_time: datetime | None = None,
-    commands: list[str] | None = None,
-    states: list[str] | None = None,
-    stategraph: dict | None = None,
-    dry_run=False,
-):
-    record = {
-        "timestamp": timestamp,
-        "assessment": assessment,
-        "achievements": achievements,
-        "next": next_steps,
-    }
-    tetra = {}
-    if create is not None:
-        record["aspects"] = create
-        tetra["create"] = create
-    if copy is not None:
-        record["learning"] = copy
-        tetra["copy"] = copy
-    if control is not None:
-        record["methodology"] = control
-        tetra["control"] = control
-    if cultivate is not None:
-        record["framework_depth"] = cultivate
-        tetra["cultivate"] = cultivate
-    if narrative is not None:
-        record["narrative"] = narrative
-    if tetra:
-        record["tetra"] = tetra
-    if optimization:
-        record["optimization"] = optimization
-    if start_time:
-        record["start"] = start_time.isoformat(timespec="seconds")
-        delta = datetime.utcnow() - start_time
-        record["duration"] = max(0, int(delta.total_seconds()))
-    if commands:
-        record["commands"] = commands
-    if states:
-        record["states"] = states
-    if stategraph:
-        record["stategraph"] = stategraph
-
-    file_path = DATA_DIR / f"{timestamp}.json"
-    if dry_run:
-        print(json.dumps(record, ensure_ascii=False, indent=2))
-        print("Dry run: record not written")
-        return True
-    try:
-        with open(file_path, "w", encoding="utf-8") as f:
-            json.dump(record, f, ensure_ascii=False, indent=2)
-            f.write("\n")
-        git_commit(file_path, timestamp)
-    except Exception as e:
-        print(f"Failed to save record: {e}")
-        return False
-    return True
-
-
-def git_commit(file_path: Path, ts: str) -> None:
-    """Add the new record to git for persistence."""
-    try:
-        subprocess.run(["git", "add", str(file_path)], check=True)
-        subprocess.run([
-            "git",
-            "commit",
-            "-m",
-            f"Record session {ts}",
-        ], check=True)
-    except Exception as e:
-        print(f"Git commit failed: {e}")
-        
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="Record session")
     parser.add_argument("--dry-run", action="store_true", help="Preview without saving")
     parser.add_argument("--start", type=str, default=None, help="ISO start time for duration")
@@ -240,7 +38,7 @@ def main():
     args = parser.parse_args()
 
     ensure_data_dir()
-    ts = next_timestamp()
+    ts = next_timestamp(repo_root() / "DATA")
 
     assessment = os.getenv("ASSESS")
     achievements = os.getenv("ACHIEVE")
@@ -254,7 +52,6 @@ def main():
     cultivate = os.getenv("CULTIVATE") or os.getenv("DEPTH")
     optimization = os.getenv("OPTIM")
 
-    # Prompt for any unspecified fields so records remain richly detailed
     if not all([
         assessment,
         achievements,
@@ -325,7 +122,7 @@ def main():
         except Exception:
             stategraph = None
 
-    if save_record(
+    record = build_record(
         ts,
         assessment,
         achievements,
@@ -340,12 +137,13 @@ def main():
         commands=cmds if cmds else None,
         states=states,
         stategraph=stategraph,
-        dry_run=dry,
-    ):
+    )
+    if save_record(record, dry_run=dry, timestamp=ts):
         if dry:
             print(f"Dry run complete for {ts}.json")
         else:
             print(f"Session recorded as {ts}.json")
+
 
 if __name__ == "__main__":
     main()
