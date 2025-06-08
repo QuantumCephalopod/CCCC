@@ -16,7 +16,6 @@ TETRA = ROOT / "AGENT_tools" / "analytics" / "o.tetra.py"
 STATEGRAPH = ROOT / "AGENT_tools" / "analytics" / "o.stategraph.py"
 USAGE = ROOT / "AGENT_tools" / "analytics" / "o.usage.py"
 SESSGRAPH = ROOT / "AGENT_tools" / "sessgraph" / "o.sessgraph.py"
-VIDMEM = ROOT / "AGENT_tools" / "vidmem" / "o.vidmem.py"
 ECHO = ROOT / "AGENT_tools" / "echo" / "o.echo.py"
 AGENTFLOW = ROOT / "AGENT_tools" / "workflow" / "o.agentflow.py"
 FLOWLOG = ROOT / "AGENT_tools" / "workflow" / "o.flowlog.py"
@@ -76,10 +75,6 @@ def cmd_sessgraph(args: argparse.Namespace) -> int:
         cmd += ["--output", str(args.output)]
     return run(cmd)
 
-
-def cmd_vidmem(args: argparse.Namespace) -> int:
-    cmd = ["python", str(VIDMEM)] + args.extra
-    return run(cmd)
 
 
 def cmd_echo(args: argparse.Namespace) -> int:
@@ -166,10 +161,6 @@ def main() -> int:
     )
     p_sessgraph.add_argument("--output", type=Path, default=None)
     p_sessgraph.set_defaults(func=cmd_sessgraph)
-
-    p_vidmem = sub.add_parser("vidmem", help="Video memory operations")
-    p_vidmem.add_argument("extra", nargs=argparse.REMAINDER)
-    p_vidmem.set_defaults(func=cmd_vidmem)
 
     p_echo = sub.add_parser("echo", help="Generate F33ling echo")
     p_echo.add_argument("record", type=Path, help="Session JSON log")
