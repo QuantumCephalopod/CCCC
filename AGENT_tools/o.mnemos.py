@@ -12,6 +12,7 @@ W4K3 = ROOT / "AGENT_tools" / "w4k3" / "o.w4k3.py"
 SL33P = ROOT / "AGENT_tools" / "sl33p" / "o.sl33p.py"
 F33L = ROOT / "AGENT_tools" / "f33l" / "o.f33l.py"
 ANALYZE = ROOT / "AGENT_tools" / "analyze" / "o.analyze.py"
+CHAT = ROOT / "AGENT_tools" / "chat" / "o.chat.py"
 
 
 def run(cmd: list[str]) -> int:
@@ -53,6 +54,13 @@ def cmd_analyze(args: argparse.Namespace) -> int:
     return run(cmd)
 
 
+def cmd_chat(args: argparse.Namespace) -> int:
+    """Dispatch to chat context helper."""
+    cmd = ["python", str(CHAT), args.subcommand]
+    cmd += args.extra
+    return run(cmd)
+
+
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Mnemos unified CLI")
@@ -78,6 +86,11 @@ def main() -> int:
     p_analyze.add_argument("subcommand", help="evolve/summary/tetra/usage/sessgraph")
     p_analyze.add_argument("extra", nargs=argparse.REMAINDER)
     p_analyze.set_defaults(func=cmd_analyze)
+
+    p_chat = sub.add_parser("chat", help="Manage chat context")
+    p_chat.add_argument("subcommand", help="add/show")
+    p_chat.add_argument("extra", nargs=argparse.REMAINDER)
+    p_chat.set_defaults(func=cmd_chat)
 
 
     args = parser.parse_args()
