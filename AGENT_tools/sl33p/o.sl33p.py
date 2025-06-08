@@ -14,7 +14,7 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from AGENT_tools.sl33p.x_input import prompt_user, extract_states
+from AGENT_tools.sl33p.x_input import prompt_agent, extract_states
 from AGENT_tools.sl33p.y_record import (
     sanitize,
     parse_json_field,
@@ -71,7 +71,7 @@ def main() -> None:
             control_i,
             cultivate_i,
             narrative_i,
-        ) = prompt_user()
+        ) = prompt_agent()
         assessment = assessment or assessment_i
         achievements = achievements or achievements_i
         next_steps = next_steps or next_steps_i
