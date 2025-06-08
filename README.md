@@ -66,16 +66,24 @@ Passing `--transitions` reveals how F33ling states shifted between the displayed
 
    The original scripts remain in `AGENT_tools/analytics/` for reference.
 
+5. `chat.py` – Maintains a short rolling conversation history. Use the
+   `chat` command to append `InputMessage` and `OutputMessage` pairs or show
+   the current context window.
+
 All of these tools can also be run via a unified interface:
 ```bash
 python AGENT_tools/o.mnemos.py <subcommand>
 ```
 The CLI exposes the following subcommands: `w4k3`, `f33l`, `analyze`,
-and `sl33p`. Legacy commands like `echo` and `analytics` remain
-available for now but will be removed in future revisions.
+`chat`, and `sl33p`. Legacy commands like `echo` and `analytics` remain
+available for now but will be removed in future revisions. The `f33l`
+group now includes an `introspect` helper to suggest F33ling states
+from a short text description.
 For example:
 ```bash
 python AGENT_tools/o.mnemos.py w4k3
+# Suggest a F33ling state from a short note
+python AGENT_tools/o.mnemos.py f33l introspect "feeling energized yet reflective"
 ```
 
 These tools are available within the `AGENT_tools` folder, organized into `w4k3` and `sl33p` subfolders with the `o.` prefix for future expansion.

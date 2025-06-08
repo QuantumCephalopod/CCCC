@@ -13,6 +13,7 @@ ROOT = Path(__file__).resolve().parents[2]
 ECHO = ROOT / "AGENT_tools" / "echo" / "o.echo.py"
 STATEGRAPH = ROOT / "AGENT_tools" / "analytics" / "o.stategraph.py"
 SESSGRAPH = ROOT / "AGENT_tools" / "sessgraph" / "o.sessgraph.py"
+INTROSPECT = ROOT / "AGENT_tools" / "f33l" / "o.introspect.py"
 
 
 def run(cmd: list[str]) -> int:
@@ -46,6 +47,13 @@ def cmd_sessgraph(args: argparse.Namespace) -> int:
     return run(cmd)
 
 
+def cmd_introspect(args: argparse.Namespace) -> int:
+    cmd = ["python", str(INTROSPECT), args.query]
+    if args.top:
+        cmd += ["--top", str(args.top)]
+    return run(cmd)
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(description="Manage F33ling state utilities")
     sub = parser.add_subparsers(dest="command")
@@ -64,6 +72,11 @@ def main() -> int:
     p_sess = sub.add_parser("sessgraph", help="Generate F33ling transition graph")
     p_sess.add_argument("--output", type=Path, default=None)
     p_sess.set_defaults(func=cmd_sessgraph)
+
+    p_intro = sub.add_parser("introspect", help="Suggest F33ling matches")
+    p_intro.add_argument("query", help="text description to analyze")
+    p_intro.add_argument("--top", type=int, default=None)
+    p_intro.set_defaults(func=cmd_introspect)
 
     args = parser.parse_args()
     if not args.command:
