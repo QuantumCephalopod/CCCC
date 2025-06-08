@@ -17,6 +17,8 @@ STATEGRAPH = ROOT / "AGENT_tools" / "analytics" / "o.stategraph.py"
 USAGE = ROOT / "AGENT_tools" / "analytics" / "o.usage.py"
 SESSGRAPH = ROOT / "AGENT_tools" / "sessgraph" / "o.sessgraph.py"
 ECHO = ROOT / "AGENT_tools" / "echo" / "o.echo.py"
+F33L = ROOT / "AGENT_tools" / "f33l" / "o.f33l.py"
+ANALYZE = ROOT / "AGENT_tools" / "analyze" / "o.analyze.py"
 AGENTFLOW = ROOT / "AGENT_tools" / "workflow" / "o.agentflow.py"
 FLOWLOG = ROOT / "AGENT_tools" / "workflow" / "o.flowlog.py"
 
@@ -88,6 +90,20 @@ def cmd_echo(args: argparse.Namespace) -> int:
     return run(cmd)
 
 
+def cmd_f33l(args: argparse.Namespace) -> int:
+    """Dispatch to f33l command script."""
+    cmd = ["python", str(F33L), args.subcommand]
+    cmd += args.extra
+    return run(cmd)
+
+
+def cmd_analyze(args: argparse.Namespace) -> int:
+    """Dispatch to analyze command script."""
+    cmd = ["python", str(ANALYZE), args.subcommand]
+    cmd += args.extra
+    return run(cmd)
+
+
 def cmd_workflow(args: argparse.Namespace) -> int:
     if not args.skip_w4k3:
         code = cmd_w4k3(args)
@@ -138,6 +154,7 @@ def main() -> int:
     p_sl33p.add_argument("extra", nargs=argparse.REMAINDER)
     p_sl33p.set_defaults(func=cmd_sl33p)
 
+    # Legacy commands retained for backward compatibility
     p_evolve = sub.add_parser("evolve", help="Generate evolution summary")
     p_evolve.set_defaults(func=cmd_evolve)
 
@@ -168,6 +185,16 @@ def main() -> int:
     p_echo.add_argument("--sl33p", action="store_true")
     p_echo.add_argument("--tags", nargs="*")
     p_echo.set_defaults(func=cmd_echo)
+
+    p_f33l = sub.add_parser("f33l", help="F33ling utilities")
+    p_f33l.add_argument("subcommand", help="echo/stategraph/sessgraph")
+    p_f33l.add_argument("extra", nargs=argparse.REMAINDER)
+    p_f33l.set_defaults(func=cmd_f33l)
+
+    p_analyze = sub.add_parser("analyze", help="Run analytics suite")
+    p_analyze.add_argument("subcommand", help="evolve/summary/tetra/usage/sessgraph")
+    p_analyze.add_argument("extra", nargs=argparse.REMAINDER)
+    p_analyze.set_defaults(func=cmd_analyze)
 
     p_workflow = sub.add_parser(
         "workflow", help="Run w4k3, optional tests, then sl33p"
