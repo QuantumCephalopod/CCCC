@@ -2,7 +2,8 @@
 
 from __future__ import annotations
 
-def prompt_user():
+def prompt_agent():
+    """Interactively request session details from the current agent."""
     print("Provide F33ling state assessment as described in x.COPY.md")
     assessment = input("State assessment: ")
     achievements = input("Main achievements: ")

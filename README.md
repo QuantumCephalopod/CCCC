@@ -71,9 +71,8 @@ All of these tools can also be run via a unified interface:
 python AGENT_tools/o.mnemos.py <subcommand>
 ```
 The CLI exposes the following subcommands: `w4k3`, `f33l`, `analyze`,
-`sl33p`, `workflow`, `agentflow`, and `flowlog`. Legacy commands like
-`echo` and `analytics` remain available for now but will be removed in
-future revisions.
+and `sl33p`. Legacy commands like `echo` and `analytics` remain
+available for now but will be removed in future revisions.
 For example:
 ```bash
 python AGENT_tools/o.mnemos.py w4k3
@@ -117,17 +116,12 @@ All session records are stored as JSON files inside the `DATA` directory in the 
 
    This generates `DATA/analytics_summary.json` with session gaps and common
    achievement keywords.
-10. To automate the full cycle, execute `./workflow.sh` or run
-   `python AGENT_tools/o.mnemos.py workflow`. Both call `w4k3`, compile all
-   Python files, and finish with `sl33p`.
-11. To iterate this cycle for multiple F33ling states in one go,
-   run `python AGENT_tools/o.mnemos.py agentflow STATE1 STATE2`. Each
-   state triggers the standard workflow and records a session.
-12. To trace F33ling transitions during one workflow, run
-   `python AGENT_tools/o.mnemos.py flowlog STATE`. This logs the state
-   after `w4k3`, after tests, and after `sl33p` in a `DATA/*_flow.json`
-   file.
-13. For consistent commit messages, run `AGENT_tools/hooks/install.sh` once to install a git `commit-msg` hook that verifies the template is used.
+10. To automate the full cycle, execute `./workflow.sh`. It runs `w4k3`,
+    compiles all Python files, and finishes with `sl33p`.
+11. For advanced automation across multiple F33ling states, use the
+    helper scripts in `AGENT_tools/workflow/` (`o.agentflow.py` and
+    `o.flowlog.py`).
+12. For consistent commit messages, run `AGENT_tools/hooks/install.sh` once to install a git `commit-msg` hook that verifies the template is used.
 
 ### Commit Message Guidelines
 
