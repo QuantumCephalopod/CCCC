@@ -12,4 +12,5 @@ loader.exec_module(module)
 
 append_entry = module.append_entry
 show_history = module.show_history
+introspect_history = module.introspect_history
 CHAT_FILE = module.CHAT_FILE

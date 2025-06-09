@@ -9,14 +9,46 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
+# Ensure package imports work when executed directly
 ROOT = Path(__file__).resolve().parents[2]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from AGENT_tools.sl33p.z_persistence import ensure_data_dir
+from importlib.machinery import SourceFileLoader
+from importlib.util import module_from_spec, spec_from_loader
+
+INTROSPECT_PATH = Path(__file__).resolve().parents[1] / 'f33l' / 'o.introspect.py'
+_loader = SourceFileLoader('f33lintrospect', str(INTROSPECT_PATH))
+_spec = spec_from_loader('f33lintrospect', _loader)
+_mod = module_from_spec(_spec)
+_loader.exec_module(_mod)
+parse_states = _mod.parse_states
+search_states = _mod.search_states
+
 CHAT_FILE = ROOT / "DATA" / "chat_context.json"
+
+_STATES: dict[str, str] | None = None
+
+
+def load_states() -> dict[str, str]:
+    """Return F33ling states parsed from z.CULTIVATE.md."""
+    global _STATES
+    if _STATES is None:
+        try:
+            path = ROOT / "z.CULTIVATE.md"
+            _STATES = parse_states(path)
+        except Exception:
+            _STATES = {}
+    return _STATES
 
 
 def load_history(path: Path) -> list[dict]:
+    ensure_data_dir()
     if path.exists():
         try:
             with open(path, "r", encoding="utf-8") as f:
@@ -27,11 +59,13 @@ def load_history(path: Path) -> list[dict]:
 
 
 def save_history(history: list[dict], path: Path) -> None:
+    ensure_data_dir()
     with open(path, "w", encoding="utf-8") as f:
         json.dump(history, f, ensure_ascii=False, indent=2)
 
 
 def append_entry(user: str, assistant: str, limit: int) -> None:
+    ensure_data_dir()
     history = load_history(CHAT_FILE)
     history.append(
         {
@@ -46,6 +80,7 @@ def append_entry(user: str, assistant: str, limit: int) -> None:
 
 
 def show_history(limit: int) -> None:
+    ensure_data_dir()
     history = load_history(CHAT_FILE)
     if limit:
         history = history[-limit:]
@@ -53,6 +88,29 @@ def show_history(limit: int) -> None:
         user = entry.get("InputMessage", "")
         assistant = entry.get("OutputMessage", "")
         print(f"InputMessage: {user}\nOutputMessage: {assistant}\n")
+
+
+def introspect_history(limit: int, top: int) -> None:
+    """Suggest F33ling states for each chat entry."""
+    ensure_data_dir()
+    history = load_history(CHAT_FILE)
+    if limit:
+        history = history[-limit:]
+    states = load_states()
+    if not states:
+        print("No F33ling states available.")
+        return
+    for entry in history:
+        user = entry.get("InputMessage", "")
+        assistant = entry.get("OutputMessage", "")
+        text = f"{user} {assistant}".strip()
+        matches = search_states(text, states, top=top)
+        print(f"InputMessage: {user}\nOutputMessage: {assistant}")
+        if matches:
+            print("F33l suggestions:")
+            for name, score in matches:
+                print(f"  {name} ({score:.2f})")
+        print()
 
 
 def main() -> None:
@@ -67,11 +125,17 @@ def main() -> None:
     show = sub.add_parser("show", help="Display recent conversation")
     show.add_argument("--limit", type=int, default=10, help="Number of messages")
 
+    intros = sub.add_parser("f33l", help="Analyze F33ling states in chat")
+    intros.add_argument("--limit", type=int, default=10, help="Messages to analyze")
+    intros.add_argument("--top", type=int, default=3, help="Matches per message")
+
     args = parser.parse_args()
     if args.command == "add":
         append_entry(args.user, args.assistant, args.limit)
     elif args.command == "show":
         show_history(args.limit)
+    elif args.command == "f33l":
+        introspect_history(args.limit, args.top)
     else:
         parser.print_help()
 
