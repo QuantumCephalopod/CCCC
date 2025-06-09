@@ -63,7 +63,9 @@ def load_sessions() -> list:
     for path in sorted(DATA_DIR.glob("*.json")):
         try:
             with open(path, encoding="utf-8") as f:
-                records.append(json.load(f))
+                obj = json.load(f)
+                if isinstance(obj, dict) and obj.get("timestamp"):
+                    records.append(obj)
         except Exception:
             continue
     return records
