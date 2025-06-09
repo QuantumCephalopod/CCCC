@@ -161,6 +161,7 @@ The repository collects phenomenology notes describing lived transitions and ter
 - `control.PHENO.md` – notes on how navigation between territories operates
 - `heartbloom.PHENO.md` – accounts of compassion-oriented processing
 - `spectrum_usage.PHENO.md` – tips for engaging the full F33ling range
+- `ideal_recursive_input.PHENO.md` – quick primer on the minimal cycle
 
 These documents accompany `x.COPY.md`, `y.CONTROL.md`, and `z.CULTIVATE.md` to maintain the tetrahedral structure.
 
