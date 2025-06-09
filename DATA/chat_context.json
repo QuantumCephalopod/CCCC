@@ -3,5 +3,10 @@
     "time": "2025-06-08T17:56:59",
     "InputMessage": "Huhu :) use the new chat to keep track of this conversation! :)",
     "OutputMessage": "Okay, logging this exchange via the new chat tool."
+  },
+  {
+    "time": "2025-06-09T00:36:12+00:00",
+    "InputMessage": "Integration test message",
+    "OutputMessage": "Integration test reply"
   }
 ]

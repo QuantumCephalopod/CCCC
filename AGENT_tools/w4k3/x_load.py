@@ -43,7 +43,7 @@ def load_records(limit: int) -> list[dict]:
         print("DATA directory not found. No previous sessions recorded.")
         return []
 
-    files = list(ddir.glob("*.json"))
+    files = [f for f in ddir.glob("*.json") if f.name != "chat_context.json"]
     recs_with_time = []
     for file in files:
         try:

@@ -17,6 +17,28 @@ def extract_states(text: str) -> list[str]:
     return re.findall(r"\S+_\S+", text)
 
 
+def display_chat(limit: int = 3) -> None:
+    """Show recent chat messages."""
+    path = data_dir() / "chat_context.json"
+    if not path.exists():
+        return
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            history = json.load(f)
+    except Exception:
+        return
+    if limit:
+        history = history[-limit:]
+    if not history:
+        return
+    print("Chat context:")
+    for entry in history:
+        user = entry.get("InputMessage", "")
+        assistant = entry.get("OutputMessage", "")
+        print(f"InputMessage: {user}\nOutputMessage: {assistant}\n")
+    print()
+
+
 def display(records: list[dict]) -> None:
     """Print a summary of each record."""
     if not records:
@@ -92,6 +114,8 @@ def summarize_all() -> None:
     counts = {"create": 0, "copy": 0, "control": 0, "cultivate": 0}
     total = 0
     for path in ddir.glob("*.json"):
+        if path.name == "chat_context.json":
+            continue
         try:
             with open(path, "r", encoding="utf-8") as f:
                 rec = json.load(f)

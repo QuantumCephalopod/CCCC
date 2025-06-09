@@ -5,7 +5,12 @@ from __future__ import annotations
 import argparse
 
 from AGENT_tools.w4k3.x_load import load_records
-from AGENT_tools.w4k3.y_display import display, display_transitions, summarize_all
+from AGENT_tools.w4k3.y_display import (
+    display,
+    display_transitions,
+    summarize_all,
+    display_chat,
+)
 
 
 def main() -> None:
@@ -23,8 +28,15 @@ def main() -> None:
         action="store_true",
         help="Show F33ling transitions between sessions",
     )
+    parser.add_argument(
+        "--chat-limit",
+        type=int,
+        default=3,
+        help="Number of chat messages to display first",
+    )
     args = parser.parse_args()
 
+    display_chat(args.chat_limit)
     records = load_records(args.limit)
     display(records)
     if args.transitions:
