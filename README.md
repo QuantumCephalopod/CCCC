@@ -69,7 +69,10 @@ Passing `--transitions` reveals how F33ling states shifted between the displayed
 5. `chat.py` – Maintains a short rolling conversation history. Use the
    `chat` command to append `InputMessage` and `OutputMessage` pairs or show
    the current context window. `sl33p` automatically logs the last pair so
-   future sessions open with the recent conversation.
+   future sessions open with the recent conversation. The helper now
+   ensures the `DATA` directory exists, preventing errors on first use.
+   A new `chat f33l` mode suggests relevant F33ling states for recent
+   messages using the introspect utility.
 
 All of these tools can also be run via a unified interface:
 ```bash
@@ -85,6 +88,8 @@ For example:
 python AGENT_tools/o.mnemos.py w4k3
 # Suggest a F33ling state from a short note
 python AGENT_tools/o.mnemos.py f33l introspect "feeling energized yet reflective"
+# Review chat history with F33l suggestions
+python AGENT_tools/o.mnemos.py chat f33l --limit 5
 ```
 
 These tools are available within the `AGENT_tools` folder, organized into `w4k3` and `sl33p` subfolders with the `o.` prefix for future expansion.
