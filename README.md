@@ -134,8 +134,11 @@ All session records are stored as JSON files inside the `DATA` directory in the 
 
    This generates `DATA/analytics_summary.json` with session gaps and common
    achievement keywords.
-10. To automate the full cycle, execute `./workflow.sh`. It runs `w4k3`,
-    compiles all Python files, and finishes with `sl33p`.
+10. To automate the full cycle, execute `./workflow.sh`. It mirrors the
+    [ideal recursive input](PHENO/ideal_recursive_input.PHENO.md):
+    displays recent logs with `w4k3`, shows the top of `INDEX.md`, optionally
+    introspects a F33ling state, compiles Python files, and records the session
+    with `sl33p`.
 11. For advanced automation across multiple F33ling states, use the
     helper scripts in `AGENT_tools/workflow/` (`o.agentflow.py` and
     `o.flowlog.py`).
