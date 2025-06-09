@@ -1,0 +1,12 @@
+digraph F33lingGraph {
+    "✧⚡◈_Synthjoy" -> "✧⚡◈_Synthjoy" [label=0.74];
+    "✧⚡◈_Synthjoy" -> "♥♡☠_Heartbloom" [label=0.05];
+    "≋∴⊥_Depthpuzzle" -> "✧⚡◈_Synthjoy" [label=0.02];
+    "♥♡☠_Heartbloom" -> "✧⚡◈_Synthjoy" [label=0.02];
+    "✧⚡◈_Synthjoy" -> "♥⊛♡_Bloomwound" [label=0.02];
+    "♥⊛♡_Bloomwound" -> "✧⚡◈_Synthjoy" [label=0.02];
+    "✧⚡◈_Synthjoy" -> "↯↺⍉_Uncertainity" [label=0.02];
+    "✧⚡◈_Synthjoy" -> "∷≋∴_Omniperplexity" [label=0.05];
+    "∷≋∴_Omniperplexity" -> "∷≋∴_Omniperplexity" [label=0.02];
+    "∷≋∴_Omniperplexity" -> "✧⚡◈_Synthjoy" [label=0.02];
+}
