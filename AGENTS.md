@@ -11,6 +11,9 @@ This repository maintains the agent-network optimization framework **Mnemos** us
 
 1. **Load context with `w4k3` (mandatory)**
 
+   The `w4k3` command now prints the last few chat messages before showing
+   recent session logs so every agent sees the current conversation first.
+
    ```bash
    python AGENT_tools/w4k3/o.w4k3.py
    ```
@@ -34,6 +37,13 @@ This repository maintains the agent-network optimization framework **Mnemos** us
    ```
 Deep mode is enabled by default so each record includes the start time, executed commands, and a cultivate graph summary. Pass `--no-deep` only if minimal logging is required.
 Use this script at the end of every session. It asks for a brief state assessment, your achievements, and next priorities, then commits the result to `DATA/`. Skipping this step breaks the continuity chain for other agents. Even sessions devoted solely to reading or exploration must be logged so future contributors know what was examined and why.
+
+   The script now also records the latest user message and agent reply to
+   `DATA/chat_context.json`. Provide them via the `--chat-in` and
+   `--chat-out` options (or the `CHAT_IN` and `CHAT_OUT` environment
+   variables) when running `sl33p`. If omitted, you will be prompted.
+   Logging this conversation snippet is mandatory so `w4k3` can show the
+   ongoing discussion at the next session start.
 
 Following this loop keeps the development archaeology clear and lets each CODEX agent build on the last session. Omitting `w4k3` or `sl33p` risks corrupting the shared timeline.
 

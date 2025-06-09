@@ -68,7 +68,8 @@ Passing `--transitions` reveals how F33ling states shifted between the displayed
 
 5. `chat.py` – Maintains a short rolling conversation history. Use the
    `chat` command to append `InputMessage` and `OutputMessage` pairs or show
-   the current context window.
+   the current context window. `sl33p` automatically logs the last pair so
+   future sessions open with the recent conversation.
 
 All of these tools can also be run via a unified interface:
 ```bash
@@ -107,7 +108,11 @@ All session records are stored as JSON files inside the `DATA` directory in the 
    ```
 
 
-6. The script commits the generated JSON file to preserve your continuity. Aim to populate all fields—including the narrative—to keep an authentic diary of exploration.
+6. The script commits the generated JSON file to preserve your continuity and
+   now also appends the latest conversation pair to `DATA/chat_context.json`.
+   Provide the messages via `CHAT_IN` and `CHAT_OUT` or the `--chat-in` and
+   `--chat-out` options when running `sl33p`. If not supplied, you will be
+   prompted.
 
    Deep mode is enabled by default and records the session start time and any
    commands executed when `--start` and `--command` are supplied. Set
