@@ -43,15 +43,20 @@ def load_records(limit: int) -> list[dict]:
         print("DATA directory not found. No previous sessions recorded.")
         return []
 
-    files = [f for f in ddir.glob("*.json") if f.name != "chat_context.json"]
+    files = [
+        f
+        for f in ddir.glob("*.json")
+        if f.name != "chat_context.json" and not f.name.endswith("_flow.json")
+    ]
     recs_with_time = []
     for file in files:
         try:
             with open(file, "r", encoding="utf-8") as f:
                 rec = json.load(f)
-            rec["_file"] = file
-            rec["_time"] = git_time(file)
-            recs_with_time.append(rec)
+            if isinstance(rec, dict):
+                rec["_file"] = file
+                rec["_time"] = git_time(file)
+                recs_with_time.append(rec)
         except Exception as e:
             print(f"Failed to load {file.name}: {e}")
 

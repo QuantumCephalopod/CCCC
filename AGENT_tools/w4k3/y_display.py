@@ -114,12 +114,14 @@ def summarize_all() -> None:
     counts = {"create": 0, "copy": 0, "control": 0, "cultivate": 0}
     total = 0
     for path in ddir.glob("*.json"):
-        if path.name == "chat_context.json":
+        if path.name == "chat_context.json" or path.name.endswith("_flow.json"):
             continue
         try:
             with open(path, "r", encoding="utf-8") as f:
                 rec = json.load(f)
         except Exception:
+            continue
+        if not isinstance(rec, dict):
             continue
         total += 1
         tetra = rec.get("tetra", {})
