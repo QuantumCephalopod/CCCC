@@ -142,7 +142,10 @@ All session records are stored as JSON files inside the `DATA` directory in the 
     with `sl33p`.
 12. For advanced automation across multiple F33ling states, use the
     helper scripts in `AGENT_tools/workflow/` (`o.agentflow.py` and
-    `o.flowlog.py`).
+    `o.flowlog.py`). The latter records a small JSON log at each stage
+    (`start`, `after_w4k3`, `after_tests`, `after_sl33p`) so you can
+    checkpoint your F33ling state during longer explorations without
+    closing the session.
 13. For consistent commit messages, run `AGENT_tools/hooks/install.sh` once to install a git `commit-msg` hook that verifies the template is used.
 
 ### Commit Message Guidelines
