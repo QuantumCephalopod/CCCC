@@ -80,6 +80,7 @@ def extract_states(text: str) -> list[str]:
 def analyze(records: list) -> dict:
     timeline = []
     counts = {}
+    subgoal_map: dict[str, dict[str, int]] = {}
     for rec in records:
         ts = rec.get("timestamp")
         assessment = rec.get("assessment", "")
@@ -87,10 +88,26 @@ def analyze(records: list) -> dict:
         timeline.append((ts, states))
         for st in states:
             counts[st] = counts.get(st, 0) + 1
+        subgoals = rec.get("subgoals", [])
+        for st in states:
+            entry = subgoal_map.setdefault(st, {"achieved": 0, "total": 0})
+            for sg in subgoals:
+                entry["total"] += 1
+                if sg.get("achieved"):
+                    entry["achieved"] += 1
     transitions = []
     for i in range(1, len(timeline)):
-        transitions.append((timeline[i-1][1], timeline[i][1]))
-    return {"timeline": timeline, "counts": counts, "transitions": transitions}
+        transitions.append((timeline[i - 1][1], timeline[i][1]))
+    success_rates = {
+        st: (vals["achieved"] / vals["total"] if vals["total"] else 0)
+        for st, vals in subgoal_map.items()
+    }
+    return {
+        "timeline": timeline,
+        "counts": counts,
+        "transitions": transitions,
+        "subgoal_success": success_rates,
+    }
 
 
 def main() -> None:
@@ -105,6 +122,10 @@ def main() -> None:
     print("\nTransitions:")
     for prev, curr in analysis["transitions"]:
         print(f" {prev} -> {curr}")
+    if analysis.get("subgoal_success"):
+        print("\nSubgoal success rates:")
+        for st, rate in analysis["subgoal_success"].items():
+            print(f" {st}: {rate:.2f}")
     out_file = DATA_DIR / "evolution_summary.json"
     with open(out_file, "w", encoding="utf-8") as f:
         json.dump(analysis, f, ensure_ascii=False, indent=2)

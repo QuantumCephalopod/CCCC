@@ -89,6 +89,18 @@ def display(records: list[dict]) -> None:
         if rec.get("optimization"):
             print(f"  Optimization: {rec['optimization']}")
 
+        if rec.get("session_type"):
+            print(f"  Type: {rec['session_type']}")
+        if rec.get("prompt_rewrite"):
+            print(f"  Prompt rewrite: {rec['prompt_rewrite']}")
+
+        if rec.get("subgoals"):
+            print("  Subgoals:")
+            for sg in rec["subgoals"]:
+                status = "✔" if sg.get("achieved") else "✘"
+                strat = f" via {sg['strategy_used']}" if sg.get("strategy_used") else ""
+                print(f"    - {status} {sg['goal']}{strat}")
+
     print()
 
 

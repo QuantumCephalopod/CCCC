@@ -50,6 +50,9 @@ def build_record(
     control=None,
     cultivate=None,
     narrative=None,
+    subgoals: list[dict] | None = None,
+    session_type: str | None = None,
+    prompt_rewrite: str | None = None,
     optimization=None,
     start_time: datetime | None = None,
     commands: list[str] | None = None,
@@ -79,6 +82,12 @@ def build_record(
         record["narrative"] = narrative
     if tetra:
         record["tetra"] = tetra
+    if subgoals:
+        record["subgoals"] = subgoals
+    if session_type:
+        record["session_type"] = session_type
+    if prompt_rewrite:
+        record["prompt_rewrite"] = prompt_rewrite
     if optimization:
         record["optimization"] = optimization
     if start_time:

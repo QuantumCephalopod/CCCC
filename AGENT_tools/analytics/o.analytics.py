@@ -120,6 +120,14 @@ def analyze() -> dict:
             if w not in STOPWORDS:
                 word_counts[w] += 1
 
+    # competency heatmap per state and session type
+    heat: dict[str, Counter] = {}
+    for rec in timeline:
+        stype = rec.get("session_type") or "unspecified"
+        for st in rec.get("states", []):
+            counter = heat.setdefault(st, Counter())
+            counter[stype] += 1
+
     top_words = word_counts.most_common(10)
 
     result = {
@@ -128,6 +136,7 @@ def analyze() -> dict:
         "max_gap_hours": round(max_gap, 2),
         "state_average_gaps": {st: round(v, 2) for st, v in state_avg_gap.items()},
         "top_achievement_words": top_words,
+        "heatmap": {k: dict(v) for k, v in heat.items()},
     }
     return result
 
@@ -147,7 +156,14 @@ def main() -> None:
     save_path = save_summary(summary)
     print("Session Analytics Summary:")
     for key, val in summary.items():
-        print(f"{key}: {val}")
+        if key == "heatmap":
+            print("heatmap:")
+            for st, mapping in val.items():
+                print(f"  {st}:")
+                for t, cnt in mapping.items():
+                    print(f"    {t}: {cnt}")
+        else:
+            print(f"{key}: {val}")
     print(f"Saved summary to {save_path}")
 
 

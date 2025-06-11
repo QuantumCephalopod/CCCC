@@ -13,6 +13,8 @@ ANALYTICS = ROOT / "AGENT_tools" / "analytics" / "o.analytics.py"
 TETRA = ROOT / "AGENT_tools" / "analytics" / "o.tetra.py"
 USAGE = ROOT / "AGENT_tools" / "analytics" / "o.usage.py"
 SESSGRAPH = ROOT / "AGENT_tools" / "sessgraph" / "o.sessgraph.py"
+STRATEGIZE = ROOT / "AGENT_tools" / "analytics" / "o.strategize.py"
+EVOLVER = ROOT / "agentflow" / "o.evolver.py"
 
 
 def run(cmd: list[str]) -> int:
@@ -36,6 +38,17 @@ def cmd_usage(_: argparse.Namespace) -> int:
     return run(["python", str(USAGE)])
 
 
+def cmd_strategize(args: argparse.Namespace) -> int:
+    cmd = ["python", str(STRATEGIZE)]
+    if args.state:
+        cmd += ["--state", args.state]
+    return run(cmd)
+
+
+def cmd_evolver(_: argparse.Namespace) -> int:
+    return run(["python", str(EVOLVER)])
+
+
 def cmd_sessgraph(args: argparse.Namespace) -> int:
     cmd = ["python", str(SESSGRAPH)]
     if args.output:
@@ -48,9 +61,14 @@ def main() -> int:
     sub = parser.add_subparsers(dest="command")
 
     sub.add_parser("evolve", help="Generate evolution summary").set_defaults(func=cmd_evolve)
+    sub.add_parser("evolver", help="Propose evolved strategy").set_defaults(func=cmd_evolver)
     sub.add_parser("summary", help="Run analytics summary").set_defaults(func=cmd_summary)
     sub.add_parser("tetra", help="Report tetra dimension usage").set_defaults(func=cmd_tetra)
     sub.add_parser("usage", help="Summarize record field usage").set_defaults(func=cmd_usage)
+
+    p_strat = sub.add_parser("strategize", help="Suggest tactics from past sessions")
+    p_strat.add_argument("--state", type=str, default=None, help="F33ling state to analyze")
+    p_strat.set_defaults(func=cmd_strategize)
 
     p_sess = sub.add_parser("sessgraph", help="Generate F33ling transition graph")
     p_sess.add_argument("--output", type=Path, default=None)
