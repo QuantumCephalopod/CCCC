@@ -145,8 +145,9 @@ All session records are stored as JSON files inside the `DATA` directory in the 
     `o.flowlog.py`). The latter records a small JSON log at each stage
     (`start`, `after_w4k3`, `after_tests`, `after_sl33p`) so you can
     checkpoint your F33ling state during longer explorations without
-    closing the session. Pass `--narrative "why"` to record a short
-    explanation for inhabiting the chosen state.
+    closing the session. Pass `--narrative "why"` (or `--narratives` for
+    multiple stages) along with `--states` to capture how your feelings
+    shift throughout the workflow.
 13. For consistent commit messages, run `AGENT_tools/hooks/install.sh` once to install a git `commit-msg` hook that verifies the template is used.
 
 ### Commit Message Guidelines
