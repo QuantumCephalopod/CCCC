@@ -152,3 +152,33 @@ def summarize_all() -> None:
     for dim, val in counts.items():
         frac = (val / total) * 100
         print(f"  {dim.capitalize()}: {val}/{total} ({frac:.0f}%)")
+
+
+def summarize_states(limit: int = 5) -> None:
+    """Display the most common F33ling states across all sessions."""
+    ddir = data_dir()
+    if not ddir.exists():
+        return
+    from collections import Counter
+
+    freq: Counter[str] = Counter()
+    for path in ddir.glob("*.json"):
+        if path.name == "chat_context.json" or path.name.endswith("_flow.json"):
+            continue
+        try:
+            with open(path, "r", encoding="utf-8") as f:
+                rec = json.load(f)
+            if not isinstance(rec, dict):
+                continue
+        except Exception:
+            continue
+        states = extract_states(rec.get("assessment", ""))
+        freq.update(states)
+
+    if not freq:
+        return
+    total = sum(freq.values())
+    print("Top F33ling states:")
+    for state, count in freq.most_common(limit):
+        frac = (count / total) * 100
+        print(f"  {state}: {count} ({frac:.0f}%)")
