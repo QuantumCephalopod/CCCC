@@ -15,7 +15,12 @@ ROOT = Path(__file__).resolve().parents[2]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from AGENT_tools.sl33p.x_input import prompt_agent, extract_states
+from AGENT_tools.sl33p.x_input import (
+    prompt_agent,
+    extract_states,
+    parse_subgoals,
+    parse_session_type,
+)
 from AGENT_tools.sl33p.y_record import (
     sanitize,
     parse_json_field,
@@ -27,8 +32,10 @@ from AGENT_tools.sl33p.z_persistence import (
     save_record,
     parse_cultivate,
     repo_root,
+    append_delta,
 )
 from AGENT_tools.chat import append_entry, CHAT_FILE
+from AGENT_tools.copy_tools import suggest_prompt_adjustment
 
 
 def main() -> None:
@@ -51,6 +58,12 @@ def main() -> None:
 
     narrative = os.getenv("NARRATIVE")
 
+    subgoals_env = os.getenv("SUBGOALS")
+    subgoals = parse_subgoals(subgoals_env) if subgoals_env else None
+
+    sess_type_env = os.getenv("SESSION_TYPE") or os.getenv("TYPE")
+    session_type = parse_session_type(sess_type_env) if sess_type_env else None
+
     create = os.getenv("CREATE") or os.getenv("ASPECTS")
     copy = os.getenv("COPY") or os.getenv("LEARN")
     control = os.getenv("CONTROL") or os.getenv("METHOD") or os.getenv("OPTIM")
@@ -70,6 +83,8 @@ def main() -> None:
         control,
         cultivate,
         narrative,
+        subgoals,
+        session_type,
     ]):
         (
             assessment_i,
@@ -80,6 +95,8 @@ def main() -> None:
             control_i,
             cultivate_i,
             narrative_i,
+            subgoals_i,
+            session_type_i,
         ) = prompt_agent()
         assessment = assessment or assessment_i
         achievements = achievements or achievements_i
@@ -89,6 +106,8 @@ def main() -> None:
         control = control or control_i
         cultivate = cultivate or cultivate_i
         narrative = narrative or narrative_i
+        subgoals = parse_subgoals(subgoals_env) if subgoals_env else subgoals_i
+        session_type = session_type or session_type_i
 
     if chat_in is None:
         chat_in = input("InputMessage to log: ")
@@ -106,6 +125,24 @@ def main() -> None:
     optimization_val = sanitize(optimization) if optimization else None
     chat_in_val = sanitize(chat_in) if chat_in else ""
     chat_out_val = sanitize(chat_out) if chat_out else ""
+    session_type_val = sanitize(session_type) if session_type else None
+    if subgoals:
+        subgoals_val = [
+            {
+                "goal": sanitize(sg.get("goal", "")),
+                "achieved": bool(sg.get("achieved")),
+                "strategy_used": sanitize(sg.get("strategy_used", "")) or None,
+            }
+            for sg in subgoals
+        ]
+    else:
+        subgoals_val = None
+
+    prompt_update = None
+    if "discordant" in assessment.lower():
+        prompt_update = suggest_prompt_adjustment(
+            assessment, achievements, narrative_val or ""
+        )
 
     dry = args.dry_run or os.getenv("SL33P_DRY_RUN")
 
@@ -148,6 +185,9 @@ def main() -> None:
         control=control_val,
         cultivate=cultivate_val,
         narrative=narrative_val,
+        subgoals=subgoals_val,
+        session_type=session_type_val,
+        prompt_rewrite=prompt_update,
         optimization=optimization_val,
         start_time=start_dt,
         commands=cmds if cmds else None,
@@ -161,6 +201,12 @@ def main() -> None:
         else:
             print(f"Session recorded as {ts}.json")
             append_entry(chat_in_val, chat_out_val, chat_limit)
+            if prompt_update:
+                append_delta({
+                    "timestamp": ts,
+                    "state": assessment,
+                    "suggestion": prompt_update,
+                })
             try:
                 subprocess.run(["git", "add", str(CHAT_FILE)], check=True)
                 subprocess.run(["git", "commit", "-m", "Update chat context"], check=True)

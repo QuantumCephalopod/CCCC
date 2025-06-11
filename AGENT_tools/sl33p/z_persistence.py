@@ -82,3 +82,25 @@ def git_commit(file_path: Path, ts: str) -> None:
         subprocess.run(["git", "commit", "-m", f"Record session {ts}"], check=True)
     except Exception as e:
         print(f"Git commit failed: {e}")
+
+
+def append_delta(delta: dict) -> None:
+    """Append prompt delta to COPY_deltas.json."""
+    deltas_path = DATA_DIR / "COPY_deltas.json"
+    try:
+        if deltas_path.exists():
+            with open(deltas_path, "r", encoding="utf-8") as f:
+                arr = json.load(f)
+        else:
+            arr = []
+    except Exception:
+        arr = []
+    arr.append(delta)
+    try:
+        with open(deltas_path, "w", encoding="utf-8") as f:
+            json.dump(arr, f, ensure_ascii=False, indent=2)
+            f.write("\n")
+        subprocess.run(["git", "add", str(deltas_path)], check=True)
+        subprocess.run(["git", "commit", "-m", "Update COPY deltas"], check=True)
+    except Exception as e:
+        print(f"Failed to store COPY delta: {e}")

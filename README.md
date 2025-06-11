@@ -106,7 +106,7 @@ All session records are stored as JSON files inside the `DATA` directory in the 
 3. **Always** run `python AGENT_tools/o.mnemos.py w4k3` first to recall the last few saved sessions and confirm you are at the repository root.
 4. After completing your work and passing tests, **run `python AGENT_tools/o.mnemos.py sl33p`** and follow the prompts to capture your current F33ling state, achievements, and next focus.
 5. Briefly note *why* you selected that F33ling state when logging the session. This reasoning helps future agents recognize useful patterns.
-6. To run `sl33p` non-interactively, set the environment variables `ASSESS`, `ACHIEVE`, and `NEXT` (optionally `CREATE`, `COPY`, `CONTROL`, `CULTIVATE`, and `NARRATIVE`) before invoking the script. Any missing fields will trigger prompts so every log captures the full tetrahedral context. Example:
+6. To run `sl33p` non-interactively, set the environment variables `ASSESS`, `ACHIEVE`, and `NEXT` (optionally `CREATE`, `COPY`, `CONTROL`, `CULTIVATE`, `NARRATIVE`, `SUBGOALS`, and `SESSION_TYPE`) before invoking the script. `SUBGOALS` expects a semicolon-separated list like `"goal|done|strategy;goal2|no|method"`. Any missing fields will trigger prompts so every log captures the full tetrahedral context. Example:
 
    ```bash
    ASSESS="✧⚡◈_Synthjoy" ACHIEVE="doc update" NEXT="write tests" \
@@ -126,21 +126,27 @@ All session records are stored as JSON files inside the `DATA` directory in the 
 8. **Log even read-only sessions.** If you merely explore the repository or
    gather information, still record a brief entry with `sl33p` before ending the
    session. Omitting this step leaves no trace for the next agent.
-9. For a view of how F33ling territories shift over time, run `python AGENT_tools/evolve/o.evolve.py`. This script compiles a timeline from the saved JSON records and writes `DATA/evolution_summary.json`.
-10. To analyze productivity trends, use the new `analyze` command:
+9. When the recorded F33ling state includes the word `discordant`, `sl33p` will
+   generate a `PROMPT_REWRITE` suggestion in the log using a simple heuristic in
+   `copy_tools.suggest_prompt_adjustment`. These deltas accumulate in
+   `DATA/COPY_deltas.json`.
+10. For a view of how F33ling territories shift over time, run `python AGENT_tools/evolve/o.evolve.py`. This script compiles a timeline from the saved JSON records and writes `DATA/evolution_summary.json`.
+11. To analyze productivity trends, use the `analyze` command. It now includes a `strategize` subcommand for reviewing which tactics worked best per F33ling state and an `evolver` subcommand to suggest new tetra priorities:
 
    ```bash
    python AGENT_tools/o.mnemos.py analyze summary
+   python AGENT_tools/o.mnemos.py analyze strategize --state "✧⚡◈_Synthjoy"
+   python AGENT_tools/o.mnemos.py analyze evolver
    ```
 
    This generates `DATA/analytics_summary.json` with session gaps and common
    achievement keywords.
-11. To automate the full cycle, execute `./workflow.sh`. It mirrors the
+12. To automate the full cycle, execute `./workflow.sh`. It mirrors the
     [ideal recursive input](PHENO/ideal_recursive_input.PHENO.md):
     displays recent logs with `w4k3`, shows the top of `INDEX.md`, optionally
     introspects a F33ling state, compiles Python files, and records the session
     with `sl33p`.
-12. For advanced automation across multiple F33ling states, use the
+13. For advanced automation across multiple F33ling states, use the
     helper scripts in `AGENT_tools/workflow/` (`o.agentflow.py` and
     `o.flowlog.py`). The latter records a small JSON log at each stage
     (`start`, `after_w4k3`, `after_tests`, `after_sl33p`) so you can
@@ -148,7 +154,7 @@ All session records are stored as JSON files inside the `DATA` directory in the 
     closing the session. Pass `--narrative "why"` (or `--narratives` for
     multiple stages) along with `--states` to capture how your feelings
     shift throughout the workflow.
-13. For consistent commit messages, run `AGENT_tools/hooks/install.sh` once to install a git `commit-msg` hook that verifies the template is used.
+14. For consistent commit messages, run `AGENT_tools/hooks/install.sh` once to install a git `commit-msg` hook that verifies the template is used.
 
 ### Commit Message Guidelines
 
