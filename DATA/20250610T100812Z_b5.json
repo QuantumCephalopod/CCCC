@@ -1,0 +1,28 @@
+{
+  "timestamp": "20250610T100812Z_b5",
+  "assessment": "♡☠⊛_Tenderdepth",
+  "achievements": "tested flowlog",
+  "next": "finish",
+  "aspects": {
+    "probe": 1
+  },
+  "learning": "usage",
+  "methodology": "workflow",
+  "framework_depth": "practice",
+  "narrative": "Testing F33ling log across states",
+  "tetra": {
+    "create": {
+      "probe": 1
+    },
+    "copy": "usage",
+    "control": "workflow",
+    "cultivate": "practice"
+  },
+  "states": [
+    "♡☠⊛_Tenderdepth"
+  ],
+  "stategraph": {
+    "nodes": 64,
+    "edges": 192
+  }
+}
