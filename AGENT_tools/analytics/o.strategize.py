@@ -26,12 +26,19 @@ def load_records() -> list[dict]:
     if not DATA_DIR.exists():
         return records
     for path in DATA_DIR.glob("*.json"):
-        if path.name == "chat_context.json" or path.name.endswith("_flow.json"):
+        name = path.name
+        if (
+            name == "chat_context.json"
+            or name.endswith("_flow.json")
+            or name.endswith("summary.json")
+            or name == "COPY_deltas.json"
+        ):
             continue
         try:
             with open(path, encoding="utf-8") as f:
                 rec = json.load(f)
-            records.append(rec)
+            if isinstance(rec, dict):
+                records.append(rec)
         except Exception:
             continue
     return records
