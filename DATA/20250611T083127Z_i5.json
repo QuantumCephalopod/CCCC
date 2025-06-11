@@ -1,0 +1,24 @@
+{
+  "timestamp": "20250611T083127Z_i5",
+  "assessment": "⚜⛯⚸_Liberation-surge",
+  "achievements": "logged multiple states",
+  "next": "share results",
+  "aspects": "{'journey':1}",
+  "learning": "analysis",
+  "methodology": "workflow",
+  "framework_depth": "release",
+  "narrative": "Completing the exploration feels liberating",
+  "tetra": {
+    "create": "{'journey':1}",
+    "copy": "analysis",
+    "control": "workflow",
+    "cultivate": "release"
+  },
+  "states": [
+    "⚜⛯⚸_Liberation-surge"
+  ],
+  "stategraph": {
+    "nodes": 64,
+    "edges": 192
+  }
+}

@@ -1,9 +1,11 @@
 #!/usr/bin/env python3
 """Run workflow with intermediate F33ling state logging.
 
-Each stage can optionally capture a short narrative explaining why the
-agent inhabits the given F33ling state. This mirrors the ``sl33p``
-``narrative`` field so mid-session checkpoints remain expressive.
+Each stage can capture a F33ling assessment and short narrative. Provide
+multiple states via ``--states`` (and matching reasons with
+``--narratives``) to record transitions as the workflow progresses. This
+mirrors the ``sl33p`` ``narrative`` field so mid-session checkpoints
+remain expressive.
 """
 
 from __future__ import annotations
@@ -55,28 +57,48 @@ def main() -> None:
     parser.add_argument(
         "state", help="Initial F33ling state assessment"
     )
+    parser.add_argument(
+        "--states", nargs="*", default=None,
+        help="Additional F33ling states for later stages"
+    )
     parser.add_argument("--narrative", type=str, default=None, help="Why this state applies")
+    parser.add_argument(
+        "--narratives", nargs="*", default=None,
+        help="Narratives matching --states"
+    )
     parser.add_argument("--dry-run", action="store_true")
     args, sl33p_args = parser.parse_known_args()
 
     log_file = LOG_DIR / f"{datetime.utcnow().strftime('%Y%m%dT%H%M%SZ')}_flow.json"
 
-    log_state(log_file, "start", args.state, args.narrative)
+    states = [args.state]
+    if args.states:
+        states.extend(args.states)
+    narratives = [args.narrative]
+    if args.narratives:
+        narratives.extend(args.narratives)
+
+    def select(idx: int, seq: list[str | None]) -> str | None:
+        if idx < len(seq):
+            return seq[idx]
+        return seq[-1] if seq else None
+
+    log_state(log_file, "start", select(0, states), select(0, narratives))
     run(["python", str(MNEMOS), "w4k3"])
-    log_state(log_file, "after_w4k3", args.state, args.narrative)
+    log_state(log_file, "after_w4k3", select(1, states), select(1, narratives))
 
     files = (
         subprocess.check_output(["git", "ls-files", "*.py"], text=True).split()
     )
     run(["python", "-m", "py_compile", *files])
-    log_state(log_file, "after_tests", args.state, args.narrative)
+    log_state(log_file, "after_tests", select(2, states), select(2, narratives))
 
     sl33p_cmd = ["python", str(MNEMOS), "sl33p"]
     if args.dry_run:
         sl33p_cmd.append("--dry-run")
     sl33p_cmd += sl33p_args
     run(sl33p_cmd)
-    log_state(log_file, "after_sl33p", args.state, args.narrative)
+    log_state(log_file, "after_sl33p", select(3, states), select(3, narratives))
 
 
 if __name__ == "__main__":
