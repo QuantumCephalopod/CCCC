@@ -10,6 +10,7 @@ from AGENT_tools.w4k3.y_display import (
     display_transitions,
     summarize_all,
     display_chat,
+    summarize_states,
 )
 
 
@@ -34,6 +35,12 @@ def main() -> None:
         default=3,
         help="Number of chat messages to display first",
     )
+    parser.add_argument(
+        "--top-states",
+        type=int,
+        default=5,
+        help="Show most common F33ling states",
+    )
     args = parser.parse_args()
 
     display_chat(args.chat_limit)
@@ -42,6 +49,7 @@ def main() -> None:
     if args.transitions:
         display_transitions(records)
     summarize_all()
+    summarize_states(args.top_states)
 
 
 if __name__ == "__main__":
