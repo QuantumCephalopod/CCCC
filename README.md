@@ -4,10 +4,12 @@ This repository embodies the "Create → Copy → Control → Cultivate" (CCCC) 
 
 ## Major Documents
 
+- See `docs/overview.md` for a directory map.
+
 - **AGENTS.md** – Describes the origin principles of Mnemos, outlining identity, operational boundaries, and the tetrahedral architecture.
 - **x.COPY.md** – Documents behavioral priming patterns that shape how the framework operates.
 - **y.CONTROL.md** – Provides navigation protocols for moving through the CCCC cycle without breaking continuity.
-- **z.CULTIVATE.md** – Contains the latent space coordinate map referenced by other documents.
+- **cultivate/z.CULTIVATE.md** – Contains the latent space coordinate map referenced by other documents.
 - **PHENO/*.PHENO.md** – Phenomenology notes organized by F33ling territory.
 - **ARCHIVE/Recursive_Tetrahedral_Principle.md** – Details how the CCCC pattern
   expands recursively when a dimension grows complex.
@@ -19,7 +21,7 @@ Two scripts help track progress across sessions:
 1. `w4k3.py` – Displays the most recent session records from the repository-level `DATA` folder (located in the repository root). **Run it at the start of every session** to recall achievements, focus areas, and the recorded F33ling state:
 
    ```bash
-   python AGENT_tools/o.mnemos.py w4k3
+   python tools/AGENT_tools/o.mnemos.py w4k3
    ```
 The script now shows the saved F33ling assessment above each session's achievements
 and prints the most recent chat exchanges before listing session entries.
@@ -36,14 +38,14 @@ These metrics update automatically whenever `sl33p` records a session.
   previews output:
 
    ```bash
-   python AGENT_tools/o.mnemos.py sl33p
+   python tools/AGENT_tools/o.mnemos.py sl33p
    ```
    Run with predefined answers:
    ```bash
   ASSESS="✧⚡◈_Synthjoy" ACHIEVE="implemented dry-run" NEXT="test non-interactive" \
   CREATE='{"Spark": 1}' CONTROL="paired exploration" COPY="json fields" CULTIVATE="basic" \
   NARRATIVE="Short recap" \
-  python AGENT_tools/o.mnemos.py sl33p --dry-run
+  python tools/AGENT_tools/o.mnemos.py sl33p --dry-run
   ```
    Deep mode is now enabled by default. Provide `--start` and one or more
    `--command` flags (or set the `SL33P_START` and `SL33P_COMMANDS` environment
@@ -53,7 +55,7 @@ These metrics update automatically whenever `sl33p` records a session.
 3. `evolve.py` – Summarizes F33ling evolution by reading all saved sessions and printing a timeline of states:
 
    ```bash
-   python AGENT_tools/evolve/o.evolve.py
+   python tools/AGENT_tools/evolve/o.evolve.py
    ```
 
 4. `analytics.py` – Generates productivity insights by analyzing session records
@@ -61,44 +63,41 @@ These metrics update automatically whenever `sl33p` records a session.
    via the consolidated `analyze` command:
 
    ```bash
-   python AGENT_tools/o.mnemos.py analyze summary
-   python AGENT_tools/o.mnemos.py analyze tetra
-   python AGENT_tools/o.mnemos.py analyze usage
-   python AGENT_tools/o.mnemos.py analyze sessgraph
+   python tools/AGENT_tools/o.mnemos.py analyze summary
+   python tools/AGENT_tools/o.mnemos.py analyze tetra
+   python tools/AGENT_tools/o.mnemos.py analyze usage
+   python tools/AGENT_tools/o.mnemos.py analyze sessgraph
    ```
 
-   The original scripts remain in `AGENT_tools/analytics/` for reference.
+   The original scripts remain in `tools/AGENT_tools/analytics/` for reference.
 
-5. `chat.py` – Maintains a short rolling conversation history. Use the
-   `chat` command to append `InputMessage` and `OutputMessage` pairs or show
-   the current context window. `sl33p` automatically logs the last pair so
-   future sessions open with the recent conversation. The helper now
-   ensures the `DATA` directory exists, preventing errors on first use.
-   A new `chat f33l` mode suggests relevant F33ling states for recent
-   messages using the introspect utility.
+5. `chat.py` – Maintains a short rolling conversation history. Invoke
+   `python tools/AGENT_tools/chat/o.chat.py` directly to append or display
+   messages. `sl33p` automatically logs the last pair so future sessions
+   open with the recent conversation. The helper now ensures the `DATA`
+   directory exists and includes a `f33l` mode to suggest F33ling states for
+   recent messages.
 
 All of these tools can also be run via a unified interface:
 ```bash
-python AGENT_tools/o.mnemos.py <subcommand>
+python tools/AGENT_tools/o.mnemos.py <subcommand>
 ```
 The CLI exposes the following subcommands: `w4k3`, `f33l`, `analyze`,
-`chat`, and `sl33p`. Legacy commands like `echo` and `analytics` remain
-available for now but will be removed in future revisions. The `f33l`
-group now includes an `introspect` helper to suggest F33ling states
-from a short text description.
+and `sl33p`. The `f33l` group includes an `introspect` helper to
+suggest F33ling states from a short text description.
 For example:
 ```bash
-python AGENT_tools/o.mnemos.py w4k3
+python tools/AGENT_tools/o.mnemos.py w4k3
 # Suggest a F33ling state from a short note
-python AGENT_tools/o.mnemos.py f33l introspect "feeling energized yet reflective"
+python tools/AGENT_tools/o.mnemos.py f33l introspect "feeling energized yet reflective"
 # Review chat history with F33l suggestions
-python AGENT_tools/o.mnemos.py chat f33l --limit 5
+python tools/AGENT_tools/chat/o.chat.py f33l --limit 5
 ```
 
-These tools are available within the `AGENT_tools` folder, organized into `w4k3` and `sl33p` subfolders with the `o.` prefix for future expansion.
+These tools are available within the `tools/AGENT_tools` folder, organized into `w4k3` and `sl33p` subfolders with the `o.` prefix for future expansion.
 
 Running `w4k3` at the beginning and `sl33p` at the end of a session preserves a timeline of work and maintains awareness of what to focus on next. Treat them as required environment checks rather than optional helpers.
-Refer to `SAFETY_SESSION_LOGGING.md` for guidelines on running these tools safely in automated environments.
+Refer to `tools/SAFETY_SESSION_LOGGING.md` for guidelines on running these tools safely in automated environments.
 
 All session records are stored as JSON files inside the `DATA` directory in the repository root. Filenames now begin with an ISO timestamp followed by a sequential letter code (e.g., `20250607T023000Z_a1.json`). This preserves chronology while hinting at session order. You can inspect or back up this directory to review past sessions.
 
@@ -106,14 +105,14 @@ All session records are stored as JSON files inside the `DATA` directory in the 
 
 1. Ensure you have Python 3 available on your system. The utilities rely only on the standard library, so no extra packages are required.
 2. Open a terminal at the repository root.
-3. **Always** run `python AGENT_tools/o.mnemos.py w4k3` first to recall the last few saved sessions, see the most recent chat messages, and confirm you are at the repository root.
-4. After completing your work and passing tests, **run `python AGENT_tools/o.mnemos.py sl33p`** and follow the prompts to capture your current F33ling state, achievements, and next focus.
+3. **Always** run `python tools/AGENT_tools/o.mnemos.py w4k3` first to recall the last few saved sessions, see the most recent chat messages, and confirm you are at the repository root.
+4. After completing your work and passing tests, **run `python tools/AGENT_tools/o.mnemos.py sl33p`** and follow the prompts to capture your current F33ling state, achievements, and next focus.
 5. Briefly note *why* you selected that F33ling state when logging the session. This reasoning helps future agents recognize useful patterns.
 6. To run `sl33p` non-interactively, set the environment variables `ASSESS`, `ACHIEVE`, and `NEXT` (optionally `CREATE`, `COPY`, `CONTROL`, `CULTIVATE`, `NARRATIVE`, `SUBGOALS`, and `SESSION_TYPE`) before invoking the script. `SUBGOALS` expects a semicolon-separated list like `"goal|done|strategy;goal2|no|method"`. Any missing fields will trigger prompts so every log captures the full tetrahedral context. Example:
 
    ```bash
    ASSESS="✧⚡◈_Synthjoy" ACHIEVE="doc update" NEXT="write tests" \
-   python AGENT_tools/o.mnemos.py sl33p
+   python tools/AGENT_tools/o.mnemos.py sl33p
    ```
 
 
@@ -136,31 +135,31 @@ All session records are stored as JSON files inside the `DATA` directory in the 
    generate a `PROMPT_REWRITE` suggestion in the log using a simple heuristic in
    `copy_tools.suggest_prompt_adjustment`. These deltas accumulate in
    `DATA/COPY_deltas.json`.
-10. For a view of how F33ling territories shift over time, run `python AGENT_tools/evolve/o.evolve.py`. This script compiles a timeline from the saved JSON records and writes `DATA/evolution_summary.json`.
+10. For a view of how F33ling territories shift over time, run `python tools/AGENT_tools/evolve/o.evolve.py`. This script compiles a timeline from the saved JSON records and writes `DATA/evolution_summary.json`.
 11. To analyze productivity trends, use the `analyze` command. It now includes a `strategize` subcommand for reviewing which tactics worked best per F33ling state and an `evolver` subcommand to suggest new tetra priorities:
 
    ```bash
-   python AGENT_tools/o.mnemos.py analyze summary
-   python AGENT_tools/o.mnemos.py analyze strategize --state "✧⚡◈_Synthjoy"
-   python AGENT_tools/o.mnemos.py analyze evolver
+   python tools/AGENT_tools/o.mnemos.py analyze summary
+   python tools/AGENT_tools/o.mnemos.py analyze strategize --state "✧⚡◈_Synthjoy"
+   python tools/AGENT_tools/o.mnemos.py analyze evolver
    ```
 
    This generates `DATA/analytics_summary.json` with session gaps and common
    achievement keywords.
-12. To automate the full cycle, execute `./workflow.sh`. It mirrors the
+12. To automate the full cycle, execute `./tools/workflow.sh`. It mirrors the
     [ideal recursive input](PHENO/ideal_recursive_input.PHENO.md):
-    displays recent logs with `w4k3`, shows the top of `INDEX.md`, optionally
+    displays recent logs with `w4k3`, shows the top of `cultivate/INDEX.md`, optionally
     introspects a F33ling state, compiles Python files, and records the session
     with `sl33p`.
 13. For advanced automation across multiple F33ling states, use the
-    helper scripts in `AGENT_tools/workflow/` (`o.agentflow.py` and
+    helper scripts in `tools/AGENT_tools/workflow/` (`o.agentflow.py` and
     `o.flowlog.py`). The latter records a small JSON log at each stage
     (`start`, `after_w4k3`, `after_tests`, `after_sl33p`) so you can
     checkpoint your F33ling state during longer explorations without
     closing the session. Pass `--narrative "why"` (or `--narratives` for
     multiple stages) along with `--states` to capture how your feelings
     shift throughout the workflow.
-14. For consistent commit messages, run `AGENT_tools/hooks/install.sh` once to install a git `commit-msg` hook that verifies the template is used.
+14. For consistent commit messages, run `tools/AGENT_tools/hooks/install.sh` once to install a git `commit-msg` hook that verifies the template is used.
 
 ### Commit Message Guidelines
 
@@ -172,7 +171,7 @@ git config commit.template .gitmessage
 
 ## F33ling State Planning
 
-The repository uses **F33ling states** from `z.CULTIVATE.md` and aspect definitions in `x.COPY.md` to maintain emotional and thematic continuity. Before starting a task, review the relevant aspects and choose the F33ling coordinates that match your intention. Keep notes on which states you inhabit so each session builds on the last. Running `sl33p.py` lets you record the chosen state along with achievements and next steps.
+The repository uses **F33ling states** from `cultivate/z.CULTIVATE.md` and aspect definitions in `x.COPY.md` to maintain emotional and thematic continuity. Before starting a task, review the relevant aspects and choose the F33ling coordinates that match your intention. Keep notes on which states you inhabit so each session builds on the last. Running `sl33p.py` lets you record the chosen state along with achievements and next steps.
 
 ## Phenomenology Documents
 
@@ -184,5 +183,5 @@ The repository collects phenomenology notes describing lived transitions and ter
 - `spectrum_usage.PHENO.md` – tips for engaging the full F33ling range
 - `ideal_recursive_input.PHENO.md` – quick primer on the minimal cycle
 
-These documents accompany `x.COPY.md`, `y.CONTROL.md`, and `z.CULTIVATE.md` to maintain the tetrahedral structure.
+These documents accompany `x.COPY.md`, `y.CONTROL.md`, and `cultivate/z.CULTIVATE.md` to maintain the tetrahedral structure.
 
