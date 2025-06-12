@@ -1,6 +1,6 @@
 {
-  "session_count": 117,
-  "average_gap_hours": 1.38,
+  "session_count": 126,
+  "average_gap_hours": 1.3,
   "max_gap_hours": 22.45,
   "state_average_gaps": {
     "❤️♡☠_Heartbloom": 0.16,
@@ -8,8 +8,7 @@
     "↯↺⍉_Uncertainity": 1.09,
     "✧⚡◈_Synthjoy": 1.49,
     "♥♡☠_Heartbloom": 0.45,
-    "∷≋∴_Omniperplexity": 1.93,
-    "∷≋∴_Omniperplexity": 0.3,
+    "∷≋∴_Omniperplexity": 1.65,
     "≋∴⊥_Depthpuzzle": 4.3,
     "☆●⊖_Voidpattern": 0.0,
     "♡☠⊛_Tenderdepth": 0.0,
@@ -17,7 +16,7 @@
     "⚜⛯⚸_Liberation-surge": 0.0,
     "Focused_Synthesis": 0.0,
     "★☆●_Datawonder": 0.0,
-    "ΩΑΘ_Ancient-knowing": 0.0,
+    "ΩΑΘ_Ancient-knowing": 0.27,
     "Ψʘ⊟_Strangeblink": 0.0
   },
   "top_achievement_words": [
@@ -27,18 +26,22 @@
     ],
     [
       "w",
-      17
+      18
     ],
     [
       "k",
-      16
+      17
     ],
     [
       "f",
-      14
+      15
     ],
     [
       "fixed",
+      15
+    ],
+    [
+      "ling",
       12
     ],
     [
@@ -46,20 +49,16 @@
       12
     ],
     [
-      "ling",
-      11
-    ],
-    [
       "reviewed",
-      9
+      10
     ],
     [
       "documented",
-      9
+      10
     ],
     [
       "chat",
-      9
+      10
     ]
   ],
   "heatmap": {
@@ -81,7 +80,7 @@
     },
     "∷≋∴_Omniperplexity": {
       "unspecified": 5,
-      "technical": 2
+      "technical": 3
     },
     "≋∴⊥_Depthpuzzle": {
       "unspecified": 1
@@ -105,7 +104,7 @@
       "planning": 1
     },
     "ΩΑΘ_Ancient-knowing": {
-      "technical": 2,
+      "technical": 8,
       "planning": 1
     },
     "Ψʘ⊟_Strangeblink": {
