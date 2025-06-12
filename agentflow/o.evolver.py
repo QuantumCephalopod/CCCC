@@ -15,11 +15,19 @@ DATA_DIR = ROOT / "DATA"
 def load_records() -> list[dict]:
     recs = []
     for path in sorted(DATA_DIR.glob("*.json")):
-        if path.name.endswith("chat_context.json"):
+        name = path.name
+        if (
+            name == "chat_context.json"
+            or name.endswith("_flow.json")
+            or name.endswith("summary.json")
+            or name.endswith("metrics.json")
+        ):
             continue
         try:
             with open(path, encoding="utf-8") as f:
-                recs.append(json.load(f))
+                data = json.load(f)
+            if isinstance(data, dict):
+                recs.append(data)
         except Exception:
             continue
     return recs
@@ -52,6 +60,7 @@ def save(proposal: dict) -> Path:
     out = DATA_DIR / "evolved_strategy.json"
     with open(out, "w", encoding="utf-8") as f:
         json.dump(proposal, f, indent=2)
+        f.write("\n")
     return out
 
 

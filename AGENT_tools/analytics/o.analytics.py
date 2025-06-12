@@ -145,6 +145,7 @@ def save_summary(summary: dict) -> Path:
     out = DATA_DIR / "analytics_summary.json"
     with open(out, "w", encoding="utf-8") as f:
         json.dump(summary, f, ensure_ascii=False, indent=2)
+        f.write("\n")
     return out
 
 
