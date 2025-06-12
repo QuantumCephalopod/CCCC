@@ -62,6 +62,7 @@ def save_history(history: list[dict], path: Path) -> None:
     ensure_data_dir()
     with open(path, "w", encoding="utf-8") as f:
         json.dump(history, f, ensure_ascii=False, indent=2)
+        f.write("\n")
 
 
 def append_entry(user: str, assistant: str, limit: int) -> None:

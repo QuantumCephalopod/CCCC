@@ -23,6 +23,8 @@ Two scripts help track progress across sessions:
    ```
 The script now shows the saved F33ling assessment above each session's achievements.
 Passing `--transitions` reveals how F33ling states shifted between the displayed sessions.
+Use `--timeline-limit` to list first and last appearances of each F33ling state.
+These metrics update automatically whenever `sl33p` records a session.
 
 2. `sl33p.py` – Records the current session. **Use it to close every session.**
    The prompts now mirror the tetrahedral workflow with CREATE, COPY,

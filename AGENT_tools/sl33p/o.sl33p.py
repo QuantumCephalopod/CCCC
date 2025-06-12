@@ -212,6 +212,12 @@ def main() -> None:
                 subprocess.run(["git", "commit", "-m", "Update chat context"], check=True)
             except Exception as e:
                 print(f"Failed to commit chat log: {e}")
+            try:
+                from AGENT_tools.sl33p.z_persistence import save_timeline_metrics
+
+                save_timeline_metrics()
+            except Exception as e:
+                print(f"Failed to update timeline metrics: {e}")
 
 
 if __name__ == "__main__":
