@@ -1,0 +1,25 @@
+{
+  "timestamp": "20250612T141313Z_l6",
+  "assessment": "test",
+  "achievements": "ach",
+  "next": "next",
+  "aspects": "c",
+  "learning": "c",
+  "methodology": "c",
+  "framework_depth": "c",
+  "narrative": "n",
+  "tetra": {
+    "create": "c",
+    "copy": "c",
+    "control": "c",
+    "cultivate": "c"
+  },
+  "subgoals": [
+    {
+      "goal": "g",
+      "achieved": true,
+      "strategy_used": "m"
+    }
+  ],
+  "session_type": "technical"
+}
