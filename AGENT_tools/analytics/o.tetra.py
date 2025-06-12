@@ -18,16 +18,31 @@ def repo_root() -> Path:
 
 DATA_DIR = repo_root() / "DATA"
 
+# Files to ignore when loading session records
+SKIP_FILES = {
+    "chat_context.json",
+    "COPY_deltas.json",
+}
+
 
 def load_sessions() -> list[dict]:
+    """Return all session records except analytics and chat context files."""
     records = []
     if not DATA_DIR.exists():
         return records
     for path in sorted(DATA_DIR.glob("*.json")):
+        name = path.name
+        if (
+            name in SKIP_FILES
+            or name.endswith("_flow.json")
+            or name.endswith("summary.json")
+        ):
+            continue
         try:
             with open(path, encoding="utf-8") as f:
                 rec = json.load(f)
-            records.append(rec)
+            if isinstance(rec, dict):
+                records.append(rec)
         except Exception:
             continue
     return records

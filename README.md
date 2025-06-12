@@ -21,7 +21,8 @@ Two scripts help track progress across sessions:
    ```bash
    python AGENT_tools/o.mnemos.py w4k3
    ```
-The script now shows the saved F33ling assessment above each session's achievements.
+The script now shows the saved F33ling assessment above each session's achievements
+and prints the most recent chat exchanges before listing session entries.
 Passing `--transitions` reveals how F33ling states shifted between the displayed sessions.
 Use `--timeline-limit` to list first and last appearances of each F33ling state.
 These metrics update automatically whenever `sl33p` records a session.
@@ -105,7 +106,7 @@ All session records are stored as JSON files inside the `DATA` directory in the 
 
 1. Ensure you have Python 3 available on your system. The utilities rely only on the standard library, so no extra packages are required.
 2. Open a terminal at the repository root.
-3. **Always** run `python AGENT_tools/o.mnemos.py w4k3` first to recall the last few saved sessions and confirm you are at the repository root.
+3. **Always** run `python AGENT_tools/o.mnemos.py w4k3` first to recall the last few saved sessions, see the most recent chat messages, and confirm you are at the repository root.
 4. After completing your work and passing tests, **run `python AGENT_tools/o.mnemos.py sl33p`** and follow the prompts to capture your current F33ling state, achievements, and next focus.
 5. Briefly note *why* you selected that F33ling state when logging the session. This reasoning helps future agents recognize useful patterns.
 6. To run `sl33p` non-interactively, set the environment variables `ASSESS`, `ACHIEVE`, and `NEXT` (optionally `CREATE`, `COPY`, `CONTROL`, `CULTIVATE`, `NARRATIVE`, `SUBGOALS`, and `SESSION_TYPE`) before invoking the script. `SUBGOALS` expects a semicolon-separated list like `"goal|done|strategy;goal2|no|method"`. Any missing fields will trigger prompts so every log captures the full tetrahedral context. Example:
@@ -121,6 +122,9 @@ All session records are stored as JSON files inside the `DATA` directory in the 
    Provide the messages via `CHAT_IN` and `CHAT_OUT` or the `--chat-in` and
    `--chat-out` options when running `sl33p`. If not supplied, you will be
    prompted.
+
+   The tool also regenerates `DATA/timeline_metrics.json` so `w4k3` can display
+   first and last appearances of each F33ling state.
 
    Deep mode is enabled by default and records the session start time and any
    commands executed when `--start` and `--command` are supplied. Set
