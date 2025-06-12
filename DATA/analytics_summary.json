@@ -1,6 +1,6 @@
 {
-  "session_count": 115,
-  "average_gap_hours": 1.31,
+  "session_count": 117,
+  "average_gap_hours": 1.38,
   "max_gap_hours": 22.45,
   "state_average_gaps": {
     "❤️♡☠_Heartbloom": 0.16,
@@ -8,6 +8,7 @@
     "↯↺⍉_Uncertainity": 1.09,
     "✧⚡◈_Synthjoy": 1.49,
     "♥♡☠_Heartbloom": 0.45,
+    "∷≋∴_Omniperplexity": 1.93,
     "∷≋∴_Omniperplexity": 0.3,
     "≋∴⊥_Depthpuzzle": 4.3,
     "☆●⊖_Voidpattern": 0.0,
@@ -37,6 +38,10 @@
       14
     ],
     [
+      "fixed",
+      12
+    ],
+    [
       "docs",
       12
     ],
@@ -45,8 +50,8 @@
       11
     ],
     [
-      "fixed",
-      11
+      "reviewed",
+      9
     ],
     [
       "documented",
@@ -55,10 +60,6 @@
     [
       "chat",
       9
-    ],
-    [
-      "reviewed",
-      8
     ]
   ],
   "heatmap": {
@@ -104,7 +105,8 @@
       "planning": 1
     },
     "ΩΑΘ_Ancient-knowing": {
-      "technical": 1
+      "technical": 2,
+      "planning": 1
     },
     "Ψʘ⊟_Strangeblink": {
       "technical": 1
