@@ -104,3 +104,88 @@ def append_delta(delta: dict) -> None:
         subprocess.run(["git", "commit", "-m", "Update COPY deltas"], check=True)
     except Exception as e:
         print(f"Failed to store COPY delta: {e}")
+
+
+def save_timeline_metrics() -> Path | None:
+    """Write timeline metrics to DATA and commit the file."""
+    import re
+    from datetime import datetime
+
+    def git_time(path: Path) -> datetime | None:
+        try:
+            out = subprocess.check_output(
+                ["git", "log", "-1", "--format=%cI", str(path)], text=True
+            )
+            return datetime.fromisoformat(out.strip())
+        except Exception:
+            return None
+
+    def load_records() -> list[dict]:
+        records = []
+        if not DATA_DIR.exists():
+            return records
+        for path in DATA_DIR.glob("*.json"):
+            if path.name == "chat_context.json" or path.name.endswith("_flow.json"):
+                continue
+            try:
+                with open(path, encoding="utf-8") as f:
+                    rec = json.load(f)
+                rec["_file"] = path
+                rec["_time"] = git_time(path)
+                records.append(rec)
+            except Exception:
+                continue
+        return records
+
+    state_re = re.compile(r"\S+_\S+")
+
+    def extract_state(text: str) -> str | None:
+        if not text:
+            return None
+        m = state_re.search(text)
+        if m:
+            return m.group(0)
+        return None
+
+    def parse_time(ts: str) -> datetime | None:
+        try:
+            base = ts.split("_")[0]
+            return datetime.strptime(base, "%Y%m%dT%H%M%SZ")
+        except Exception:
+            return None
+
+    mapping: dict[str, dict[str, datetime | int]] = {}
+    for rec in load_records():
+        state = extract_state(rec.get("assessment", ""))
+        if not state:
+            continue
+        dt = rec.get("_time") or parse_time(rec.get("timestamp", ""))
+        if not dt:
+            continue
+        info = mapping.setdefault(state, {"first": dt, "last": dt, "count": 0})
+        if dt < info["first"]:
+            info["first"] = dt
+        if dt > info["last"]:
+            info["last"] = dt
+        info["count"] = int(info.get("count", 0)) + 1
+    if not mapping:
+        return None
+    serializable = {
+        state: {
+            "first": info["first"].isoformat(),
+            "last": info["last"].isoformat(),
+            "count": info["count"],
+        }
+        for state, info in mapping.items()
+    }
+    out_path = DATA_DIR / "timeline_metrics.json"
+    try:
+        with open(out_path, "w", encoding="utf-8") as f:
+            json.dump(serializable, f, ensure_ascii=False, indent=2)
+            f.write("\n")
+        subprocess.run(["git", "add", str(out_path)], check=True)
+        subprocess.run(["git", "commit", "-m", "Update timeline metrics"], check=True)
+    except Exception as e:
+        print(f"Failed to save timeline metrics: {e}")
+        return None
+    return out_path

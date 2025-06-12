@@ -10,6 +10,28 @@ from pathlib import Path
 from AGENT_tools.w4k3.x_load import data_dir
 
 
+def display_timeline_metrics(limit: int | None = None) -> None:
+    """Show first and last appearances for each F33ling state."""
+    path = data_dir() / "timeline_metrics.json"
+    if not path.exists():
+        return
+    try:
+        with open(path, "r", encoding="utf-8") as f:
+            metrics = json.load(f)
+    except Exception:
+        return
+    items = sorted(metrics.items(), key=lambda kv: kv[1].get("first", ""))
+    if limit:
+        items = items[:limit]
+    print("Timeline metrics:")
+    for state, info in items:
+        first = info.get("first", "")
+        last = info.get("last", "")
+        count = info.get("count", 0)
+        print(f"  {state}: {count} from {first} to {last}")
+    print()
+
+
 def extract_states(text: str) -> list[str]:
     """Return list of F33ling states encoded as 'symbol_name'."""
     if not text:

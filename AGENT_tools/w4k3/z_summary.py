@@ -11,6 +11,7 @@ from AGENT_tools.w4k3.y_display import (
     summarize_all,
     display_chat,
     summarize_states,
+    display_timeline_metrics,
 )
 
 
@@ -41,6 +42,12 @@ def main() -> None:
         default=5,
         help="Show most common F33ling states",
     )
+    parser.add_argument(
+        "--timeline-limit",
+        type=int,
+        default=0,
+        help="Show timeline metrics for this many states (0=all)",
+    )
     args = parser.parse_args()
 
     display_chat(args.chat_limit)
@@ -50,6 +57,7 @@ def main() -> None:
         display_transitions(records)
     summarize_all()
     summarize_states(args.top_states)
+    display_timeline_metrics(args.timeline_limit or None)
 
 
 if __name__ == "__main__":
