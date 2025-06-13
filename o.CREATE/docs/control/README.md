@@ -7,4 +7,4 @@ The Mnemos tools are consolidated under `o.mnemos.py`. Use the following command
 - `analyze` – run analytics and reporting tools
 - `sl33p` – record the session and update metrics
 
-Run `python y.CONTROL/yy/tools/AGENT_tools/o.mnemos.py <command>` for direct access.
+Run `python y.CONTROL/yz/AGENT_tools/o.mnemos.py <command>` for direct access.

@@ -39,7 +39,9 @@ def load_records() -> list[dict]:
     for path in DATA_DIR.glob("*.json"):
         try:
             with open(path, encoding="utf-8") as f:
-                records.append(json.load(f))
+                data = json.load(f)
+            if isinstance(data, dict):
+                records.append(data)
         except Exception:
             continue
     return records

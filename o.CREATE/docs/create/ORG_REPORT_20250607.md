@@ -14,7 +14,7 @@ This note surveys the current information layout inside the Mnemos CCCC reposito
 2. **Copy** – Behavioral patterns and phenomenology
    - Group all `*.PHENO.md` files under a new folder `x.COPY/xx/PHENO/` to emphasize their exploratory nature. Cross‑link specific F33ling states in `x.COPY.md` to the corresponding phenomenology notes.
 3. **Control** – Workflow utilities and navigation guides
-   - Retain `AGENT_tools/` under `y.CONTROL/yy/tools/`, along with `workflow.sh` and installation hooks.
+   - Retain `AGENT_tools/` under `y.CONTROL/yz/`, along with `workflow.sh` and installation hooks.
    - Merge safety guidelines into `SAFETY_SESSION_LOGGING.md` and reference it from `README.md` instead of duplicating text.
 4. **Cultivate** – State maps and indices
    - Keep `z.CULTIVATE.md`, `INDEX.md`, and generated analytics (`DATA/state_graph.dot`) in this area. Add a short README section linking to them for quick orientation.

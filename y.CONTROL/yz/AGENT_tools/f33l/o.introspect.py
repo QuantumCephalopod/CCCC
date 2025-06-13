@@ -14,7 +14,7 @@ import argparse
 from difflib import SequenceMatcher
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[3]
+ROOT = Path(__file__).resolve().parents[4]
 CULTIVATE = ROOT / "z.CULTIVATE" / "z.CULTIVATE.md"
 
 
