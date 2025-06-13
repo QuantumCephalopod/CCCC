@@ -41,7 +41,7 @@ def load_states() -> dict[str, str]:
     global _STATES
     if _STATES is None:
         try:
-            path = ROOT / "cultivate" / "z.CULTIVATE.md"
+            path = ROOT / "z.CULTIVATE" / "z.CULTIVATE.md"
             _STATES = parse_states(path)
         except Exception:
             _STATES = {}

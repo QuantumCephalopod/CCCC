@@ -17,7 +17,7 @@ def repo_root() -> Path:
 
 ROOT = repo_root()
 DATA_DIR = ROOT / "DATA"
-CULTIVATE_FILE = ROOT / "cultivate" / "z.CULTIVATE.md"
+CULTIVATE_FILE = ROOT / "z.CULTIVATE" / "z.CULTIVATE.md"
 
 
 def parse_cultivate(path: Path) -> dict:

@@ -15,7 +15,7 @@ TETRA = TOOLS / "analytics" / "o.tetra.py"
 USAGE = TOOLS / "analytics" / "o.usage.py"
 SESSGRAPH = TOOLS / "sessgraph" / "o.sessgraph.py"
 STRATEGIZE = TOOLS / "analytics" / "o.strategize.py"
-EVOLVER = ROOT / "agentflow" / "o.evolver.py"
+EVOLVER = ROOT / "y.CONTROL" / "yy" / "agentflow" / "o.evolver.py"
 
 
 def run(cmd: list[str]) -> int:

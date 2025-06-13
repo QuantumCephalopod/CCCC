@@ -81,7 +81,7 @@ def main() -> None:
     args = parser.parse_args()
 
     root = repo_root()
-    cultivate_file = root / "cultivate" / "z.CULTIVATE.md"
+    cultivate_file = root / "z.CULTIVATE" / "z.CULTIVATE.md"
     nodes, edges = parse_cultivate(cultivate_file)
     dot = build_dot(nodes, edges)
 

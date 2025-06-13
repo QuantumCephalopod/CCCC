@@ -21,7 +21,7 @@ def repo_root() -> Path:
 
 ROOT = repo_root()
 DATA_DIR = ROOT / "DATA"
-CULTIVATE_MAP = ROOT / "cultivate" / "z.CULTIVATE.md"
+CULTIVATE_MAP = ROOT / "z.CULTIVATE" / "z.CULTIVATE.md"
 
 
 def extract_states(text: str) -> list[str]:
