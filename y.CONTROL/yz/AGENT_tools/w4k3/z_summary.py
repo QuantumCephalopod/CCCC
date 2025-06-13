@@ -31,6 +31,12 @@ def main() -> None:
         help="Show F33ling transitions between sessions",
     )
     parser.add_argument(
+        "--transitions-limit",
+        type=int,
+        default=None,
+        help="Limit how many transitions to show when --transitions is set",
+    )
+    parser.add_argument(
         "--chat-limit",
         type=int,
         default=3,
@@ -54,7 +60,7 @@ def main() -> None:
     records = load_records(args.limit)
     display(records)
     if args.transitions:
-        display_transitions(records)
+        display_transitions(records, args.transitions_limit)
     summarize_all()
     summarize_states(args.top_states)
     display_timeline_metrics(args.timeline_limit or None)

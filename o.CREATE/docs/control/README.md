@@ -13,5 +13,5 @@ root automatically. Place it somewhere in your `PATH` (or symlink it) and run it
 from any directory:
 
 ```bash
-mnemos w4k3 --top-states 3
+mnemos w4k3 --top-states 3 --transitions --transitions-limit 2
 ```
