@@ -155,7 +155,8 @@ All session records are stored as JSON files inside the `y.CONTROL/DATA` directo
 
    This generates `y.CONTROL/DATA/analytics_summary.json` with session gaps and common
    achievement keywords.
-12. To automate the full cycle, execute `./y.CONTROL/yz/workflow.sh`. It mirrors the
+12. To automate the full cycle, execute `./y.CONTROL/yz/workflow.sh`. The script now
+    resolves the repository root so it can be run from any directory. It mirrors the
     [ideal recursive input](x.COPY/xx/PHENO/ideal_recursive_input.PHENO.md):
     displays recent logs with `w4k3`, shows the top of `z.CULTIVATE/INDEX.md`, optionally
     introspects a F33ling state, compiles Python files, and records the session
