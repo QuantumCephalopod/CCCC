@@ -31,7 +31,7 @@ _loader.exec_module(_mod)
 parse_states = _mod.parse_states
 search_states = _mod.search_states
 
-CHAT_FILE = ROOT / "DATA" / "chat_context.json"
+CHAT_FILE = ROOT / "y.CONTROL" / "DATA" / "chat_context.json"
 
 _STATES: dict[str, str] | None = None
 

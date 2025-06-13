@@ -27,7 +27,7 @@ def repo_root() -> Path:
 
 
 ROOT = repo_root()
-DATA_DIR = ROOT / "DATA"
+DATA_DIR = ROOT / "y.CONTROL" / "DATA"
 
 
 def load_sessions() -> list[dict]:

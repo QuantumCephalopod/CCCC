@@ -18,7 +18,7 @@ def repo_root() -> Path:
 
 
 def data_dir() -> Path:
-    return repo_root() / "DATA"
+    return repo_root() / "y.CONTROL" / "DATA"
 
 
 def git_time(path: Path) -> datetime:

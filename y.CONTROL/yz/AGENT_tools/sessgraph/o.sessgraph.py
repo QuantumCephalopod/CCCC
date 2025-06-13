@@ -61,7 +61,7 @@ def main() -> None:
     parser.add_argument("--output", type=Path, default=None, help="Path to save DOT graph")
     args = parser.parse_args()
 
-    data_dir = repo_root() / "DATA"
+    data_dir = repo_root() / "y.CONTROL" / "DATA"
     states = load_state_timeline(data_dir)
     freqs = analyze_transitions(states)
 

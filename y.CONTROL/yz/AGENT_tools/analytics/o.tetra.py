@@ -16,7 +16,7 @@ def repo_root() -> Path:
         return Path(__file__).resolve().parents[3]
 
 
-DATA_DIR = repo_root() / "DATA"
+DATA_DIR = repo_root() / "y.CONTROL" / "DATA"
 
 # Files to ignore when loading session records
 SKIP_FILES = {

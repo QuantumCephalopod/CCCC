@@ -5,7 +5,7 @@ The Mnemos repository has expanded rapidly. Documentation, tools and logs now sp
 ## 1. Group by Tetrahedral Domain
 
 - **Create** – policy and architecture notes
-  - Keep `AGENTS.md`, `COMMIT_GUIDELINES.md`, and `ARCHIVE/Recursive_Tetrahedral_Principle.md` here.
+  - Keep `AGENTS.md`, `COMMIT_GUIDELINES.md`, and `z.CULTIVATE/ARCHIVE/Recursive_Tetrahedral_Principle.md` here.
   - Move scattered design references into a `o.CREATE/docs/create/` folder.
 - **Copy** – experiential patterns and phenomenology
   - Retain `x.COPY.md` and gather all `*.PHENO.md` under `x.COPY/xx/PHENO/`.
@@ -19,7 +19,7 @@ The Mnemos repository has expanded rapidly. Documentation, tools and logs now sp
 
 ## 2. Archive Legacy Notes
 
-Move older reports in `ARCHIVE/` to dated subfolders (e.g., `ARCHIVE/2025-06`), keeping the root archive tidy. Compress session logs older than one month into zip files or transfer them to long‑term storage.
+Move older reports in `z.CULTIVATE/ARCHIVE/` to dated subfolders (e.g., `z.CULTIVATE/ARCHIVE/2025-06`), keeping the archive tidy. Compress session logs older than one month into zip files or transfer them to long‑term storage.
 
 ## 3. Streamline the CLI
 
