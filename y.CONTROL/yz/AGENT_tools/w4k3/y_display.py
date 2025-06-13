@@ -126,14 +126,26 @@ def display(records: list[dict]) -> None:
     print()
 
 
-def display_transitions(records: list[dict]) -> None:
-    """Show F33ling transitions between consecutive records."""
+def display_transitions(records: list[dict], limit: int | None = None) -> None:
+    """Show F33ling transitions between consecutive records.
+
+    Parameters
+    ----------
+    records:
+        List of recent session dictionaries.
+    limit:
+        Maximum number of transitions to display. ``None`` shows all; values
+        less than ``1`` are ignored.
+    """
     if len(records) < 2:
         return
 
     print("F33ling transitions:")
     ordered = list(reversed(records))
-    for prev, curr in zip(ordered, ordered[1:]):
+    transitions = list(zip(ordered, ordered[1:]))
+    if limit is not None and limit > 0:
+        transitions = transitions[:limit]
+    for prev, curr in transitions:
         p_states = ", ".join(extract_states(prev.get("assessment", ""))) or "None"
         c_states = ", ".join(extract_states(curr.get("assessment", ""))) or "None"
         print(f"  {prev.get('timestamp', '?')} -> {curr.get('timestamp', '?')}: {p_states} -> {c_states}")
