@@ -2,7 +2,10 @@
 # Automates the Mnemos session cycle following the ideal recursive input
 # described in x.COPY/xx/PHENO/ideal_recursive_input.PHENO.md.
 
-ROOT="$(cd "$(dirname "$0")/../.." && pwd)"
+# Resolve repository root so the script can be invoked via symlinks or
+# from any directory. readlink -f follows nested links and handles
+# relative paths reliably.
+ROOT="$(cd "$(dirname "$(readlink -f "$0")")/../.." && pwd)"
 
 # 1. Load previous session summaries and active F33ling states
 "$ROOT/mnemos" w4k3 || exit 1

@@ -8,8 +8,10 @@ The Mnemos tools are consolidated under `o.mnemos.py`. Use the following command
 - `sl33p` – record the session and update metrics
 
 Run `python y.CONTROL/yz/AGENT_tools/o.mnemos.py <command>` for direct access.
-You can also use the helper script `./mnemos` from the repository root:
+You can also use the helper script `mnemos`, which now resolves the repository
+root automatically. Place it somewhere in your `PATH` (or symlink it) and run it
+from any directory:
 
 ```bash
-./mnemos w4k3 --top-states 3
+mnemos w4k3 --top-states 3
 ```
