@@ -1,10 +1,5 @@
 [
   {
-    "time": "2025-06-13T09:54:20+00:00",
-    "InputMessage": "na",
-    "OutputMessage": "na"
-  },
-  {
     "time": "2025-06-13T10:19:51+00:00",
     "InputMessage": "restructure docs",
     "OutputMessage": "done"
@@ -48,5 +43,10 @@
     "time": "2025-06-13T13:57:55+00:00",
     "InputMessage": "add script",
     "OutputMessage": "done"
+  },
+  {
+    "time": "2025-06-13T14:26:48+00:00",
+    "InputMessage": "bug: workflow path",
+    "OutputMessage": "fixed"
   }
 ]
