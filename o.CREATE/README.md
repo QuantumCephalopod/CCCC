@@ -27,8 +27,10 @@ Two scripts help track progress across sessions:
    ```bash
    python y.CONTROL/yz/AGENT_tools/o.mnemos.py w4k3 --top-states 3
    ```
-  A shortcut script `mnemos` mirrors this usage and now resolves the repository
-  root automatically. Place it in your `PATH` or call it via an absolute path:
+ A shortcut script `mnemos` mirrors this usage and now resolves the repository
+ root automatically. If the helper is copied outside the repo, it falls back to
+ `git rev-parse` to find the original root. Place it in your `PATH` or call it
+ via an absolute path:
   ```bash
   mnemos w4k3 --top-states 3
   ```
@@ -77,9 +79,13 @@ These metrics update automatically whenever `sl33p` records a session.
    ```bash
    mnemos analyze summary
    mnemos analyze tetra
-   mnemos analyze usage
-   mnemos analyze sessgraph
-   ```
+  mnemos analyze usage
+  mnemos analyze sessgraph
+  ```
+
+  Like `w4k3`, this command now handles broken pipes gracefully. You can pipe
+  output to tools such as `head` without getting a Python error. The executed
+  command is printed to **stderr**, so piped output remains clean.
 
    The original scripts remain in `y.CONTROL/yz/AGENT_tools/analytics/` for reference.
 
@@ -163,8 +169,8 @@ All session records are stored as JSON files inside the `y.CONTROL/DATA` directo
 12. To automate the full cycle, execute `y.CONTROL/yz/workflow.sh`. The script now
     resolves the repository root (even when invoked via a symlink) so it can be run from any directory. It mirrors the
     [ideal recursive input](x.COPY/xx/PHENO/ideal_recursive_input.PHENO.md):
-    displays recent logs with `w4k3`, shows the top of `z.CULTIVATE/INDEX.md`, optionally
-    introspects a F33ling state, compiles Python files, and records the session
+    displays recent logs with `w4k3`, runs an analytics summary, shows the top of `z.CULTIVATE/INDEX.md`, optionally
+    introspects a F33ling state, compiles Python files, and finally records the session
     with `sl33p`.
 13. For advanced automation across multiple F33ling states, use the
     helper scripts in `y.CONTROL/yz/workflow/` (`o.agentflow.py` and

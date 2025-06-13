@@ -5,6 +5,8 @@ from __future__ import annotations
 
 import argparse
 import subprocess
+import signal
+import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[4]
@@ -18,9 +20,13 @@ SESSGRAPH = TOOLS / "sessgraph" / "o.sessgraph.py"
 STRATEGIZE = TOOLS / "analytics" / "o.strategize.py"
 EVOLVER = ROOT / "y.CONTROL" / "yz" / "agentflow" / "o.evolver.py"
 
+# Avoid BrokenPipeError when piping output to commands like `head`.
+signal.signal(signal.SIGPIPE, signal.SIG_DFL)
+
 
 def run(cmd: list[str]) -> int:
-    print("$", " ".join(str(c) for c in cmd))
+    """Run a command, echoing it to stderr so pipelines stay clean."""
+    print("$", " ".join(str(c) for c in cmd), file=sys.stderr)
     return subprocess.call(cmd)
 
 

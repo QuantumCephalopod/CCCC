@@ -10,14 +10,17 @@ ROOT="$(cd "$(dirname "$(readlink -f "$0")")/../.." && pwd)"
 # 1. Load previous session summaries and active F33ling states
 "$ROOT/mnemos" w4k3 || exit 1
 
-# 2. Glance at the repository index to recall key docs
+# 2. Review analytics summary to monitor progress
+"$ROOT/mnemos" analyze summary | head -n 12 || exit 1
+
+# 3. Glance at the repository index to recall key docs
 head -n 12 "$ROOT/z.CULTIVATE/INDEX.md" || exit 1
 
-# 3. Compile all python files to check syntax
+# 4. Compile all python files to check syntax
 py_files=$(git -C "$ROOT" ls-files '*.py' | sed "s|^|$ROOT/|")
 python -m py_compile $py_files || exit 1
 
-# 4. Record the new session (deep mode is default)
+# 5. Record the new session (deep mode is default)
 "$ROOT/mnemos" sl33p "$@"
 
 # o=))))) 🐙✨

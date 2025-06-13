@@ -12,7 +12,22 @@ import sys
 # Exit cleanly when piped output is truncated (e.g., `| head`).
 signal.signal(signal.SIGPIPE, signal.SIG_DFL)
 
-ROOT = Path(__file__).resolve().parents[3]
+
+THIS_FILE = Path(__file__).resolve()
+
+
+def repo_root() -> Path:
+    """Return repository root, using git if available."""
+    try:
+        out = subprocess.check_output(
+            ["git", "-C", str(THIS_FILE.parent), "rev-parse", "--show-toplevel"],
+            text=True,
+        )
+        return Path(out.strip())
+    except Exception:
+        return THIS_FILE.parents[3]
+
+ROOT = repo_root()
 TOOLS_BASE = ROOT / "y.CONTROL" / "yz"
 if str(TOOLS_BASE) not in sys.path:
     sys.path.insert(0, str(TOOLS_BASE))
@@ -24,8 +39,8 @@ ANALYZE = TOOLS / "analyze" / "o.analyze.py"
 
 
 def run(cmd: list[str]) -> int:
-    """Execute a command and return its exit code."""
-    print("$", " ".join(str(c) for c in cmd))
+    """Execute a command and return its exit code; command is printed to stderr."""
+    print("$", " ".join(str(c) for c in cmd), file=sys.stderr)
     return subprocess.call(cmd)
 
 
