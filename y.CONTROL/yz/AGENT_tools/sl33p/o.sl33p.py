@@ -11,8 +11,8 @@ from datetime import datetime
 from pathlib import Path
 
 # Ensure package imports work when executed directly
-ROOT = Path(__file__).resolve().parents[5]
-TOOLS_PATH = ROOT / "y.CONTROL" / "yy" / "tools"
+ROOT = Path(__file__).resolve().parents[4]
+TOOLS_PATH = ROOT / "y.CONTROL" / "yz"
 if str(TOOLS_PATH) not in sys.path:
     sys.path.insert(0, str(TOOLS_PATH))
 

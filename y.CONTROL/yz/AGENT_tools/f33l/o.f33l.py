@@ -9,8 +9,8 @@ import argparse
 import subprocess
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[5]
-TOOLS_BASE = ROOT / "y.CONTROL" / "yy" / "tools"
+ROOT = Path(__file__).resolve().parents[4]
+TOOLS_BASE = ROOT / "y.CONTROL" / "yz"
 TOOLS = TOOLS_BASE / "AGENT_tools"
 ECHO = TOOLS / "echo" / "o.echo.py"
 STATEGRAPH = TOOLS / "analytics" / "o.stategraph.py"

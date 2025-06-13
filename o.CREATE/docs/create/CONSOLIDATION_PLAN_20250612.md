@@ -11,7 +11,7 @@ The Mnemos repository has expanded rapidly. Documentation, tools and logs now sp
   - Retain `x.COPY.md` and gather all `*.PHENO.md` under `x.COPY/xx/PHENO/`.
   - Cross‑link PHENO notes from the relevant COPY aspects to simplify navigation.
 - **Control** – workflow utilities and safety guides
-  - Store `AGENT_tools/`, `workflow.sh`, and `SAFETY_SESSION_LOGGING.md` under `y.CONTROL/yy/tools/`.
+  - Store `AGENT_tools/`, `workflow.sh`, and `SAFETY_SESSION_LOGGING.md` under `y.CONTROL/yz/`.
   - Consolidate CLI usage examples in a single `o.CREATE/docs/control/README.md`.
 - **Cultivate** – indices and state maps
   - Keep `z.CULTIVATE.md`, `INDEX.md`, and analytics outputs (`DATA/state_graph.dot`, summaries) in a `z.CULTIVATE/` folder.

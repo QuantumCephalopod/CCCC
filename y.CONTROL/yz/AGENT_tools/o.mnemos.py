@@ -8,8 +8,8 @@ import subprocess
 from pathlib import Path
 import sys
 
-ROOT = Path(__file__).resolve().parents[4]
-TOOLS_BASE = ROOT / "y.CONTROL" / "yy" / "tools"
+ROOT = Path(__file__).resolve().parents[3]
+TOOLS_BASE = ROOT / "y.CONTROL" / "yz"
 if str(TOOLS_BASE) not in sys.path:
     sys.path.insert(0, str(TOOLS_BASE))
 TOOLS = TOOLS_BASE / "AGENT_tools"

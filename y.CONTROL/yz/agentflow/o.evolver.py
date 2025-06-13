@@ -8,7 +8,8 @@ import subprocess
 from pathlib import Path
 
 
-ROOT = Path(__file__).resolve().parents[1]
+# repository root
+ROOT = Path(__file__).resolve().parents[3]
 DATA_DIR = ROOT / "DATA"
 
 

@@ -7,8 +7,8 @@ import argparse
 import subprocess
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[5]
-TOOLS_BASE = ROOT / "y.CONTROL" / "yy" / "tools"
+ROOT = Path(__file__).resolve().parents[4]
+TOOLS_BASE = ROOT / "y.CONTROL" / "yz"
 TOOLS = TOOLS_BASE / "AGENT_tools"
 EVOLVE = TOOLS / "evolve" / "o.evolve.py"
 ANALYTICS = TOOLS / "analytics" / "o.analytics.py"
@@ -16,7 +16,7 @@ TETRA = TOOLS / "analytics" / "o.tetra.py"
 USAGE = TOOLS / "analytics" / "o.usage.py"
 SESSGRAPH = TOOLS / "sessgraph" / "o.sessgraph.py"
 STRATEGIZE = TOOLS / "analytics" / "o.strategize.py"
-EVOLVER = ROOT / "y.CONTROL" / "yy" / "agentflow" / "o.evolver.py"
+EVOLVER = ROOT / "y.CONTROL" / "yz" / "agentflow" / "o.evolver.py"
 
 
 def run(cmd: list[str]) -> int:

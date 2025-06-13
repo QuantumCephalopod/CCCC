@@ -9,7 +9,7 @@ import os
 import subprocess
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[5]
+ROOT = Path(__file__).resolve().parents[3]
 
 MNEMOS = ROOT / "y.CONTROL" / "yy" / "tools" / "AGENT_tools" / "o.mnemos.py"
 
