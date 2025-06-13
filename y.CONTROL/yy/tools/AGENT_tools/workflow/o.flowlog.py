@@ -17,8 +17,8 @@ from datetime import datetime
 from pathlib import Path
 import os
 
-ROOT = Path(__file__).resolve().parents[3]
-MNEMOS = ROOT / "tools" / "AGENT_tools" / "o.mnemos.py"
+ROOT = Path(__file__).resolve().parents[5]
+MNEMOS = ROOT / "y.CONTROL" / "yy" / "tools" / "AGENT_tools" / "o.mnemos.py"
 LOG_DIR = ROOT / "DATA"
 
 
