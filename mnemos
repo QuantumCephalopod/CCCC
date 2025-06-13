@@ -1,2 +1,5 @@
 #!/usr/bin/env bash
-python "$(dirname "$0")/y.CONTROL/yz/AGENT_tools/o.mnemos.py" "$@"
+# Resolve repository root so the script works from any directory or when
+# invoked via $PATH. "readlink -f" handles symlinks and relative paths.
+SCRIPT_DIR="$(cd "$(dirname "$(readlink -f "$0")")" && pwd)"
+python "$SCRIPT_DIR/y.CONTROL/yz/AGENT_tools/o.mnemos.py" "$@"
