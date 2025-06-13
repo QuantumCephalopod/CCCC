@@ -8,10 +8,11 @@ import subprocess
 from pathlib import Path
 import sys
 
-ROOT = Path(__file__).resolve().parents[2]
-if str(ROOT / "tools") not in sys.path:
-    sys.path.insert(0, str(ROOT / "tools"))
-TOOLS = ROOT / "tools" / "AGENT_tools"
+ROOT = Path(__file__).resolve().parents[4]
+TOOLS_BASE = ROOT / "y.CONTROL" / "yy" / "tools"
+if str(TOOLS_BASE) not in sys.path:
+    sys.path.insert(0, str(TOOLS_BASE))
+TOOLS = TOOLS_BASE / "AGENT_tools"
 W4K3 = TOOLS / "w4k3" / "o.w4k3.py"
 SL33P = TOOLS / "sl33p" / "o.sl33p.py"
 F33L = TOOLS / "f33l" / "o.f33l.py"

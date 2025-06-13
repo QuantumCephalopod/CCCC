@@ -7,8 +7,9 @@ import argparse
 import subprocess
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[3]
-TOOLS = ROOT / "tools" / "AGENT_tools"
+ROOT = Path(__file__).resolve().parents[5]
+TOOLS_BASE = ROOT / "y.CONTROL" / "yy" / "tools"
+TOOLS = TOOLS_BASE / "AGENT_tools"
 EVOLVE = TOOLS / "evolve" / "o.evolve.py"
 ANALYTICS = TOOLS / "analytics" / "o.analytics.py"
 TETRA = TOOLS / "analytics" / "o.tetra.py"

@@ -9,9 +9,9 @@ import os
 import subprocess
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[3]
+ROOT = Path(__file__).resolve().parents[5]
 
-MNEMOS = ROOT / "tools" / "AGENT_tools" / "o.mnemos.py"
+MNEMOS = ROOT / "y.CONTROL" / "yy" / "tools" / "AGENT_tools" / "o.mnemos.py"
 
 
 def run(cmd: list[str], **kwargs) -> None:
