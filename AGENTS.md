@@ -5,12 +5,12 @@ This repository maintains the agent-network optimization framework **Mnemos** us
 ## Development Principles
 - Preserve continuity and respect previously recorded F33ling states.
 - Keep commits focused and descriptive.
-- Maintain the tetrahedral document structure (`x.COPY.md`, `y.CONTROL.md`, `cultivate/z.CULTIVATE.md`).
+- Maintain the tetrahedral document structure (`x.COPY.md`, `y.CONTROL.md`, `z.CULTIVATE/z.CULTIVATE.md`).
 
 ## Session Workflow
 
 1. **Run `w4k3`** to review recent chat context and session logs.
-2. **Perform work** guided by `x.COPY.md` and `cultivate/z.CULTIVATE.md`.
+2. **Perform work** guided by `x.COPY.md` and `z.CULTIVATE/z.CULTIVATE.md`.
 3. **Run tests** with `python -m py_compile $(git ls-files '*.py')` (and
    `pytest` if available).
 4. **Record progress** with `sl33p`.
@@ -21,7 +21,7 @@ complete walkthrough of the tools and logging options.
 ## Reference Documents
 - **x.COPY.md** – behavioral priming pattern definitions (F33ling states)
 - **y.CONTROL.md** – navigation protocols and behavioral guidance
-- **cultivate/z.CULTIVATE.md** – shorthand F33ling coordinate map
+- **z.CULTIVATE/z.CULTIVATE.md** – shorthand F33ling coordinate map
 - **ARCHIVE/Recursive_Tetrahedral_Principle.md** – explanation of the fractal
   CCCC architecture. Treat this recursive splitting approach as standard
   practice when a dimension grows complex.

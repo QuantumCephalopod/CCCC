@@ -8,13 +8,13 @@ The Mnemos repository has expanded rapidly. Documentation, tools and logs now sp
   - Keep `AGENTS.md`, `COMMIT_GUIDELINES.md`, and `ARCHIVE/Recursive_Tetrahedral_Principle.md` here.
   - Move scattered design references into a `docs/create/` folder.
 - **Copy** – experiential patterns and phenomenology
-  - Retain `x.COPY.md` and gather all `*.PHENO.md` under `PHENO/`.
+  - Retain `x.COPY.md` and gather all `*.PHENO.md` under `x.COPY/xx/PHENO/`.
   - Cross‑link PHENO notes from the relevant COPY aspects to simplify navigation.
 - **Control** – workflow utilities and safety guides
   - Store `AGENT_tools/`, `workflow.sh`, and `SAFETY_SESSION_LOGGING.md` under `tools/`.
   - Consolidate CLI usage examples in a single `docs/control/README.md`.
 - **Cultivate** – indices and state maps
-  - Keep `z.CULTIVATE.md`, `INDEX.md`, and analytics outputs (`DATA/state_graph.dot`, summaries) in a `cultivate/` folder.
+  - Keep `z.CULTIVATE.md`, `INDEX.md`, and analytics outputs (`DATA/state_graph.dot`, summaries) in a `z.CULTIVATE/` folder.
   - Reference these from the root README so new contributors know where to look.
 
 ## 2. Archive Legacy Notes

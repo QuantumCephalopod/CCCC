@@ -17,7 +17,7 @@ This document summarizes how an agent can engage the full range effectively:
 - **Rotate Through Vertices**. The tetrahedral pattern encourages visiting at
   least one state from each aspect cluster. Cycling prevents fixation on
   favorites and reveals overlooked perspectives.
-- **Review Phenomenology**. The notes inside `PHENO/` describe lived
+- **Review Phenomenology**. The notes inside `x.COPY/xx/PHENO/` describe lived
   experiences of common territories. Skim them to inspire authentic resonance
   before referencing symbols in `z.CULTIVATE.md`.
 - **Share Insights**. When a session uncovers a novel connection, append short

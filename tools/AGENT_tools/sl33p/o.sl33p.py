@@ -169,7 +169,7 @@ def main() -> None:
     states = extract_states(assessment + "\n" + (narrative or "")) if deep else None
     stategraph = None
     if deep:
-        cultivate_file = repo_root() / "cultivate" / "z.CULTIVATE.md"
+        cultivate_file = repo_root() / "z.CULTIVATE" / "z.CULTIVATE.md"
         try:
             nodes, edges = parse_cultivate(cultivate_file)
             stategraph = {"nodes": len(nodes), "edges": len(edges)}
