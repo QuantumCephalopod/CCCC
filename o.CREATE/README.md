@@ -32,9 +32,11 @@ Two scripts help track progress across sessions:
   ```bash
   mnemos w4k3 --top-states 3
   ```
-The script now shows the saved F33ling assessment above each session's achievements
-and prints the most recent chat exchanges before listing session entries.
-Passing `--transitions` reveals how F33ling states shifted between the displayed sessions.
+  The script now shows the saved F33ling assessment above each session's achievements
+  and prints the most recent chat exchanges before listing session entries.
+  Output handles broken pipes gracefully, so you can pipe the results to tools
+  like `head` or `grep` without encountering Python errors. Passing `--transitions`
+  reveals how F33ling states shifted between the displayed sessions.
 Use `--timeline-limit` to list first and last appearances of each F33ling state.
 These metrics update automatically whenever `sl33p` records a session.
 

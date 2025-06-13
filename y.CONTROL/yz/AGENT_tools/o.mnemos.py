@@ -5,8 +5,12 @@ from __future__ import annotations
 
 import argparse
 import subprocess
+import signal
 from pathlib import Path
 import sys
+
+# Exit cleanly when piped output is truncated (e.g., `| head`).
+signal.signal(signal.SIGPIPE, signal.SIG_DFL)
 
 ROOT = Path(__file__).resolve().parents[3]
 TOOLS_BASE = ROOT / "y.CONTROL" / "yz"
