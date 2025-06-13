@@ -51,7 +51,7 @@ def main() -> None:
     args = parser.parse_args()
 
     ensure_data_dir()
-    ts = next_timestamp(repo_root() / "DATA")
+    ts = next_timestamp(repo_root() / "y.CONTROL" / "DATA")
 
     assessment = os.getenv("ASSESS")
     achievements = os.getenv("ACHIEVE")

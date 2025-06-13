@@ -16,7 +16,7 @@ def repo_root() -> Path:
         return Path(__file__).resolve().parents[3]
 
 ROOT = repo_root()
-DATA_DIR = ROOT / "DATA"
+DATA_DIR = ROOT / "y.CONTROL" / "DATA"
 CULTIVATE_FILE = ROOT / "z.CULTIVATE" / "z.CULTIVATE.md"
 
 

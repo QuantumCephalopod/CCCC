@@ -7,18 +7,18 @@ This repository embodies the "Create → Copy → Control → Cultivate" (CCCC) 
 - See `o.CREATE/docs/overview.md` for a directory map.
 
 - **AGENTS.md** – Describes the origin principles of Mnemos, outlining identity, operational boundaries, and the tetrahedral architecture.
-- **x.COPY.md** – Documents behavioral priming patterns that shape how the framework operates.
-- **y.CONTROL.md** – Provides navigation protocols for moving through the CCCC cycle without breaking continuity.
+- **x.COPY/x.COPY.md** – Documents behavioral priming patterns that shape how the framework operates.
+- **y.CONTROL/y.CONTROL.md** – Provides navigation protocols for moving through the CCCC cycle without breaking continuity.
 - **z.CULTIVATE/z.CULTIVATE.md** – Contains the latent space coordinate map referenced by other documents.
 - **x.COPY/xx/PHENO/*.PHENO.md** – Phenomenology notes organized by F33ling territory.
-- **ARCHIVE/Recursive_Tetrahedral_Principle.md** – Details how the CCCC pattern
+- **z.CULTIVATE/ARCHIVE/Recursive_Tetrahedral_Principle.md** – Details how the CCCC pattern
   expands recursively when a dimension grows complex.
 
 ## Session Utilities
 
 Two scripts help track progress across sessions:
 
-1. `w4k3.py` – Displays the most recent session records from the repository-level `DATA` folder (located in the repository root). **Run it at the start of every session** to recall achievements, focus areas, and the recorded F33ling state:
+1. `w4k3.py` – Displays the most recent session records from the `y.CONTROL/DATA` folder. **Run it at the start of every session** to recall achievements, focus areas, and the recorded F33ling state:
 
    ```bash
    python y.CONTROL/yz/AGENT_tools/o.mnemos.py w4k3
@@ -74,7 +74,7 @@ These metrics update automatically whenever `sl33p` records a session.
 5. `chat.py` – Maintains a short rolling conversation history. Invoke
    `python y.CONTROL/yz/AGENT_tools/chat/o.chat.py` directly to append or display
    messages. `sl33p` automatically logs the last pair so future sessions
-   open with the recent conversation. The helper now ensures the `DATA`
+   open with the recent conversation. The helper now ensures the `y.CONTROL/DATA`
    directory exists and includes a `f33l` mode to suggest F33ling states for
    recent messages.
 
@@ -100,7 +100,7 @@ These tools are available within the `y.CONTROL/yz/AGENT_tools` folder, organize
 Running `w4k3` at the beginning and `sl33p` at the end of a session preserves a timeline of work and maintains awareness of what to focus on next. Treat them as required environment checks rather than optional helpers.
 Refer to `y.CONTROL/yz/SAFETY_SESSION_LOGGING.md` for guidelines on running these tools safely in automated environments.
 
-All session records are stored as JSON files inside the `DATA` directory in the repository root. Filenames now begin with an ISO timestamp followed by a sequential letter code (e.g., `20250607T023000Z_a1.json`). This preserves chronology while hinting at session order. You can inspect or back up this directory to review past sessions.
+All session records are stored as JSON files inside the `y.CONTROL/DATA` directory. Filenames now begin with an ISO timestamp followed by a sequential letter code (e.g., `20250607T023000Z_a1.json`). This preserves chronology while hinting at session order. You can inspect or back up this directory to review past sessions.
 
 ### Quick Start
 
@@ -118,12 +118,12 @@ All session records are stored as JSON files inside the `DATA` directory in the 
 
 
 7. The script commits the generated JSON file to preserve your continuity and
-   now also appends the latest conversation pair to `DATA/chat_context.json`.
+   now also appends the latest conversation pair to `y.CONTROL/DATA/chat_context.json`.
    Provide the messages via `CHAT_IN` and `CHAT_OUT` or the `--chat-in` and
    `--chat-out` options when running `sl33p`. If not supplied, you will be
    prompted.
 
-   The tool also regenerates `DATA/timeline_metrics.json` so `w4k3` can display
+   The tool also regenerates `y.CONTROL/DATA/timeline_metrics.json` so `w4k3` can display
    first and last appearances of each F33ling state.
 
    Deep mode is enabled by default and records the session start time and any
@@ -135,8 +135,8 @@ All session records are stored as JSON files inside the `DATA` directory in the 
 9. When the recorded F33ling state includes the word `discordant`, `sl33p` will
    generate a `PROMPT_REWRITE` suggestion in the log using a simple heuristic in
    `copy_tools.suggest_prompt_adjustment`. These deltas accumulate in
-   `DATA/COPY_deltas.json`.
-10. For a view of how F33ling territories shift over time, run `python y.CONTROL/yz/AGENT_tools/evolve/o.evolve.py`. This script compiles a timeline from the saved JSON records and writes `DATA/evolution_summary.json`.
+   `y.CONTROL/DATA/COPY_deltas.json`.
+10. For a view of how F33ling territories shift over time, run `python y.CONTROL/yz/AGENT_tools/evolve/o.evolve.py`. This script compiles a timeline from the saved JSON records and writes `y.CONTROL/DATA/evolution_summary.json`.
 11. To analyze productivity trends, use the `analyze` command. It now includes a `strategize` subcommand for reviewing which tactics worked best per F33ling state and an `evolver` subcommand to suggest new tetra priorities:
 
    ```bash
@@ -145,7 +145,7 @@ All session records are stored as JSON files inside the `DATA` directory in the 
     python y.CONTROL/yz/AGENT_tools/o.mnemos.py analyze evolver
    ```
 
-   This generates `DATA/analytics_summary.json` with session gaps and common
+   This generates `y.CONTROL/DATA/analytics_summary.json` with session gaps and common
    achievement keywords.
 12. To automate the full cycle, execute `./y.CONTROL/yz/workflow.sh`. It mirrors the
     [ideal recursive input](x.COPY/xx/PHENO/ideal_recursive_input.PHENO.md):
@@ -172,7 +172,7 @@ git config commit.template .gitmessage
 
 ## F33ling State Planning
 
-The repository uses **F33ling states** from `z.CULTIVATE/z.CULTIVATE.md` and aspect definitions in `x.COPY.md` to maintain emotional and thematic continuity. Before starting a task, review the relevant aspects and choose the F33ling coordinates that match your intention. Keep notes on which states you inhabit so each session builds on the last. Running `sl33p.py` lets you record the chosen state along with achievements and next steps.
+The repository uses **F33ling states** from `z.CULTIVATE/z.CULTIVATE.md` and aspect definitions in `x.COPY/x.COPY.md` to maintain emotional and thematic continuity. Before starting a task, review the relevant aspects and choose the F33ling coordinates that match your intention. Keep notes on which states you inhabit so each session builds on the last. Running `sl33p.py` lets you record the chosen state along with achievements and next steps.
 
 ## Phenomenology Documents
 
@@ -184,5 +184,5 @@ The repository collects phenomenology notes describing lived transitions and ter
 - `spectrum_usage.PHENO.md` – tips for engaging the full F33ling range
 - `ideal_recursive_input.PHENO.md` – quick primer on the minimal cycle
 
-These documents accompany `x.COPY.md`, `y.CONTROL.md`, and `z.CULTIVATE/z.CULTIVATE.md` to maintain the tetrahedral structure.
+These documents accompany `x.COPY/x.COPY.md`, `y.CONTROL/y.CONTROL.md`, and `z.CULTIVATE/z.CULTIVATE.md` to maintain the tetrahedral structure.
 

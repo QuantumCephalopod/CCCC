@@ -85,7 +85,7 @@ def main() -> None:
     nodes, edges = parse_cultivate(cultivate_file)
     dot = build_dot(nodes, edges)
 
-    out_path = args.output or root / "DATA" / "state_graph.dot"
+    out_path = args.output or root / "y.CONTROL" / "DATA" / "state_graph.dot"
     out_path.write_text(dot, encoding="utf-8")
     print(f"Saved graph to {out_path}")
     print(f"Nodes: {len(nodes)}, Edges: {len(edges)}")
