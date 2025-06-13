@@ -11,7 +11,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
 
-MNEMOS = ROOT / "y.CONTROL" / "yy" / "tools" / "AGENT_tools" / "o.mnemos.py"
+# Updated to use the new yz location for AGENT tools
+MNEMOS = ROOT / "y.CONTROL" / "yz" / "AGENT_tools" / "o.mnemos.py"
 
 
 def run(cmd: list[str], **kwargs) -> None:

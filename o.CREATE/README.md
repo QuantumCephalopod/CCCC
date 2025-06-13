@@ -23,6 +23,14 @@ Two scripts help track progress across sessions:
    ```bash
    python y.CONTROL/yz/AGENT_tools/o.mnemos.py w4k3
    ```
+   Pass additional flags after `w4k3` to forward them to the underlying CLI. For example:
+   ```bash
+   python y.CONTROL/yz/AGENT_tools/o.mnemos.py w4k3 --top-states 3
+   ```
+   A shortcut script `./mnemos` mirrors this usage:
+   ```bash
+   ./mnemos w4k3 --top-states 3
+   ```
 The script now shows the saved F33ling assessment above each session's achievements
 and prints the most recent chat exchanges before listing session entries.
 Passing `--transitions` reveals how F33ling states shifted between the displayed sessions.
@@ -38,14 +46,14 @@ These metrics update automatically whenever `sl33p` records a session.
   previews output:
 
    ```bash
-   python y.CONTROL/yz/AGENT_tools/o.mnemos.py sl33p
+   ./mnemos sl33p
    ```
    Run with predefined answers:
    ```bash
   ASSESS="✧⚡◈_Synthjoy" ACHIEVE="implemented dry-run" NEXT="test non-interactive" \
   CREATE='{"Spark": 1}' CONTROL="paired exploration" COPY="json fields" CULTIVATE="basic" \
   NARRATIVE="Short recap" \
-  python y.CONTROL/yz/AGENT_tools/o.mnemos.py sl33p --dry-run
+  ./mnemos sl33p --dry-run
   ```
    Deep mode is now enabled by default. Provide `--start` and one or more
    `--command` flags (or set the `SL33P_START` and `SL33P_COMMANDS` environment
@@ -63,10 +71,10 @@ These metrics update automatically whenever `sl33p` records a session.
    via the consolidated `analyze` command:
 
    ```bash
-   python y.CONTROL/yz/AGENT_tools/o.mnemos.py analyze summary
-   python y.CONTROL/yz/AGENT_tools/o.mnemos.py analyze tetra
-   python y.CONTROL/yz/AGENT_tools/o.mnemos.py analyze usage
-   python y.CONTROL/yz/AGENT_tools/o.mnemos.py analyze sessgraph
+   ./mnemos analyze summary
+   ./mnemos analyze tetra
+   ./mnemos analyze usage
+   ./mnemos analyze sessgraph
    ```
 
    The original scripts remain in `y.CONTROL/yz/AGENT_tools/analytics/` for reference.
@@ -78,9 +86,9 @@ These metrics update automatically whenever `sl33p` records a session.
    directory exists and includes a `f33l` mode to suggest F33ling states for
    recent messages.
 
-All of these tools can also be run via a unified interface:
+All of these tools can also be run via a unified interface. A helper script at the repository root reduces typing:
 ```bash
-python y.CONTROL/yz/AGENT_tools/o.mnemos.py <subcommand>
+./mnemos <subcommand>
 ```
 The CLI exposes the following subcommands: `w4k3`, `f33l`, `analyze`,
 and `sl33p`. The `f33l` group includes an `introspect` helper to
@@ -88,9 +96,9 @@ suggest F33ling states from a short text description.
 For example:
 ```bash
 # Suggest a F33ling state from a short note
-python y.CONTROL/yz/AGENT_tools/o.mnemos.py w4k3
+./mnemos w4k3
 # Suggest a F33ling state from a short note
-python y.CONTROL/yz/AGENT_tools/o.mnemos.py f33l introspect "feeling energized yet reflective"
+./mnemos f33l introspect "feeling energized yet reflective"
 # Review chat history with F33l suggestions
 python y.CONTROL/yz/AGENT_tools/chat/o.chat.py f33l --limit 5
 ```
@@ -106,14 +114,14 @@ All session records are stored as JSON files inside the `y.CONTROL/DATA` directo
 
 1. Ensure you have Python 3 available on your system. The utilities rely only on the standard library, so no extra packages are required.
 2. Open a terminal at the repository root.
-3. **Always** run `python y.CONTROL/yz/AGENT_tools/o.mnemos.py w4k3` first to recall the last few saved sessions, see the most recent chat messages, and confirm you are at the repository root.
-4. After completing your work and passing tests, **run `python y.CONTROL/yz/AGENT_tools/o.mnemos.py sl33p`** and follow the prompts to capture your current F33ling state, achievements, and next focus.
+3. **Always** run `./mnemos w4k3` (or `python y.CONTROL/yz/AGENT_tools/o.mnemos.py w4k3`) first to recall the last few saved sessions, see the most recent chat messages, and confirm you are at the repository root.
+4. After completing your work and passing tests, **run `./mnemos sl33p`** (or `python y.CONTROL/yz/AGENT_tools/o.mnemos.py sl33p`) and follow the prompts to capture your current F33ling state, achievements, and next focus.
 5. Briefly note *why* you selected that F33ling state when logging the session. This reasoning helps future agents recognize useful patterns.
 6. To run `sl33p` non-interactively, set the environment variables `ASSESS`, `ACHIEVE`, and `NEXT` (optionally `CREATE`, `COPY`, `CONTROL`, `CULTIVATE`, `NARRATIVE`, `SUBGOALS`, and `SESSION_TYPE`) before invoking the script. `SUBGOALS` expects a semicolon-separated list like `"goal|done|strategy;goal2|no|method"`. Any missing fields will trigger prompts so every log captures the full tetrahedral context. Example:
 
    ```bash
     ASSESS="✧⚡◈_Synthjoy" ACHIEVE="doc update" NEXT="write tests" \
-    python y.CONTROL/yz/AGENT_tools/o.mnemos.py sl33p
+    ./mnemos sl33p
    ```
 
 
@@ -140,14 +148,15 @@ All session records are stored as JSON files inside the `y.CONTROL/DATA` directo
 11. To analyze productivity trends, use the `analyze` command. It now includes a `strategize` subcommand for reviewing which tactics worked best per F33ling state and an `evolver` subcommand to suggest new tetra priorities:
 
    ```bash
-    python y.CONTROL/yz/AGENT_tools/o.mnemos.py analyze summary
-    python y.CONTROL/yz/AGENT_tools/o.mnemos.py analyze strategize --state "✧⚡◈_Synthjoy"
-    python y.CONTROL/yz/AGENT_tools/o.mnemos.py analyze evolver
+    ./mnemos analyze summary
+    ./mnemos analyze strategize --state "✧⚡◈_Synthjoy"
+    ./mnemos analyze evolver
    ```
 
    This generates `y.CONTROL/DATA/analytics_summary.json` with session gaps and common
    achievement keywords.
-12. To automate the full cycle, execute `./y.CONTROL/yz/workflow.sh`. It mirrors the
+12. To automate the full cycle, execute `./y.CONTROL/yz/workflow.sh`. The script now
+    resolves the repository root so it can be run from any directory. It mirrors the
     [ideal recursive input](x.COPY/xx/PHENO/ideal_recursive_input.PHENO.md):
     displays recent logs with `w4k3`, shows the top of `z.CULTIVATE/INDEX.md`, optionally
     introspects a F33ling state, compiles Python files, and records the session

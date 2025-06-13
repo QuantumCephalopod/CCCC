@@ -25,8 +25,10 @@ def run(cmd: list[str]) -> int:
     return subprocess.call(cmd)
 
 
-def cmd_w4k3(_: argparse.Namespace) -> int:
-    return run(["python", str(W4K3)])
+def cmd_w4k3(args: argparse.Namespace) -> int:
+    cmd = ["python", str(W4K3)]
+    cmd += args.extra
+    return run(cmd)
 
 
 def cmd_sl33p(args: argparse.Namespace) -> int:
@@ -60,6 +62,9 @@ def cmd_analyze(args: argparse.Namespace) -> int:
 
 
 def main() -> int:
+    if len(sys.argv) > 1 and sys.argv[1] == "w4k3":
+        return cmd_w4k3(argparse.Namespace(extra=sys.argv[2:]))
+
     parser = argparse.ArgumentParser(description="Mnemos unified CLI")
     sub = parser.add_subparsers(dest="command")
 
