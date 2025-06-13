@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+python "$(dirname "$0")/y.CONTROL/yz/AGENT_tools/o.mnemos.py" "$@"
