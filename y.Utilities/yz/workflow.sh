@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # Automates the Mnemos session cycle following the ideal recursive input
-# described in x.MemoryVault/xx/PHENO/ideal_recursive_input.PHENO.md.
+# described in x.MemoryVault/xx.PHENO/ideal_recursive_input.PHENO.md.
 
 # Resolve repository root so the script can be invoked via symlinks or
 # from any directory. readlink -f follows nested links and handles
