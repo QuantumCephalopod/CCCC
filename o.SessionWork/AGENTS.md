@@ -22,7 +22,7 @@ complete walkthrough of the tools and logging options.
 - **x.MemoryVault.md** – behavioral priming pattern definitions (F33ling states)
 - **y.Utilities.md** – navigation protocols and behavioral guidance
 - **z.Research/z.Research.md** – shorthand F33ling coordinate map
-- **../z.Research/ARCHIVE/Recursive_Tetrahedral_Principle.md** – explanation of the fractal
+- **../z.Research/zx.Archive/Recursive_Tetrahedral_Principle.md** – explanation of the fractal
   CCCC architecture. Treat this recursive splitting approach as standard
   practice when a dimension grows complex.
 
