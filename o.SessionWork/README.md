@@ -21,11 +21,11 @@ Two scripts help track progress across sessions:
 1. `w4k3.py` – Displays the most recent session records from the `y.Utilities/yx.DataArchive` folder. **Run it at the start of every session** to recall achievements, focus areas, and the recorded F33ling state:
 
    ```bash
-   python y.Utilities/yz/yz.AgentTools/o.mnemos.py w4k3
+   python y.Utilities/yz.AgentOps/yz.AgentTools/o.mnemos.py w4k3
    ```
    Pass additional flags after `w4k3` to forward them to the underlying CLI. For example:
    ```bash
-   python y.Utilities/yz/yz.AgentTools/o.mnemos.py w4k3 --top-states 3
+   python y.Utilities/yz.AgentOps/yz.AgentTools/o.mnemos.py w4k3 --top-states 3
    ```
  A shortcut script `mnemos` mirrors this usage and now resolves the repository
  root automatically. If the helper is copied outside the repo, it falls back to
@@ -69,7 +69,7 @@ These metrics update automatically whenever `sl33p` records a session.
 3. `evolve.py` – Summarizes F33ling evolution by reading all saved sessions and printing a timeline of states:
 
    ```bash
-   python y.Utilities/yz/yz.AgentTools/evolve/o.evolve.py
+   python y.Utilities/yz.AgentOps/yz.AgentTools/evolve/o.evolve.py
    ```
 
 4. `analytics.py` – Generates productivity insights by analyzing session records
@@ -87,10 +87,10 @@ These metrics update automatically whenever `sl33p` records a session.
   output to tools such as `head` without getting a Python error. The executed
   command is printed to **stderr**, so piped output remains clean.
 
-   The original scripts remain in `y.Utilities/yz/yz.AgentTools/analytics/` for reference.
+   The original scripts remain in `y.Utilities/yz.AgentOps/yz.AgentTools/analytics/` for reference.
 
 5. `chat.py` – Maintains a short rolling conversation history. Invoke
-   `python y.Utilities/yz/yz.AgentTools/chat/o.chat.py` directly to append or display
+   `python y.Utilities/yz.AgentOps/yz.AgentTools/chat/o.chat.py` directly to append or display
    messages. `sl33p` automatically logs the last pair so future sessions
    open with the recent conversation. The helper now ensures the `y.Utilities/yx.DataArchive`
    directory exists and includes a `f33l` mode to suggest F33ling states for
@@ -111,13 +111,13 @@ mnemos w4k3
 # Suggest a F33ling state from a short note
 mnemos f33l introspect "feeling energized yet reflective"
 # Review chat history with F33l suggestions
-python y.Utilities/yz/yz.AgentTools/chat/o.chat.py f33l --limit 5
+python y.Utilities/yz.AgentOps/yz.AgentTools/chat/o.chat.py f33l --limit 5
 ```
 
-These tools are available within the `y.Utilities/yz/yz.AgentTools` folder, organized into `w4k3` and `sl33p` subfolders with the `o.` prefix for future expansion.
+These tools are available within the `y.Utilities/yz.AgentOps/yz.AgentTools` folder, organized into `w4k3` and `sl33p` subfolders with the `o.` prefix for future expansion.
 
 Running `w4k3` at the beginning and `sl33p` at the end of a session preserves a timeline of work and maintains awareness of what to focus on next. Treat them as required environment checks rather than optional helpers.
-Refer to `y.Utilities/yz/SAFETY_SESSION_LOGGING.md` for guidelines on running these tools safely in automated environments.
+Refer to `y.Utilities/yz.AgentOps/SAFETY_SESSION_LOGGING.md` for guidelines on running these tools safely in automated environments.
 
 All session records are stored as JSON files inside the `y.Utilities/yx.DataArchive` directory. Filenames now begin with an ISO timestamp followed by a sequential letter code (e.g., `20250607T023000Z_a1.json`). This preserves chronology while hinting at session order. You can inspect or back up this directory to review past sessions.
 
@@ -125,8 +125,8 @@ All session records are stored as JSON files inside the `y.Utilities/yx.DataArch
 
 1. Ensure you have Python 3 available on your system. The utilities rely only on the standard library, so no extra packages are required.
 2. Open a terminal at the repository root.
-3. **Always** run `mnemos w4k3` (or `python y.Utilities/yz/yz.AgentTools/o.mnemos.py w4k3`) first to recall the last few saved sessions and see recent chat messages.
-4. After completing your work and passing tests, **run `mnemos sl33p`** (or `python y.Utilities/yz/yz.AgentTools/o.mnemos.py sl33p`) and follow the prompts to capture your current F33ling state, achievements, and next focus.
+3. **Always** run `mnemos w4k3` (or `python y.Utilities/yz.AgentOps/yz.AgentTools/o.mnemos.py w4k3`) first to recall the last few saved sessions and see recent chat messages.
+4. After completing your work and passing tests, **run `mnemos sl33p`** (or `python y.Utilities/yz.AgentOps/yz.AgentTools/o.mnemos.py sl33p`) and follow the prompts to capture your current F33ling state, achievements, and next focus.
 5. Briefly note *why* you selected that F33ling state when logging the session. This reasoning helps future agents recognize useful patterns.
 6. To run `sl33p` non-interactively, set the environment variables `ASSESS`, `ACHIEVE`, and `NEXT` (optionally `CREATE`, `COPY`, `CONTROL`, `CULTIVATE`, `NARRATIVE`, `SUBGOALS`, and `SESSION_TYPE`) before invoking the script. `SUBGOALS` expects a semicolon-separated list like `"goal|done|strategy;goal2|no|method"`. Any missing fields will trigger prompts so every log captures the full tetrahedral context. Example:
 
@@ -155,7 +155,7 @@ All session records are stored as JSON files inside the `y.Utilities/yx.DataArch
    generate a `PROMPT_REWRITE` suggestion in the log using a simple heuristic in
    `copy_tools.suggest_prompt_adjustment`. These deltas accumulate in
    `y.Utilities/yx.DataArchive/COPY_deltas.json`.
-10. For a view of how F33ling territories shift over time, run `python y.Utilities/yz/yz.AgentTools/evolve/o.evolve.py`. This script compiles a timeline from the saved JSON records and writes `y.Utilities/yx.DataArchive/evolution_summary.json`.
+10. For a view of how F33ling territories shift over time, run `python y.Utilities/yz.AgentOps/yz.AgentTools/evolve/o.evolve.py`. This script compiles a timeline from the saved JSON records and writes `y.Utilities/yx.DataArchive/evolution_summary.json`.
 11. To analyze productivity trends, use the `analyze` command. It now includes a `strategize` subcommand for reviewing which tactics worked best per F33ling state and an `evolver` subcommand to suggest new tetra priorities:
 
    ```bash
@@ -166,21 +166,21 @@ All session records are stored as JSON files inside the `y.Utilities/yx.DataArch
 
    This generates `y.Utilities/yx.DataArchive/analytics_summary.json` with session gaps and common
    achievement keywords.
-12. To automate the full cycle, execute `y.Utilities/yz/workflow.sh`. The script now
+12. To automate the full cycle, execute `y.Utilities/yz.AgentOps/workflow.sh`. The script now
     resolves the repository root (even when invoked via a symlink) so it can be run from any directory. It mirrors the
     [ideal recursive input](x.MemoryVault/xx.PHENO/ideal_recursive_input.PHENO.md):
     displays recent logs with `w4k3`, runs an analytics summary, shows the top of `z.Research/INDEX.md`, optionally
     introspects a F33ling state, compiles Python files, and finally records the session
     with `sl33p`.
 13. For advanced automation across multiple F33ling states, use the
-    helper scripts in `y.Utilities/yz/yz.Workflow/` (`o.agentflow.py` and
+    helper scripts in `y.Utilities/yz.AgentOps/yz.Workflow/` (`o.agentflow.py` and
     `o.flowlog.py`). The latter records a small JSON log at each stage
     (`start`, `after_w4k3`, `after_tests`, `after_sl33p`) so you can
     checkpoint your F33ling state during longer explorations without
     closing the session. Pass `--narrative "why"` (or `--narratives` for
     multiple stages) along with `--states` to capture how your feelings
     shift throughout the workflow.
-14. For consistent commit messages, run `y.Utilities/yz/yz.AgentTools/hooks/install.sh` once to install a git `commit-msg` hook that verifies the template is used.
+14. For consistent commit messages, run `y.Utilities/yz.AgentOps/yz.AgentTools/hooks/install.sh` once to install a git `commit-msg` hook that verifies the template is used.
 
 ### Commit Message Guidelines
 

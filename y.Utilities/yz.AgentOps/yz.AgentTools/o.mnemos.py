@@ -28,7 +28,7 @@ def repo_root() -> Path:
         return THIS_FILE.parents[3]
 
 ROOT = repo_root()
-TOOLS_BASE = ROOT / "y.Utilities" / "yz"
+TOOLS_BASE = ROOT / "y.Utilities" / "yz.AgentOps"
 if str(TOOLS_BASE) not in sys.path:
     sys.path.insert(0, str(TOOLS_BASE))
 TOOLS = TOOLS_BASE / "yz.AgentTools"
