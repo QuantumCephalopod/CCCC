@@ -15,6 +15,7 @@ def prompt_agent():
     control = input("CONTROL dimension notes (methodology, optimization, optional): ")
     cultivate = input("CULTIVATE dimension notes (growth insights, optional): ")
     narrative = input("Moment narrative (short description in sentences, optional): ")
+    poem = input("12-line poem capturing the methodology (optional): ")
     subgoal_text = input("Subgoals (goal|done|strategy; optional): ")
     sess_type = input(
         "Session type (creative/technical/archival/planning; optional): "
@@ -28,6 +29,7 @@ def prompt_agent():
         control,
         cultivate,
         narrative,
+        poem,
         parse_subgoals(subgoal_text),
         parse_session_type(sess_type),
     )

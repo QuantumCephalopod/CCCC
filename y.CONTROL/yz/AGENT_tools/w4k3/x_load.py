@@ -8,13 +8,19 @@ from datetime import datetime
 from pathlib import Path
 
 
+THIS_FILE = Path(__file__).resolve()
+
+
 def repo_root() -> Path:
     """Return repository root using git if available."""
     try:
-        out = subprocess.check_output(["git", "rev-parse", "--show-toplevel"], text=True)
+        out = subprocess.check_output(
+            ["git", "-C", str(THIS_FILE.parent), "rev-parse", "--show-toplevel"],
+            text=True,
+        )
         return Path(out.strip())
     except Exception:
-        return Path(__file__).resolve().parents[3]
+        return THIS_FILE.parents[3]
 
 
 def data_dir() -> Path:
@@ -24,13 +30,18 @@ def data_dir() -> Path:
 def git_time(path: Path) -> datetime:
     """Return the commit timestamp for the given file."""
     try:
-        out = subprocess.check_output([
-            "git",
-            "log",
-            "-1",
-            "--format=%cI",
-            str(path),
-        ], text=True)
+        out = subprocess.check_output(
+            [
+                "git",
+                "-C",
+                str(repo_root()),
+                "log",
+                "-1",
+                "--format=%cI",
+                str(path),
+            ],
+            text=True,
+        )
         return datetime.fromisoformat(out.strip())
     except Exception:
         return datetime.fromtimestamp(path.stat().st_mtime)

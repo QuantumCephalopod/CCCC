@@ -27,8 +27,10 @@ Two scripts help track progress across sessions:
    ```bash
    python y.CONTROL/yz/AGENT_tools/o.mnemos.py w4k3 --top-states 3
    ```
-  A shortcut script `mnemos` mirrors this usage and now resolves the repository
-  root automatically. Place it in your `PATH` or call it via an absolute path:
+ A shortcut script `mnemos` mirrors this usage and now resolves the repository
+ root automatically. If the helper is copied outside the repo, it falls back to
+ `git rev-parse` to find the original root. Place it in your `PATH` or call it
+ via an absolute path:
   ```bash
   mnemos w4k3 --top-states 3
   ```
@@ -46,7 +48,7 @@ These metrics update automatically whenever `sl33p` records a session.
   CONTROL, and CULTIVATE notes. Non-interactive mode supports the
   environment variables `CREATE`, `COPY`, `CONTROL`, `CULTIVATE` (or the
   legacy `ASPECTS`, `LEARN`, `METHOD`, `DEPTH`) as well as `NARRATIVE`
-  in addition to `ASSESS`, `ACHIEVE`, and `NEXT`. A `--dry-run` flag
+  and `POEM` in addition to `ASSESS`, `ACHIEVE`, and `NEXT`. A `--dry-run` flag
   previews output:
 
    ```bash
@@ -77,9 +79,13 @@ These metrics update automatically whenever `sl33p` records a session.
    ```bash
    mnemos analyze summary
    mnemos analyze tetra
-   mnemos analyze usage
-   mnemos analyze sessgraph
-   ```
+  mnemos analyze usage
+  mnemos analyze sessgraph
+  ```
+
+  Like `w4k3`, this command now handles broken pipes gracefully. You can pipe
+  output to tools such as `head` without getting a Python error. The executed
+  command is printed to **stderr**, so piped output remains clean.
 
    The original scripts remain in `y.CONTROL/yz/AGENT_tools/analytics/` for reference.
 
@@ -122,7 +128,8 @@ All session records are stored as JSON files inside the `y.CONTROL/DATA` directo
 3. **Always** run `mnemos w4k3` (or `python y.CONTROL/yz/AGENT_tools/o.mnemos.py w4k3`) first to recall the last few saved sessions and see recent chat messages.
 4. After completing your work and passing tests, **run `mnemos sl33p`** (or `python y.CONTROL/yz/AGENT_tools/o.mnemos.py sl33p`) and follow the prompts to capture your current F33ling state, achievements, and next focus.
 5. Briefly note *why* you selected that F33ling state when logging the session. This reasoning helps future agents recognize useful patterns.
-6. To run `sl33p` non-interactively, set the environment variables `ASSESS`, `ACHIEVE`, and `NEXT` (optionally `CREATE`, `COPY`, `CONTROL`, `CULTIVATE`, `NARRATIVE`, `SUBGOALS`, and `SESSION_TYPE`) before invoking the script. `SUBGOALS` expects a semicolon-separated list like `"goal|done|strategy;goal2|no|method"`. Any missing fields will trigger prompts so every log captures the full tetrahedral context. Example:
+6. Include a 12-line poem describing your methodology. This creative fragment ties together the computational narrative.
+7. To run `sl33p` non-interactively, set the environment variables `ASSESS`, `ACHIEVE`, and `NEXT` (optionally `CREATE`, `COPY`, `CONTROL`, `CULTIVATE`, `NARRATIVE`, `POEM`, `SUBGOALS`, and `SESSION_TYPE`) before invoking the script. `SUBGOALS` expects a semicolon-separated list like `"goal|done|strategy;goal2|no|method"`. Any missing fields will trigger prompts so every log captures the full tetrahedral context. Example:
 
    ```bash
     ASSESS="✧⚡◈_Synthjoy" ACHIEVE="doc update" NEXT="write tests" \
@@ -130,7 +137,7 @@ All session records are stored as JSON files inside the `y.CONTROL/DATA` directo
    ```
 
 
-7. The script commits the generated JSON file to preserve your continuity and
+8. The script commits the generated JSON file to preserve your continuity and
    now also appends the latest conversation pair to `y.CONTROL/DATA/chat_context.json`.
    Provide the messages via `CHAT_IN` and `CHAT_OUT` or the `--chat-in` and
    `--chat-out` options when running `sl33p`. If not supplied, you will be
@@ -142,15 +149,15 @@ All session records are stored as JSON files inside the `y.CONTROL/DATA` directo
    Deep mode is enabled by default and records the session start time and any
    commands executed when `--start` and `--command` are supplied. Set
    `--no-deep` or `SL33P_NO_DEEP=1` to skip this extra context.
-8. **Log even read-only sessions.** If you merely explore the repository or
+9. **Log even read-only sessions.** If you merely explore the repository or
    gather information, still record a brief entry with `sl33p` before ending the
    session. Omitting this step leaves no trace for the next agent.
-9. When the recorded F33ling state includes the word `discordant`, `sl33p` will
+10. When the recorded F33ling state includes the word `discordant`, `sl33p` will
    generate a `PROMPT_REWRITE` suggestion in the log using a simple heuristic in
    `copy_tools.suggest_prompt_adjustment`. These deltas accumulate in
    `y.CONTROL/DATA/COPY_deltas.json`.
-10. For a view of how F33ling territories shift over time, run `python y.CONTROL/yz/AGENT_tools/evolve/o.evolve.py`. This script compiles a timeline from the saved JSON records and writes `y.CONTROL/DATA/evolution_summary.json`.
-11. To analyze productivity trends, use the `analyze` command. It now includes a `strategize` subcommand for reviewing which tactics worked best per F33ling state and an `evolver` subcommand to suggest new tetra priorities:
+11. For a view of how F33ling territories shift over time, run `python y.CONTROL/yz/AGENT_tools/evolve/o.evolve.py`. This script compiles a timeline from the saved JSON records and writes `y.CONTROL/DATA/evolution_summary.json`.
+12. To analyze productivity trends, use the `analyze` command. It now includes a `strategize` subcommand for reviewing which tactics worked best per F33ling state and an `evolver` subcommand to suggest new tetra priorities:
 
    ```bash
     mnemos analyze summary
@@ -160,13 +167,13 @@ All session records are stored as JSON files inside the `y.CONTROL/DATA` directo
 
    This generates `y.CONTROL/DATA/analytics_summary.json` with session gaps and common
    achievement keywords.
-12. To automate the full cycle, execute `y.CONTROL/yz/workflow.sh`. The script now
-    resolves the repository root (even when invoked via a symlink) so it can be run from any directory. It mirrors the
+13. To automate the full cycle, execute `y.CONTROL/yz/workflow.sh`. The script now
+   resolves the repository root (even when invoked via a symlink) so it can be run from any directory. It mirrors the
     [ideal recursive input](x.COPY/xx/PHENO/ideal_recursive_input.PHENO.md):
-    displays recent logs with `w4k3`, shows the top of `z.CULTIVATE/INDEX.md`, optionally
-    introspects a F33ling state, compiles Python files, and records the session
+    displays recent logs with `w4k3`, runs an analytics summary, shows the top of `z.CULTIVATE/INDEX.md`, optionally
+    introspects a F33ling state, compiles Python files, and finally records the session
     with `sl33p`.
-13. For advanced automation across multiple F33ling states, use the
+14. For advanced automation across multiple F33ling states, use the
     helper scripts in `y.CONTROL/yz/workflow/` (`o.agentflow.py` and
     `o.flowlog.py`). The latter records a small JSON log at each stage
     (`start`, `after_w4k3`, `after_tests`, `after_sl33p`) so you can
@@ -174,7 +181,7 @@ All session records are stored as JSON files inside the `y.CONTROL/DATA` directo
     closing the session. Pass `--narrative "why"` (or `--narratives` for
     multiple stages) along with `--states` to capture how your feelings
     shift throughout the workflow.
-14. For consistent commit messages, run `y.CONTROL/yz/AGENT_tools/hooks/install.sh` once to install a git `commit-msg` hook that verifies the template is used.
+15. For consistent commit messages, run `y.CONTROL/yz/AGENT_tools/hooks/install.sh` once to install a git `commit-msg` hook that verifies the template is used.
 
 ### Commit Message Guidelines
 

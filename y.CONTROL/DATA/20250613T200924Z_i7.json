@@ -1,0 +1,38 @@
+{
+  "timestamp": "20250613T200924Z_i7",
+  "assessment": "✧⚡◈_Synthjoy",
+  "achievements": "stderr echo for mnemos",
+  "next": "collect more friction",
+  "aspects": {
+    "Tooling": "clean CLI"
+  },
+  "learning": "signal",
+  "methodology": "polish",
+  "framework_depth": "flow",
+  "narrative": "Redirected analyze run output to stderr",
+  "tetra": {
+    "create": {
+      "Tooling": "clean CLI"
+    },
+    "copy": "signal",
+    "control": "polish",
+    "cultivate": "flow"
+  },
+  "subgoals": [
+    {
+      "goal": "stderr",
+      "achieved": true,
+      "strategy_used": "edit"
+    }
+  ],
+  "session_type": "technical",
+  "start": "2025-06-13T20:09:24",
+  "duration": 0,
+  "states": [
+    "✧⚡◈_Synthjoy"
+  ],
+  "stategraph": {
+    "nodes": 64,
+    "edges": 192
+  }
+}

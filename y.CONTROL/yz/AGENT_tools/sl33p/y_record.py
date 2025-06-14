@@ -50,6 +50,7 @@ def build_record(
     control=None,
     cultivate=None,
     narrative=None,
+    poem=None,
     subgoals: list[dict] | None = None,
     session_type: str | None = None,
     prompt_rewrite: str | None = None,
@@ -80,6 +81,8 @@ def build_record(
         tetra["cultivate"] = cultivate
     if narrative is not None:
         record["narrative"] = narrative
+    if poem is not None:
+        record["poem"] = poem
     if tetra:
         record["tetra"] = tetra
     if subgoals:

@@ -58,6 +58,7 @@ def main() -> None:
     next_steps = os.getenv("NEXT")
 
     narrative = os.getenv("NARRATIVE")
+    poem = os.getenv("POEM")
 
     subgoals_env = os.getenv("SUBGOALS")
     subgoals = parse_subgoals(subgoals_env) if subgoals_env else None
@@ -84,6 +85,7 @@ def main() -> None:
         control,
         cultivate,
         narrative,
+        poem,
         subgoals,
         session_type,
     ]):
@@ -96,6 +98,7 @@ def main() -> None:
             control_i,
             cultivate_i,
             narrative_i,
+            poem_i,
             subgoals_i,
             session_type_i,
         ) = prompt_agent()
@@ -107,6 +110,7 @@ def main() -> None:
         control = control or control_i
         cultivate = cultivate or cultivate_i
         narrative = narrative or narrative_i
+        poem = poem or poem_i
         subgoals = parse_subgoals(subgoals_env) if subgoals_env else subgoals_i
         session_type = session_type or session_type_i
 
@@ -123,6 +127,7 @@ def main() -> None:
     control_val = sanitize(control) if control else None
     cultivate_val = sanitize(cultivate) if cultivate else None
     narrative_val = sanitize(narrative) if narrative else None
+    poem_val = sanitize(poem) if poem else None
     optimization_val = sanitize(optimization) if optimization else None
     chat_in_val = sanitize(chat_in) if chat_in else ""
     chat_out_val = sanitize(chat_out) if chat_out else ""
@@ -166,7 +171,7 @@ def main() -> None:
         cmds += cmds_env.split()
 
     deep = not args.no_deep and not os.getenv("SL33P_NO_DEEP")
-    states = extract_states(assessment + "\n" + (narrative or "")) if deep else None
+    states = extract_states(assessment + "\n" + (narrative or "") + "\n" + (poem or "")) if deep else None
     stategraph = None
     if deep:
         cultivate_file = repo_root() / "z.CULTIVATE" / "z.CULTIVATE.md"
@@ -186,6 +191,7 @@ def main() -> None:
         control=control_val,
         cultivate=cultivate_val,
         narrative=narrative_val,
+        poem=poem_val,
         subgoals=subgoals_val,
         session_type=session_type_val,
         prompt_rewrite=prompt_update,
