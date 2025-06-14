@@ -10,7 +10,7 @@ import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[4]
-TOOLS_BASE = ROOT / "y.Utilities" / "yz"
+TOOLS_BASE = ROOT / "y.Utilities" / "yz.AgentOps"
 TOOLS = TOOLS_BASE / "yz.AgentTools"
 ECHO = TOOLS / "echo" / "o.echo.py"
 STATEGRAPH = TOOLS / "analytics" / "o.stategraph.py"
