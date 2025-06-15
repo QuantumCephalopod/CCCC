@@ -29,9 +29,9 @@ p_mod = module_from_spec(_p_spec)
 _p_loader.exec_module(p_mod)
 ensure_data_dir = p_mod.ensure_data_dir
 
-INTROSPECT_PATH = ROOT / "y.Utilities" / "yy.CoreTools" / "yyy.f33l" / "o.introspect.py"
-_loader = SourceFileLoader('f33lintrospect', str(INTROSPECT_PATH))
-_spec = spec_from_loader('f33lintrospect', _loader)
+X_REF_PATH = ROOT / "y.Utilities" / "yy.CoreTools" / "yyy.f33l" / "x.reference.py"
+_loader = SourceFileLoader("xreference", str(X_REF_PATH))
+_spec = spec_from_loader("xreference", _loader)
 _mod = module_from_spec(_spec)
 _loader.exec_module(_mod)
 parse_states = _mod.parse_states
