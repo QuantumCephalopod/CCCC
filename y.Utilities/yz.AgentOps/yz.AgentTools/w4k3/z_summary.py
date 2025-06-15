@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import argparse
 
-from yz.AgentTools.yz.w4k3.x_load import load_records
-from yz.AgentTools.yz.w4k3.y_display import (
+from .x_load import load_records
+from .y_display import (
     display,
     display_transitions,
     summarize_all,

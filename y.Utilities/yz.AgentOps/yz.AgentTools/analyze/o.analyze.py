@@ -12,13 +12,13 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[4]
 TOOLS_BASE = ROOT / "y.Utilities" / "yz.AgentOps"
 TOOLS = TOOLS_BASE / "yz.AgentTools"
-EVOLVE = TOOLS / "evolve" / "o.evolve.py"
-ANALYTICS = TOOLS / "analytics" / "o.analytics.py"
-TETRA = TOOLS / "analytics" / "o.tetra.py"
-USAGE = TOOLS / "analytics" / "o.usage.py"
-SESSGRAPH = TOOLS / "sessgraph" / "o.sessgraph.py"
-STRATEGIZE = TOOLS / "analytics" / "o.strategize.py"
-EVOLVER = ROOT / "y.Utilities" / "yz.AgentOps" / "agentflow" / "o.evolver.py"
+EVOLVE = TOOLS / "yz" / "evolve" / "o.evolve.py"
+ANALYTICS = TOOLS / "yz" / "analytics" / "o.analytics.py"
+TETRA = TOOLS / "yz" / "analytics" / "o.tetra.py"
+USAGE = TOOLS / "yz" / "analytics" / "o.usage.py"
+SESSGRAPH = TOOLS / "yz" / "sessgraph" / "o.sessgraph.py"
+STRATEGIZE = TOOLS / "yz" / "analytics" / "o.strategize.py"
+EVOLVER = ROOT / "y.Utilities" / "yz.AgentOps" / "yz.Agentflow" / "o.evolver.py"
 
 # Avoid BrokenPipeError when piping output to commands like `head`.
 signal.signal(signal.SIGPIPE, signal.SIG_DFL)

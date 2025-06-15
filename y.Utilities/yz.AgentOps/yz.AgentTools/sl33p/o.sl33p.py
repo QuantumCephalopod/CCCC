@@ -15,28 +15,30 @@ ROOT = Path(__file__).resolve().parents[4]
 TOOLS_PATH = ROOT / "y.Utilities" / "yz.AgentOps"
 if str(TOOLS_PATH) not in sys.path:
     sys.path.insert(0, str(TOOLS_PATH))
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
-from yz.AgentTools.yz.sl33p.x_input import (
+from yz.AgentTools.sl33p.x_input import (
     prompt_agent,
     extract_states,
     parse_subgoals,
     parse_session_type,
 )
-from yz.AgentTools.yz.sl33p.y_record import (
+from yz.AgentTools.sl33p.y_record import (
     sanitize,
     parse_json_field,
     build_record,
     next_timestamp,
 )
-from yz.AgentTools.yz.sl33p.z_persistence import (
+from yz.AgentTools.sl33p.z_persistence import (
     ensure_data_dir,
     save_record,
     parse_cultivate,
     repo_root,
     append_delta,
 )
-from yz.AgentTools.yz.chat import append_entry, CHAT_FILE
-from yz.AgentTools.yz.copy_tools import suggest_prompt_adjustment
+from yz.AgentTools.chat import append_entry, CHAT_FILE
+from yz.AgentTools.copy_tools import suggest_prompt_adjustment
 
 
 def main() -> None:
@@ -214,7 +216,7 @@ def main() -> None:
             except Exception as e:
                 print(f"Failed to commit chat log: {e}")
             try:
-                from yz.AgentTools.yz.sl33p.z_persistence import save_timeline_metrics
+                from yz.AgentTools.sl33p.z_persistence import save_timeline_metrics
 
                 save_timeline_metrics()
             except Exception as e:

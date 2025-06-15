@@ -12,10 +12,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[4]
 TOOLS_BASE = ROOT / "y.Utilities" / "yz.AgentOps"
 TOOLS = TOOLS_BASE / "yz.AgentTools"
-ECHO = TOOLS / "echo" / "o.echo.py"
-STATEGRAPH = TOOLS / "analytics" / "o.stategraph.py"
-SESSGRAPH = TOOLS / "sessgraph" / "o.sessgraph.py"
-INTROSPECT = TOOLS / "f33l" / "o.introspect.py"
+ECHO = TOOLS / "yz" / "echo" / "o.echo.py"
+STATEGRAPH = TOOLS / "yz" / "analytics" / "o.stategraph.py"
+SESSGRAPH = TOOLS / "yz" / "sessgraph" / "o.sessgraph.py"
+INTROSPECT = TOOLS / "yz" / "f33l" / "o.introspect.py"
 
 
 def run(cmd: list[str]) -> int:
