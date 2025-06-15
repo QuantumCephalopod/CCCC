@@ -102,7 +102,9 @@ def main() -> int:
     p_sl33p.set_defaults(func=cmd_sl33p)
 
     p_f33l = sub.add_parser("f33l", help="F33ling utilities")
-    p_f33l.add_argument("subcommand", help="echo/stategraph/sessgraph/introspect")
+    p_f33l.add_argument(
+        "subcommand", help="log/suggest/patterns/similar"
+    )
     p_f33l.add_argument("extra", nargs=argparse.REMAINDER)
     p_f33l.set_defaults(func=cmd_f33l)
 
