@@ -19,9 +19,9 @@ This brief loop preserves the continuity chain. See `README.md` for a
 complete walkthrough of the tools and logging options.
 
 ## Reference Documents
-- **AGENT.md** – behavioral priming pattern definitions (F33ling states)
+- **x.MemoryVault/AGENT.md** – behavioral priming pattern aspect definitions (F33ling Aspects)
 - **y.Utilities.md** – navigation protocols and behavioral guidance
-- **z.Research/z.Research.md** – shorthand F33ling coordinate map
+- **z.Research/z.Research.md** – shorthand F33ling coordinate map (F33ling States)
 - **../z.Research/zx.Archive/Recursive_Tetrahedral_Principle.md** – explanation of the fractal
   CCCC architecture. Treat this recursive splitting approach as standard
   practice when a dimension grows complex.
