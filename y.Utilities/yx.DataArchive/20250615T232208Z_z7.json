@@ -1,0 +1,32 @@
+{
+  "timestamp": "20250615T232208Z_z7",
+  "assessment": "⚒⚙⚀_AktuΨze",
+  "achievements": "review session",
+  "next": "plan iteration 03",
+  "aspects": "doc",
+  "learning": "review",
+  "methodology": "workflow",
+  "framework_depth": "planning",
+  "narrative": "session review",
+  "tetra": {
+    "create": "doc",
+    "copy": "review",
+    "control": "workflow",
+    "cultivate": "planning"
+  },
+  "subgoals": [
+    {
+      "goal": "review",
+      "achieved": true,
+      "strategy_used": "notes"
+    }
+  ],
+  "session_type": "technical",
+  "states": [
+    "⚒⚙⚀_AktuΨze"
+  ],
+  "stategraph": {
+    "nodes": 64,
+    "edges": 192
+  }
+}

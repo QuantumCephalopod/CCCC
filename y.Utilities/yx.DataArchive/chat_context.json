@@ -1,25 +1,5 @@
 [
   {
-    "time": "2025-06-14T16:19:00+00:00",
-    "InputMessage": "bootstrap",
-    "OutputMessage": "scaffolding ready"
-  },
-  {
-    "time": "2025-06-14T19:07:01+00:00",
-    "InputMessage": "address user concerns",
-    "OutputMessage": "adding session logs"
-  },
-  {
-    "time": "2025-06-15T15:00:43+00:00",
-    "InputMessage": "workflow continuity",
-    "OutputMessage": "logged session"
-  },
-  {
-    "time": "2025-06-15T15:09:09+00:00",
-    "InputMessage": "workflow continuity",
-    "OutputMessage": "w4k3 reviewed"
-  },
-  {
     "time": "2025-06-15T15:36:14+00:00",
     "InputMessage": "workflow upgrade",
     "OutputMessage": "noted"
@@ -48,5 +28,25 @@
     "time": "2025-06-15T23:06:31+00:00",
     "InputMessage": "update",
     "OutputMessage": "done"
+  },
+  {
+    "time": "2025-06-15T23:13:30+00:00",
+    "InputMessage": "Recursive exploration v2 test",
+    "OutputMessage": "File updated"
+  },
+  {
+    "time": "2025-06-15T23:17:44+00:00",
+    "InputMessage": "update exploration",
+    "OutputMessage": "notes improved"
+  },
+  {
+    "time": "2025-06-15T23:22:10+00:00",
+    "InputMessage": "fix issues",
+    "OutputMessage": "session reviewed"
+  },
+  {
+    "time": "2025-06-15T23:22:51+00:00",
+    "InputMessage": "clarify awakening command",
+    "OutputMessage": "added explicit path"
   }
 ]
