@@ -9,7 +9,21 @@ import os
 import subprocess
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[3]
+
+def repo_root() -> Path:
+    """Return repository root using git if available."""
+    try:
+        out = subprocess.check_output([
+            "git",
+            "rev-parse",
+            "--show-toplevel",
+        ], text=True)
+        return Path(out.strip())
+    except Exception:
+        return Path(__file__).resolve().parents[3]
+
+
+ROOT = repo_root()
 
 # Path to consolidated mnemos operator
 MNEMOS = ROOT / "y.Utilities" / "yy.CoreTools" / "yyo.mnemos.py"

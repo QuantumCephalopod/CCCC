@@ -14,7 +14,7 @@ The latest session records produced by `sl33p` were noticeably sparse compared t
 ASSESS="✧⚡◈_Synthjoy" ACHIEVE="investigated sl33p logs" NEXT="document deep mode" \
 CREATE="analysis" COPY="sl33p features" CONTROL="log detail investigation" \
 CULTIVATE="workflow improvement" NARRATIVE="Explored sl33p record structure" \
-python yz.AgentTools/o.mnemos.py sl33p --start 2025-06-07T22:15:00 \
+python mnemos sl33p --start 2025-06-07T22:15:00 \
   --command py_compile --command sl33p
 ```
 

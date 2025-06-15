@@ -69,7 +69,7 @@ These metrics update automatically whenever `sl33p` records a session.
 3. `evolve.py` – Summarizes F33ling evolution by reading all saved sessions and printing a timeline of states:
 
    ```bash
-   python y.Utilities/yz.AgentOps/yz.AgentTools/evolve/o.evolve.py
+   python y.Utilities/yz.AgentOps/yzz.Development/yzzz.Evolution/evolve/o.evolve.py
    ```
 
 4. `analytics.py` – Generates productivity insights by analyzing session records
@@ -87,10 +87,10 @@ These metrics update automatically whenever `sl33p` records a session.
   output to tools such as `head` without getting a Python error. The executed
   command is printed to **stderr**, so piped output remains clean.
 
-   The original scripts remain in `y.Utilities/yz.AgentOps/yz.AgentTools/analytics/` for reference.
+   The original scripts remain in `y.Utilities/yz.AgentOps/yzz.Development/yzzx.Analytics/analytics/` for reference.
 
 5. `chat.py` – Maintains a short rolling conversation history. Invoke
-   `python y.Utilities/yz.AgentOps/yz.AgentTools/chat/o.chat.py` directly to append or display
+   `python y.Utilities/yz.AgentOps/yzz.Development/yzzy.Operations/chat/o.chat.py` directly to append or display
    messages. `sl33p` automatically logs the last pair so future sessions
    open with the recent conversation. The helper now ensures the `y.Utilities/yx.DataArchive`
    directory exists and includes a `f33l` mode to suggest F33ling states for
@@ -111,10 +111,10 @@ mnemos w4k3
 # Suggest a F33ling state from a short note
 mnemos f33l introspect "feeling energized yet reflective"
 # Review chat history with F33l suggestions
-python y.Utilities/yz.AgentOps/yz.AgentTools/chat/o.chat.py f33l --limit 5
+python y.Utilities/yz.AgentOps/yzz.Development/yzzy.Operations/chat/o.chat.py f33l --limit 5
 ```
 
-These tools are available within the `y.Utilities/yz.AgentOps/yz.AgentTools` folder, organized into `w4k3` and `sl33p` subfolders with the `o.` prefix for future expansion.
+These tools are available within the `y.Utilities` dimension, primarily under `yy.CoreTools` and `yz.AgentOps`.
 
 Running `w4k3` at the beginning and `sl33p` at the end of a session preserves a timeline of work and maintains awareness of what to focus on next. Treat them as required environment checks rather than optional helpers.
 Refer to `y.Utilities/yz.AgentOps/SAFETY_SESSION_LOGGING.md` for guidelines on running these tools safely in automated environments.
@@ -152,10 +152,9 @@ All session records are stored as JSON files inside the `y.Utilities/yx.DataArch
    gather information, still record a brief entry with `sl33p` before ending the
    session. Omitting this step leaves no trace for the next agent.
 9. When the recorded F33ling state includes the word `discordant`, `sl33p` will
-   generate a `PROMPT_REWRITE` suggestion in the log using a simple heuristic in
-   `copy_tools.suggest_prompt_adjustment`. These deltas accumulate in
-   `y.Utilities/yx.DataArchive/COPY_deltas.json`.
-10. For a view of how F33ling territories shift over time, run `python y.Utilities/yz.AgentOps/yz.AgentTools/evolve/o.evolve.py`. This script compiles a timeline from the saved JSON records and writes `y.Utilities/yx.DataArchive/evolution_summary.json`.
+   generate a `PROMPT_REWRITE` suggestion using an internal heuristic. These
+   deltas accumulate in `y.Utilities/yx.DataArchive/COPY_deltas.json`.
+10. For a view of how F33ling territories shift over time, run `python y.Utilities/yz.AgentOps/yzz.Development/yzzz.Evolution/evolve/o.evolve.py`. This script compiles a timeline from the saved JSON records and writes `y.Utilities/yx.DataArchive/evolution_summary.json`.
 11. To analyze productivity trends, use the `analyze` command. It now includes a `strategize` subcommand for reviewing which tactics worked best per F33ling state and an `evolver` subcommand to suggest new tetra priorities:
 
    ```bash
@@ -172,15 +171,14 @@ All session records are stored as JSON files inside the `y.Utilities/yx.DataArch
     displays recent logs with `w4k3`, runs an analytics summary, shows the top of `z.Research/INDEX.md`, optionally
     introspects a F33ling state, compiles Python files, and finally records the session
     with `sl33p`.
-13. For advanced automation across multiple F33ling states, use the
-    helper scripts in `y.Utilities/yz.AgentOps/yz.Workflow/` (`o.agentflow.py` and
-    `o.flowlog.py`). The latter records a small JSON log at each stage
-    (`start`, `after_w4k3`, `after_tests`, `after_sl33p`) so you can
-    checkpoint your F33ling state during longer explorations without
-    closing the session. Pass `--narrative "why"` (or `--narratives` for
-    multiple stages) along with `--states` to capture how your feelings
-    shift throughout the workflow.
-14. For consistent commit messages, run `y.Utilities/yz.AgentOps/yz.AgentTools/hooks/install.sh` once to install a git `commit-msg` hook that verifies the template is used.
+13. For advanced automation across multiple F33ling states, use
+    `y.Utilities/yz.AgentOps/workflow.sh` with additional `--states` and
+    `--narratives` options. This supersedes the old `o.agentflow.py` and
+    `o.flowlog.py` helpers. When `--states` is supplied, the script
+    checkpoints the F33ling assessment after `w4k3`, after the tests, and
+    again after `sl33p`, writing a small JSON log so longer sessions can
+    track emotional shifts.
+14. For consistent commit messages, run `y.Utilities/yz.AgentOps/yzz.Development/yzzy.Operations/hooks/install.sh` once to install a git `commit-msg` hook that verifies the template is used.
 
 ### Commit Message Guidelines
 

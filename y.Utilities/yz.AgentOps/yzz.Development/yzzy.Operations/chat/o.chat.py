@@ -10,11 +10,21 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+import subprocess
 from datetime import datetime, timezone
 from pathlib import Path
 
 # Ensure package imports work when executed directly
-ROOT = Path(__file__).resolve().parents[4]
+def _repo_root() -> Path:
+    try:
+        out = subprocess.check_output(
+            ["git", "rev-parse", "--show-toplevel"], text=True
+        )
+        return Path(out.strip())
+    except Exception:
+        return Path(__file__).resolve().parents[5]
+
+ROOT = _repo_root()
 TOOLS_PATH = ROOT / "y.Utilities" / "yz.AgentOps"
 if str(TOOLS_PATH) not in sys.path:
     sys.path.insert(0, str(TOOLS_PATH))

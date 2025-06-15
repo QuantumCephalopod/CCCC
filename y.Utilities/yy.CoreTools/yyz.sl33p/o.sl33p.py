@@ -11,7 +11,17 @@ from datetime import datetime
 from pathlib import Path
 
 # Ensure package imports work when executed directly
-ROOT = Path(__file__).resolve().parents[3]
+def _repo_root() -> Path:
+    """Return repository root using git if available."""
+    try:
+        out = subprocess.check_output(
+            ["git", "rev-parse", "--show-toplevel"], text=True
+        )
+        return Path(out.strip())
+    except Exception:
+        return Path(__file__).resolve().parents[3]
+
+ROOT = _repo_root()
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
@@ -57,12 +67,17 @@ loader.exec_module(chatmod)
 append_entry = chatmod.append_entry
 CHAT_FILE = chatmod.CHAT_FILE
 
-COPY_PATH = ROOT / "y.Utilities" / "yz.AgentOps" / "yzz.Development" / "yzzy.Operations" / "copy_tools" / "suggest.py"
-_copy_loader = SourceFileLoader("copytools", str(COPY_PATH))
-_copy_spec = spec_from_loader("copytools", _copy_loader)
-_copy_mod = module_from_spec(_copy_spec)
-_copy_loader.exec_module(_copy_mod)
-suggest_prompt_adjustment = _copy_mod.suggest_prompt_adjustment
+
+def suggest_prompt_adjustment(state: str, result: str, notes: str | None = None) -> str:
+    """Return a simple prompt adjustment suggestion."""
+    base = f"State `{state}` with result `{result}`"
+    if notes:
+        base += f" and notes `{notes}`"
+    if "discordant" in state.lower():
+        return base + " -> Consider shifting COPY focus toward reflective alignment."
+    if "flux" in state.lower():
+        return base + " -> Emphasize CONTROL for stability."
+    return base + " -> Maintain current strategy, minor tweaks only."
 
 
 def main() -> None:

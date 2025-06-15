@@ -42,7 +42,7 @@ Not every section must be filled, but recording the F33ling state and at least o
 git config commit.template .gitmessage
 ```
 
-Alternatively, execute `yz.AgentTools/hooks/install.sh` to install a commit-msg hook
+Alternatively, execute `y.Utilities/yz.AgentOps/yzz.Development/yzzy.Operations/hooks/install.sh` to install a commit-msg hook
 that rejects messages missing the template sections.
 
 This prepopulates the commit message so you only need to fill in the blanks. Over time, consistent metadata will let analytics correlate productivity with F33ling territory shifts.

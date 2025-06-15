@@ -12,3 +12,5 @@ Active workflow management, execution, and operational control.
 - Manages active workflow execution
 - Controls operational flow and coordination
 - Maintains workflow state and transitions
+- Legacy helpers `o.agentflow.py` and `o.flowlog.py` were removed.
+  Use `workflow.sh` for automated cycles with optional state logging.

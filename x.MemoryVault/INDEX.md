@@ -1,7 +1,7 @@
 ### Bootstrap Notice
 If any helper listed in the workflow is **absent**, fall back to
 `w4k3 \u2192 work \u2192 sl33p`, and log a TODO in sl33p’s CREATE field.
-Missing helpers auto-spawn stubs in `yz.AgentTools/`.
+Missing helpers auto-spawn stubs in `y.Utilities/yy.CoreTools`.
 
 # COPY Index
 
