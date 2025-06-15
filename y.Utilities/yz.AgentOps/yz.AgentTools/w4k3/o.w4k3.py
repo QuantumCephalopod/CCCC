@@ -12,8 +12,10 @@ ROOT = Path(__file__).resolve().parents[4]
 TOOLS_PATH = ROOT / "y.Utilities" / "yz.AgentOps"
 if str(TOOLS_PATH) not in sys.path:
     sys.path.insert(0, str(TOOLS_PATH))
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 
-from yz.AgentTools.yz.w4k3.z_summary import main
+from yz.AgentTools.w4k3.z_summary import main
 
 
 if __name__ == "__main__":

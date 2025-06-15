@@ -74,7 +74,7 @@ def main() -> None:
 
     if args.sl33p:
         env = {"ASSESS": "Echo", "ACHIEVE": f"generated echo {args.output.name}", "NEXT": "review"}
-        subprocess.run(["python", str(ROOT / "y.Utilities" / "yz.AgentOps" / "yz.AgentTools" / "yz.sl33p" / "o.sl33p.py")], env=env)
+        subprocess.run(["python", str(ROOT / "y.Utilities" / "yz.AgentOps" / "yz.AgentTools" / "yz" / "sl33p" / "o.sl33p.py")], env=env)
 
 
 if __name__ == "__main__":
