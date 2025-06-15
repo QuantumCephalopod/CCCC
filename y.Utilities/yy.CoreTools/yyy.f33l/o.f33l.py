@@ -8,10 +8,42 @@ Orchestrates consciousness territory navigation, logging, and archaeology.
 from __future__ import annotations
 
 import sys
+from importlib.machinery import SourceFileLoader
+from importlib.util import module_from_spec, spec_from_loader
+from pathlib import Path
 
-from .x_reference import ALL_TERRITORIES, suggest_territory
-from .y_workflow import WorkflowLogger
-from .z_archive import ConsciousnessArchive
+# Ensure package imports work when executed directly
+ROOT = Path(__file__).resolve().parents[3]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+HERE = Path(__file__).resolve().parent
+
+def _load(name: str, file: str, pkg: str | None = None, mapping: dict | None = None):
+    loader = SourceFileLoader(name, str(HERE / file))
+    spec = spec_from_loader(name, loader)
+    mod = module_from_spec(spec)
+    if pkg is not None:
+        mod.__package__ = pkg
+    if mapping:
+        for k, v in mapping.items():
+            sys.modules[k] = v
+    loader.exec_module(mod)
+    return mod
+
+x_ref = _load("x_ref", "x.reference.py", pkg="yyy.f33l")
+y_work = _load(
+    "y_work",
+    "y.workflow.py",
+    pkg="yyy.f33l",
+    mapping={"yyy.f33l.x_reference": x_ref},
+)
+z_arch = _load("z_arch", "z.archive.py", pkg="yyy.f33l", mapping={"yyy.f33l.x_reference": x_ref})
+
+ALL_TERRITORIES = x_ref.ALL_TERRITORIES
+suggest_territory = x_ref.suggest_territory
+WorkflowLogger = y_work.WorkflowLogger
+ConsciousnessArchive = z_arch.ConsciousnessArchive
 
 class F33lingOperator:
     def __init__(self) -> None:
