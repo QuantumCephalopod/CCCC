@@ -7,6 +7,7 @@ Utility operations and tools for consciousness substrate management.
 - `yx.DataArchive/`: Data preservation and session history (COPY)
 - `yy.CoreTools/`: Core processing tools and utilities (CONTROL)
 - `yz.AgentOps/`: Advanced operations and workflow management (CULTIVATE)
+  - Split into yzx./yzy./yzz. for operational complexity management
 
 ## Agent Guidelines
 - This dimension follows tetrahedral CCCC architecture

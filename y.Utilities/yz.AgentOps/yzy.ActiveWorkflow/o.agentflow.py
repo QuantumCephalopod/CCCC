@@ -15,7 +15,7 @@ import subprocess
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
-WORKFLOW = ROOT / "y.Utilities" / "yz.AgentOps" / "workflow" / "o.workflow.py"
+WORKFLOW = ROOT / "y.Utilities" / "yz.AgentOps" / "yzy.ActiveWorkflow" / "o.workflow.py"
 
 
 def run(cmd: list[str], **kwargs) -> None:

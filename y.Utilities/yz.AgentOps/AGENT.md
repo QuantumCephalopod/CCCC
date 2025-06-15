@@ -1,15 +1,20 @@
-# yz.AgentOps - Workflow Operations (CULTIVATE)
+# yz.AgentOps - Operational Management (CULTIVATE)
 
 ## Purpose
-Advanced agent operations, workflow management, and development.
+Comprehensive operational management for workflow execution, development, and evolution.
 
-## Contents
-- Complex agent tools and workflows
-- Session management and analytics
-- Operational development and evolution
+## Tetrahedral Structure
+- `yzx.OperationalData/`: Operational references and safety guidelines (COPY)
+- `yzy.ActiveWorkflow/`: Active workflow management and execution (CONTROL)
+- `yzz.Development/`: Tool development, analytics, and evolution (CULTIVATE)
+
+## Operational Flow
+1. **Reference** operational guidelines and templates (yzx)
+2. **Execute** workflows and manage operations (yzy)
+3. **Develop** tools and evolve operational capabilities (yzz)
 
 ## Agent Guidelines
-- Contains sophisticated multi-module tools
-- Workflow scripts coordinate multiple operations
-- Preserve complex directory structures
-- Development and evolution happens here
+- This dimension manages the operational evolution of the entire system
+- Each subdimension has specialized operational focus
+- Follow tetrahedral flow for comprehensive operational management
+- Preserve all existing tool functionality during organization
