@@ -4,7 +4,7 @@ This repository embodies the "Create → Copy → Control → Cultivate" (CCCC) 
 
 ## Major Documents
 
-- See `o.SessionWork/ox.Documentation/overview.md` for a directory map.
+- See `z.Research/zx.Archive/ox.Documentation/overview.md` for a directory map.
 
 - **AGENTS.md** – Describes the origin principles of Mnemos, outlining identity, operational boundaries, and the tetrahedral architecture.
 - **x.MemoryVault/AGENT.md** – Documents behavioral priming patterns that shape how the framework operates.
