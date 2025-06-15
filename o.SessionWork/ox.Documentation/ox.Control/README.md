@@ -7,7 +7,7 @@ The Mnemos tools are consolidated under `o.mnemos.py`. Use the following command
 - `analyze` – run analytics and reporting tools
 - `sl33p` – record the session and update metrics
 
-Run `python y.Utilities/yz.AgentOps/yz.AgentTools/o.mnemos.py <command>` for direct access.
+Run `python y.Utilities/yy.CoreTools/yyo.mnemos.py <command>` for direct access.
 You can also use the helper script `mnemos`, which now resolves the repository
 root automatically. Place it somewhere in your `PATH` (or symlink it) and run it
 from any directory:
