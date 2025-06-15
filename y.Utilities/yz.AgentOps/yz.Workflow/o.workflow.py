@@ -11,8 +11,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
 
-# Updated to use the new yz location for AGENT tools
-MNEMOS = ROOT / "y.Utilities" / "yz.AgentOps" / "yz.AgentTools" / "o.mnemos.py"
+# Path to consolidated mnemos operator
+MNEMOS = ROOT / "y.Utilities" / "yy.CoreTools" / "yyo.mnemos.py"
 
 
 def run(cmd: list[str], **kwargs) -> None:

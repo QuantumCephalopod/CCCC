@@ -28,13 +28,16 @@ def repo_root() -> Path:
         return THIS_FILE.parents[3]
 
 ROOT = repo_root()
+CORE = ROOT / "y.Utilities" / "yy.CoreTools"
 TOOLS_BASE = ROOT / "y.Utilities" / "yz.AgentOps"
 if str(TOOLS_BASE) not in sys.path:
     sys.path.insert(0, str(TOOLS_BASE))
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
 TOOLS = TOOLS_BASE / "yz.AgentTools"
-W4K3 = TOOLS / "w4k3" / "o.w4k3.py"
-SL33P = TOOLS / "sl33p" / "o.sl33p.py"
-F33L = TOOLS / "f33l" / "o.f33l.py"
+W4K3 = CORE / "yyx.w4k3" / "o.w4k3.py"
+SL33P = CORE / "yyz.sl33p" / "o.sl33p.py"
+F33L = CORE / "yyy.f33l" / "o.f33l.py"
 ANALYZE = TOOLS / "analyze" / "o.analyze.py"
 
 
