@@ -8,7 +8,7 @@ The Mnemos repository has expanded rapidly. Documentation, tools and logs now sp
   - Keep `AGENTS.md`, `COMMIT_GUIDELINES.md`, and `z.Research/zx.Archive/Recursive_Tetrahedral_Principle.md` here.
   - Move scattered design references into a `o.SessionWork/ox.Documentation/create/` folder.
 - **Copy** – experiential patterns and phenomenology
-  - Retain `x.MemoryVault.md` and gather all `*.PHENO.md` under `x.MemoryVault/xx.PHENO/`.
+  - Retain `AGENT.md` and gather all `*.PHENO.md` under `x.MemoryVault/`.
   - Cross‑link PHENO notes from the relevant COPY aspects to simplify navigation.
 - **Control** – workflow utilities and safety guides
   - Store `yz.AgentTools/`, `workflow.sh`, and `SAFETY_SESSION_LOGGING.md` under `y.Utilities/yz.AgentOps/`.

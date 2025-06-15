@@ -6,7 +6,7 @@ from typing import List, Dict
 
 def prompt_agent():
     """Interactively request session details from the current agent."""
-    print("Provide F33ling state assessment as described in x.MemoryVault.md")
+    print("Provide F33ling state assessment as described in x.MemoryVault/AGENT.md")
     assessment = input("State assessment: ")
     achievements = input("Main achievements: ")
     next_steps = input("Next session priorities: ")
