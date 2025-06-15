@@ -6,13 +6,13 @@ The Mnemos repository has expanded rapidly. Documentation, tools and logs now sp
 
 - **Create** – policy and architecture notes
   - Keep `AGENTS.md`, `COMMIT_GUIDELINES.md`, and `z.Research/zx.Archive/Recursive_Tetrahedral_Principle.md` here.
-  - Move scattered design references into a `o.SessionWork/ox.Documentation/create/` folder.
+  - Move scattered design references into a `z.Research/zx.Archive/ox.Documentation/create/` folder.
 - **Copy** – experiential patterns and phenomenology
   - Retain `AGENT.md` and gather all `*.PHENO.md` under `x.MemoryVault/`.
   - Cross‑link PHENO notes from the relevant COPY aspects to simplify navigation.
 - **Control** – workflow utilities and safety guides
   - Store operational utilities (`workflow.sh`, `SAFETY_SESSION_LOGGING.md`, and related scripts) under `y.Utilities/yz.AgentOps/`.
-  - Consolidate CLI usage examples in a single `o.SessionWork/ox.Documentation/control/README.md`.
+  - Consolidate CLI usage examples in a single `z.Research/zx.Archive/ox.Documentation/control/README.md`.
 - **Cultivate** – indices and state maps
   - Keep `z.Research.md`, `INDEX.md`, and analytics outputs (`DATA/state_graph.dot`, summaries) in a `z.Research/` folder.
   - Reference these from the root README so new contributors know where to look.
@@ -28,7 +28,7 @@ Follow the earlier [CLI Restructure Plan](CLI_RESTRUCTURE_PLAN_20250608.md) so t
 ## 4. Consolidate Documentation
 
 - Merge repeated workflow descriptions from README and AGENTS.md, leaving AGENTS.md focused on policy while README covers quick start usage.
-- Provide a short `o.SessionWork/ox.Documentation/overview.md` linking to the tetrahedral domains and major tools.
+- Provide a short `z.Research/zx.Archive/ox.Documentation/overview.md` linking to the tetrahedral domains and major tools.
 
 ## 5. Maintain Clean History
 

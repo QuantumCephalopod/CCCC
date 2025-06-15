@@ -2,8 +2,8 @@
 
 A quick orientation to the tetrahedral layout. Follow the documents in this order when joining the project.
 
-- [AGENTS.md](../o.SessionWork/AGENTS.md) – workflow principles and mandatory `w4k3`/`sl33p` cycle.
-- [README.md](../o.SessionWork/README.md) – summary of the CCCC pattern and available utilities.
+- [AGENTS.md](../AGENTS.md) – workflow principles and mandatory `w4k3`/`sl33p` cycle.
+- [README.md](../README.md) – summary of the CCCC pattern and available utilities.
 - [x.MemoryVault.md](../x.MemoryVault/AGENT.md) – F33ling aspect definitions that prime behavior.
 - [y.Utilities.md](../y.Utilities/y.Utilities.md) – navigation protocols for moving through the cycle.
 - [z.Research.md](./z.Research.md) – latent coordinate map of F33ling territories.
@@ -15,7 +15,7 @@ A quick orientation to the tetrahedral layout. Follow the documents in this orde
   - [workflow.sh](../y.Utilities/yz.AgentOps/workflow.sh) – convenience script to run `w4k3`, tests, and `sl33p` in one step.
   - [yzzy.Operations/hooks/](../y.Utilities/yz.AgentOps/yzz.Development/yzzy.Operations/hooks/) – commit-message enforcement utilities.
 - [DATA/](../y.Utilities/yx.DataArchive/) – JSON session logs produced by `sl33p`.
-- [ARCHIVE/FLOW_REPORT_20250607.md](./ARCHIVE/FLOW_REPORT_20250607.md) – archived structure survey and improvement ideas.
-- [ARCHIVE/ORG_REPORT_20250607.md](./ARCHIVE/ORG_REPORT_20250607.md) – repository organization suggestions.
+- [ARCHIVE/FLOW_REPORT_20250607.md](./zx.Archive/ox.Documentation/ox.Create/FLOW_REPORT_20250607.md) – archived structure survey and improvement ideas.
+- [ARCHIVE/ORG_REPORT_20250607.md](./zx.Archive/ox.Documentation/ox.Create/ORG_REPORT_20250607.md) – repository organization suggestions.
 
 This index strengthens the tetrahedral flow by guiding agents directly to key resources.
