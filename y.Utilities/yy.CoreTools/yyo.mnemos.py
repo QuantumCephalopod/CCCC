@@ -34,11 +34,11 @@ if str(TOOLS_BASE) not in sys.path:
     sys.path.insert(0, str(TOOLS_BASE))
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
-TOOLS = TOOLS_BASE / "yz.AgentTools"
+TOOLS = TOOLS_BASE / "yzz.Development"
 W4K3 = CORE / "yyx.w4k3" / "o.w4k3.py"
 SL33P = CORE / "yyz.sl33p" / "o.sl33p.py"
 F33L = CORE / "yyy.f33l" / "o.f33l.py"
-ANALYZE = TOOLS / "analyze" / "o.analyze.py"
+ANALYZE = TOOLS / "yzzx.Analytics" / "analyze" / "o.analyze.py"
 
 
 def run(cmd: list[str]) -> int:

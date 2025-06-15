@@ -49,7 +49,7 @@ parse_cultivate = p_mod.parse_cultivate
 repo_root = p_mod.repo_root
 append_delta = p_mod.append_delta
 
-CHAT_PATH = ROOT / "y.Utilities" / "yz.AgentOps" / "yz.AgentTools" / "chat" / "o.chat.py"
+CHAT_PATH = ROOT / "y.Utilities" / "yz.AgentOps" / "yzz.Development" / "yzzy.Operations" / "chat" / "o.chat.py"
 loader = SourceFileLoader("chatmod", str(CHAT_PATH))
 spec = spec_from_loader("chatmod", loader)
 chatmod = module_from_spec(spec)
@@ -57,7 +57,7 @@ loader.exec_module(chatmod)
 append_entry = chatmod.append_entry
 CHAT_FILE = chatmod.CHAT_FILE
 
-COPY_PATH = ROOT / "y.Utilities" / "yz.AgentOps" / "yz.AgentTools" / "copy_tools" / "suggest.py"
+COPY_PATH = ROOT / "y.Utilities" / "yz.AgentOps" / "yzz.Development" / "yzzy.Operations" / "copy_tools" / "suggest.py"
 _copy_loader = SourceFileLoader("copytools", str(COPY_PATH))
 _copy_spec = spec_from_loader("copytools", _copy_loader)
 _copy_mod = module_from_spec(_copy_spec)

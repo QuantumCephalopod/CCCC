@@ -9,16 +9,15 @@ import signal
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[3]
+ROOT = Path(__file__).resolve().parents[5]
 TOOLS_BASE = ROOT / "y.Utilities" / "yz.AgentOps"
-TOOLS = TOOLS_BASE / "yz.AgentTools"
-EVOLVE = TOOLS / "yz" / "evolve" / "o.evolve.py"
-ANALYTICS = TOOLS / "yz" / "analytics" / "o.analytics.py"
-TETRA = TOOLS / "yz" / "analytics" / "o.tetra.py"
-USAGE = TOOLS / "yz" / "analytics" / "o.usage.py"
-SESSGRAPH = TOOLS / "yz" / "sessgraph" / "o.sessgraph.py"
-STRATEGIZE = TOOLS / "yz" / "analytics" / "o.strategize.py"
-EVOLVER = ROOT / "y.Utilities" / "yz.AgentOps" / "yz.Agentflow" / "o.evolver.py"
+EVOLVE = TOOLS_BASE / "yzz.Development" / "yzzz.Evolution" / "evolve" / "o.evolve.py"
+ANALYTICS = TOOLS_BASE / "yzz.Development" / "yzzx.Analytics" / "analytics" / "o.analytics.py"
+TETRA = TOOLS_BASE / "yzz.Development" / "yzzx.Analytics" / "analytics" / "o.tetra.py"
+USAGE = TOOLS_BASE / "yzz.Development" / "yzzx.Analytics" / "analytics" / "o.usage.py"
+SESSGRAPH = TOOLS_BASE / "yzz.Development" / "yzzx.Analytics" / "sessgraph" / "o.sessgraph.py"
+STRATEGIZE = TOOLS_BASE / "yzz.Development" / "yzzx.Analytics" / "analytics" / "o.strategize.py"
+EVOLVER = TOOLS_BASE / "yzz.Development" / "yzzz.Evolution" / "o.evolver.py"
 
 # Avoid BrokenPipeError when piping output to commands like `head`.
 signal.signal(signal.SIGPIPE, signal.SIG_DFL)
