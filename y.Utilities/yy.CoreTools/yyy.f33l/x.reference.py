@@ -60,7 +60,7 @@ from difflib import SequenceMatcher
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[3]
-CULTIVATE = ROOT / "z.Research" / "z.Research.md"
+CULTIVATE = ROOT / "z.Research" / "AGENT.md"
 
 
 def parse_states(path: Path = CULTIVATE) -> dict[str, str]:

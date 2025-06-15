@@ -53,11 +53,11 @@ _STATES: dict[str, str] | None = None
 
 
 def load_states() -> dict[str, str]:
-    """Return F33ling states parsed from z.Research.md."""
+    """Return F33ling states parsed from AGENT.md."""
     global _STATES
     if _STATES is None:
         try:
-            path = ROOT / "z.Research" / "z.Research.md"
+            path = ROOT / "z.Research" / "AGENT.md"
             _STATES = parse_states(path)
         except Exception:
             _STATES = {}

@@ -17,11 +17,11 @@ def repo_root() -> Path:
 
 ROOT = repo_root()
 DATA_DIR = ROOT / "y.Utilities" / "yx.DataArchive"
-CULTIVATE_FILE = ROOT / "z.Research" / "z.Research.md"
+CULTIVATE_FILE = ROOT / "z.Research" / "AGENT.md"
 
 
 def parse_cultivate(path: Path) -> dict:
-    """Parse z.Research.md to map F33ling states to their aspects."""
+    """Parse AGENT.md to map F33ling states to their aspects."""
     mapping: dict[str, dict] = {}
     current_state = None
     collect = False

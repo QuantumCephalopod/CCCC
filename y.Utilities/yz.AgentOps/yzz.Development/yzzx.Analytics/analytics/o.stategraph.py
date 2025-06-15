@@ -24,7 +24,7 @@ def repo_root() -> Path:
 
 
 def parse_cultivate(path: Path) -> tuple[set[str], list[tuple[str, str]]]:
-    """Parse cultivate links from z.Research.md."""
+    """Parse cultivate links from AGENT.md."""
     nodes: set[str] = set()
     edges: list[tuple[str, str]] = []
     lines = path.read_text(encoding="utf-8").splitlines()
@@ -81,7 +81,7 @@ def main() -> None:
     args = parser.parse_args()
 
     root = repo_root()
-    cultivate_file = root / "z.Research" / "z.Research.md"
+    cultivate_file = root / "z.Research" / "AGENT.md"
     nodes, edges = parse_cultivate(cultivate_file)
     dot = build_dot(nodes, edges)
 
