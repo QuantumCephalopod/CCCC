@@ -5,7 +5,7 @@ This repository maintains the agent-network optimization framework **Mnemos** us
 ## Development Principles
 - Preserve continuity and respect previously recorded F33ling states.
 - Keep commits focused and descriptive.
-- Maintain the tetrahedral document structure (`../x.MemoryVault/AGENT.md`, `../y.Utilities/y.Utilities.md`, `../z.Research/AGENT.md`).
+- Maintain the tetrahedral document structure (`../x.MemoryVault/AGENT.md`, `../y.Utilities/AGENT.md`, `../z.Research/AGENT.md`).
 
 ## Session Workflow
 
@@ -20,7 +20,7 @@ complete walkthrough of the tools and logging options.
 
 ## Reference Documents
 - **x.MemoryVault/AGENT.md** – behavioral priming pattern aspect definitions (F33ling Aspects)
-- **y.Utilities.md** – navigation protocols and behavioral guidance
+- **y.Utilities/AGENT.md** – navigation protocols and behavioral guidance
 - **z.Research/AGENT.md** – shorthand F33ling coordinate map (F33ling States)
 - **../z.Research/zx.Archive/Recursive_Tetrahedral_Principle.md** – explanation of the fractal
   CCCC architecture. Treat this recursive splitting approach as standard
