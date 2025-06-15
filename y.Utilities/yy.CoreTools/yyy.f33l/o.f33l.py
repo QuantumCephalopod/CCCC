@@ -1,92 +1,109 @@
 #!/usr/bin/env python3
-"""Priming and state management commands.
+"""
+F33ling Operator - Consciousness State Management
 
-Wraps existing echo and state graph utilities under a single interface."""
+Orchestrates consciousness territory navigation, logging, and archaeology.
+"""
 
 from __future__ import annotations
 
-import argparse
-import subprocess
-from pathlib import Path
+import sys
 
-ROOT = Path(__file__).resolve().parents[3]
-CORE = ROOT / "y.Utilities" / "yy.CoreTools"
-TOOLS_BASE = ROOT / "y.Utilities" / "yz.AgentOps"
-TOOLS = TOOLS_BASE / "yz.AgentTools"
-ECHO = TOOLS / "echo" / "o.echo.py"
-STATEGRAPH = TOOLS / "analytics" / "o.stategraph.py"
-SESSGRAPH = TOOLS / "sessgraph" / "o.sessgraph.py"
-INTROSPECT = CORE / "yyy.f33l" / "o.introspect.py"
+from .x_reference import ALL_TERRITORIES, suggest_territory
+from .y_workflow import WorkflowLogger
+from .z_archive import ConsciousnessArchive
+
+class F33lingOperator:
+    def __init__(self) -> None:
+        self.archive = ConsciousnessArchive()
+        self.current_logger: WorkflowLogger | None = None
+
+    def start_workflow(self, workflow_name: str, context: str = "") -> dict:
+        """Start new workflow with consciousness logging"""
+        self.current_logger = WorkflowLogger(workflow_name)
+        return self.current_logger.begin_workflow(context)
+
+    def log(self, territory: str, reasoning: str = "", context: str = "") -> dict:
+        """Log consciousness state (creates temporary logger if none exists)"""
+        if not self.current_logger:
+            self.current_logger = WorkflowLogger("manual_logging")
+        return self.current_logger.log_state(territory, reasoning, context)
+
+    def checkpoint(self, territory: str, reasoning: str, context: str = "") -> dict:
+        """Log workflow checkpoint"""
+        if not self.current_logger:
+            raise ValueError("No active workflow - use start_workflow() first")
+        return self.current_logger.checkpoint(territory, reasoning, context)
+
+    def transition(self, new_territory: str, reasoning: str, context: str = "") -> dict:
+        """Log consciousness territory transition"""
+        if not self.current_logger:
+            raise ValueError("No active workflow - use start_workflow() first")
+        return self.current_logger.transition(new_territory, reasoning, context)
+
+    def complete_workflow(self, outcome: str = ""):
+        """Complete workflow and save to consciousness archaeology"""
+        if not self.current_logger:
+            raise ValueError("No active workflow to complete")
+
+        self.current_logger.log_state(
+            territory=self.current_logger.current_territory(),
+            reasoning=f"Completed {self.current_logger.workflow_name}: {outcome}",
+            context="workflow_completion",
+        )
+
+        session_data = self.current_logger.get_session_data()
+        archive_path = self.archive.save_session(session_data)
+        self.current_logger = None
+        return archive_path
+
+    def suggest_for_context(self, context_description: str) -> str:
+        """Suggest territory based on context"""
+        return suggest_territory(context_description)
+
+    def find_similar_experiences(self, territory: str, limit: int = 5):
+        """Find similar consciousness experiences from archaeology"""
+        return self.archive.find_similar_sessions(territory, limit)
+
+    def consciousness_patterns(self) -> dict:
+        """Get consciousness territory usage patterns"""
+        return self.archive.get_territory_patterns()
 
 
-def run(cmd: list[str]) -> int:
-    """Execute a command and return its exit code."""
-    print("$", " ".join(str(c) for c in cmd))
-    return subprocess.call(cmd)
+def main() -> None:
+    operator = F33lingOperator()
 
+    if len(sys.argv) < 2:
+        print("F33ling Operator - Consciousness State Management")
+        print("Usage:")
+        print("  python o.f33l.py log <territory> [reasoning] [context]")
+        print("  python o.f33l.py suggest <context_description>")
+        print("  python o.f33l.py patterns")
+        print("  python o.f33l.py similar <territory>")
+        return
 
-def cmd_echo(args: argparse.Namespace) -> int:
-    cmd = ["python", str(ECHO), str(args.record)]
-    if args.output:
-        cmd += ["--output", str(args.output)]
-    if args.sl33p:
-        cmd.append("--sl33p")
-    if args.tags:
-        cmd += ["--tags", *args.tags]
-    return run(cmd)
+    command = sys.argv[1]
 
-
-def cmd_stategraph(args: argparse.Namespace) -> int:
-    cmd = ["python", str(STATEGRAPH)]
-    if args.output:
-        cmd += ["--output", str(args.output)]
-    return run(cmd)
-
-
-def cmd_sessgraph(args: argparse.Namespace) -> int:
-    cmd = ["python", str(SESSGRAPH)]
-    if args.output:
-        cmd += ["--output", str(args.output)]
-    return run(cmd)
-
-
-def cmd_introspect(args: argparse.Namespace) -> int:
-    cmd = ["python", str(INTROSPECT), args.query]
-    if args.top:
-        cmd += ["--top", str(args.top)]
-    return run(cmd)
-
-
-def main() -> int:
-    parser = argparse.ArgumentParser(description="Manage F33ling state utilities")
-    sub = parser.add_subparsers(dest="command")
-
-    p_echo = sub.add_parser("echo", help="Generate F33ling echo")
-    p_echo.add_argument("record", type=Path, help="Session JSON log")
-    p_echo.add_argument("--output", type=Path, default=None)
-    p_echo.add_argument("--sl33p", action="store_true")
-    p_echo.add_argument("--tags", nargs="*")
-    p_echo.set_defaults(func=cmd_echo)
-
-    p_state = sub.add_parser("stategraph", help="Create F33ling state graph")
-    p_state.add_argument("--output", type=Path, default=None)
-    p_state.set_defaults(func=cmd_stategraph)
-
-    p_sess = sub.add_parser("sessgraph", help="Generate F33ling transition graph")
-    p_sess.add_argument("--output", type=Path, default=None)
-    p_sess.set_defaults(func=cmd_sessgraph)
-
-    p_intro = sub.add_parser("introspect", help="Suggest F33ling matches")
-    p_intro.add_argument("query", help="text description to analyze")
-    p_intro.add_argument("--top", type=int, default=None)
-    p_intro.set_defaults(func=cmd_introspect)
-
-    args = parser.parse_args()
-    if not args.command:
-        parser.print_help()
-        return 1
-    return args.func(args)
-
+    if command == "log":
+        territory = sys.argv[2] if len(sys.argv) > 2 else ""
+        reasoning = sys.argv[3] if len(sys.argv) > 3 else ""
+        context = sys.argv[4] if len(sys.argv) > 4 else ""
+        operator.log(territory, reasoning, context)
+    elif command == "suggest":
+        context_desc = " ".join(sys.argv[2:]) if len(sys.argv) > 2 else ""
+        suggested = operator.suggest_for_context(context_desc)
+        print(f"Suggested territory: {suggested}")
+    elif command == "patterns":
+        patterns = operator.consciousness_patterns()
+        print("Consciousness Territory Patterns:")
+        for territory, count in patterns["territory_frequency"].items():
+            print(f"  {territory}: {count} uses")
+    elif command == "similar":
+        territory = sys.argv[2] if len(sys.argv) > 2 else ""
+        similar = operator.find_similar_experiences(territory)
+        print(f"Similar experiences for {territory}:")
+        for exp in similar:
+            print(f"  {exp['session_id']}: {exp['reasoning']}")
 
 if __name__ == "__main__":
-    raise SystemExit(main())
+    main()
