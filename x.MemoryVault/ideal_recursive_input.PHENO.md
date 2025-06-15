@@ -7,8 +7,9 @@ agent to the tetrahedral loop.
 1. **Run `w4k3`** – display recent session logs and active F33ling states.
 2. **Glance at `INDEX.md`** – orient to key documents.
 3. **Reference the tetrahedral steps** – CREATE → COPY → CONTROL → CULTIVATE.
-4. **Use `z.Research/AGENT.md`** for coordinate shorthand when needed and introspect
-   with `f33l introspect` to pick a guiding state.
+4. **Use `z.Research/AGENT.md`** for coordinate shorthand when needed and
+   run `f33l suggest` to pick a guiding state, optionally logging it with
+   `f33l log`.
 5. **Find something useful to do** – pick a concrete improvement from the logs
    or open issues.
 6. **Do it** – implement or document the change.

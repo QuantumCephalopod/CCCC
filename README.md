@@ -109,7 +109,7 @@ For example:
 # Suggest a F33ling state from a short note
 mnemos w4k3
 # Suggest a F33ling state from a short note
-mnemos f33l introspect "feeling energized yet reflective"
+mnemos f33l suggest "feeling energized yet reflective"
 # Review chat history with F33l suggestions
 python y.Utilities/yz.AgentOps/yzz.Development/yzzy.Operations/chat/o.chat.py f33l --limit 5
 ```
