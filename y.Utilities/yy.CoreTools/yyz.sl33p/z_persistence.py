@@ -12,7 +12,7 @@ def repo_root() -> Path:
         out = subprocess.check_output(["git", "rev-parse", "--show-toplevel"], text=True)
         return Path(out.strip())
     except Exception:
-        return Path(__file__).resolve().parents[4]
+        return Path(__file__).resolve().parents[3]
 
 
 DATA_DIR = repo_root() / "y.Utilities" / "yx.DataArchive"

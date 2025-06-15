@@ -11,31 +11,43 @@ from datetime import datetime
 from pathlib import Path
 
 # Ensure package imports work when executed directly
-ROOT = Path(__file__).resolve().parents[4]
+ROOT = Path(__file__).resolve().parents[3]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from yy.CoreTools.yyz.sl33p.x_input import (
-    prompt_agent,
-    extract_states,
-    parse_subgoals,
-    parse_session_type,
-)
-from yy.CoreTools.yyz.sl33p.y_record import (
-    sanitize,
-    parse_json_field,
-    build_record,
-    next_timestamp,
-)
-from yy.CoreTools.yyz.sl33p.z_persistence import (
-    ensure_data_dir,
-    save_record,
-    parse_cultivate,
-    repo_root,
-    append_delta,
-)
 from importlib.machinery import SourceFileLoader
 from importlib.util import module_from_spec, spec_from_loader
+
+X_INPUT_PATH = ROOT / "y.Utilities" / "yy.CoreTools" / "yyz.sl33p" / "x_input.py"
+_x_loader = SourceFileLoader("x_input", str(X_INPUT_PATH))
+_x_spec = spec_from_loader("x_input", _x_loader)
+x_mod = module_from_spec(_x_spec)
+_x_loader.exec_module(x_mod)
+prompt_agent = x_mod.prompt_agent
+extract_states = x_mod.extract_states
+parse_subgoals = x_mod.parse_subgoals
+parse_session_type = x_mod.parse_session_type
+
+Y_RECORD_PATH = ROOT / "y.Utilities" / "yy.CoreTools" / "yyz.sl33p" / "y_record.py"
+_r_loader = SourceFileLoader("y_record", str(Y_RECORD_PATH))
+_r_spec = spec_from_loader("y_record", _r_loader)
+r_mod = module_from_spec(_r_spec)
+_r_loader.exec_module(r_mod)
+sanitize = r_mod.sanitize
+parse_json_field = r_mod.parse_json_field
+build_record = r_mod.build_record
+next_timestamp = r_mod.next_timestamp
+
+Z_PERSIST_PATH = ROOT / "y.Utilities" / "yy.CoreTools" / "yyz.sl33p" / "z_persistence.py"
+_p_loader = SourceFileLoader("z_persistence", str(Z_PERSIST_PATH))
+_p_spec = spec_from_loader("z_persistence", _p_loader)
+p_mod = module_from_spec(_p_spec)
+_p_loader.exec_module(p_mod)
+ensure_data_dir = p_mod.ensure_data_dir
+save_record = p_mod.save_record
+parse_cultivate = p_mod.parse_cultivate
+repo_root = p_mod.repo_root
+append_delta = p_mod.append_delta
 
 CHAT_PATH = ROOT / "y.Utilities" / "yz.AgentOps" / "yz.AgentTools" / "chat" / "o.chat.py"
 loader = SourceFileLoader("chatmod", str(CHAT_PATH))
@@ -228,9 +240,7 @@ def main() -> None:
             except Exception as e:
                 print(f"Failed to commit chat log: {e}")
             try:
-                from yy.CoreTools.yyz.sl33p.z_persistence import save_timeline_metrics
-
-                save_timeline_metrics()
+                p_mod.save_timeline_metrics()
             except Exception as e:
                 print(f"Failed to update timeline metrics: {e}")
 

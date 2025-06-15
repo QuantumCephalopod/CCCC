@@ -7,7 +7,17 @@ import re
 from datetime import datetime
 from pathlib import Path
 
-from .x_load import data_dir
+try:
+    from .x_load import data_dir
+except Exception:  # fallback when executed outside package
+    from importlib.machinery import SourceFileLoader
+    from importlib.util import module_from_spec, spec_from_loader
+    HERE = Path(__file__).resolve().parent
+    loader = SourceFileLoader("x_load", str(HERE / "x_load.py"))
+    spec = spec_from_loader("x_load", loader)
+    mod = module_from_spec(spec)
+    loader.exec_module(mod)
+    data_dir = mod.data_dir
 
 
 def display_timeline_metrics(limit: int | None = None) -> None:
