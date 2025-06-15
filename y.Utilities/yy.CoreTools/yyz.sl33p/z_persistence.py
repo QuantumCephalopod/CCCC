@@ -24,7 +24,7 @@ def ensure_data_dir() -> None:
 
 
 def parse_cultivate(path: Path) -> tuple[set[str], list[tuple[str, str]]]:
-    """Parse cultivate links from z.Research.md."""
+    """Parse cultivate links from AGENT.md."""
     nodes: set[str] = set()
     edges: list[tuple[str, str]] = []
     lines = path.read_text(encoding="utf-8").splitlines()

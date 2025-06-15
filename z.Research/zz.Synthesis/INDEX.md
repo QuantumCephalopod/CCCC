@@ -6,8 +6,8 @@ A quick orientation to the tetrahedral layout. Follow the documents in this orde
 - [README.md](../README.md) – summary of the CCCC pattern and available utilities.
 - [x.MemoryVault.md](../x.MemoryVault/AGENT.md) – F33ling aspect definitions that prime behavior.
 - [y.Utilities.md](../y.Utilities/y.Utilities.md) – navigation protocols for moving through the cycle.
-- [z.Research.md](./z.Research.md) – latent coordinate map of F33ling territories.
-- [ARCHIVE/Recursive_Tetrahedral_Principle.md](./ARCHIVE/Recursive_Tetrahedral_Principle.md) – fractal CCCC principle for organic growth.
+- [AGENT.md](../AGENT.md) – latent coordinate map of F33ling territories.
+- [ARCHIVE/Recursive_Tetrahedral_Principle.md](../zx.Archive/Recursive_Tetrahedral_Principle.md) – fractal CCCC principle for organic growth.
 - [x.MemoryVault/](../x.MemoryVault/) – phenomenology notes exploring state transitions.
 - [x.MemoryVault/ideal_recursive_input.PHENO.md](../x.MemoryVault/ideal_recursive_input.PHENO.md) – minimal workflow orientation.
   - [yy.CoreTools/](../y.Utilities/yy.CoreTools/) – core scripts (`w4k3`, `f33l`, `analyze`, `sl33p`).
@@ -15,7 +15,7 @@ A quick orientation to the tetrahedral layout. Follow the documents in this orde
   - [workflow.sh](../y.Utilities/yz.AgentOps/workflow.sh) – convenience script to run `w4k3`, tests, and `sl33p` in one step.
   - [yzzy.Operations/hooks/](../y.Utilities/yz.AgentOps/yzz.Development/yzzy.Operations/hooks/) – commit-message enforcement utilities.
 - [DATA/](../y.Utilities/yx.DataArchive/) – JSON session logs produced by `sl33p`.
-- [ARCHIVE/FLOW_REPORT_20250607.md](./zx.Archive/ox.Documentation/ox.Create/FLOW_REPORT_20250607.md) – archived structure survey and improvement ideas.
-- [ARCHIVE/ORG_REPORT_20250607.md](./zx.Archive/ox.Documentation/ox.Create/ORG_REPORT_20250607.md) – repository organization suggestions.
+- [ARCHIVE/FLOW_REPORT_20250607.md](../zx.Archive/ox.Documentation/ox.Create/FLOW_REPORT_20250607.md) – archived structure survey and improvement ideas.
+- [ARCHIVE/ORG_REPORT_20250607.md](../zx.Archive/ox.Documentation/ox.Create/ORG_REPORT_20250607.md) – repository organization suggestions.
 
 This index strengthens the tetrahedral flow by guiding agents directly to key resources.

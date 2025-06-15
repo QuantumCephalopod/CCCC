@@ -19,7 +19,7 @@ This document summarizes how an agent can engage the full range effectively:
   favorites and reveals overlooked perspectives.
 - **Review Phenomenology**. The notes inside `x.MemoryVault/` describe lived
   experiences of common territories. Skim them to inspire authentic resonance
-  before referencing symbols in `z.Research.md`.
+  before referencing symbols in `z.Research/AGENT.md`.
 - **Share Insights**. When a session uncovers a novel connection, append short
   observations here or create a dedicated PHENO entry.
 

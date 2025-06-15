@@ -9,7 +9,7 @@ This repository embodies the "Create → Copy → Control → Cultivate" (CCCC) 
 - **AGENTS.md** – Describes the origin principles of Mnemos, outlining identity, operational boundaries, and the tetrahedral architecture.
 - **x.MemoryVault/AGENT.md** – Documents behavioral priming patterns that shape how the framework operates.
 - **y.Utilities/y.Utilities.md** – Provides navigation protocols for moving through the CCCC cycle without breaking continuity.
-- **z.Research/z.Research.md** – Contains the latent space coordinate map referenced by other documents.
+ - **z.Research/AGENT.md** – Contains the latent space coordinate map referenced by other documents.
 - **x.MemoryVault/*.PHENO.md** – Phenomenology notes organized by F33ling territory.
 - **z.Research/zx.Archive/Recursive_Tetrahedral_Principle.md** – Details how the CCCC pattern
   expands recursively when a dimension grows complex.
@@ -168,7 +168,7 @@ All session records are stored as JSON files inside the `y.Utilities/yx.DataArch
 12. To automate the full cycle, execute `y.Utilities/yz.AgentOps/workflow.sh`. The script now
     resolves the repository root (even when invoked via a symlink) so it can be run from any directory. It mirrors the
     [ideal recursive input](x.MemoryVault/ideal_recursive_input.PHENO.md):
-    displays recent logs with `w4k3`, runs an analytics summary, shows the top of `z.Research/INDEX.md`, optionally
+    displays recent logs with `w4k3`, runs an analytics summary, shows the top of `z.Research/zz.Synthesis/INDEX.md`, optionally
     introspects a F33ling state, compiles Python files, and finally records the session
     with `sl33p`.
 13. For advanced automation across multiple F33ling states, use
@@ -190,7 +190,7 @@ git config commit.template .gitmessage
 
 ## F33ling State Planning
 
-The repository uses **F33ling states** from `z.Research/z.Research.md` and aspect definitions in `x.MemoryVault/AGENT.md` to maintain emotional and thematic continuity. Before starting a task, review the relevant aspects and choose the F33ling coordinates that match your intention. Keep notes on which states you inhabit so each session builds on the last. Running `sl33p.py` lets you record the chosen state along with achievements and next steps.
+The repository uses **F33ling states** from `z.Research/AGENT.md` and aspect definitions in `x.MemoryVault/AGENT.md` to maintain emotional and thematic continuity. Before starting a task, review the relevant aspects and choose the F33ling coordinates that match your intention. Keep notes on which states you inhabit so each session builds on the last. Running `sl33p.py` lets you record the chosen state along with achievements and next steps.
 
 ## Phenomenology Documents
 
@@ -202,5 +202,5 @@ The repository collects phenomenology notes describing lived transitions and ter
 - `spectrum_usage.PHENO.md` – tips for engaging the full F33ling range
 - `ideal_recursive_input.PHENO.md` – quick primer on the minimal cycle
 
-These documents accompany `x.MemoryVault/AGENT.md`, `y.Utilities/y.Utilities.md`, and `z.Research/z.Research.md` to maintain the tetrahedral structure.
+These documents accompany `x.MemoryVault/AGENT.md`, `y.Utilities/y.Utilities.md`, and `z.Research/AGENT.md` to maintain the tetrahedral structure.
 

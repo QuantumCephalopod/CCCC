@@ -14,7 +14,7 @@ ROOT="$(cd "$(dirname "$(readlink -f "$0")")/../.." && pwd)"
 "$ROOT/mnemos" analyze summary | head -n 12 || exit 1
 
 # 3. Glance at the repository index to recall key docs
-head -n 12 "$ROOT/z.Research/INDEX.md" || exit 1
+head -n 12 "$ROOT/z.Research/zz.Synthesis/INDEX.md" || exit 1
 
 # 4. Compile all python files to check syntax
 py_files=$(git -C "$ROOT" ls-files '*.py' | sed "s|^|$ROOT/|")
