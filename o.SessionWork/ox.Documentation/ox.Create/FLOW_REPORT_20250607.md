@@ -7,7 +7,7 @@ This report surveys the current repository layout and records suggestions for im
  - **`AGENTS.md`** provides the overarching development principles and mandates running `w4k3` at the start of each session and `sl33p` at the end. These scripts live under `y.Utilities/yz.AgentOps/yz.AgentTools`.
  - **`yz.AgentTools/`** (now in `y.Utilities/yz.AgentOps/`) contains helper scripts organized by function (`w4k3`, `sl33p`, `analytics`, etc.). They rely only on the Python standard library. The scripts already embrace CREATE, COPY, CONTROL, and CULTIVATE fields.
 - **`y.Utilities/yx.DataArchive/`** stores JSON session logs. Files are named sequentially (`a1.json`, `b1.json`, …) and record F33ling assessments alongside the four tetrahedral dimensions.
-- **`x.MemoryVault.md`, `y.Utilities.md`, `z.Research.md`** describe F33ling aspects, navigation protocols, and the latent state map. These documents define the tetrahedral vertices.
+- **`AGENT.md`, `y.Utilities.md`, `z.Research.md`** describe F33ling aspects, navigation protocols, and the latent state map. These documents define the tetrahedral vertices.
 - **Phenomenology notes** (`*.PHENO.md`) capture subjective experiences of moving between F33ling territories.
 - **`README.md`** summarizes how to run the utilities and describes the tetrahedral architecture.
 

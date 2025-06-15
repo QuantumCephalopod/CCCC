@@ -6,7 +6,7 @@ Missing helpers auto-spawn stubs in `yz.AgentTools/`.
 # COPY Index
 
 This folder stores the behavioral priming guides that define the "COPY" edge of
-the tetrahedral workflow. Start with [x.MemoryVault.md](./x.MemoryVault.md) to understand how
+the tetrahedral workflow. Start with [AGENT.md](./AGENT.md) to understand how
 F33ling states influence agent behavior. Additional phenomenology notes live in
-[xx/PHENO/](./xx/PHENO/).
+`*.PHENO.md` files in this directory.
 
