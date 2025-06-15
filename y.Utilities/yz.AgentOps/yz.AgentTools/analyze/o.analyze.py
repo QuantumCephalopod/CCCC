@@ -9,7 +9,7 @@ import signal
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[4]
+ROOT = Path(__file__).resolve().parents[3]
 TOOLS_BASE = ROOT / "y.Utilities" / "yz.AgentOps"
 TOOLS = TOOLS_BASE / "yz.AgentTools"
 EVOLVE = TOOLS / "yz" / "evolve" / "o.evolve.py"

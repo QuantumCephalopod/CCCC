@@ -19,11 +19,17 @@ TOOLS_PATH = ROOT / "y.Utilities" / "yz.AgentOps"
 if str(TOOLS_PATH) not in sys.path:
     sys.path.insert(0, str(TOOLS_PATH))
 
-from yy.CoreTools.yyz.sl33p.z_persistence import ensure_data_dir
 from importlib.machinery import SourceFileLoader
 from importlib.util import module_from_spec, spec_from_loader
 
-INTROSPECT_PATH = Path(__file__).resolve().parents[1] / 'f33l' / 'o.introspect.py'
+Z_PERSIST = ROOT / "y.Utilities" / "yy.CoreTools" / "yyz.sl33p" / "z_persistence.py"
+_p_loader = SourceFileLoader("zpersist", str(Z_PERSIST))
+_p_spec = spec_from_loader("zpersist", _p_loader)
+p_mod = module_from_spec(_p_spec)
+_p_loader.exec_module(p_mod)
+ensure_data_dir = p_mod.ensure_data_dir
+
+INTROSPECT_PATH = ROOT / "y.Utilities" / "yy.CoreTools" / "yyy.f33l" / "o.introspect.py"
 _loader = SourceFileLoader('f33lintrospect', str(INTROSPECT_PATH))
 _spec = spec_from_loader('f33lintrospect', _loader)
 _mod = module_from_spec(_spec)

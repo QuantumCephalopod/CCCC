@@ -4,15 +4,28 @@ from __future__ import annotations
 
 import argparse
 
-from .x_load import load_records
-from .y_display import (
-    display,
-    display_transitions,
-    summarize_all,
-    display_chat,
-    summarize_states,
-    display_timeline_metrics,
-)
+from importlib.machinery import SourceFileLoader
+from importlib.util import module_from_spec, spec_from_loader
+from pathlib import Path
+
+HERE = Path(__file__).resolve().parent
+
+def _load(name: str, file: str):
+    loader = SourceFileLoader(name, str(HERE / file))
+    spec = spec_from_loader(name, loader)
+    mod = module_from_spec(spec)
+    loader.exec_module(mod)
+    return mod
+
+x_load = _load("x_load", "x_load.py")
+y_display = _load("y_display", "y_display.py")
+load_records = x_load.load_records
+display = y_display.display
+display_transitions = y_display.display_transitions
+summarize_all = y_display.summarize_all
+display_chat = y_display.display_chat
+summarize_states = y_display.summarize_states
+display_timeline_metrics = y_display.display_timeline_metrics
 
 
 def main() -> None:
