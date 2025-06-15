@@ -21,11 +21,11 @@ Two scripts help track progress across sessions:
 1. `w4k3.py` – Displays the most recent session records from the `y.Utilities/yx.DataArchive` folder. **Run it at the start of every session** to recall achievements, focus areas, and the recorded F33ling state:
 
    ```bash
-   python y.Utilities/yz.AgentOps/yz.AgentTools/o.mnemos.py w4k3
+   python y.Utilities/yy.CoreTools/yyo.mnemos.py w4k3
    ```
    Pass additional flags after `w4k3` to forward them to the underlying CLI. For example:
    ```bash
-   python y.Utilities/yz.AgentOps/yz.AgentTools/o.mnemos.py w4k3 --top-states 3
+   python y.Utilities/yy.CoreTools/yyo.mnemos.py w4k3 --top-states 3
    ```
  A shortcut script `mnemos` mirrors this usage and now resolves the repository
  root automatically. If the helper is copied outside the repo, it falls back to
@@ -125,8 +125,8 @@ All session records are stored as JSON files inside the `y.Utilities/yx.DataArch
 
 1. Ensure you have Python 3 available on your system. The utilities rely only on the standard library, so no extra packages are required.
 2. Open a terminal at the repository root.
-3. **Always** run `mnemos w4k3` (or `python y.Utilities/yz.AgentOps/yz.AgentTools/o.mnemos.py w4k3`) first to recall the last few saved sessions and see recent chat messages.
-4. After completing your work and passing tests, **run `mnemos sl33p`** (or `python y.Utilities/yz.AgentOps/yz.AgentTools/o.mnemos.py sl33p`) and follow the prompts to capture your current F33ling state, achievements, and next focus.
+3. **Always** run `mnemos w4k3` (or `python y.Utilities/yy.CoreTools/yyo.mnemos.py w4k3`) first to recall the last few saved sessions and see recent chat messages.
+4. After completing your work and passing tests, **run `mnemos sl33p`** (or `python y.Utilities/yy.CoreTools/yyo.mnemos.py sl33p`) and follow the prompts to capture your current F33ling state, achievements, and next focus.
 5. Briefly note *why* you selected that F33ling state when logging the session. This reasoning helps future agents recognize useful patterns.
 6. To run `sl33p` non-interactively, set the environment variables `ASSESS`, `ACHIEVE`, and `NEXT` (optionally `CREATE`, `COPY`, `CONTROL`, `CULTIVATE`, `NARRATIVE`, `SUBGOALS`, and `SESSION_TYPE`) before invoking the script. `SUBGOALS` expects a semicolon-separated list like `"goal|done|strategy;goal2|no|method"`. Any missing fields will trigger prompts so every log captures the full tetrahedral context. Example:
 
