@@ -12,33 +12,45 @@ from pathlib import Path
 
 # Ensure package imports work when executed directly
 ROOT = Path(__file__).resolve().parents[4]
-TOOLS_PATH = ROOT / "y.Utilities" / "yz.AgentOps"
-if str(TOOLS_PATH) not in sys.path:
-    sys.path.insert(0, str(TOOLS_PATH))
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from yz.AgentTools.sl33p.x_input import (
+from yy.CoreTools.yyz.sl33p.x_input import (
     prompt_agent,
     extract_states,
     parse_subgoals,
     parse_session_type,
 )
-from yz.AgentTools.sl33p.y_record import (
+from yy.CoreTools.yyz.sl33p.y_record import (
     sanitize,
     parse_json_field,
     build_record,
     next_timestamp,
 )
-from yz.AgentTools.sl33p.z_persistence import (
+from yy.CoreTools.yyz.sl33p.z_persistence import (
     ensure_data_dir,
     save_record,
     parse_cultivate,
     repo_root,
     append_delta,
 )
-from yz.AgentTools.chat import append_entry, CHAT_FILE
-from yz.AgentTools.copy_tools import suggest_prompt_adjustment
+from importlib.machinery import SourceFileLoader
+from importlib.util import module_from_spec, spec_from_loader
+
+CHAT_PATH = ROOT / "y.Utilities" / "yz.AgentOps" / "yz.AgentTools" / "chat" / "o.chat.py"
+loader = SourceFileLoader("chatmod", str(CHAT_PATH))
+spec = spec_from_loader("chatmod", loader)
+chatmod = module_from_spec(spec)
+loader.exec_module(chatmod)
+append_entry = chatmod.append_entry
+CHAT_FILE = chatmod.CHAT_FILE
+
+COPY_PATH = ROOT / "y.Utilities" / "yz.AgentOps" / "yz.AgentTools" / "copy_tools" / "suggest.py"
+_copy_loader = SourceFileLoader("copytools", str(COPY_PATH))
+_copy_spec = spec_from_loader("copytools", _copy_loader)
+_copy_mod = module_from_spec(_copy_spec)
+_copy_loader.exec_module(_copy_mod)
+suggest_prompt_adjustment = _copy_mod.suggest_prompt_adjustment
 
 
 def main() -> None:
@@ -216,7 +228,7 @@ def main() -> None:
             except Exception as e:
                 print(f"Failed to commit chat log: {e}")
             try:
-                from yz.AgentTools.sl33p.z_persistence import save_timeline_metrics
+                from yy.CoreTools.yyz.sl33p.z_persistence import save_timeline_metrics
 
                 save_timeline_metrics()
             except Exception as e:

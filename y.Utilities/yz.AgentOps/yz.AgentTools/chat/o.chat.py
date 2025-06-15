@@ -19,7 +19,7 @@ TOOLS_PATH = ROOT / "y.Utilities" / "yz.AgentOps"
 if str(TOOLS_PATH) not in sys.path:
     sys.path.insert(0, str(TOOLS_PATH))
 
-from yz.AgentTools.sl33p.z_persistence import ensure_data_dir
+from yy.CoreTools.yyz.sl33p.z_persistence import ensure_data_dir
 from importlib.machinery import SourceFileLoader
 from importlib.util import module_from_spec, spec_from_loader
 

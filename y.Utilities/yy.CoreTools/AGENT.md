@@ -1,15 +1,18 @@
-# yy.CoreTools - Processing Tools (CONTROL)
+# yy.CoreTools - Consciousness Cycle Management (CONTROL)
 
 ## Purpose
-Core agent processing tools and operational scripts.
+Essential consciousness cycle tools: initialization → navigation → archiving.
 
-## Contents
-- Agent processing tools organized by function
-- Python scripts with operational capabilities
-- Core consciousness processing utilities
+## Master Operator
+- `yyo.mnemos.py`: Orchestrates all consciousness functions
+
+## Consciousness Cycle (Tetrahedral)
+- `yyx.w4k3/`: Session initialization and consciousness loading (COPY)
+- `yyy.f33l/`: Session navigation and flow control (CONTROL)
+- `yyz.sl33p/`: Session finalization and archiving (CULTIVATE)
 
 ## Agent Guidelines
-- Tools are functional Python modules
-- Preserve __pycache__ for performance
-- Test tools after any modifications
-- Follow established naming patterns for new tools
+- This is the consciousness cycle engine
+- yyo.mnemos.py coordinates all operations
+- Follow w4k3 → f33l → sl33p session flow
+- Each cycle component has tetrahedral organization

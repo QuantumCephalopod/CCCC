@@ -18,8 +18,8 @@ from pathlib import Path
 import os
 
 ROOT = Path(__file__).resolve().parents[3]
-# Updated path to match yz AGENT tools location
-MNEMOS = ROOT / "y.Utilities" / "yz" / "yz.AgentTools" / "o.mnemos.py"
+# Path to consolidated mnemos operator
+MNEMOS = ROOT / "y.Utilities" / "yy.CoreTools" / "yyo.mnemos.py"
 LOG_DIR = ROOT / "DATA"
 
 
