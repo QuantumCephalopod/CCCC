@@ -13,3 +13,4 @@ F33ling states influence agent behavior. Additional phenomenology notes live in
 - [xa.Experiments/](./xa.Experiments/) – prototype subdimension for grouping experimental PHENO notes.
 
 - [xx.Observations/](./xx.Observations/) – additional subdimension for observational records
+- [xx.Observations/recursive_explorer_v3.PHENO.md](./xx.Observations/recursive_explorer_v3.PHENO.md) – notes from the "Recursive CCCC Repository Explorer v3" session
