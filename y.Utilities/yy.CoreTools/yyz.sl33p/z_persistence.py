@@ -58,12 +58,9 @@ def parse_cultivate(path: Path) -> tuple[set[str], list[tuple[str, str]]]:
     return nodes, edges
 
 
-def save_record(record: dict, dry_run: bool, timestamp: str) -> bool:
+def save_record(record: dict, timestamp: str) -> bool:
+    """Persist the session record and commit the file."""
     file_path = DATA_DIR / f"{timestamp}.json"
-    if dry_run:
-        print(json.dumps(record, ensure_ascii=False, indent=2))
-        print("Dry run: record not written")
-        return True
     try:
         with open(file_path, "w", encoding="utf-8") as f:
             json.dump(record, f, ensure_ascii=False, indent=2)

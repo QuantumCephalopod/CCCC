@@ -55,8 +55,6 @@ def cmd_w4k3(args: argparse.Namespace) -> int:
 
 def cmd_sl33p(args: argparse.Namespace) -> int:
     cmd = ["python", str(SL33P)]
-    if args.dry_run:
-        cmd.append("--dry-run")
     if args.start:
         cmd += ["--start", args.start]
     if args.commands:
@@ -94,7 +92,6 @@ def main() -> int:
     p_w4k3.set_defaults(func=cmd_w4k3)
 
     p_sl33p = sub.add_parser("sl33p", help="Record a session")
-    p_sl33p.add_argument("--dry-run", action="store_true")
     p_sl33p.add_argument("--start", type=str, default=None)
     p_sl33p.add_argument("--command", dest="commands", action="append")
     p_sl33p.add_argument("--no-deep", action="store_true")

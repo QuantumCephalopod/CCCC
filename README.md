@@ -49,7 +49,7 @@ These metrics update automatically whenever `sl33p` records a session.
   CONTROL, and CULTIVATE notes. Non-interactive mode supports the
   environment variables `CREATE`, `COPY`, `CONTROL`, `CULTIVATE` (or the
   legacy `ASPECTS`, `LEARN`, `METHOD`, `DEPTH`) as well as `NARRATIVE`
-  in addition to `ASSESS`, `ACHIEVE`, and `NEXT`. Use `sl33p` to record every session. A `--dry-run` flag is available only for debugging or verifying the script once:
+  in addition to `ASSESS`, `ACHIEVE`, and `NEXT`. Use `sl33p` to record every session:
 
    ```bash
    mnemos sl33p

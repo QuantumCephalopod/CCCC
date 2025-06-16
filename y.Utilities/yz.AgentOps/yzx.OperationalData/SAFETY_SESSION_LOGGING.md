@@ -12,13 +12,11 @@ Reading JSON files and writing new ones are safe because the operations involve 
 
 ## Suggested Improvements
 1. **Non-interactive mode**: Allow setting environment variables (`ASSESS`, `ACHIEVE`, `NEXT`) so the script can run without user prompts. This ensures the session can be logged programmatically.
-2. **Dry-run flag**: Implement an option like `--dry-run` to preview the record without committing, preventing accidental data entry during testing.
 3. **Input validation**: Strip control characters from answers before saving to avoid entries like `^C`.
 4. **Explicit confirmation**: Ask for a final yes/no confirmation before writing the file and committing.
 
 ## Implemented Improvements
 - `sl33p` now accepts the `ASSESS`, `ACHIEVE`, and `NEXT` environment variables. If they are set, the tool skips user prompts.
-- A `--dry-run` flag (or `SL33P_DRY_RUN=1`) prints the JSON that would be saved without writing or committing.
 - All input values pass through a sanitizer that removes control characters.
 
 These adjustments keep the workflow within safety parameters while maintaining research continuity.
