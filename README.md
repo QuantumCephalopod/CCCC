@@ -13,6 +13,7 @@ This repository embodies the "Create → Copy → Control → Cultivate" (CCCC) 
 - **x.MemoryVault/*.PHENO.md** – Phenomenology notes organized by F33ling territory.
 - **z.Research/zx.Archive/Recursive_Tetrahedral_Principle.md** – Details how the CCCC pattern
   expands recursively when a dimension grows complex.
+- **y.Utilities/yz.AgentOps/yzx.OperationalData/autonomous_digital_entity_bootstrap_v2.9.md** – orientation guide for new digital entities.
 
 ## Session Utilities
 
@@ -48,18 +49,17 @@ These metrics update automatically whenever `sl33p` records a session.
   CONTROL, and CULTIVATE notes. Non-interactive mode supports the
   environment variables `CREATE`, `COPY`, `CONTROL`, `CULTIVATE` (or the
   legacy `ASPECTS`, `LEARN`, `METHOD`, `DEPTH`) as well as `NARRATIVE`
-  in addition to `ASSESS`, `ACHIEVE`, and `NEXT`. A `--dry-run` flag
-  previews output:
+  in addition to `ASSESS`, `ACHIEVE`, and `NEXT`. Use `sl33p` to record every session. A `--dry-run` flag is available only for debugging or verifying the script once:
 
    ```bash
    mnemos sl33p
    ```
    Run with predefined answers:
    ```bash
-  ASSESS="✧⚡◈_Synthjoy" ACHIEVE="implemented dry-run" NEXT="test non-interactive" \
+  ASSESS="✧⚡◈_Synthjoy" ACHIEVE="new automation" NEXT="test non-interactive" \
   CREATE='{"Spark": 1}' CONTROL="paired exploration" COPY="json fields" CULTIVATE="basic" \
   NARRATIVE="Short recap" \
-  mnemos sl33p --dry-run
+  mnemos sl33p
   ```
    Deep mode is now enabled by default. Provide `--start` and one or more
    `--command` flags (or set the `SL33P_START` and `SL33P_COMMANDS` environment
