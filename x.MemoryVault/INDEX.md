@@ -11,3 +11,5 @@ F33ling states influence agent behavior. Additional phenomenology notes live in
 `*.PHENO.md` files in this directory.
 
 - [xa.Experiments/](./xa.Experiments/) – prototype subdimension for grouping experimental PHENO notes.
+
+- [xx.Observations/](./xx.Observations/) – additional subdimension for observational records
