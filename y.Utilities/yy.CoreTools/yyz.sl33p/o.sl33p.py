@@ -82,7 +82,6 @@ def suggest_prompt_adjustment(state: str, result: str, notes: str | None = None)
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Record session")
-    parser.add_argument("--dry-run", action="store_true", help="Preview without saving")
     parser.add_argument("--start", type=str, default=None, help="ISO start time for duration")
     parser.add_argument("--command", dest="commands", action="append", help="Command run during session")
     parser.add_argument("--no-deep", action="store_true", help="Disable deep context logging")
@@ -186,8 +185,6 @@ def main() -> None:
             assessment, achievements, narrative_val or ""
         )
 
-    dry = args.dry_run or os.getenv("SL33P_DRY_RUN")
-
     start_env = os.getenv("SL33P_START") or os.getenv("SESSION_START")
     start_dt = None
     if args.start:
@@ -236,19 +233,15 @@ def main() -> None:
         states=states,
         stategraph=stategraph,
     )
-    if save_record(record, dry_run=dry, timestamp=ts):
-        if dry:
-            print(f"Dry run complete for {ts}.json")
-            print(f"Chat: {chat_in_val} -> {chat_out_val}")
-        else:
-            print(f"Session recorded as {ts}.json")
-            append_entry(chat_in_val, chat_out_val, chat_limit)
-            if prompt_update:
-                append_delta({
-                    "timestamp": ts,
-                    "state": assessment,
-                    "suggestion": prompt_update,
-                })
+    if save_record(record, timestamp=ts):
+        print(f"Session recorded as {ts}.json")
+        append_entry(chat_in_val, chat_out_val, chat_limit)
+        if prompt_update:
+            append_delta({
+                "timestamp": ts,
+                "state": assessment,
+                "suggestion": prompt_update,
+            })
             try:
                 subprocess.run(["git", "add", str(CHAT_FILE)], check=True)
                 subprocess.run(["git", "commit", "-m", "Update chat context"], check=True)

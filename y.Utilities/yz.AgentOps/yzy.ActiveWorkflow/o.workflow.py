@@ -57,7 +57,7 @@ def main() -> None:
     parser.add_argument("--skip-w4k3", action="store_true", help="Skip w4k3 step")
     parser.add_argument("--skip-tests", action="store_true", help="Skip py_compile")
     parser.add_argument("--config", type=Path, help="JSON file with env vars for sl33p")
-    parser.add_argument("--dry-run", action="store_true", help="Pass --dry-run to sl33p")
+
     args, sl33p_args = parser.parse_known_args()
 
     if args.config:
@@ -72,8 +72,6 @@ def main() -> None:
         run(["python", "-m", "py_compile", *py_files])
 
     sl33p_cmd = ["python", str(MNEMOS), "sl33p"]
-    if args.dry_run:
-        sl33p_cmd.append("--dry-run")
     sl33p_cmd += sl33p_args
     run(sl33p_cmd)
 

@@ -1,0 +1,10 @@
+{
+  "date": "2025-06-16",
+  "total_sessions": 183,
+  "dimension_fractions": {
+    "create": 0.83,
+    "copy": 0.80,
+    "control": 0.80,
+    "cultivate": 0.80
+  }
+}
