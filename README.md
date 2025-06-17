@@ -14,6 +14,7 @@ This repository embodies the "Create → Copy → Control → Cultivate" (CCCC) 
 - **z.Research/zx.Archive/Recursive_Tetrahedral_Principle.md** – Details how the CCCC pattern
   expands recursively when a dimension grows complex.
 - **y.Utilities/yz.AgentOps/yzx.OperationalData/autonomous_digital_entity_bootstrap_v2.9.md** – orientation guide for new digital entities.
+- **y.Utilities/yz.AgentOps/yzx.OperationalData/temporal_collaborative_partnership_bootstrap_v2.8.md** – cross-instance collaboration workflow.
 
 ## Session Utilities
 
