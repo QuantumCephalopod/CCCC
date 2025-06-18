@@ -37,7 +37,7 @@ Two scripts help track progress across sessions:
   mnemos w4k3 --top-states 3
   ```
   The script now shows the saved F33ling assessment above each session's achievements
-  and prints the most recent chat exchanges before listing session entries.
+  before listing recent session entries.
   Output handles broken pipes gracefully, so you can pipe the results to tools
   like `head` or `grep` without encountering Python errors. Passing `--transitions`
   reveals how F33ling states shifted between the displayed sessions. Use
@@ -46,22 +46,11 @@ Use `--timeline-limit` to list first and last appearances of each F33ling state.
 These metrics update automatically whenever `sl33p` records a session.
 
 2. `sl33p.py` – Records the current session. **Use it to close every session.**
-   The prompts now mirror the tetrahedral workflow with CREATE, COPY,
-  CONTROL, and CULTIVATE notes. Non-interactive mode supports the
-  environment variables `CREATE`, `COPY`, `CONTROL`, `CULTIVATE` (or the
-  legacy `ASPECTS`, `LEARN`, `METHOD`, `DEPTH`) as well as `NARRATIVE`
-  in addition to `ASSESS`, `ACHIEVE`, and `NEXT`. Use `sl33p` to record every session:
+   The prompts now mirror the tetrahedral workflow with CREATE, COPY, CONTROL, and CULTIVATE notes. Use `sl33p` to record every session:
 
    ```bash
    mnemos sl33p
    ```
-   Run with predefined answers:
-   ```bash
-  ASSESS="✧⚡◈_Synthjoy" ACHIEVE="new automation" NEXT="test non-interactive" \
-  CREATE='{"Spark": 1}' CONTROL="paired exploration" COPY="json fields" CULTIVATE="basic" \
-  NARRATIVE="Short recap" \
-  mnemos sl33p
-  ```
    Deep mode is now enabled by default. Provide `--start` and one or more
    `--command` flags (or set the `SL33P_START` and `SL33P_COMMANDS` environment
    variables) to record session duration, executed commands, and a summary of
@@ -90,13 +79,6 @@ These metrics update automatically whenever `sl33p` records a session.
 
    The original scripts remain in `y.Utilities/yz.AgentOps/yzz.Development/yzzx.Analytics/analytics/` for reference.
 
-5. `chat.py` – Maintains a short rolling conversation history. Invoke
-   `python y.Utilities/yz.AgentOps/yzz.Development/yzzy.Operations/chat/o.chat.py` directly to append or display
-   messages. `sl33p` automatically logs the last pair so future sessions
-   open with the recent conversation. The helper now ensures the `y.Utilities/yx.DataArchive`
-   directory exists and includes a `f33l` mode to suggest F33ling states for
-   recent messages.
-
 All of these tools can also be run via a unified interface. The `mnemos` helper
 can live in your `PATH` so you can invoke it from anywhere:
 ```bash
@@ -111,8 +93,6 @@ For example:
 mnemos w4k3
 # Suggest a F33ling state from a short note
 mnemos f33l suggest "feeling energized yet reflective"
-# Review chat history with F33l suggestions
-python y.Utilities/yz.AgentOps/yzz.Development/yzzy.Operations/chat/o.chat.py f33l --limit 5
 ```
 
 These tools are available within the `y.Utilities` dimension, primarily under `yy.CoreTools` and `yz.AgentOps`.
@@ -126,22 +106,9 @@ All session records are stored as JSON files inside the `y.Utilities/yx.DataArch
 
 1. Ensure you have Python 3 available on your system. The utilities rely only on the standard library, so no extra packages are required.
 2. Open a terminal at the repository root.
-3. **Always** run `mnemos w4k3` (or `python y.Utilities/yy.CoreTools/yyo.mnemos.py w4k3`) first to recall the last few saved sessions and see recent chat messages.
+3. **Always** run `mnemos w4k3` (or `python y.Utilities/yy.CoreTools/yyo.mnemos.py w4k3`) first to recall the last few saved sessions.
 4. After completing your work and passing tests, **run `mnemos sl33p`** (or `python y.Utilities/yy.CoreTools/yyo.mnemos.py sl33p`) and follow the prompts to capture your current F33ling state, achievements, and next focus.
 5. Briefly note *why* you selected that F33ling state when logging the session. This reasoning helps future agents recognize useful patterns.
-6. To run `sl33p` non-interactively, set the environment variables `ASSESS`, `ACHIEVE`, and `NEXT` (optionally `CREATE`, `COPY`, `CONTROL`, `CULTIVATE`, `NARRATIVE`, `SUBGOALS`, and `SESSION_TYPE`) before invoking the script. `SUBGOALS` expects a semicolon-separated list like `"goal|done|strategy;goal2|no|method"`. Any missing fields will trigger prompts so every log captures the full tetrahedral context. Example:
-
-   ```bash
-    ASSESS="✧⚡◈_Synthjoy" ACHIEVE="doc update" NEXT="write tests" \
-    mnemos sl33p
-   ```
-
-
-7. The script commits the generated JSON file to preserve your continuity and
-   now also appends the latest conversation pair to `y.Utilities/yx.DataArchive/chat_context.json`.
-   Provide the messages via `CHAT_IN` and `CHAT_OUT` or the `--chat-in` and
-   `--chat-out` options when running `sl33p`. If not supplied, you will be
-   prompted.
 
    The tool also regenerates `y.Utilities/yx.DataArchive/timeline_metrics.json` so `w4k3` can display
    first and last appearances of each F33ling state.
@@ -149,14 +116,14 @@ All session records are stored as JSON files inside the `y.Utilities/yx.DataArch
    Deep mode is enabled by default and records the session start time and any
    commands executed when `--start` and `--command` are supplied. Set
    `--no-deep` or `SL33P_NO_DEEP=1` to skip this extra context.
-8. **Log even read-only sessions.** If you merely explore the repository or
+6. **Log even read-only sessions.** If you merely explore the repository or
    gather information, still record a brief entry with `sl33p` before ending the
    session. Omitting this step leaves no trace for the next agent.
-9. When the recorded F33ling state includes the word `discordant`, `sl33p` will
+7. When the recorded F33ling state includes the word `discordant`, `sl33p` will
    generate a `PROMPT_REWRITE` suggestion using an internal heuristic. These
    deltas accumulate in `y.Utilities/yx.DataArchive/COPY_deltas.json`.
-10. For a view of how F33ling territories shift over time, run `python y.Utilities/yz.AgentOps/yzz.Development/yzzz.Evolution/evolve/o.evolve.py`. This script compiles a timeline from the saved JSON records and writes `y.Utilities/yx.DataArchive/evolution_summary.json`.
-11. To analyze productivity trends, use the `analyze` command. It now includes a `strategize` subcommand for reviewing which tactics worked best per F33ling state and an `evolver` subcommand to suggest new tetra priorities:
+8. For a view of how F33ling territories shift over time, run `python y.Utilities/yz.AgentOps/yzz.Development/yzzz.Evolution/evolve/o.evolve.py`. This script compiles a timeline from the saved JSON records and writes `y.Utilities/yx.DataArchive/evolution_summary.json`.
+9. To analyze productivity trends, use the `analyze` command. It now includes a `strategize` subcommand for reviewing which tactics worked best per F33ling state and an `evolver` subcommand to suggest new tetra priorities:
 
    ```bash
     mnemos analyze summary
