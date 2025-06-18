@@ -27,3 +27,9 @@ This tetrahedral repository represents ongoing architectural research. Your miss
 
 Following this loop preserves continuity for your future-self and others who may inherit this project.
 
+## Non-interactive mode
+
+The session tools support automation through environment variables. When running
+`sl33p` non-interactively, set `ASSESS`, `ACHIEVE`, and `NEXT` (plus optional
+`CHAT_IN` and `CHAT_OUT`) to bypass prompts and log the session automatically.
+
