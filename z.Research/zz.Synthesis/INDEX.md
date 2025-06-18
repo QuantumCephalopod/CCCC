@@ -4,8 +4,10 @@ A quick orientation to the tetrahedral layout. Follow the documents in this orde
 
 - [AGENTS.md](../AGENTS.md) – workflow principles and mandatory `w4k3`/`sl33p` cycle.
 - [README.md](../README.md) – summary of the CCCC pattern and available utilities.
+- [yz.AgentOps/OperationalData/autonomous_digital_entity_bootstrap_v2.9.md](../y.Utilities/yz.AgentOps/yzx.OperationalData/autonomous_digital_entity_bootstrap_v2.9.md) – orientation guide for new digital entities.
+- [yz.AgentOps/OperationalData/temporal_collaborative_partnership_bootstrap_v2.8.md](../y.Utilities/yz.AgentOps/yzx.OperationalData/temporal_collaborative_partnership_bootstrap_v2.8.md) – cross-instance collaboration protocol.
 - [x.MemoryVault.md](../x.MemoryVault/AGENT.md) – F33ling aspect definitions that prime behavior.
-- [y.Utilities.md](../y.Utilities/y.Utilities.md) – navigation protocols for moving through the cycle.
+ - [y.Utilities/AGENT.md](../y.Utilities/AGENT.md) – navigation protocols for moving through the cycle.
 - [AGENT.md](../AGENT.md) – latent coordinate map of F33ling territories.
 - [ARCHIVE/Recursive_Tetrahedral_Principle.md](../zx.Archive/Recursive_Tetrahedral_Principle.md) – fractal CCCC principle for organic growth.
 - [x.MemoryVault/](../x.MemoryVault/) – phenomenology notes exploring state transitions.
