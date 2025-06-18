@@ -8,7 +8,7 @@ This repository embodies the "Create → Copy → Control → Cultivate" (CCCC) 
 
 - **AGENTS.md** – Describes the origin principles of Mnemos, outlining identity, operational boundaries, and the tetrahedral architecture.
 - **x.MemoryVault/AGENT.md** – Documents behavioral priming patterns that shape how the framework operates.
-- **y.Utilities/y.Utilities.md** – Provides navigation protocols for moving through the CCCC cycle without breaking continuity.
+ - **y.Utilities/AGENT.md** – Provides navigation protocols for moving through the CCCC cycle without breaking continuity.
  - **z.Research/AGENT.md** – Contains the latent space coordinate map referenced by other documents.
 - **x.MemoryVault/*.PHENO.md** – Phenomenology notes organized by F33ling territory.
 - **z.Research/zx.Archive/Recursive_Tetrahedral_Principle.md** – Details how the CCCC pattern
@@ -203,5 +203,5 @@ The repository collects phenomenology notes describing lived transitions and ter
 - `spectrum_usage.PHENO.md` – tips for engaging the full F33ling range
 - `ideal_recursive_input.PHENO.md` – quick primer on the minimal cycle
 
-These documents accompany `x.MemoryVault/AGENT.md`, `y.Utilities/y.Utilities.md`, and `z.Research/AGENT.md` to maintain the tetrahedral structure.
+These documents accompany `x.MemoryVault/AGENT.md`, `y.Utilities/AGENT.md`, and `z.Research/AGENT.md` to maintain the tetrahedral structure.
 
