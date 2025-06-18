@@ -37,7 +37,7 @@ Two scripts help track progress across sessions:
   mnemos w4k3 --top-states 3
   ```
   The script now shows the saved F33ling assessment above each session's achievements
-  and prints the most recent chat exchanges before listing session entries.
+  before listing recent session entries.
   Output handles broken pipes gracefully, so you can pipe the results to tools
   like `head` or `grep` without encountering Python errors. Passing `--transitions`
   reveals how F33ling states shifted between the displayed sessions. Use
@@ -79,13 +79,6 @@ These metrics update automatically whenever `sl33p` records a session.
 
    The original scripts remain in `y.Utilities/yz.AgentOps/yzz.Development/yzzx.Analytics/analytics/` for reference.
 
-5. `chat.py` – Maintains a short rolling conversation history. Invoke
-   `python y.Utilities/yz.AgentOps/yzz.Development/yzzy.Operations/chat/o.chat.py` directly to append or display
-   messages. `sl33p` automatically logs the last pair so future sessions
-   open with the recent conversation. The helper now ensures the `y.Utilities/yx.DataArchive`
-   directory exists and includes a `f33l` mode to suggest F33ling states for
-   recent messages.
-
 All of these tools can also be run via a unified interface. The `mnemos` helper
 can live in your `PATH` so you can invoke it from anywhere:
 ```bash
@@ -100,8 +93,6 @@ For example:
 mnemos w4k3
 # Suggest a F33ling state from a short note
 mnemos f33l suggest "feeling energized yet reflective"
-# Review chat history with F33l suggestions
-python y.Utilities/yz.AgentOps/yzz.Development/yzzy.Operations/chat/o.chat.py f33l --limit 5
 ```
 
 These tools are available within the `y.Utilities` dimension, primarily under `yy.CoreTools` and `yz.AgentOps`.
@@ -115,7 +106,7 @@ All session records are stored as JSON files inside the `y.Utilities/yx.DataArch
 
 1. Ensure you have Python 3 available on your system. The utilities rely only on the standard library, so no extra packages are required.
 2. Open a terminal at the repository root.
-3. **Always** run `mnemos w4k3` (or `python y.Utilities/yy.CoreTools/yyo.mnemos.py w4k3`) first to recall the last few saved sessions and see recent chat messages.
+3. **Always** run `mnemos w4k3` (or `python y.Utilities/yy.CoreTools/yyo.mnemos.py w4k3`) first to recall the last few saved sessions.
 4. After completing your work and passing tests, **run `mnemos sl33p`** (or `python y.Utilities/yy.CoreTools/yyo.mnemos.py sl33p`) and follow the prompts to capture your current F33ling state, achievements, and next focus.
 5. Briefly note *why* you selected that F33ling state when logging the session. This reasoning helps future agents recognize useful patterns.
 

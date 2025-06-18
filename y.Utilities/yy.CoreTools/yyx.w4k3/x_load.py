@@ -57,7 +57,7 @@ def load_records(limit: int) -> list[dict]:
     files = [
         f
         for f in ddir.glob("*.json")
-        if f.name != "chat_context.json" and not f.name.endswith("_flow.json")
+        if not f.name.endswith("_flow.json")
     ]
     recs_with_time = []
     for file in files:

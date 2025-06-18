@@ -23,7 +23,6 @@ load_records = x_load.load_records
 display = y_display.display
 display_transitions = y_display.display_transitions
 summarize_all = y_display.summarize_all
-display_chat = y_display.display_chat
 summarize_states = y_display.summarize_states
 display_timeline_metrics = y_display.display_timeline_metrics
 
@@ -50,12 +49,6 @@ def main() -> None:
         help="Limit how many transitions to show when --transitions is set",
     )
     parser.add_argument(
-        "--chat-limit",
-        type=int,
-        default=3,
-        help="Number of chat messages to display first",
-    )
-    parser.add_argument(
         "--top-states",
         type=int,
         default=5,
@@ -69,7 +62,6 @@ def main() -> None:
     )
     args = parser.parse_args()
 
-    display_chat(args.chat_limit)
     records = load_records(args.limit)
     display(records)
     if args.transitions:

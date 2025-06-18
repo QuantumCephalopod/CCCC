@@ -4,8 +4,7 @@
 Operational utilities, interaction tools, and system hooks.
 
 ## Contents
-- Chat and interaction management tools
-- Operational utilities and system hooks
+- Interaction utilities and system hooks
 - Copy tools and operational support utilities
 
 ## Agent Guidelines

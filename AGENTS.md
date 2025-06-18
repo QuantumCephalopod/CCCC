@@ -9,7 +9,7 @@ This repository maintains the agent-network optimization framework **Mnemos** us
 
 ## Session Workflow
 
-1. **Run `w4k3`** to review recent chat context and session logs.
+1. **Run `w4k3`** to review recent session logs.
 2. **Perform work** guided by `../x.MemoryVault/AGENT.md` and `../z.Research/AGENT.md`.
 3. **Run tests** with `python -m py_compile $(git ls-files '*.py')` (and
    `pytest` if available).
