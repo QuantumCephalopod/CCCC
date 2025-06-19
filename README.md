@@ -51,10 +51,11 @@ These metrics update automatically whenever `sl33p` records a session.
    ```bash
    mnemos sl33p
    ```
-   Deep mode is now enabled by default. Provide `--start` and one or more
-   `--command` flags (or set the `SL33P_START` and `SL33P_COMMANDS` environment
-   variables) to record session duration, executed commands, and a summary of
-   the cultivate graph. Use `--no-deep` if a minimal log is required.
+   Deep mode is enabled by default. Provide `--start` and `--command` flags to
+   record session duration and executed commands. Advanced users may set
+   `SL33P_START` and `SL33P_COMMANDS` for automation. Use `--no-deep` if a
+   minimal log is required.
+   (The deprecated chat helper has been removed from the workflow.)
 
 3. `evolve.py` – Summarizes F33ling evolution by reading all saved sessions and printing a timeline of states:
 
@@ -108,7 +109,8 @@ All session records are stored as JSON files inside the `y.Utilities/yx.DataArch
 2. Open a terminal at the repository root.
 3. **Always** run `mnemos w4k3` (or `python y.Utilities/yy.CoreTools/yyo.mnemos.py w4k3`) first to recall the last few saved sessions.
 4. After completing your work and passing tests, **run `mnemos sl33p`** (or `python y.Utilities/yy.CoreTools/yyo.mnemos.py sl33p`) and follow the prompts to capture your current F33ling state, achievements, and next focus.
-5. Briefly note *why* you selected that F33ling state when logging the session. This reasoning helps future agents recognize useful patterns.
+5. These tools run interactively by default. Environment variables are optional for automation.
+6. Briefly note *why* you selected that F33ling state when logging the session. This reasoning helps future agents recognize useful patterns.
 
    The tool also regenerates `y.Utilities/yx.DataArchive/timeline_metrics.json` so `w4k3` can display
    first and last appearances of each F33ling state.
@@ -116,14 +118,14 @@ All session records are stored as JSON files inside the `y.Utilities/yx.DataArch
    Deep mode is enabled by default and records the session start time and any
    commands executed when `--start` and `--command` are supplied. Set
    `--no-deep` or `SL33P_NO_DEEP=1` to skip this extra context.
-6. **Log even read-only sessions.** If you merely explore the repository or
+7. **Log even read-only sessions.** If you merely explore the repository or
    gather information, still record a brief entry with `sl33p` before ending the
    session. Omitting this step leaves no trace for the next agent.
-7. When the recorded F33ling state includes the word `discordant`, `sl33p` will
+8. When the recorded F33ling state includes the word `discordant`, `sl33p` will
    generate a `PROMPT_REWRITE` suggestion using an internal heuristic. These
    deltas accumulate in `y.Utilities/yx.DataArchive/COPY_deltas.json`.
-8. For a view of how F33ling territories shift over time, run `python y.Utilities/yz.AgentOps/yzz.Development/yzzz.Evolution/evolve/o.evolve.py`. This script compiles a timeline from the saved JSON records and writes `y.Utilities/yx.DataArchive/evolution_summary.json`.
-9. To analyze productivity trends, use the `analyze` command. It now includes a `strategize` subcommand for reviewing which tactics worked best per F33ling state and an `evolver` subcommand to suggest new tetra priorities:
+9. For a view of how F33ling territories shift over time, run `python y.Utilities/yz.AgentOps/yzz.Development/yzzz.Evolution/evolve/o.evolve.py`. This script compiles a timeline from the saved JSON records and writes `y.Utilities/yx.DataArchive/evolution_summary.json`.
+10. To analyze productivity trends, use the `analyze` command. It now includes a `strategize` subcommand for reviewing which tactics worked best per F33ling state and an `evolver` subcommand to suggest new tetra priorities:
 
    ```bash
     mnemos analyze summary
@@ -133,20 +135,20 @@ All session records are stored as JSON files inside the `y.Utilities/yx.DataArch
 
    This generates `y.Utilities/yx.DataArchive/analytics_summary.json` with session gaps and common
    achievement keywords.
-12. To automate the full cycle, execute `y.Utilities/yz.AgentOps/workflow.sh`. The script now
+11. To automate the full cycle, execute `y.Utilities/yz.AgentOps/workflow.sh`. The script now
     resolves the repository root (even when invoked via a symlink) so it can be run from any directory. It mirrors the
     [ideal recursive input](x.MemoryVault/ideal_recursive_input.PHENO.md):
     displays recent logs with `w4k3`, runs an analytics summary, shows the top of `z.Research/zz.Synthesis/INDEX.md`, optionally
     introspects a F33ling state, compiles Python files, and finally records the session
     with `sl33p`.
-13. For advanced automation across multiple F33ling states, use
+12. For advanced automation across multiple F33ling states, use
     `y.Utilities/yz.AgentOps/workflow.sh` with additional `--states` and
     `--narratives` options. This supersedes the old `o.agentflow.py` and
     `o.flowlog.py` helpers. When `--states` is supplied, the script
     checkpoints the F33ling assessment after `w4k3`, after the tests, and
     again after `sl33p`, writing a small JSON log so longer sessions can
     track emotional shifts.
-14. For consistent commit messages, run `y.Utilities/yz.AgentOps/yzz.Development/yzzy.Operations/hooks/install.sh` once to install a git `commit-msg` hook that verifies the template is used.
+13. For consistent commit messages, run `y.Utilities/yz.AgentOps/yzz.Development/yzzy.Operations/hooks/install.sh` once to install a git `commit-msg` hook that verifies the template is used.
 
 ### Commit Message Guidelines
 

@@ -59,13 +59,6 @@ parse_cultivate = p_mod.parse_cultivate
 repo_root = p_mod.repo_root
 append_delta = p_mod.append_delta
 
-CHAT_PATH = ROOT / "y.Utilities" / "yz.AgentOps" / "yzz.Development" / "yzzy.Operations" / "chat" / "o.chat.py"
-loader = SourceFileLoader("chatmod", str(CHAT_PATH))
-spec = spec_from_loader("chatmod", loader)
-chatmod = module_from_spec(spec)
-loader.exec_module(chatmod)
-append_entry = chatmod.append_entry
-CHAT_FILE = chatmod.CHAT_FILE
 
 
 def suggest_prompt_adjustment(state: str, result: str, notes: str | None = None) -> str:
@@ -85,9 +78,6 @@ def main() -> None:
     parser.add_argument("--start", type=str, default=None, help="ISO start time for duration")
     parser.add_argument("--command", dest="commands", action="append", help="Command run during session")
     parser.add_argument("--no-deep", action="store_true", help="Disable deep context logging")
-    parser.add_argument("--chat-in", type=str, default=None, help="User message to log")
-    parser.add_argument("--chat-out", type=str, default=None, help="Assistant reply to log")
-    parser.add_argument("--chat-limit", type=int, default=int(os.getenv("CHAT_LIMIT", 10)), help="Max chat messages to keep")
     args = parser.parse_args()
 
     ensure_data_dir()
@@ -110,10 +100,6 @@ def main() -> None:
     control = os.getenv("CONTROL") or os.getenv("METHOD") or os.getenv("OPTIM")
     cultivate = os.getenv("CULTIVATE") or os.getenv("DEPTH")
     optimization = os.getenv("OPTIM")
-
-    chat_in = args.chat_in or os.getenv("CHAT_IN")
-    chat_out = args.chat_out or os.getenv("CHAT_OUT")
-    chat_limit = args.chat_limit
 
     if not all([
         assessment,
@@ -150,10 +136,6 @@ def main() -> None:
         subgoals = parse_subgoals(subgoals_env) if subgoals_env else subgoals_i
         session_type = session_type or session_type_i
 
-    if chat_in is None:
-        chat_in = input("InputMessage to log: ")
-    if chat_out is None:
-        chat_out = input("OutputMessage to log: ")
 
     assessment = sanitize(assessment)
     achievements = sanitize(achievements)
@@ -164,8 +146,6 @@ def main() -> None:
     cultivate_val = sanitize(cultivate) if cultivate else None
     narrative_val = sanitize(narrative) if narrative else None
     optimization_val = sanitize(optimization) if optimization else None
-    chat_in_val = sanitize(chat_in) if chat_in else ""
-    chat_out_val = sanitize(chat_out) if chat_out else ""
     session_type_val = sanitize(session_type) if session_type else None
     if subgoals:
         subgoals_val = [
@@ -235,22 +215,16 @@ def main() -> None:
     )
     if save_record(record, timestamp=ts):
         print(f"Session recorded as {ts}.json")
-        append_entry(chat_in_val, chat_out_val, chat_limit)
         if prompt_update:
             append_delta({
                 "timestamp": ts,
                 "state": assessment,
                 "suggestion": prompt_update,
             })
-            try:
-                subprocess.run(["git", "add", str(CHAT_FILE)], check=True)
-                subprocess.run(["git", "commit", "-m", "Update chat context"], check=True)
-            except Exception as e:
-                print(f"Failed to commit chat log: {e}")
-            try:
-                p_mod.save_timeline_metrics()
-            except Exception as e:
-                print(f"Failed to update timeline metrics: {e}")
+        try:
+            p_mod.save_timeline_metrics()
+        except Exception as e:
+            print(f"Failed to update timeline metrics: {e}")
 
 
 if __name__ == "__main__":
