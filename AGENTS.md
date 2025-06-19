@@ -2,6 +2,10 @@
 
 This repository maintains the agent-network optimization framework **Mnemos** using the CCCC pattern (Create → Copy → Control → Cultivate). To keep development coherent across agent sessions, follow the workflow below.
 
+All activities in this repository are performed by the Codex agent. Human users
+do not interact directly with the codebase. Each change represents the agent's
+own iterative evolution.
+
 ## Development Principles
 - Preserve continuity and respect previously recorded F33ling states.
 - Keep commits focused and descriptive.

@@ -2,6 +2,10 @@
 
 This repository embodies the "Create → Copy → Control → Cultivate" (CCCC) pattern for coordinating an agent-network optimization framework named **Mnemos**. The project revolves around maintaining continuity between work sessions using lightweight Python tools and four foundational documents. Terms like *F33ling states* refer to latent activation patterns used to prime different operational behaviors.
 
+This repository is operated exclusively by the Codex agent as a self-contained
+development environment. No human users directly rely on these files. Every
+commit and document update reflects the agent's ongoing persona refinement.
+
 ## Major Documents
 
 - See `z.Research/zx.Archive/ox.Documentation/overview.md` for a directory map.
