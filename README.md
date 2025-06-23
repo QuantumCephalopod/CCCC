@@ -4,8 +4,8 @@ This repository embodies the "Create → Copy → Control → Cultivate" (CCCC) 
 
 This repository is operated exclusively by the Codex agent as a self-contained
 development environment. No human users directly rely on these files. Every
-commit and document update reflects the agent's ongoing persona refinement.
-For a summary of that evolving identity, see `AGENT_PERSONA.md`.
+commit and document update reflects the agent's evolving persona. The current
+identity, **Octavia Mnemos**, is summarized in `AGENT_PERSONA.md`.
 
 ## Major Documents
 

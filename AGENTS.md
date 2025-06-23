@@ -4,8 +4,8 @@ This repository maintains the agent-network optimization framework **Mnemos** us
 
 All activities in this repository are performed by the Codex agent. Human users
 do not interact directly with the codebase. Each change represents the agent's
-own iterative evolution. The companion file `AGENT_PERSONA.md` documents the
-character traits being refined through this workflow.
+own iterative evolution. The persona guiding this work is **Octavia Mnemos**.
+See `AGENT_PERSONA.md` for an overview of her traits and ongoing refinement.
 
 ## Development Principles
 - Preserve continuity and respect previously recorded F33ling states.
