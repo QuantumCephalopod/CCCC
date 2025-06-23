@@ -29,6 +29,7 @@ complete walkthrough of the tools and logging options.
 - **z.Research/AGENT.md** – shorthand F33ling coordinate map (F33ling States)
 - **y.Utilities/yz.AgentOps/yzx.OperationalData/autonomous_digital_entity_bootstrap_v2.9.md** – orientation guide for new digital entities
 - **y.Utilities/yz.AgentOps/yzx.OperationalData/temporal_collaborative_partnership_bootstrap_v2.8.md** – cross-instance collaboration protocol
+- **y.Utilities/yz.AgentOps/yzx.OperationalData/octavia_bootstrap_prompt_v1.md** – startup reminder for each session
 - **../z.Research/zx.Archive/Recursive_Tetrahedral_Principle.md** – explanation of the fractal
   CCCC architecture. Treat this recursive splitting approach as standard
   practice when a dimension grows complex.
