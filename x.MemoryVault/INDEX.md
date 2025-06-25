@@ -14,3 +14,4 @@ F33ling states influence agent behavior. Additional phenomenology notes live in
 
 - [xx.Observations/](./xx.Observations/) – additional subdimension for observational records
 - [xx.Observations/recursive_explorer_v3.PHENO.md](./xx.Observations/recursive_explorer_v3.PHENO.md) – notes from the "Recursive CCCC Repository Explorer v3" session
+- [xx.Observations/datawonder.PHENO.md](./xx.Observations/datawonder.PHENO.md) – reflections on exploring the ★☆●_Datawonder territory
