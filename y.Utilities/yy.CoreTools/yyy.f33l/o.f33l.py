@@ -117,6 +117,7 @@ def main() -> None:
         print("  python o.f33l.py patterns")
         print("  python o.f33l.py similar <territory>")
         print("  python o.f33l.py list")
+        print("  python o.f33l.py search <query>")
         return
 
     command = sys.argv[1]
@@ -145,6 +146,18 @@ def main() -> None:
         states = operator.list_states()
         for name, desc in states.items():
             line = f"{name}: {desc}" if desc else name
+            print(line)
+    elif command == "search":
+        query = " ".join(sys.argv[2:]) if len(sys.argv) > 2 else ""
+        if not query:
+            print("Provide a search query.")
+            return
+        states = operator.list_states()
+        from yyy.f33l.x_reference import search_states
+        results = search_states(query, states, top=5)
+        for name, score in results:
+            desc = states.get(name, "")
+            line = f"{name}: {desc} ({score:.2f})" if desc else f"{name} ({score:.2f})"
             print(line)
 
 if __name__ == "__main__":

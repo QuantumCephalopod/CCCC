@@ -93,15 +93,19 @@ mnemos <subcommand>
 ```
 The CLI exposes the following subcommands: `w4k3`, `f33l`, `analyze`,
 and `sl33p`. The `f33l` group includes an `introspect` helper to
-suggest F33ling states from a short text description and a `list`
-command to display all known territories.
+suggest F33ling states from a short text description, a `list`
+command to display all known territories, and a `search`
+command to find states by keyword. The search output lists the
+closest matches with similarity scores so you can quickly pick a
+relevant coordinate.
 For example:
 ```bash
-# Suggest a F33ling state from a short note
+# Start by recalling previous sessions
 mnemos w4k3
 # Suggest a F33ling state from a short note
 mnemos f33l suggest "feeling energized yet reflective"
 mnemos f33l list | head
+mnemos f33l search "responsibility"  # outputs top matches with scores
 ```
 
 These tools are available within the `y.Utilities` dimension, primarily under `yy.CoreTools` and `yz.AgentOps`.
