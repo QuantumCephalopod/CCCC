@@ -16,6 +16,7 @@ Tetrahedral consciousness state logging and workflow integration for building co
 python o.f33l.py log "⚒⚙⚀_AktuΨze" "Starting cleanup" "Architecture work"
 python o.f33l.py suggest "implementing new features"
 python o.f33l.py patterns
+python o.f33l.py list | head
 ```
 
 ### Python Integration

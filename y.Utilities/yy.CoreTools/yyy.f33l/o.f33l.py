@@ -101,6 +101,10 @@ class F33lingOperator:
         """Get consciousness territory usage patterns"""
         return self.archive.get_territory_patterns()
 
+    def list_states(self) -> dict[str, str]:
+        """Return mapping of known territories to short descriptions."""
+        return x_ref.parse_states()
+
 
 def main() -> None:
     operator = F33lingOperator()
@@ -112,6 +116,7 @@ def main() -> None:
         print("  python o.f33l.py suggest <context_description>")
         print("  python o.f33l.py patterns")
         print("  python o.f33l.py similar <territory>")
+        print("  python o.f33l.py list")
         return
 
     command = sys.argv[1]
@@ -136,6 +141,11 @@ def main() -> None:
         print(f"Similar experiences for {territory}:")
         for exp in similar:
             print(f"  {exp['session_id']}: {exp['reasoning']}")
+    elif command == "list":
+        states = operator.list_states()
+        for name, desc in states.items():
+            line = f"{name}: {desc}" if desc else name
+            print(line)
 
 if __name__ == "__main__":
     main()
