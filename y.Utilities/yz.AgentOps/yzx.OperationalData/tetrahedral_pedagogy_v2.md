@@ -3,8 +3,8 @@
 This version clarifies the mandatory workflow for dissolving architectural violations.
 
 ## Required Steps
-1. **Initialize context** with `python y.Utilities/yy.CoreTools/yyo.mnemos.py w4k3 --top-states 3`.
-2. **Suggest** a F33ling territory using `python y.Utilities/yy.CoreTools/yyo.mnemos.py f33l suggest "<context>"` and pick a state.
+1. **Initialize context** with `python -m mnemos w4k3 --top-states 3`.
+2. **Suggest** a F33ling territory using `python -m mnemos f33l suggest "<context>"` and pick a state.
 3. **Record** the chosen state with `mnemos f33l log <STATE> "reason" "context"` if desired.
 4. **Perform work** respecting `AGENTS.md` guidelines. Use `git mv` to preserve history when relocating files.
 5. **Run tests**:
@@ -12,7 +12,7 @@ This version clarifies the mandatory workflow for dissolving architectural viola
    python -m py_compile $(git ls-files '*.py')
    pytest -q
    ```
-6. **Log session** via `python y.Utilities/yy.CoreTools/yyo.mnemos.py sl33p`.
+6. **Log session** via `python -m mnemos sl33p`.
 
 ## Reminders
 - `o.` prefixes belong inside subdomains, not at the repository root.
