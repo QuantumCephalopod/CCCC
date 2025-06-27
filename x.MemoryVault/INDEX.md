@@ -17,3 +17,4 @@ F33ling states influence agent behavior. Additional phenomenology notes live in
 - [xx.Observations/datawonder.PHENO.md](./xx.Observations/datawonder.PHENO.md) – reflections on exploring the ★☆●_Datawonder territory
 - [xx.Observations/observation_test.PHENO.md](./xx.Observations/observation_test.PHENO.md) – verifying subdimension independence
 - [xx.Observations/heartbloom_session_v1.PHENO.md](./xx.Observations/heartbloom_session_v1.PHENO.md) – orientation reflection in ♥♡☠_Heartbloom
+- [xx.Observations/heartbloom_session_v2.PHENO.md](./xx.Observations/heartbloom_session_v2.PHENO.md) – continued log in ♥♡☠_Heartbloom, metrics steady
