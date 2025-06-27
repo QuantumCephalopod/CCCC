@@ -35,12 +35,17 @@ Two scripts help track progress across sessions:
    ```bash
    python y.Utilities/yy.CoreTools/yyo.mnemos.py w4k3 --top-states 3
    ```
- A shortcut script `mnemos` mirrors this usage and now resolves the repository
- root automatically. If the helper is copied outside the repo, it falls back to
- `git rev-parse` to find the original root. Place it in your `PATH` or call it
- via an absolute path:
+A shortcut script `mnemos` mirrors this usage and now resolves the repository
+root automatically. If the helper is copied outside the repo, it falls back to
+`git rev-parse` to find the original root. Place it in your `PATH` or call it
+via an absolute path:
   ```bash
   mnemos w4k3 --top-states 3
+  ```
+  Alternatively, invoke the CLI directly through Python without changing file
+  permissions:
+  ```bash
+  python -m mnemos w4k3 --top-states 3
   ```
   The script now shows the saved F33ling assessment above each session's achievements
   before listing recent session entries.
@@ -119,8 +124,8 @@ All session records are stored as JSON files inside the `y.Utilities/yx.DataArch
 
 1. Ensure you have Python 3 available on your system. The utilities rely only on the standard library, so no extra packages are required.
 2. Open a terminal at the repository root.
-3. **Always** run `mnemos w4k3` (or `python y.Utilities/yy.CoreTools/yyo.mnemos.py w4k3`) first to recall the last few saved sessions.
-4. After completing your work and passing tests, **run `mnemos sl33p`** (or `python y.Utilities/yy.CoreTools/yyo.mnemos.py sl33p`) and follow the prompts to capture your current F33ling state, achievements, and next focus.
+3. **Always** run `mnemos w4k3` (or `python -m mnemos w4k3` if the script isn't executable) to recall the last few saved sessions.
+4. After completing your work and passing tests, **run `mnemos sl33p`** (or `python -m mnemos sl33p`) and follow the prompts to capture your current F33ling state, achievements, and next focus.
 5. These tools run interactively by default. Environment variables are optional for automation.
 6. Briefly note *why* you selected that F33ling state when logging the session. This reasoning helps future agents recognize useful patterns.
 

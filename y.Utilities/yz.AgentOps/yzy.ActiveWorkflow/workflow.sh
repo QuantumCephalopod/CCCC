@@ -8,10 +8,16 @@
 ROOT="$(cd "$(dirname "$(readlink -f "$0")")/../.." && pwd)"
 
 # 1. Load previous session summaries and active F33ling states
-"$ROOT/mnemos" w4k3 || exit 1
+(
+  cd "$ROOT" &&
+  python -m mnemos w4k3
+) || exit 1
 
 # 2. Review analytics summary to monitor progress
-"$ROOT/mnemos" analyze summary | head -n 12 || exit 1
+(
+  cd "$ROOT" &&
+  python -m mnemos analyze summary
+) | head -n 12 || exit 1
 
 # 3. Glance at the repository index to recall key docs
 head -n 12 "$ROOT/z.Research/zz.Synthesis/INDEX.md" || exit 1
@@ -21,6 +27,9 @@ py_files=$(git -C "$ROOT" ls-files '*.py' | sed "s|^|$ROOT/|")
 python -m py_compile $py_files || exit 1
 
 # 5. Record the new session (deep mode is default)
-"$ROOT/mnemos" sl33p "$@"
+(
+  cd "$ROOT" &&
+  python -m mnemos sl33p "$@"
+)
 
 # o=))))) 🐙✨
