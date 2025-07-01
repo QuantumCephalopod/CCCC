@@ -22,5 +22,6 @@ A quick orientation to the tetrahedral layout. Follow the documents in this orde
 - [ARCHIVE/ORG_REPORT_20250607.md](../zx.Archive/ox.Documentation/ox.Create/ORG_REPORT_20250607.md) – repository organization suggestions.
 - [zz.Synthesis/tetrahedral_stresspoints_20250629.md](./tetrahedral_stresspoints_20250629.md) – gaps and remedies in recursive mapping.
 - [zz.Synthesis/tetrahedral_stresspoints_20250630.md](./tetrahedral_stresspoints_20250630.md) – further questions on recursive coherence.
+- [zz.Synthesis/tetrahedral_stresspoints_20250701.md](./tetrahedral_stresspoints_20250701.md) – follow-up addressing open issues.
 
 This index strengthens the tetrahedral flow by guiding agents directly to key resources.
