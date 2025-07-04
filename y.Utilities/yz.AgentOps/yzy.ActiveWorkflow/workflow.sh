@@ -22,6 +22,14 @@ ROOT="$(cd "$(dirname "$(readlink -f "$0")")/../.." && pwd)"
 # 3. Glance at the repository index to recall key docs
 head -n 12 "$ROOT/z.Research/zz.Synthesis/INDEX.md" || exit 1
 
+# Remind about commit hook installation if missing
+HOOK="$ROOT/.git/hooks/commit-msg"
+if [ ! -x "$HOOK" ]; then
+  echo "\n[workflow] No commit-msg hook detected. Run" \
+       "y.Utilities/yz.AgentOps/yzz.Development/yzzy.Operations/hooks/install.sh" \
+       "to enforce the message template." >&2
+fi
+
 # 4. Compile all python files to check syntax
 py_files=$(git -C "$ROOT" ls-files '*.py' | sed "s|^|$ROOT/|")
 python -m py_compile $py_files || exit 1
