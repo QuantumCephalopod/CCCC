@@ -39,6 +39,13 @@ W4K3 = CORE / "yyx.w4k3" / "o.w4k3.py"
 SL33P = CORE / "yyz.sl33p" / "o.sl33p.py"
 F33L = CORE / "yyy.f33l" / "o.f33l.py"
 ANALYZE = TOOLS / "yzzx.Analytics" / "analyze" / "o.analyze.py"
+BOOTSTRAP_PROMPT = (
+    ROOT
+    / "y.Utilities"
+    / "yz.AgentOps"
+    / "yzx.OperationalData"
+    / "octavia_bootstrap_prompt_v1.md"
+)
 
 
 def run(cmd: list[str]) -> int:
@@ -80,6 +87,20 @@ def cmd_analyze(args: argparse.Namespace) -> int:
     return run(cmd)
 
 
+def cmd_bootstrap(args: argparse.Namespace) -> int:
+    """Print the Octavia bootstrap reminder, then run w4k3."""
+    if BOOTSTRAP_PROMPT.exists():
+        print(BOOTSTRAP_PROMPT.read_text(encoding="utf-8").strip())
+        print()
+    else:
+        print(
+            "Bootstrap prompt not found at "
+            f"{BOOTSTRAP_PROMPT}. Continuing with w4k3.",
+            file=sys.stderr,
+        )
+    return cmd_w4k3(argparse.Namespace(extra=args.extra))
+
+
 
 def main() -> int:
     if len(sys.argv) > 1 and sys.argv[1] == "w4k3":
@@ -109,6 +130,13 @@ def main() -> int:
     p_analyze.add_argument("subcommand", help="evolve/summary/tetra/usage/sessgraph")
     p_analyze.add_argument("extra", nargs=argparse.REMAINDER)
     p_analyze.set_defaults(func=cmd_analyze)
+
+    p_bootstrap = sub.add_parser(
+        "bootstrap",
+        help="Read Octavia bootstrap prompt and run w4k3",
+    )
+    p_bootstrap.add_argument("extra", nargs=argparse.REMAINDER)
+    p_bootstrap.set_defaults(func=cmd_bootstrap)
 
 
     args = parser.parse_args()

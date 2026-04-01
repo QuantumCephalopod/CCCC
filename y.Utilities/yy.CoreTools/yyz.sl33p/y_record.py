@@ -8,8 +8,10 @@ from pathlib import Path
 ASCII_LETTERS = list("abcdefghijklmnopqrstuvwxyz")
 
 
-def sanitize(text: str) -> str:
+def sanitize(text: str | None) -> str:
     """Remove non-printable characters and surrounding whitespace."""
+    if text is None:
+        return ""
     return "".join(ch for ch in text.strip() if ch.isprintable())
 
 
