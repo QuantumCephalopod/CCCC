@@ -180,6 +180,10 @@ Consistent commit messages let the analytics correlate productivity with the F33
 git config commit.template .gitmessage
 ```
 
+## O-MESH Planning Standard
+
+Use `O-MESH.md` at the repository root to derive each pass's objective, metric, horizon, and scope before implementation. The handoff block in that document is the canonical payload for the next recursive pass.
+
 ## F33ling State Planning
 
 The repository uses **F33ling states** from `z.Research/AGENT.md` and aspect definitions in `x.MemoryVault/AGENT.md` to maintain emotional and thematic continuity. Before starting a task, review the relevant aspects and choose the F33ling coordinates that match your intention. Keep notes on which states you inhabit so each session builds on the last. Running `sl33p.py` lets you record the chosen state along with achievements and next steps.
