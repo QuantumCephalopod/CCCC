@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 import json
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 ASCII_LETTERS = list("abcdefghijklmnopqrstuvwxyz")
@@ -40,6 +40,18 @@ def next_timestamp(data_dir: Path) -> str:
     cycle = count // len(ASCII_LETTERS) + 1
     prefix = current_time_stamp()
     return f"{prefix}_{letter}{cycle}"
+
+
+def _compute_duration_seconds(start_time: datetime, now: datetime | None = None) -> int:
+    """Return non-negative elapsed seconds from start_time to now."""
+    if now is None:
+        now = (
+            datetime.now(start_time.tzinfo)
+            if start_time.tzinfo is not None
+            else datetime.now(timezone.utc).replace(tzinfo=None)
+        )
+    delta = now - start_time
+    return max(0, int(delta.total_seconds()))
 
 
 def build_record(
@@ -94,8 +106,7 @@ def build_record(
         record["optimization"] = optimization
     if start_time:
         record["start"] = start_time.isoformat(timespec="seconds")
-        delta = datetime.utcnow() - start_time
-        record["duration"] = max(0, int(delta.total_seconds()))
+        record["duration"] = _compute_duration_seconds(start_time)
     if commands:
         record["commands"] = commands
     if states:

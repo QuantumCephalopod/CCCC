@@ -34,7 +34,15 @@ fi
 py_files=$(git -C "$ROOT" ls-files '*.py' | sed "s|^|$ROOT/|")
 python -m py_compile $py_files || exit 1
 
-# 5. Record the new session (deep mode is default)
+# 5. Run pytest if available
+if command -v pytest >/dev/null 2>&1; then
+  (
+    cd "$ROOT" &&
+    pytest -q
+  ) || exit 1
+fi
+
+# 6. Record the new session (deep mode is default)
 (
   cd "$ROOT" &&
   python -m mnemos sl33p "$@"

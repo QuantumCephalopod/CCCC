@@ -26,5 +26,6 @@ A quick orientation to the tetrahedral layout. Follow the documents in this orde
 - [zz.Synthesis/tetrahedral_stresspoints_20250629.md](./tetrahedral_stresspoints_20250629.md) – gaps and remedies in recursive mapping.
 - [zz.Synthesis/tetrahedral_stresspoints_20250630.md](./tetrahedral_stresspoints_20250630.md) – further questions on recursive coherence.
 - [zz.Synthesis/tetrahedral_stresspoints_20250701.md](./tetrahedral_stresspoints_20250701.md) – follow-up addressing open issues.
+- [zz.Synthesis/repo_organism_kernel_20260401.md](./repo_organism_kernel_20260401.md) – ternary kernel model embedded in tetrahedral CCCC constraints.
 
 This index strengthens the tetrahedral flow by guiding agents directly to key resources.

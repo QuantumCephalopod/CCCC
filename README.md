@@ -157,14 +157,14 @@ All session records are stored as JSON files inside the `y.Utilities/yx.DataArch
 
    This generates `y.Utilities/yx.DataArchive/analytics_summary.json` with session gaps and common
    achievement keywords.
-11. To automate the full cycle, execute `y.Utilities/yz.AgentOps/workflow.sh`. The script now
+11. To automate the full cycle, execute `y.Utilities/yz.AgentOps/yzy.ActiveWorkflow/workflow.sh`. The script now
     resolves the repository root (even when invoked via a symlink) so it can be run from any directory. It mirrors the
     [ideal recursive input](x.MemoryVault/ideal_recursive_input.PHENO.md):
     displays recent logs with `w4k3`, runs an analytics summary, shows the top of `z.Research/zz.Synthesis/INDEX.md`, optionally
-    introspects a F33ling state, compiles Python files, and finally records the session
+    introspects a F33ling state, compiles Python files, runs `pytest` when available, and finally records the session
     with `sl33p`.
 12. For advanced automation across multiple F33ling states, use
-    `y.Utilities/yz.AgentOps/workflow.sh` with additional `--states` and
+    `y.Utilities/yz.AgentOps/yzy.ActiveWorkflow/workflow.sh` with additional `--states` and
     `--narratives` options. This supersedes the old `o.agentflow.py` and
     `o.flowlog.py` helpers. When `--states` is supplied, the script
     checkpoints the F33ling assessment after `w4k3`, after the tests, and

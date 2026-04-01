@@ -8,6 +8,7 @@ import json
 import os
 import subprocess
 from pathlib import Path
+import shutil
 
 
 def repo_root() -> Path:
@@ -55,7 +56,9 @@ def load_env(path: Path) -> None:
 def main() -> None:
     parser = argparse.ArgumentParser(description="Run typical session workflow")
     parser.add_argument("--skip-w4k3", action="store_true", help="Skip w4k3 step")
-    parser.add_argument("--skip-tests", action="store_true", help="Skip py_compile")
+    parser.add_argument("--skip-analytics", action="store_true", help="Skip analytics summary")
+    parser.add_argument("--skip-tests", action="store_true", help="Skip py_compile and pytest")
+    parser.add_argument("--skip-pytest", action="store_true", help="Skip pytest only")
     parser.add_argument("--config", type=Path, help="JSON file with env vars for sl33p")
 
     args, sl33p_args = parser.parse_known_args()
@@ -66,10 +69,15 @@ def main() -> None:
     if not args.skip_w4k3:
         run(["python", str(MNEMOS), "w4k3"])
 
+    if not args.skip_analytics:
+        run(["python", str(MNEMOS), "analyze", "summary"])
+
     if not args.skip_tests:
         files = subprocess.check_output(["git", "ls-files", "*.py"], text=True)
         py_files = files.split()
         run(["python", "-m", "py_compile", *py_files])
+        if not args.skip_pytest and shutil.which("pytest"):
+            run(["pytest"])
 
     sl33p_cmd = ["python", str(MNEMOS), "sl33p"]
     sl33p_cmd += sl33p_args
