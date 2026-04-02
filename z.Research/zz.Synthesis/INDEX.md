@@ -27,5 +27,10 @@ A quick orientation to the tetrahedral layout. Follow the documents in this orde
 - [zz.Synthesis/tetrahedral_stresspoints_20250630.md](./tetrahedral_stresspoints_20250630.md) – further questions on recursive coherence.
 - [zz.Synthesis/tetrahedral_stresspoints_20250701.md](./tetrahedral_stresspoints_20250701.md) – follow-up addressing open issues.
 - [zz.Synthesis/repo_organism_kernel_20260401.md](./repo_organism_kernel_20260401.md) – ternary kernel model embedded in tetrahedral CCCC constraints.
+- [zz.Synthesis/tet_kernel_alignment_20260401.md](./tet_kernel_alignment_20260401.md) – canonical `.tet` address/operator semantics and alignment contract.
+
+- [zz.Synthesis/tet_naming_audit_20260401.md](./tet_naming_audit_20260401.md) – strict naming audit against recursive `.tet` address conventions.
+
+- [zz.Synthesis/tet_rename_wave1_plan_20260401.md](./tet_rename_wave1_plan_20260401.md) – staged rename strategy derived from deterministic cluster canonicalization.
 
 This index strengthens the tetrahedral flow by guiding agents directly to key resources.
