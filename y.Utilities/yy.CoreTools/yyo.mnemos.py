@@ -8,7 +8,12 @@ import subprocess
 import signal
 from pathlib import Path
 import sys
-from mnemos.tet_naming import build_summary, write_rename_plan
+from mnemos.tet_naming import (
+    build_summary,
+    find_canonical_collisions,
+    git_tracked_files,
+    write_rename_plan,
+)
 
 # Exit cleanly when piped output is truncated (e.g., `| head`).
 signal.signal(signal.SIGPIPE, signal.SIG_DFL)
@@ -119,6 +124,10 @@ def cmd_tet_audit(args: argparse.Namespace) -> int:
             f"- {issue.path} :: segment={issue.segment} :: {issue.reason}"
             f" :: suggest={suggestion}"
         )
+    if args.fail_on_divergence and bad > 0:
+        return 1
+    if args.max_divergent is not None and bad > args.max_divergent:
+        return 1
     return 0
 
 
@@ -127,6 +136,27 @@ def cmd_tet_plan(args: argparse.Namespace) -> int:
     out = write_rename_plan(ROOT, Path(args.out) if args.out else None)
     print(f"Wrote rename plan: {out}")
     return 0
+
+
+def cmd_tet_collisions(args: argparse.Namespace) -> int:
+    """Report canonicalized path collisions (duplicate effective addresses)."""
+    files = git_tracked_files(ROOT)
+    collisions = find_canonical_collisions(files)
+    print(f"Tracked files: {len(files)}")
+    print(f"Canonical collisions: {len(collisions)}")
+    if not collisions:
+        print("No duplicate canonical addresses detected.")
+        return 0
+
+    if args.limit <= 0:
+        return 0
+    print()
+    print("Colliding canonical addresses:")
+    for collision in collisions[: args.limit]:
+        print(f"- {collision.canonical_path}")
+        for path in collision.paths:
+            print(f"  - {path}")
+    return 1 if args.fail_on_collision else 0
 
 
 
@@ -176,6 +206,17 @@ def main() -> int:
         default=20,
         help="Maximum number of divergent paths to print (default: 20)",
     )
+    p_tet_audit.add_argument(
+        "--fail-on-divergence",
+        action="store_true",
+        help="Exit with status 1 when any divergent path is found",
+    )
+    p_tet_audit.add_argument(
+        "--max-divergent",
+        type=int,
+        default=None,
+        help="Exit with status 1 when divergent paths exceed this threshold",
+    )
     p_tet_audit.set_defaults(func=cmd_tet_audit)
 
     p_tet_plan = sub.add_parser(
@@ -189,6 +230,23 @@ def main() -> int:
         help="Optional output path (default: y.Utilities/yx.DataArchive/tet_rename_plan.json)",
     )
     p_tet_plan.set_defaults(func=cmd_tet_plan)
+
+    p_tet_collisions = sub.add_parser(
+        "tet-collisions",
+        help="Report duplicate canonical `.tet` addresses across tracked files",
+    )
+    p_tet_collisions.add_argument(
+        "--limit",
+        type=int,
+        default=20,
+        help="Maximum number of collisions to print (default: 20)",
+    )
+    p_tet_collisions.add_argument(
+        "--fail-on-collision",
+        action="store_true",
+        help="Exit with status 1 when any collision is found",
+    )
+    p_tet_collisions.set_defaults(func=cmd_tet_collisions)
 
 
     args = parser.parse_args()

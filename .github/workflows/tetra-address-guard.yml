@@ -1,0 +1,29 @@
+name: tetra-address-guard
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  guard:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Compile Python sources
+        run: python -m py_compile $(git ls-files '*.py')
+
+      - name: Run test suite
+        run: pytest -q
+
+      - name: Enforce no canonical collisions
+        run: python -m mnemos tet-collisions --fail-on-collision --limit 20
+
+      - name: Prevent divergence growth (baseline ratchet)
+        run: python -m mnemos tet-audit --max-divergent 383 --limit 0
