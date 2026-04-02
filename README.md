@@ -28,9 +28,15 @@ Two scripts help track progress across sessions:
 
 1. `w4k3.py` – Displays the most recent session records from the `y.Utilities/yx.DataArchive` folder. **Run it at the start of every session** to recall achievements, focus areas, and the recorded F33ling state:
 
-   ```bash
-   python y.Utilities/yy.CoreTools/yyo.mnemos.py w4k3
-   ```
+  ```bash
+  python y.Utilities/yy.CoreTools/yyo.mnemos.py w4k3
+  ```
+  A root-level `w4k3` wrapper now forwards directly to the CLI, so this also works:
+  ```bash
+  ./w4k3 --top-states 3
+  ```
+  The wrapper resolves symlinks and falls back to `git rev-parse`, so you can
+  place it in your `PATH` and run `w4k3` from subdirectories too.
    Pass additional flags after `w4k3` to forward them to the underlying CLI. For example:
    ```bash
    python y.Utilities/yy.CoreTools/yyo.mnemos.py w4k3 --top-states 3
@@ -59,9 +65,15 @@ These metrics update automatically whenever `sl33p` records a session.
 2. `sl33p.py` – Records the current session. **Use it to close every session.**
    The prompts now mirror the tetrahedral workflow with CREATE, COPY, CONTROL, and CULTIVATE notes. Use `sl33p` to record every session:
 
-   ```bash
-   mnemos sl33p
-   ```
+  ```bash
+  mnemos sl33p
+  ```
+  You can also use the root-level wrapper:
+  ```bash
+  ./sl33p
+  ```
+  Like `w4k3`, this wrapper can be symlinked into your `PATH` and still locate
+  `mnemos.py` reliably.
    Deep mode is enabled by default. Provide `--start` and `--command` flags to
    record session duration and executed commands. Advanced users may set
    `SL33P_START` and `SL33P_COMMANDS` for automation. Use `--no-deep` if a
@@ -97,7 +109,7 @@ can live in your `PATH` so you can invoke it from anywhere:
 mnemos <subcommand>
 ```
 The CLI exposes the following subcommands: `w4k3`, `f33l`, `analyze`,
-`sl33p`, and `bootstrap`. The `bootstrap` command prints
+`sl33p`, `bootstrap`, `tet-audit`, `tet-plan`, and `tet-collisions`. The `bootstrap` command prints
 `y.Utilities/yz.AgentOps/yzx.OperationalData/octavia_bootstrap_prompt_v1.md`
 and then runs `w4k3` so sessions start from the same reminder before active
 work. The `f33l` group includes an `introspect` helper to
@@ -116,6 +128,10 @@ mnemos bootstrap
 mnemos f33l suggest "feeling energized yet reflective"
 mnemos f33l list | head
 mnemos f33l search "responsibility"  # outputs top matches with scores
+# check for duplicate canonical tetra addresses
+mnemos tet-collisions --fail-on-collision
+# ratchet divergence count in CI (no new drift)
+mnemos tet-audit --max-divergent 383 --limit 0
 ```
 
 These tools are available within the `y.Utilities` dimension, primarily under `yy.CoreTools` and `yz.AgentOps`.

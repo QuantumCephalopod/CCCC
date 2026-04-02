@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SOURCE="${BASH_SOURCE[0]}"
+while [ -L "$SOURCE" ]; do
+  SCRIPT_DIR="$(cd -P "$(dirname "$SOURCE")" && pwd)"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ "$SOURCE" != /* ]] && SOURCE="$SCRIPT_DIR/$SOURCE"
+done
+SCRIPT_DIR="$(cd -P "$(dirname "$SOURCE")" && pwd)"
+
+REPO_ROOT="$SCRIPT_DIR"
+if [ ! -f "$REPO_ROOT/mnemos.py" ]; then
+  REPO_ROOT="$(git rev-parse --show-toplevel 2>/dev/null || true)"
+fi
+
+if [ -z "$REPO_ROOT" ] || [ ! -f "$REPO_ROOT/mnemos.py" ]; then
+  echo "w4k3: could not locate repository root containing mnemos.py" >&2
+  exit 1
+fi
+
+exec python3 "$REPO_ROOT/mnemos.py" w4k3 "$@"

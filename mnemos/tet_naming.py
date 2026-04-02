@@ -33,6 +33,12 @@ class RenameProposal:
     proposed_path: str
 
 
+@dataclass(frozen=True)
+class CanonicalCollision:
+    canonical_path: str
+    paths: list[str]
+
+
 def _segment_token(segment: str, *, is_leaf: bool) -> str:
     """Return segment token used for address checks.
 
@@ -43,15 +49,20 @@ def _segment_token(segment: str, *, is_leaf: bool) -> str:
 
     if not is_leaf:
         return segment
+    if segment.startswith(".") and segment.count(".") == 1:
+        return segment[1:]
     if "." not in segment:
         return segment
-    return segment.rsplit(".", 1)[0]
+    token = segment.rsplit(".", 1)[0]
+    return token if token else segment.lstrip(".")
 
 
 def suggest_segment(segment: str, *, is_leaf: bool = False) -> str | None:
     """Suggest a canonicalized segment name when possible."""
 
     token = _segment_token(segment, is_leaf=is_leaf)
+    if not token:
+        return None
     if ADDRESS_RE.match(token):
         return None
 
@@ -76,9 +87,9 @@ def check_segment(segment: str, *, is_leaf: bool = False) -> tuple[bool, str, st
         return False, "non-address suffix after tetra prefix", None
 
     suggestion = suggest_segment(segment, is_leaf=is_leaf)
-    if suggestion:
+    if suggestion and CLUSTER_RE.match(token):
         return False, "compressed address cluster (non-canonical)", suggestion
-    return False, "missing tetra address prefix", None
+    return False, "missing tetra address prefix (manual naming required)", None
 
 
 def audit_paths(paths: list[str]) -> list[NamingIssue]:
@@ -139,6 +150,22 @@ def build_rename_plan(paths: list[str]) -> list[RenameProposal]:
         if proposed != path:
             proposals.append(RenameProposal(path=path, proposed_path=proposed))
     return proposals
+
+
+def find_canonical_collisions(paths: list[str]) -> list[CanonicalCollision]:
+    """Return canonical path collisions where multiple files map to one target."""
+
+    buckets: dict[str, list[str]] = {}
+    for path in paths:
+        canonical = canonicalize_path(path)
+        buckets.setdefault(canonical, []).append(path)
+
+    collisions = [
+        CanonicalCollision(canonical_path=canonical, paths=sorted(originals))
+        for canonical, originals in sorted(buckets.items())
+        if len(originals) > 1
+    ]
+    return collisions
 
 
 def write_rename_plan(root: Path, output_file: Path | None = None) -> Path:

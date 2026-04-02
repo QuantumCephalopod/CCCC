@@ -33,7 +33,21 @@ def test_audit_paths_stops_on_first_bad_segment_per_path():
 def test_check_segment_reports_missing_prefix_when_not_address_based():
     ok, reason, suggestion = tet_naming.check_segment("README.md", is_leaf=True)
     assert ok is False
-    assert reason == "missing tetra address prefix"
+    assert reason == "missing tetra address prefix (manual naming required)"
+    assert suggestion is None
+
+
+def test_check_segment_requires_manual_naming_for_non_address_directory():
+    ok, reason, suggestion = tet_naming.check_segment("tests")
+    assert ok is False
+    assert reason == "missing tetra address prefix (manual naming required)"
+    assert suggestion is None
+
+
+def test_check_segment_requires_manual_naming_for_dotfile_leaf():
+    ok, reason, suggestion = tet_naming.check_segment(".gitignore", is_leaf=True)
+    assert ok is False
+    assert reason == "missing tetra address prefix (manual naming required)"
     assert suggestion is None
 
 
@@ -45,9 +59,8 @@ def test_check_segment_flags_non_address_suffix_after_valid_prefix():
 
 
 def test_canonicalize_path_only_changes_convertible_clusters():
-    assert tet_naming.canonicalize_path("y.Utilities/yzx.Analytics/o.tetra.py") == (
-        "y.Utilities/y.z.x.Analytics/o.tetra.py"
-    )
+    canonical = tet_naming.canonicalize_path("y.Utilities/yzx.Analytics/o.tetra.py")
+    assert canonical == "y.Utilities/y.z.x.Analytics/o.tetra.py"
 
 
 def test_build_rename_plan_skips_unchanged_paths():
@@ -56,3 +69,26 @@ def test_build_rename_plan_skips_unchanged_paths():
     )
     assert len(plan) == 1
     assert plan[0].path == "y.Utilities/yzx.Analytics/o.tetra.py"
+
+
+def test_find_canonical_collisions_detects_duplicate_targets():
+    collisions = tet_naming.find_canonical_collisions(
+        [
+            "y.Utilities/yzx.Analytics/o.tetra.py",
+            "y.Utilities/y.z.x.Analytics/o.tetra.py",
+            "w.x.y.md",
+        ]
+    )
+    assert len(collisions) == 1
+    assert collisions[0].canonical_path == "y.Utilities/y.z.x.Analytics/o.tetra.py"
+    assert collisions[0].paths == [
+        "y.Utilities/y.z.x.Analytics/o.tetra.py",
+        "y.Utilities/yzx.Analytics/o.tetra.py",
+    ]
+
+
+def test_find_canonical_collisions_empty_when_unique():
+    collisions = tet_naming.find_canonical_collisions(
+        ["w.x.y.md", "x.y.z.md", "y.Utilities/yy.CoreTools/o.py"]
+    )
+    assert collisions == []
