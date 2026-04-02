@@ -8,6 +8,7 @@ import subprocess
 import signal
 from pathlib import Path
 import sys
+from mnemos.tet_naming import build_summary, write_rename_plan
 
 # Exit cleanly when piped output is truncated (e.g., `| head`).
 signal.signal(signal.SIGPIPE, signal.SIG_DFL)
@@ -101,6 +102,33 @@ def cmd_bootstrap(args: argparse.Namespace) -> int:
     return cmd_w4k3(argparse.Namespace(extra=args.extra))
 
 
+def cmd_tet_audit(args: argparse.Namespace) -> int:
+    """Report strict `.tet` naming compliance for tracked files."""
+    total, bad, issues = build_summary(ROOT)
+    print(f"Tracked files: {total}")
+    print(f"Divergent files: {bad}")
+    rate = (total - bad) / total if total else 0.0
+    print(f"Strict compliance: {rate:.1%}")
+    if args.limit <= 0:
+        return 0
+    print()
+    print("Top divergent paths:")
+    for issue in issues[: args.limit]:
+        suggestion = issue.suggestion or "—"
+        print(
+            f"- {issue.path} :: segment={issue.segment} :: {issue.reason}"
+            f" :: suggest={suggestion}"
+        )
+    return 0
+
+
+def cmd_tet_plan(args: argparse.Namespace) -> int:
+    """Write deterministic rename proposals for canonical dotted addressing."""
+    out = write_rename_plan(ROOT, Path(args.out) if args.out else None)
+    print(f"Wrote rename plan: {out}")
+    return 0
+
+
 
 def main() -> int:
     if len(sys.argv) > 1 and sys.argv[1] == "w4k3":
@@ -137,6 +165,30 @@ def main() -> int:
     )
     p_bootstrap.add_argument("extra", nargs=argparse.REMAINDER)
     p_bootstrap.set_defaults(func=cmd_bootstrap)
+
+    p_tet_audit = sub.add_parser(
+        "tet-audit",
+        help="Audit file naming against strict recursive `.tet` addressing",
+    )
+    p_tet_audit.add_argument(
+        "--limit",
+        type=int,
+        default=20,
+        help="Maximum number of divergent paths to print (default: 20)",
+    )
+    p_tet_audit.set_defaults(func=cmd_tet_audit)
+
+    p_tet_plan = sub.add_parser(
+        "tet-plan",
+        help="Generate a JSON rename plan toward canonical dotted `.tet` segments",
+    )
+    p_tet_plan.add_argument(
+        "--out",
+        type=str,
+        default=None,
+        help="Optional output path (default: y.Utilities/yx.DataArchive/tet_rename_plan.json)",
+    )
+    p_tet_plan.set_defaults(func=cmd_tet_plan)
 
 
     args = parser.parse_args()
